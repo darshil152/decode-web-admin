@@ -111,6 +111,9 @@ Author URI: http://www.bootstrapthemes.co
         font-size: 0.675rem;
     }
 
+    .about .single_about .single_ab_text {
+        margin-left: 40px;
+    }
 
 }
 
