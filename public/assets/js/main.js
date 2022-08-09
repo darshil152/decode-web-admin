@@ -238,37 +238,47 @@ function addEntryToDatabase() {
     let subject = document.getElementById('select-subject').value;
     let message = document.getElementById('message').value;
     email = email.toLowerCase();
-    let registerQuery = new Promise((resolve, reject) => {
-        let db = firebase.firestore();
-        db.collection("ContactUsPortfolio").add({
-            name: name,
-            email: email,
-            subject: subject,
-            message: message,
-            phone: number,
-            createdAt: new Date().getTime(),
-            project: 'decode'
-        })
-            .then(function (docRef) {
-                console.log("Document written with ID: ", docRef.id);
-                resolve(docRef.id);
+
+    if (name === '') {
+        alert('Please Enter your name!')
+    }
+    else if (number === '') {
+        alert('Please Enter your contact Number!')
+    } else {
+        let registerQuery = new Promise((resolve, reject) => {
+            let db = firebase.firestore();
+            db.collection("ContactUsPortfolio").add({
+                name: name,
+                email: email,
+                subject: subject,
+                message: message,
+                phone: number,
+                createdAt: new Date().getTime(),
+                project: 'decode'
             })
-            .catch(function (error) {
-                console.error("Error adding document: ", error);
-                reject(error);
-            });
-    });
-    registerQuery.then(result => {
-        console.warn('register successful')
-        alert('Thank you for reaching out. We will contact you soon.')
-        document.getElementById('full-name').value = ''
-        document.getElementById('phone-number').value = ''
-        document.getElementById('email').value = ''
-        document.getElementById('select-subject').value = ''
-        document.getElementById('message').value = ''
-    }).catch(error => {
-        console.error(error)
-    })
+                .then(function (docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                    resolve(docRef.id);
+                })
+                .catch(function (error) {
+                    console.error("Error adding document: ", error);
+                    reject(error);
+                });
+        });
+        registerQuery.then(result => {
+            console.warn('register successful')
+            alert('Thank you for reaching out. We will contact you soon.')
+            document.getElementById('full-name').value = ''
+            document.getElementById('phone-number').value = ''
+            document.getElementById('email').value = ''
+            document.getElementById('select-subject').value = ''
+            document.getElementById('message').value = ''
+        }).catch(error => {
+            console.error(error)
+        })
+    }
+
+
 }
 
 
