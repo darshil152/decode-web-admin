@@ -40,6 +40,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 html {
@@ -325,6 +326,26 @@ legend {
   line-height: inherit;
   color: inherit;
   white-space: normal;
+}
+
+.margin-bottom {
+  margin-bottom: 90px 0px !important;
+}
+
+.img-cover {
+  object-fit: cover !important;
+}
+
+.min-h-500 {
+  min-height: 500px !important;
+}
+
+.pad-30-20 {
+  padding: 30px 20px !important;
+}
+
+.border-color {
+  border-color: rgba(256, 256, 256, .1) !important;
 }
 
 @media (max-width: 1200px) {
@@ -11115,8 +11136,8 @@ h6,
 }
 
 .testimonial-carousel .owl-item img {
-  width: 80px;
-  height: 80px;
+  width: 80px !important;
+  height: 80px !important;
 }
 
 .testimonial-carousel .owl-nav {
@@ -11137,19 +11158,27 @@ h6,
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FFFFFF;
-  background: #0a508c;
-  font-size: 22px;
+  color: #FFFFFF !important;
+  background: #0a508c !important;
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  font-family: sans-serif !important;
   transition: .5s;
+}
+
+.owl-carousel .owl-nav button.owl-prev,
+.owl-carousel .owl-nav button.owl-next,
+.owl-carousel button.owl-dot {
+  outline: none;
 }
 
 .testimonial-carousel .owl-nav .owl-prev,
 .testimonial-carousel .owl-nav .owl-next:hover {
-  background: #F14D5D;
+  background: #F14D5D !important;
 }
 
 .testimonial-carousel .owl-nav .owl-prev:hover {
-  background: #0a508c;
+  background: #0a508c !important;
 }
 
 
