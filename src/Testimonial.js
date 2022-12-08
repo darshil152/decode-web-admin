@@ -8,7 +8,7 @@ export default class Testimonial extends Component {
                     <div className="row align-items-center">
                         <div className="col-lg-5 mb-5 mb-lg-0">
                             <div className="section-title position-relative mb-4">
-                                <h6 className="d-inline-block position-relative text-secondary text-uppercase pb-2">Testimonial</h6>
+                                <h6 className="d-inline-block position-relative text-secondary-new text-uppercase pb-2">Testimonial</h6>
                                 <h1 className="display-4">What Say Our Students</h1>
                             </div>
                             {/* <!-- <p className="m-0">Dolor est dolores et nonumy sit labore dolores est sed rebum amet, justo duo ipsum

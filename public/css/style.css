@@ -168,7 +168,7 @@ sup {
 
 a {
   color: #0a508c;
-  text-decoration: none;
+  text-decoration: none !important;
   background-color: transparent;
 }
 
@@ -342,6 +342,10 @@ legend {
 
 .pad-30-20 {
   padding: 30px 20px !important;
+}
+
+.pad-0-30 {
+  padding: 0px 30px !important;
 }
 
 .border-color {
@@ -2737,56 +2741,56 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #0a508c;
-  border-color: #0a508c;
+  color: #fff !important;
+  background-color: #0a508c !important;
+  border-color: #0a508c !important;
 }
 
 .btn-primary:hover {
-  color: #fff;
-  background-color: #1465d9;
-  border-color: #135fcd;
+  color: #fff !important;
+  background-color: #1465d9 !important;
+  border-color: #135fcd !important;
 }
 
 .btn-primary:focus,
 .btn-primary.focus {
-  color: #fff;
-  background-color: #1465d9;
-  border-color: #135fcd;
-  box-shadow: 0 0 0 0.2rem rgba(72, 140, 238, 0.5);
+  color: #fff !important;
+  background-color: #1465d9 !important;
+  border-color: #135fcd !important;
+  box-shadow: 0 0 0 0.2rem rgba(72, 140, 238, 0.5) !important;
 }
 
 .btn-primary.disabled,
 .btn-primary:disabled {
-  color: #fff;
-  background-color: #0a508c;
-  border-color: #0a508c;
+  color: #fff !important;
+  background-color: #0a508c !important;
+  border-color: #0a508c !important;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active,
 .btn-primary:not(:disabled):not(.disabled).active,
 .show>.btn-primary.dropdown-toggle {
-  color: #fff;
-  background-color: #135fcd;
-  border-color: #125ac1;
+  color: #fff !important;
+  background-color: #135fcd !important;
+  border-color: #125ac1 !important;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .show>.btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(72, 140, 238, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(72, 140, 238, 0.5) !important;
 }
 
 .btn-secondary {
-  color: #fff;
-  background-color: #F14D5D;
-  border-color: #F14D5D;
+  color: #fff !important;
+  background-color: #F14D5D !important;
+  border-color: #F14D5D !important;
 }
 
 .btn-secondary:hover {
-  color: #fff;
-  background-color: #ee2a3d;
-  border-color: #ed1e32;
+  color: #fff !important;
+  background-color: #ee2a3d !important;
+  border-color: #ed1e32 !important;
 }
 
 .btn-secondary:focus,
@@ -6988,14 +6992,14 @@ a.close.disabled {
   vertical-align: text-top !important;
 }
 
-.bg-primary {
+.bg-primary-new {
   background-color: #0a508c !important;
 }
 
-a.bg-primary:hover,
-a.bg-primary:focus,
-button.bg-primary:hover,
-button.bg-primary:focus {
+a.bg-primary-new:hover,
+a.bg-primary-new:focus,
+button.bg-primary-new:hover,
+button.bg-primary-new:focus {
   background-color: #135fcd !important;
 }
 
@@ -7007,6 +7011,17 @@ a.bg-secondary:hover,
 a.bg-secondary:focus,
 button.bg-secondary:hover,
 button.bg-secondary:focus {
+  background-color: #ed1e32 !important;
+}
+
+.bg-secondary-new {
+  background-color: #F14D5D !important;
+}
+
+a.bg-secondary-new:hover,
+a.bg-secondary-new:focus,
+button.bg-secondary-new:hover,
+button.bg-secondary-new:focus {
   background-color: #ed1e32 !important;
 }
 
@@ -10720,12 +10735,12 @@ a.text-primary:focus {
   color: #1154b6 !important;
 }
 
-.text-secondary {
+.text-secondary-new {
   color: #F14D5D !important;
 }
 
-a.text-secondary:hover,
-a.text-secondary:focus {
+a.text-secondary-new:hover,
+a.text-secondary-new:focus {
   color: #e01226 !important;
 }
 
@@ -11122,9 +11137,11 @@ h6,
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FFFFFF;
-  background: #0a508c;
-  font-size: 22px;
+  color: #FFFFFF !important;
+  background: #0a508c !important;
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  font-family: sans-serif !important;
   transition: .5s;
 }
 
@@ -11132,7 +11149,7 @@ h6,
 .team-carousel .owl-nav .owl-next:hover,
 .related-carousel .owl-nav .owl-prev:hover,
 .related-carousel .owl-nav .owl-next:hover {
-  background: #F14D5D;
+  background: #F14D5D !important;
 }
 
 .testimonial-carousel .owl-item img {

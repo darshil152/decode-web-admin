@@ -9,7 +9,7 @@ export default class Contact extends Component {
                         <div className="col-lg-5 mb-5 mb-lg-0">
                             <div className="bg-light d-flex flex-column justify-content-center px-5" style={{ height: '500px' }}>
                                 <div className="d-flex align-items-center mb-5">
-                                    <div className="btn-icon bg-primary mr-4">
+                                    <div className="btn-icon bg-primary-new mr-4">
                                         <a className="text-white" href="https://goo.gl/maps/tY68pnXuMjLQ1Jc19" target="_blank">
                                             <i className="fa fa-2x fa-map-marker-alt text-white"></i>
                                         </a>
@@ -21,7 +21,7 @@ export default class Contact extends Component {
                                     </div>
                                 </div>
                                 <div className="d-flex align-items-center mb-5">
-                                    <div className="btn-icon bg-secondary mr-4">
+                                    <div className="btn-icon bg-secondary-new mr-4">
                                         <i className="fa fa-2x fa-phone-alt text-white"></i>
                                     </div>
                                     <div className="mt-n1">
@@ -42,7 +42,7 @@ export default class Contact extends Component {
                         </div>
                         <div className="col-lg-7">
                             <div className="section-title position-relative mb-4">
-                                <h6 className="d-inline-block position-relative text-secondary text-uppercase pb-2">Need Help?</h6>
+                                <h6 className="d-inline-block position-relative text-secondary-new text-uppercase pb-2">Need Help?</h6>
                                 <h1 className="display-4">Send Us A Message</h1>
                             </div>
                             <div className="contact-form">

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from 'react-router-dom';
 export default class Navbar extends Component {
     render() {
         return (
@@ -15,26 +16,27 @@ export default class Navbar extends Component {
 
                     <div className="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                         <div className="navbar-nav mx-auto py-0">
-                            <a className="nav-item nav-link active">Home</a>
-                            <a className="nav-item nav-link">About</a>
-                            <a className="nav-item nav-link">Courses</a>
+                            <Link to={'/'} className="nav-item nav-link active">Home</Link>
+                            <Link to={'/about'} className="nav-item nav-link ">About</Link>
+                            <Link to={'/courses'} className="nav-item nav-link ">Courses</Link>
+
 
                             <NavDropdown
                                 id="nav-dropdown-dark-example"
                                 title="Pages"
 
                             >
-                                <NavDropdown.Item href="#action/3.1">Course Details</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">
-                                    Our Features
-                                </NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Instructors</NavDropdown.Item>
+                                <NavDropdown.Item><Link to={'/details'}>Course Details</Link></NavDropdown.Item>
+                                <NavDropdown.Item ><Link to={'/feature'}>      Our Features</Link>
 
-                                <NavDropdown.Item href="#action/3.4">
-                                    Testimonial
+                                </NavDropdown.Item>
+                                <NavDropdown.Item ><Link to={'/instructors'}>Instructors</Link></NavDropdown.Item>
+
+                                <NavDropdown.Item>
+                                    <Link to={'/testimonial'}>Testimonial</Link>
                                 </NavDropdown.Item>
                             </NavDropdown>
-                            <a href="contact.html" className="nav-item nav-link">Contact</a>
+                            <Link to={'/contact'} className="nav-item nav-link ">Contact Us</Link>
                         </div>
                         <a href="https://wa.me/918347763858" target="_blank"
                             className="btn btn-primary py-2 px-4 d-none d-lg-block"> <i className="fa-brands fa-whatsapp mr-2"></i> Join
