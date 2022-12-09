@@ -13,7 +13,7 @@ export default class DetailsPage extends Component {
                             <div class="col-lg-8">
                                 <div class="mb-5">
                                     <div class="section-title position-relative mb-5">
-                                        <h6 class="d-inline-block position-relative text-secondary-new text-uppercase pb-2">Course
+                                        <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">Course
                                             Detail</h6>
                                         <h1 class="display-4">Master in Full-stack Development</h1>
                                     </div>
@@ -159,7 +159,7 @@ export default class DetailsPage extends Component {
                             </div>
 
                             <div class="col-lg-4 mt-5 mt-lg-0">
-                                <div class="bg-primary-new mb-5 py-3">
+                                <div class="bg-primary mb-5 py-3">
                                     <h3 class="text-white py-3 px-4 m-0">Course Features</h3>
                                     <div class="d-flex justify-content-between border-bottom px-4">
                                         <h6 class="text-white my-3">Instructor</h6>

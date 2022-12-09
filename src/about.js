@@ -13,7 +13,7 @@ export default class About extends Component {
                         </div>
                         <div className="col-lg-7">
                             <div className="section-title position-relative mb-4">
-                                <h6 className="d-inline-block position-relative text-secondary-new text-uppercase pb-2">About Us</h6>
+                                <h6 className="d-inline-block position-relative text-secondary text-uppercase pb-2">About Us</h6>
                                 <h1 className="display-4">First Choice For Starting Career in IT</h1>
                             </div>
                             <p>Decode softtech is a Surat-based IT Education and Training Institution. Founded in 2022,Decode
@@ -32,13 +32,13 @@ export default class About extends Component {
                                     </div>
                                 </div>
                                 <div className="col-3 px-0">
-                                    <div className="bg-primary-new text-center pt-4 pb-4">
+                                    <div className="bg-primary text-center pt-4 pb-4">
                                         <h1 className="text-white" data-toggle="counter-up"><CountUp delay={1} end={10} /></h1>
                                         <h6 className="text-uppercase text-white">Online<span className="d-block">Courses</span></h6>
                                     </div>
                                 </div>
                                 <div className="col-3 px-0">
-                                    <div className="bg-secondary-new text-center pt-4 pb-4">
+                                    <div className="bg-secondary text-center pt-4 pb-4">
                                         <h1 className="text-white" data-toggle="counter-up"><CountUp delay={1} end={3} /></h1>
                                         <h6 className="text-uppercase text-white">Skilled<span className="d-block">Instructors</span>
                                         </h6>

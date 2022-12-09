@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import OwlCarousel from 'react-owl-carousel';
+import { Link } from 'react-router-dom';
 export default class Courses extends Component {
     state = {
         courseCarousel: {
@@ -17,13 +18,22 @@ export default class Courses extends Component {
             }
         },
     }
+
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value })
+    }
+
+    handleSignup = () => {
+        console.log('sign up')
+    }
+
     render() {
         return (
             <div className="container-fluid px-0 py-5">
                 <div className="row mx-0 justify-content-center pt-5">
                     <div className="col-lg-6">
                         <div className="section-title text-center position-relative mb-4">
-                            <h6 className="d-inline-block position-relative text-secondary-new text-uppercase pb-2">Our Courses</h6>
+                            <h6 className="d-inline-block position-relative text-secondary text-uppercase pb-2">Our Courses</h6>
                             <h1 className="display-4">Checkout New Releases Of Our Courses</h1>
                         </div>
                     </div>
@@ -40,7 +50,8 @@ export default class Courses extends Component {
                                             </div>
                                         </div> --> */}
                             <div className="w-100 bg-white text-center p-4">
-                                <a className="btn btn-primary" href="detail.html">Course Detail</a>
+                                {/* <a className="btn btn-primary" href="detail.html">Course Detail</a> */}
+                                <Link className="btn btn-primary" to={'/details'}>Course Detail</Link>
                             </div>
                         </div>
                     </div>
@@ -55,7 +66,8 @@ export default class Courses extends Component {
                                             </div>
                                         </div> --> */}
                             <div className="w-100 bg-white text-center p-4">
-                                <a className="btn btn-primary" href="detail.html">Course Detail</a>
+                                {/* <a className="btn btn-primary" href="detail.html">Course Detail</a> */}
+                                <Link className="btn btn-primary" to={'/details'}>Course Detail</Link>
                             </div>
                         </div>
                     </div>
@@ -70,7 +82,8 @@ export default class Courses extends Component {
                                             </div>
                                         </div> --> */}
                             <div className="w-100 bg-white text-center p-4">
-                                <a className="btn btn-primary" href="detail.html">Course Detail</a>
+                                {/* <a className="btn btn-primary" href="detail.html">Course Detail</a> */}
+                                <Link className="btn btn-primary" to={'/details'}>Course Detail</Link>
                             </div>
                         </div>
                     </div>
@@ -85,7 +98,8 @@ export default class Courses extends Component {
                                             </div>
                                         </div> --> */}
                             <div className="w-100 bg-white text-center p-4">
-                                <a className="btn btn-primary" href="detail.html">Course Detail</a>
+                                {/* <a className="btn btn-primary" href="detail.html">Course Detail</a> */}
+                                <Link className="btn btn-primary" to={'/details'}>Course Detail</Link>
                             </div>
                         </div>
                     </div>
@@ -100,7 +114,8 @@ export default class Courses extends Component {
                                             </div>
                                         </div> --> */}
                             <div className="w-100 bg-white text-center p-4">
-                                <a className="btn btn-primary" href="detail.html">Course Detail</a>
+                                {/* <a className="btn btn-primary" href="detail.html">Course Detail</a> */}
+                                <Link className="btn btn-primary" to={'/details'}>Course Detail</Link>
                             </div>
                         </div>
                     </div>
@@ -115,7 +130,8 @@ export default class Courses extends Component {
                                             </div>
                                         </div> --> */}
                             <div className="w-100 bg-white text-center p-4">
-                                <a className="btn btn-primary" href="detail.html">Course Detail</a>
+                                <Link className="btn btn-primary" to={'/details'}>Course Detail</Link>
+                                {/* <a className="btn btn-primary" href="detail.html">Course Detail</a> */}
                             </div>
                         </div>
                     </div>
@@ -129,13 +145,13 @@ export default class Courses extends Component {
                             <div className="form-row">
                                 <div className="col-sm-6">
                                     <div className="form-group">
-                                        <input id="s-name" type="text" className="form-control bg-light border-0 pad-30-20"
+                                        <input onChange={this.handleChange} id="s-name" name='sname' type="text" className="form-control bg-light border-0 pad-30-20"
                                             placeholder="Your Name" />
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
                                     <div className="form-group">
-                                        <input id="s-number" type="tel" className="form-control bg-light border-0 pad-30-20"
+                                        <input onChange={this.handleChange} id="s-number" name='snumber' type="tel" className="form-control bg-light border-0 pad-30-20"
                                             placeholder="Your Contact No" />
                                     </div>
                                 </div>
@@ -143,7 +159,7 @@ export default class Courses extends Component {
                             <div className="form-row">
                                 <div className="col-sm-6">
                                     <div className="form-group">
-                                        <select id="s-subject" className="custom-select bg-light border-0 px-3"
+                                        <select onChange={this.handleChange} name='ssubject' id="s-subject" className="custom-select bg-light border-0 px-3"
                                             style={{ height: '60px' }}>
                                             <option value="">Select a course</option>
                                             <option value="webdesign">Master in Web Design</option>
@@ -159,7 +175,7 @@ export default class Courses extends Component {
                                 </div>
                                 <div className="col-sm-6">
                                     <button className="btn btn-primary btn-block"
-                                        style={{ height: '60px' }}>Sign Up
+                                        style={{ height: '60px' }} onClick={this.handleSignup}>Sign Up
                                         Now</button>
                                 </div>
                             </div>
