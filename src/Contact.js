@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
 
 export default class Contact extends Component {
 
@@ -16,7 +17,14 @@ export default class Contact extends Component {
 
 
     sendMessage = () => {
-
+        toast.success("Wow so easy!")
+        this.setState({
+            cname: '',
+            cemail: '',
+            csubject: '',
+            cmessage: '',
+            cphone: ''
+        })
     }
 
     render() {
@@ -67,12 +75,12 @@ export default class Contact extends Component {
                                 {/* <!-- <form> --> */}
                                 <div className="row">
                                     <div className="col-6 form-group">
-                                        <input onChange={this.handleChange} name='cname' type="text" id="c-name"
+                                        <input onChange={this.handleChange} value={this.state.cname} name='cname' type="text" id="c-name"
                                             className="form-control border-top-0 border-right-0 border-left-0 p-0"
                                             placeholder="Your Name" required="required" />
                                     </div>
                                     <div className="col-6 form-group">
-                                        <input onChange={this.handleChange} type="email" name='cemail' id="c-email"
+                                        <input onChange={this.handleChange} value={this.state.cemail} type="email" name='cemail' id="c-email"
                                             className="form-control border-top-0 border-right-0 border-left-0 p-0"
                                             placeholder="Your Email" required="required" />
                                     </div>
@@ -95,13 +103,13 @@ export default class Contact extends Component {
                                         </div>
                                     </div>
                                     <div className="form-group col-6">
-                                        <input onChange={this.handleChange} name='cnumber' type="text" id="c-number"
+                                        <input onChange={this.handleChange} value={this.state.cphone} name='cnumber' type="text" id="c-number"
                                             className="form-control border-top-0 border-right-0 border-left-0 p-0"
                                             placeholder="Enter Contact Number" required="required" />
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <textarea onChange={this.handleChange} name='cmessage' className="form-control border-top-0 border-right-0 border-left-0 p-0" rows="5"
+                                    <textarea onChange={this.handleChange} value={this.state.cmessage} name='cmessage' className="form-control border-top-0 border-right-0 border-left-0 p-0" rows="5"
                                         id="c-message" placeholder="Message" required="required"></textarea>
                                 </div>
                                 <div>
@@ -112,6 +120,20 @@ export default class Contact extends Component {
                         </div>
                     </div>
                 </div>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
+                {/* Same as */}
+                <ToastContainer />
             </div>
         )
     }
