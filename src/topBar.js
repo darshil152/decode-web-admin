@@ -26,9 +26,7 @@ export default class TopBar extends Component {
                             <a className="text-white px-2" href="https://www.instagram.com/decodesofttech/">
                                 <i className="fab fa-instagram"></i>
                             </a>
-                            <a className="text-white pl-2" href="">
-                                <i className="fab fa-youtube"></i>
-                            </a>
+
                         </div>
                     </div>
                 </div>

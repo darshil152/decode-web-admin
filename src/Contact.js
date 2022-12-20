@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
+import firebaseApp from './firebase/firebase';
 
 export default class Contact extends Component {
 
@@ -8,7 +9,7 @@ export default class Contact extends Component {
         cemail: '',
         csubject: '',
         cmessage: '',
-        cemail: ''
+        cphone: ''
     }
 
     handleChange = (e) => {
@@ -17,14 +18,43 @@ export default class Contact extends Component {
 
 
     sendMessage = () => {
-        toast.success("Wow so easy!")
-        this.setState({
-            cname: '',
-            cemail: '',
-            csubject: '',
-            cmessage: '',
-            cphone: ''
+
+
+        let registerQuery = new Promise((resolve, reject) => {
+            let db = firebaseApp.firestore();
+            db.collection("ContactUsPortfolio").add({
+                name: this.state.cname,
+                phone: this.state.cphone,
+                subject: this.state.csubject,
+                message: this.state.cmessage,
+                email: this.state.cemail,
+                createdAt: new Date().getTime(),
+                project: 'decode-contact'
+            })
+                .then(function (docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                    resolve(docRef.id);
+                })
+                .catch(function (error) {
+                    console.error("Error adding document: ", error);
+                    reject(error);
+                });
+        });
+        registerQuery.then(result => {
+            console.warn('register successful')
+            toast.success("Thank you for reaching out. We will contact you soon.")
+            this.setState({
+                cname: '',
+                cemail: '',
+                csubject: '',
+                cmessage: '',
+                cphone: ''
+            })
+
+        }).catch(error => {
+            console.error(error)
         })
+
     }
 
     render() {
@@ -103,7 +133,7 @@ export default class Contact extends Component {
                                         </div>
                                     </div>
                                     <div className="form-group col-6">
-                                        <input onChange={this.handleChange} value={this.state.cphone} name='cnumber' type="text" id="c-number"
+                                        <input onChange={this.handleChange} value={this.state.cphone} name='cphone' type="text" id="c-number"
                                             className="form-control border-top-0 border-right-0 border-left-0 p-0"
                                             placeholder="Enter Contact Number" required="required" />
                                     </div>

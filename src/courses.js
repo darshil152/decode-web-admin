@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import OwlCarousel from 'react-owl-carousel';
 import { Link } from 'react-router-dom';
+import firebaseApp from './firebase/firebase';
+import { ToastContainer, toast } from 'react-toastify';
 export default class Courses extends Component {
     state = {
+        sname: '',
+        snumber: '',
+        ssubject: '',
         courseCarousel: {
             0: {
                 items: 1
@@ -24,7 +29,38 @@ export default class Courses extends Component {
     }
 
     handleSignup = () => {
-        console.log('sign up')
+
+        let registerQuery = new Promise((resolve, reject) => {
+            let db = firebaseApp.firestore();
+            db.collection("ContactUsPortfolio").add({
+                name: this.state.sname,
+                phone: this.state.snumber,
+                subject: this.state.ssubject,
+                createdAt: new Date().getTime(),
+                project: 'decode-new'
+            })
+                .then(function (docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                    resolve(docRef.id);
+                })
+                .catch(function (error) {
+                    console.error("Error adding document: ", error);
+                    reject(error);
+                });
+        });
+        registerQuery.then(result => {
+            console.warn('register successful')
+            toast.success("Thank you for reaching out. We will contact you soon.")
+            this.setState({
+                sname: '',
+                snumber: '',
+                ssubject: '',
+            })
+
+        }).catch(error => {
+            console.error(error)
+        })
+
     }
 
     render() {
@@ -183,6 +219,20 @@ export default class Courses extends Component {
                         </div>
                     </div>
                 </div>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
+                {/* Same as */}
+                <ToastContainer />
             </div>
         )
     }
