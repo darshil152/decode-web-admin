@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
+import logo from './img/logo.png'
 export default class Navbar extends Component {
     render() {
         return (
@@ -8,7 +9,7 @@ export default class Navbar extends Component {
                 <nav className="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
                     <a href="index.html" className="navbar-brand ml-lg-3">
                         {/* <!-- <h1 className="m-0 text-uppercase text-primary"><i className="fa fa-book-reader mr-3"></i>Edukate</h1> --> */}
-                        <img className="m-0 logo" src="img/logo.png" alt="Decode Softtech" />
+                        <img className="m-0 logo" src={logo} alt="Decode Softtech" />
                     </a>
                     <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span className="navbar-toggler-icon"></span>
@@ -26,7 +27,7 @@ export default class Navbar extends Component {
                                 title="Pages"
 
                             >
-                                <NavDropdown.Item><Link to={'/details'}>Course Details</Link></NavDropdown.Item>
+                                <NavDropdown.Item><Link to={'/details/4'}>Course Details</Link></NavDropdown.Item>
                                 <NavDropdown.Item ><Link to={'/feature'}>      Our Features</Link>
 
                                 </NavDropdown.Item>

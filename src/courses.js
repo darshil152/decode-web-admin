@@ -87,7 +87,7 @@ export default class Courses extends Component {
                                         </div> --> */}
                             <div className="w-100 bg-white text-center p-4">
                                 {/* <a className="btn btn-primary" href="detail.html">Course Detail</a> */}
-                                <Link className="btn btn-primary" to={'/details'}>Course Detail</Link>
+                                <Link className="btn btn-primary" to={'/details/1'}>Course Detail</Link>
                             </div>
                         </div>
                     </div>
@@ -103,7 +103,7 @@ export default class Courses extends Component {
                                         </div> --> */}
                             <div className="w-100 bg-white text-center p-4">
                                 {/* <a className="btn btn-primary" href="detail.html">Course Detail</a> */}
-                                <Link className="btn btn-primary" to={'/details'}>Course Detail</Link>
+                                <Link className="btn btn-primary" to={'/details/2'}>Course Detail</Link>
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@ export default class Courses extends Component {
                                         </div> --> */}
                             <div className="w-100 bg-white text-center p-4">
                                 {/* <a className="btn btn-primary" href="detail.html">Course Detail</a> */}
-                                <Link className="btn btn-primary" to={'/details'}>Course Detail</Link>
+                                <Link className="btn btn-primary" to={'/details/3'}>Course Detail</Link>
                             </div>
                         </div>
                     </div>
@@ -135,7 +135,7 @@ export default class Courses extends Component {
                                         </div> --> */}
                             <div className="w-100 bg-white text-center p-4">
                                 {/* <a className="btn btn-primary" href="detail.html">Course Detail</a> */}
-                                <Link className="btn btn-primary" to={'/details'}>Course Detail</Link>
+                                <Link className="btn btn-primary" to={'/details/4'}>Course Detail</Link>
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,7 @@ export default class Courses extends Component {
                                         </div> --> */}
                             <div className="w-100 bg-white text-center p-4">
                                 {/* <a className="btn btn-primary" href="detail.html">Course Detail</a> */}
-                                <Link className="btn btn-primary" to={'/details'}>Course Detail</Link>
+                                <Link className="btn btn-primary" to={'/details/5'}>Course Detail</Link>
                             </div>
                         </div>
                     </div>
@@ -166,7 +166,7 @@ export default class Courses extends Component {
                                             </div>
                                         </div> --> */}
                             <div className="w-100 bg-white text-center p-4">
-                                <Link className="btn btn-primary" to={'/details'}>Course Detail</Link>
+                                <Link className="btn btn-primary" to={'/details/6'}>Course Detail</Link>
                                 {/* <a className="btn btn-primary" href="detail.html">Course Detail</a> */}
                             </div>
                         </div>

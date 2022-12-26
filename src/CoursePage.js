@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import HeaderForPage from './HeaderForPage'
 import Layout from './Layout'
 
@@ -19,7 +20,7 @@ export default class CoursePage extends Component {
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-6 pb-4">
-                                <a class="courses-list-item position-relative d-block overflow-hidden mb-2" href="detail.html">
+                                <Link class="courses-list-item position-relative d-block overflow-hidden mb-2" to={'/details/1'}>
                                     <img class="img-fluid" src="img/courses-1.jpg" alt="" />
                                     <div class="courses-text">
                                         <h4 class="text-center text-white px-3">Master In Web design </h4>
@@ -31,10 +32,11 @@ export default class CoursePage extends Component {
                                             </div>
                                         </div> --> */}
                                     </div>
-                                </a>
+                                </Link>
+
                             </div>
                             <div class="col-lg-4 col-md-6 pb-4">
-                                <a class="courses-list-item position-relative d-block overflow-hidden mb-2" href="detail.html">
+                                <Link class="courses-list-item position-relative d-block overflow-hidden mb-2" to={'/details/2'}>
                                     <img class="img-fluid" src="img/courses-2.jpg" alt="" />
                                     <div class="courses-text">
                                         <h4 class="text-center text-white px-3">Master In Frontend Development</h4>
@@ -46,10 +48,10 @@ export default class CoursePage extends Component {
                                             </div>
                                         </div> --> */}
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                             <div class="col-lg-4 col-md-6 pb-4">
-                                <a class="courses-list-item position-relative d-block overflow-hidden mb-2" href="detail.html">
+                                <Link class="courses-list-item position-relative d-block overflow-hidden mb-2" to={'/details/3'}>
                                     <img class="img-fluid" src="img/courses-3.jpg" alt="" />
                                     <div class="courses-text">
                                         <h4 class="text-center text-white px-3">Master In Backend Development</h4>
@@ -61,10 +63,10 @@ export default class CoursePage extends Component {
                                             </div>
                                         </div> --> */}
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                             <div class="col-lg-4 col-md-6 pb-4">
-                                <a class="courses-list-item position-relative d-block overflow-hidden mb-2" href="detail.html">
+                                <Link class="courses-list-item position-relative d-block overflow-hidden mb-2" to={'/details/6'}>
                                     <img class="img-fluid" src="img/courses-4.jpg" alt="" />
                                     <div class="courses-text">
                                         <h4 class="text-center text-white px-3">Firebase</h4>
@@ -76,10 +78,10 @@ export default class CoursePage extends Component {
                                             </div>
                                         </div> --> */}
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                             <div class="col-lg-4 col-md-6 pb-4">
-                                <a class="courses-list-item position-relative d-block overflow-hidden mb-2" href="detail.html">
+                                <Link class="courses-list-item position-relative d-block overflow-hidden mb-2" to={'/details/5'}>
                                     <img class="img-fluid" src="img/courses-5.jpg" alt="" />
                                     <div class="courses-text">
                                         <h4 class="text-center text-white px-3">Master in 360 & 3D Website</h4>
@@ -91,10 +93,10 @@ export default class CoursePage extends Component {
                                             </div>
                                         </div> --> */}
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                             <div class="col-lg-4 col-md-6 pb-4">
-                                <a class="courses-list-item position-relative d-block overflow-hidden mb-2" href="detail.html">
+                                <Link class="courses-list-item position-relative d-block overflow-hidden mb-2" to={'/details/4'}>
                                     <img class="img-fluid" src="img/courses-6.jpg" alt="" />
                                     <div class="courses-text">
                                         <h4 class="text-center text-white px-3">Master In Fullstack Development
@@ -107,7 +109,7 @@ export default class CoursePage extends Component {
                                                 </div>
                                             </div> --> */}
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                             {/* <!-- <div class="col-12">
                                 <nav aria-label="Page navigation">

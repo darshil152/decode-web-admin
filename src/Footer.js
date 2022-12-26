@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import whiteLogo from './img/white logo.png'
 
 export default class Footer extends Component {
     render() {
@@ -10,7 +11,7 @@ export default class Footer extends Component {
                         <div className="row">
                             <div className="col-md-6 mb-5">
                                 <a href="index.html" className="navbar-brand">
-                                    <img className="m-0 logo" src="img/white logo.png" alt="Decode Softtech" />
+                                    <img className="m-0 logo" src={whiteLogo} alt="Decode Softtech" />
                                 </a>
                                 {/* <!-- <p className="m-0">Accusam nonumy clita sed rebum kasd eirmod elitr. Ipsum ea lorem at et diam est,
                                         tempor rebum ipsum sit ea tempor stet et consetetur dolores. Justo stet diam ipsum lorem vero
