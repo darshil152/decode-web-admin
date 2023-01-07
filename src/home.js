@@ -10,6 +10,7 @@ import Team from './team';
 import Testimonial from './Testimonial';
 import Contact from './Contact';
 import Footer from './Footer';
+import Layout from './Layout';
 export default class Home extends Component {
 
     state = {
@@ -41,16 +42,7 @@ export default class Home extends Component {
     }
     render() {
         return (
-            <div>
-                {/* <!-- Topbar Start --> */}
-                <TopBar />
-                {/* <!-- Topbar End --> */}
-
-
-                {/* <!-- Navbar Start --> */}
-                <Navbar />
-                {/* <!-- Navbar End --> */}
-
+            <Layout>
 
                 {/* <!-- Header Start --> */}
                 <Header />
@@ -87,18 +79,9 @@ export default class Home extends Component {
                 {/* <!-- Contact End --> */}
 
 
-                {/* <!-- Footer Start --> */}
-                <Footer />
-                {/* <!-- Footer End --> */}
 
 
-                {/* <!-- Back to Top --> */}
-
-
-
-
-
-            </div >
+            </Layout >
         )
     }
 }

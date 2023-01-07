@@ -181,13 +181,13 @@ export default class Courses extends Component {
                             <div className="form-row">
                                 <div className="col-sm-6">
                                     <div className="form-group">
-                                        <input onChange={this.handleChange} id="s-name" name='sname' type="text" className="form-control bg-light border-0 pad-30-20"
+                                        <input onChange={this.handleChange} id="s-name" name='sname' value={this.state.sname} type="text" className="form-control bg-light border-0 pad-30-20"
                                             placeholder="Your Name" />
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
                                     <div className="form-group">
-                                        <input onChange={this.handleChange} id="s-number" name='snumber' type="tel" className="form-control bg-light border-0 pad-30-20"
+                                        <input onChange={this.handleChange} id="s-number" name='snumber' value={this.state.snumber} type="tel" className="form-control bg-light border-0 pad-30-20"
                                             placeholder="Your Contact No" />
                                     </div>
                                 </div>

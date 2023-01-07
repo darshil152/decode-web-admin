@@ -4,6 +4,9 @@ import Navbar from './navbar'
 import TopBar from './topBar'
 
 export default class Layout extends Component {
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
     render() {
         return (
             <>

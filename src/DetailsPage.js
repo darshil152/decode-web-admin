@@ -190,7 +190,8 @@ export default class DetailsPage extends Component {
                                     </div>
                                     <h5 class="text-white py-3 px-4 m-0">100% Job Guarantee</h5>
                                     <div class="py-3 px-4">
-                                        <a class="btn btn-block btn-secondary py-3 px-5" href="contact.html">Enroll Now</a>
+                                        <Link class="btn btn-block btn-secondary py-3 px-5" to={'/contact'}>Enroll Now</Link>
+                                        {/* <a class="btn btn-block btn-secondary py-3 px-5" href="contact.html">Enroll Now</a> */}
                                     </div>
                                 </div>
 
@@ -232,7 +233,7 @@ export default class DetailsPage extends Component {
 
                                 <div class="mb-5">
                                     <h2 class="mb-4">Recent Courses</h2>
-                                    <a class="d-flex align-items-center text-decoration-none mb-4" href="">
+                                    <a class="d-flex align-items-center text-decoration-none mb-4" href="/details/2">
 
                                         <img class="img-fluid rounded" src={coursethumb} alt="" />
                                         <div class="pl-3">
@@ -245,7 +246,7 @@ export default class DetailsPage extends Component {
                                             </div> --> */}
                                         </div>
                                     </a>
-                                    <a class="d-flex align-items-center text-decoration-none mb-4" href="">
+                                    <a class="d-flex align-items-center text-decoration-none mb-4" href="/details/3">
                                         <img class="img-fluid rounded" src={coursethumb} alt="" />
                                         <div class="pl-3">
                                             <h6>Node Js</h6>
@@ -257,7 +258,7 @@ export default class DetailsPage extends Component {
                                             </div> --> */}
                                         </div>
                                     </a>
-                                    <a class="d-flex align-items-center text-decoration-none mb-4" href="">
+                                    <a class="d-flex align-items-center text-decoration-none mb-4" href="/details/6">
                                         <img class="img-fluid rounded" src={coursethumb} alt="" />
                                         <div class="pl-3">
                                             <h6>Firebase</h6>
@@ -269,7 +270,7 @@ export default class DetailsPage extends Component {
                                             </div> --> */}
                                         </div>
                                     </a>
-                                    <a class="d-flex align-items-center text-decoration-none" href="">
+                                    <a class="d-flex align-items-center text-decoration-none" href="/details/5">
                                         <img class="img-fluid rounded" src={coursethumb} alt="" />
                                         <div class="pl-3">
                                             <h6>Aframe</h6>

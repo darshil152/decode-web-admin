@@ -7,6 +7,7 @@ import Navbar from './navbar'
 import TopBar from './topBar'
 
 export default class AboutPage extends Component {
+
     render() {
         return (
             <Layout>
