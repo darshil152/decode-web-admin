@@ -60,18 +60,18 @@ export default class Footer extends Component {
                             <div className="col-md-4 mb-5">
                                 <h3 className="text-white mb-4">We Provide</h3>
                                 <div className="d-flex flex-column justify-content-start">
-                                    <a className="text-white-50 mb-2" href="#"><i className="fa fa-angle-right mr-2"></i>Web Design</a>
-                                    <a className="text-white-50 mb-2" href="#"><i className="fa fa-angle-right mr-2"></i>Frontend
+                                    <a className="text-white-50 mb-2" href="/details/1"><i className="fa fa-angle-right mr-2"></i>Web Design</a>
+                                    <a className="text-white-50 mb-2" href="/details/2"><i className="fa fa-angle-right mr-2"></i>Frontend
                                         Development</a>
-                                    <a className="text-white-50 mb-2" href="#"><i className="fa fa-angle-right mr-2"></i>Backend
+                                    <a className="text-white-50 mb-2" href="/details/3"><i className="fa fa-angle-right mr-2"></i>Backend
                                         Development</a>
-                                    <a className="text-white-50 mb-2" href="#"><i className="fa fa-angle-right mr-2"></i>Fullstack
+                                    <a className="text-white-50 mb-2" href="/details/4"><i className="fa fa-angle-right mr-2"></i>Fullstack
                                         Development</a>
-                                    <a className="text-white-50 mb-2" href="#"><i className="fa fa-angle-right mr-2"></i>Firebase</a>
-                                    <a className="text-white-50 mb-2" href="#"><i className="fa fa-angle-right mr-2"></i>360 & 3D
+                                    <a className="text-white-50 mb-2" href="/details/6"><i className="fa fa-angle-right mr-2"></i>Firebase</a>
+                                    <a className="text-white-50 mb-2" href="/details/5"><i className="fa fa-angle-right mr-2"></i>360 & 3D
                                         Website</a>
-                                    <a className="text-white-50 mb-2" href="#"><i className="fa fa-angle-right mr-2"></i>React Js</a>
-                                    <a className="text-white-50 " href="#"><i className="fa fa-angle-right mr-2"></i>Node Js</a>
+                                    <a className="text-white-50 mb-2" href="/details/2"><i className="fa fa-angle-right mr-2"></i>React Js</a>
+                                    <a className="text-white-50 " href="/details/3 "><i className="fa fa-angle-right mr-2"></i>Node Js</a>
                                 </div>
                             </div>
                             <div className="col-md-4 mb-5">
@@ -101,7 +101,7 @@ export default class Footer extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-6 text-center text-md-left mb-3 mb-md-0">
-                                <p className="m-0">© Copyright 2022. <a className="text-white" href="https://decodesofttech.com">Decode
+                                <p className="m-0">© Copyright 2023. <a className="text-white" href="https://decodesofttech.com">Decode
                                     Softtech</a>. All Rights
                                     Reserved.
                                 </p>
