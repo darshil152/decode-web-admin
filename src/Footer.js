@@ -39,7 +39,7 @@ export default class Footer extends Component {
                                     408-409, Dhara Trade Center, Mahadev Chowk, Mota
                                     Varachha, Surat</a></p>
                                 <p>
-                                    <a className="text-white-50" href="tel:8347763858"> <i className="fa fa-phone-alt mr-2"></i>+91 834 776
+                                    <a className="text-white-50" href="tel:8347763858"> <i className="fa fa-phone mr-2"></i>+91 834 776
                                         3858</a>
                                 </p>
                                 <p>

@@ -8,7 +8,7 @@ export default class TopBar extends Component {
                     <div className="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
                         <div className="d-inline-flex align-items-center text-white">
                             <a href='tel:8347763858'>
-                                <small className='text-white'><i className="fa fa-phone-alt mr-2"></i>+91 834 776 3858</small>
+                                <small className='text-white'><i className="fa fa-phone mr-2"></i>+91 834 776 3858</small>
                             </a>
                             {/* <!-- <small className="px-3">|</small>
                                     <small><i className="fa fa-envelope mr-2"></i>info@decodesofttech.com</small> --> */}

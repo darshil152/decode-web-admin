@@ -21,6 +21,7 @@ export default class RouterContainer extends Component {
                     <Route path="/instructors" element={<TeamPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/feature" element={<FeaturePage />} />
+                    <Route path="*" element={<Home />} />
                 </Routes>
             </Router>
         )

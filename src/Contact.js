@@ -78,7 +78,7 @@ export default class Contact extends Component {
                                 </div>
                                 <div className="d-flex align-items-center mb-5">
                                     <div className="btn-icon bg-secondary mr-4">
-                                        <i className="fa fa-2x fa-phone-alt text-white"></i>
+                                        <i className="fa fa-2x fa-phone text-white"></i>
                                     </div>
                                     <div className="mt-n1">
                                         <h4>Call Us</h4>
