@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 export default class HeaderForPage extends Component {
     render() {
@@ -7,7 +8,7 @@ export default class HeaderForPage extends Component {
                 <div class="container text-center py-5 my-5">
                     <h1 class="text-white display-1">{this.props.name}</h1>
                     <div class="d-inline-flex text-white mb-5">
-                        <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
+                        <p class="m-0 text-uppercase"> <Link to={'/'} class="text-white" href="">Home</Link></p>
                         <i class="fa fa-angle-double-right pt-1 px-3"></i>
                         <p class="m-0 text-uppercase">{this.props.name}</p>
                     </div>

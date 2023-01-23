@@ -11193,3 +11193,10 @@ h6,
 .logo {
   width: 200px;
 }
+
+.placementlogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+}

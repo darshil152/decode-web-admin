@@ -87,8 +87,9 @@ export default class Footer extends Component {
                                     <Link className="text-white-50 mb-2" to={'/courses'}><i className="fa fa-angle-right mr-2"></i>Courses</Link>
                                     {/* <a className="text-white-50 mb-2" href="#"><i className="fa fa-angle-right mr-2"></i>Terms &
                                         Condition</a> */}
-                                    <Link className="text-white-50 mb-2" to={'#'}><i className="fa fa-angle-right mr-2"></i>Terms &
+                                    <Link className="text-white-50 mb-2" to={'/terms'}><i className="fa fa-angle-right mr-2"></i>Terms &
                                         Condition</Link>
+                                    <Link className="text-white-50 mb-2" to={'/placement-partners'}><i className="fa fa-angle-right mr-2"></i>Placement Partners</Link>
                                     {/* <a className="text-white-50" href="/contact">
                                         <i className="fa fa-angle-right mr-2"></i>Contact Us</a> */}
                                     <Link className="text-white-50 mb-2" to={'/contact'}><i className="fa fa-angle-right mr-2"></i>Contact Us</Link>

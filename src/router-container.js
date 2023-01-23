@@ -6,7 +6,9 @@ import CoursePage from './CoursePage';
 import DetailsPage from './DetailsPage';
 import FeaturePage from './FeaturePage';
 import Home from './home';
+import PlacementPartners from './PlacementPartners';
 import TeamPage from './TeamPage';
+import TearmsCondition from './TearmsCondition';
 import TestimonialPage from './TestimonialPage';
 export default class RouterContainer extends Component {
     render() {
@@ -21,6 +23,8 @@ export default class RouterContainer extends Component {
                     <Route path="/instructors" element={<TeamPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/feature" element={<FeaturePage />} />
+                    <Route path="/terms" element={<TearmsCondition />} />
+                    <Route path="/placement-partners" element={<PlacementPartners />} />
                     <Route path="*" element={<Home />} />
                 </Routes>
             </Router>

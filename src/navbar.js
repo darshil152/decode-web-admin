@@ -43,6 +43,9 @@ export default class NavbarComponent extends Component {
                                 <NavDropdown.Item>
                                     <Link to={'/testimonial'}>Testimonial</Link>
                                 </NavDropdown.Item>
+                                <NavDropdown.Item>
+                                    <Link to={'/placement-partners'}>Placement Partners</Link>
+                                </NavDropdown.Item>
                             </NavDropdown>
                             <Link to={'/contact'} className={this.state.currentPage == 'contact' ? "nav-item nav-link active" : "nav-item nav-link "}>Contact Us</Link>
                         </Nav>
