@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AboutPage from './AboutPage';
+import AddStudent from './add-student';
 import ContactPage from './ContactPage';
 import CoursePage from './CoursePage';
 import DetailsPage from './DetailsPage';
@@ -10,6 +11,10 @@ import PlacementPartners from './PlacementPartners';
 import TeamPage from './TeamPage';
 import TearmsCondition from './TearmsCondition';
 import TestimonialPage from './TestimonialPage';
+import "../src/css/admincss/style.css";
+import "../src/css/admincss/style.scss";
+import ProtectedRoute from './ProtectedRouter';
+
 export default class RouterContainer extends Component {
     render() {
         return (
@@ -26,6 +31,12 @@ export default class RouterContainer extends Component {
                     <Route path="/terms" element={<TearmsCondition />} />
                     <Route path="/placement-partners" element={<PlacementPartners />} />
                     <Route path="*" element={<Home />} />
+
+                    <Route path="/add-student" element={
+                        <ProtectedRoute>
+                            <AddStudent />
+                        </ProtectedRoute>
+                    } />
                 </Routes>
             </Router>
         )

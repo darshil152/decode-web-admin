@@ -19,7 +19,6 @@ export default class Contact extends Component {
 
     sendMessage = () => {
 
-
         let registerQuery = new Promise((resolve, reject) => {
             let db = firebaseApp.firestore();
             db.collection("ContactUsPortfolio").add({
