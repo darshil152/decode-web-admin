@@ -7,20 +7,23 @@ import * as Yup from "yup";
 // import toastr from "toastr";
 import { jssPreset } from "@material-ui/core";
 import { ThemeProvider } from "react-bootstrap";
+import firebaseApp from "./firebase/firebase";
 
 
 
 function AddStudent() {
 
 
-    const [image, setImage] = useState('');
-    const [file, setFile] = useState('')
+    const [imageAsUrl, setImageAsUrl] = useState('');
+    const [file, setFile] = useState('');
 
 
     const submitStudentData = (formData, resetForm) => {
+        // UploadImageTOFirebase(formData);
+        sendMessage(formData)
         console.log("student :: ", formData);
-        localStorage.setItem('StudentData', JSON.stringify(formData))
     };
+
     const errorContainer = (form, field) => {
         return form.touched[field] && form.errors[field] ? <span className="error text-danger">{form.errors[field]}</span> : null;
     };
@@ -45,13 +48,112 @@ function AddStudent() {
     //         dataurl = reader.result
     //         // setImage(reader.result);
     //     };
-    //     setImage(dataurl)
+    //     setImageAsUrl(dataurl)
     // }
 
     const handleChange = (e) => {
         console.log(e.target.files);
-        setFile(URL.createObjectURL(e.target.files[0]));
+        setImageAsUrl(URL.createObjectURL(e.target.files[0]));
+        setFile((e.target.files[0]));
     }
+
+
+    const UploadImageTOFirebase = (data) => {
+
+        const guid = () => {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
+            return String(s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                s4() + '-' + s4() + s4() + s4());
+        }
+
+
+        let myPromise = new Promise((resolve, reject) => {
+
+            const myGuid = guid();
+            const storageUrl = firebaseApp.storage('gs://hey1-portfolio.appspot.com/')
+            const storageRef = storageUrl.ref();
+
+            const uploadTask = storageRef.child('decode').child('profile').child(myGuid).put(file)
+            uploadTask.on('state_changed',
+                (snapShot) => {
+
+                }, (err) => {
+                    //catches the errors
+                    console.log(err)
+                    reject(err)
+                }, () => {
+
+                    firebaseApp
+                        .storage('gs://hey1-portfolio.appspot.com/')
+                        .ref()
+                        .child('decode')
+                        .child('profile')
+                        .child(myGuid)
+                        .getDownloadURL()
+                        .then(fireBaseUrl => {
+                            resolve(fireBaseUrl)
+                        }).catch(err => {
+                            console.log('error caught', err)
+                        })
+                })
+        })
+        myPromise.then(url => {
+            console.log(url)
+            sendMessage(data)
+        }).catch(err => {
+            console.log('error caught', err)
+        })
+    }
+
+
+    const sendMessage = (data) => {
+
+        let registerQuery = new Promise((resolve, reject) => {
+            let db = firebaseApp.firestore();
+            db.collection("Students").add({
+                f_name: data.f_name,
+                l_name: data.l_name,
+                dob: data.dob,
+                phone: data.phone,
+                email: data.email,
+                eme_phone: data.eme_phone,
+                courses: data.courses,
+                f_f_name: data.f_f_name,
+                f_l_name: data.f_l_name,
+                occupation: data.occupation,
+                qualification: data.qualification,
+                f_phone: data.f_phone,
+                line_1: data.line_1,
+                line_2: data.line_2,
+                city: data.city,
+                state: data.state,
+                country: data.country,
+                zipcode: data.zipcode,
+                createdAt: new Date().getTime(),
+                // project: 'decode-contact'
+            })
+                .then(function (docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                    resolve(docRef.id);
+                })
+                .catch(function (error) {
+                    console.error("Error adding document: ", error);
+                    reject(error);
+                });
+        });
+        registerQuery.then(result => {
+            console.warn('register successful')
+            // toast.success("Thank you for reaching out. We will contact you soon.")
+        }).catch(error => {
+            console.error(error)
+        })
+
+    }
+
 
     return (
         <AdminLayout>
@@ -117,7 +219,7 @@ function AddStudent() {
 
                                             <div className="stsg-box-list d-flex align-items-center stsg-box-list-text mb-4">
                                                 <span className="d-block">
-                                                    <img src={file} alt="profile" />
+                                                    <img src={imageAsUrl} alt="profile" />
                                                 </span>
                                                 <div className="stsg-box-list-text ps-3">
                                                     <bdi className="d-block">Upload your profile</bdi>
