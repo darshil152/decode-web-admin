@@ -71,7 +71,7 @@ export default class Contact extends Component {
                                     </div>
                                     <div className="mt-n1">
                                         <h4>Our Location</h4>
-                                        <p className="m-0">408-409, Dhara Trade Center, Mahadev Chowk, Mota
+                                        <p className="m-0">304, Dhara Arcade, Mahadev Chowk, Mota
                                             Varachha, Surat</p>
                                     </div>
                                 </div>

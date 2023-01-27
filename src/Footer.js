@@ -36,7 +36,7 @@ export default class Footer extends Component {
                                 <h3 className="text-white mb-4">Get In Touch</h3>
                                 <p> <a className="text-white-50" href="https://goo.gl/maps/tY68pnXuMjLQ1Jc19" target="_blank"><i
                                     className="fa fa-map-marker-alt mr-2"></i>
-                                    408-409, Dhara Trade Center, Mahadev Chowk, Mota
+                                    304, Dhara Arcade, Mahadev Chowk, Mota
                                     Varachha, Surat</a></p>
                                 <p>
                                     <a className="text-white-50" href="tel:8347763858"> <i className="fa fa-phone mr-2"></i>+91 834 776
