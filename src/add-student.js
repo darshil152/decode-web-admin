@@ -16,12 +16,14 @@ function AddStudent() {
 
     const [imageAsUrl, setImageAsUrl] = useState('');
     const [file, setFile] = useState('');
+    const [ernum, setErnum] = useState('23000001')
 
 
     const submitStudentData = (formData, resetForm) => {
         // UploadImageTOFirebase(formData);
         sendMessage(formData)
         console.log("student :: ", formData);
+
     };
 
     const errorContainer = (form, field) => {
@@ -59,7 +61,6 @@ function AddStudent() {
 
 
     const UploadImageTOFirebase = (data) => {
-
         const guid = () => {
             function s4() {
                 return Math.floor((1 + Math.random()) * 0x10000)
@@ -115,6 +116,7 @@ function AddStudent() {
         let registerQuery = new Promise((resolve, reject) => {
             let db = firebaseApp.firestore();
             db.collection("Students").add({
+                er_num: ernum,
                 f_name: data.f_name,
                 l_name: data.l_name,
                 dob: data.dob,
@@ -170,6 +172,7 @@ function AddStudent() {
                                 <Formik
                                     enableReinitialize
                                     initialValues={{
+                                        er_num: ernum,
                                         file: '',
                                         f_name: '',
                                         l_name: '',
@@ -191,6 +194,7 @@ function AddStudent() {
                                         zipcode: '',
                                     }}
                                     validationSchema={Yup.object({
+
                                         f_name: Yup.string().required("First name is required."),
                                         l_name: Yup.string().required("Last name is required."),
                                         email: Yup.string().required("email is required."),
@@ -215,8 +219,6 @@ function AddStudent() {
                                 >
                                     {(runform) => (
                                         <form className="row" onSubmit={runform.handleSubmit}>
-
-
                                             <div className="stsg-box-list d-flex align-items-center stsg-box-list-text mb-4">
                                                 <span className="d-block">
                                                     <img src={imageAsUrl} alt="profile" />
@@ -233,6 +235,13 @@ function AddStudent() {
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div className="col-md-6 mb-3">
+                                                <label className="lbl-comn-info">Enrollment Number</label>
+                                                <input type="text" name="er_num" value={ernum} className="form-control input-style" placeholder="" />
+
+                                            </div>
+
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">First Name</label>
                                                 <input type="text" name="f_name" {...formAttr(runform, "f_name")} className="form-control input-style" placeholder="" />
@@ -381,7 +390,7 @@ function AddStudent() {
                                                 {errorContainer(runform, "zipcode")}
                                             </div>
                                             <div className="col-12 pt-4 text-md-end text-center">
-                                                <button type="submit" className="btn-comn-all">
+                                                <button type="submit" className="btn-comn-all" style={{ marginRight: 15 }}>
                                                     Save
                                                 </button>
                                                 <button type="button" className="btn-comn-all3 ms-3">
