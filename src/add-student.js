@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import AdminLayout from "./adminlayout/adminlayout"
 import Upload from "./img/upload-icon.svg"
 import PhoneInput from "react-phone-input-2";
@@ -17,6 +18,7 @@ function AddStudent() {
     const [imageAsUrl, setImageAsUrl] = useState('');
     const [file, setFile] = useState('');
     const [ernum, setErnum] = useState('23000001')
+    const [fetchdata, setFetchdata] = useState([]);
 
 
     const submitStudentData = (formData, resetForm) => {
@@ -103,6 +105,7 @@ function AddStudent() {
                 })
         })
         myPromise.then(url => {
+
             console.log(url)
             sendMessage(data)
         }).catch(err => {
@@ -110,6 +113,25 @@ function AddStudent() {
         })
     }
 
+    useEffect(() => {
+        getdata();
+    }, [])
+
+
+    const getdata = () => {
+        let entry = []
+        const db = firebaseApp.firestore();
+        db.collection('Students').get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                entry.push(doc.data())
+            })
+            console.log(entry, 'product array')
+            setFetchdata(entry)
+        }).catch(err => {
+            console.error(err)
+        });
+
+    }
 
     const sendMessage = (data) => {
 
@@ -194,7 +216,6 @@ function AddStudent() {
                                         zipcode: '',
                                     }}
                                     validationSchema={Yup.object({
-
                                         f_name: Yup.string().required("First name is required."),
                                         l_name: Yup.string().required("Last name is required."),
                                         email: Yup.string().required("email is required."),
