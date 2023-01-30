@@ -17,9 +17,13 @@ function AddStudent() {
 
     const [imageAsUrl, setImageAsUrl] = useState('');
     const [file, setFile] = useState('');
-    const [ernum, setErnum] = useState('23000001')
+    const [ernum, setErnum] = useState(23000001)
     const [fetchdata, setFetchdata] = useState([]);
 
+
+    useEffect(() => {
+        getdata();
+    }, [])
 
     const submitStudentData = (formData, resetForm) => {
         // UploadImageTOFirebase(formData);
@@ -105,7 +109,6 @@ function AddStudent() {
                 })
         })
         myPromise.then(url => {
-
             console.log(url)
             sendMessage(data)
         }).catch(err => {
@@ -113,15 +116,26 @@ function AddStudent() {
         })
     }
 
-    useEffect(() => {
-        getdata();
-    }, [])
 
 
-    const getdata = () => {
+
+
+
+    const getdata = async () => {
         let entry = []
         const db = firebaseApp.firestore();
-        db.collection('Students').get().then((querySnapshot) => {
+
+        // const citiesRef = firebaseApp.database();
+        // const firstThreeRes = citiesRef.orderBy('createdAt').limit(3).get();
+        // console.log(firstThreeRes)
+
+        // const messageRef = firebaseApp.firestore();
+
+        // messageRef.orderByChild("created_at").on("child_added", snap => {
+        //     console.log(snap.val());
+        // });
+
+        db.collection('Students').get().where("proejct" == "Decode").then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 entry.push(doc.data())
             })
@@ -133,12 +147,24 @@ function AddStudent() {
 
     }
 
+    const makeid = (length) => {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            counter += 1;
+        }
+        return result;
+    }
+
     const sendMessage = (data) => {
 
         let registerQuery = new Promise((resolve, reject) => {
             let db = firebaseApp.firestore();
             db.collection("Students").add({
-                er_num: ernum,
+                er_num: Number(ernum),
                 f_name: data.f_name,
                 l_name: data.l_name,
                 dob: data.dob,
@@ -157,8 +183,10 @@ function AddStudent() {
                 state: data.state,
                 country: data.country,
                 zipcode: data.zipcode,
+                reference: data.reference,
                 createdAt: new Date().getTime(),
-                // project: 'decode-contact'
+                id: makeid(16),
+                project: "Decode",
             })
                 .then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
@@ -214,6 +242,7 @@ function AddStudent() {
                                         state: '',
                                         country: '',
                                         zipcode: '',
+                                        reference: "",
                                     }}
                                     validationSchema={Yup.object({
                                         f_name: Yup.string().required("First name is required."),
@@ -233,6 +262,8 @@ function AddStudent() {
                                         state: Yup.string().required("state is required."),
                                         country: Yup.string().required("country is required."),
                                         zipcode: Yup.string().required("Zipcode is required"),
+                                        reference: Yup.string().required("reference is required"),
+
                                     })}
                                     onSubmit={(formData, { resetForm }) => {
                                         submitStudentData(formData, resetForm);
@@ -410,6 +441,26 @@ function AddStudent() {
                                                 <input type="tel" name="zipcode" {...formAttr(runform, "zipcode")} className="form-control input-style" placeholder="" />
                                                 {errorContainer(runform, "zipcode")}
                                             </div>
+
+                                            <div className="col-12">
+                                                <div className="comn-title-info">
+                                                    <h1>Reference By</h1>
+                                                </div>
+                                            </div>
+
+                                            <div className="col-md-6 mb-3"  {...formAttr(runform, "reference")} >
+                                                <label className="lbl-comn-info">Reference</label>
+                                                <select className="form-control input-style" name="reference" >
+                                                    <option value="⬇️ Select a fruit ⬇️" > -- Select a reference -- </option>
+                                                    {fetchdata.length && fetchdata.map((items) => (
+
+                                                        <option value={items.id}>{items.f_name} {items.l_name}</option>
+
+                                                    ))}
+                                                </select>
+                                                {errorContainer(runform, "reference")}
+                                            </div>
+
                                             <div className="col-12 pt-4 text-md-end text-center">
                                                 <button type="submit" className="btn-comn-all" style={{ marginRight: 15 }}>
                                                     Save
