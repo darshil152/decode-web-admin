@@ -23,6 +23,7 @@ function AddStudent() {
 
     useEffect(() => {
         getdata();
+        incrementRollnum();
     }, [])
 
     const submitStudentData = (formData, resetForm) => {
@@ -117,24 +118,41 @@ function AddStudent() {
     }
 
 
+    const incrementRollnum = () => {
+        // Update state with incremented value
 
 
+    };
 
 
     const getdata = async () => {
         let entry = []
-        const db = firebaseApp.firestore();
+        const citiesRef = db.collection('Students');
+        const snapshot = await citiesRef.orderBy('f_name', "desc").get();
+        if (snapshot.empty) {
+            console.log('No matching documents.');
+            return;
+        }
 
-        // const citiesRef = firebaseApp.database();
-        // const firstThreeRes = citiesRef.orderBy('createdAt').limit(3).get();
-        // console.log(firstThreeRes)
+        snapshot.forEach(doc => {
 
-        // const messageRef = firebaseApp.firestore();
+            console.log(doc.id, '=>', doc.data());
+        });
+        // const citiesRef = db.collection('Students');
+        // const snapshot = await citiesRef.orderBy('f_name',).limit(13).get();
+        // if (snapshot.empty) {
+        //     console.log('No matching documents.');
+        //     return;
+        // }
 
-        // messageRef.orderByChild("created_at").on("child_added", snap => {
-        //     console.log(snap.val());
+        // snapshot.forEach(doc => {
+
+        //     console.log(doc.id, '=>', doc.data());
         // });
 
+
+
+        const db = firebaseApp.firestore();
         db.collection('Students').get().where("proejct" == "Decode").then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 entry.push(doc.data())
@@ -148,6 +166,18 @@ function AddStudent() {
     }
 
     const makeid = (length) => {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            counter += 1;
+        }
+        return result;
+    }
+
+    const makepass = (length) => {
         let result = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         const charactersLength = characters.length;
@@ -186,6 +216,7 @@ function AddStudent() {
                 reference: data.reference,
                 createdAt: new Date().getTime(),
                 id: makeid(16),
+                password: makepass(8),
                 project: "Decode",
             })
                 .then(function (docRef) {
@@ -246,23 +277,23 @@ function AddStudent() {
                                     }}
                                     validationSchema={Yup.object({
                                         f_name: Yup.string().required("First name is required."),
-                                        l_name: Yup.string().required("Last name is required."),
-                                        email: Yup.string().required("email is required."),
-                                        courses: Yup.string().required("please choose your course."),
-                                        phone: Yup.string().required("phone is required."),
-                                        dob: Yup.string().required("Date Of Birth is required."),
-                                        eme_phone: Yup.string().required("Emergency Contact number is required."),
-                                        f_f_name: Yup.string().required("First name is required."),
-                                        f_l_name: Yup.string().required("Last name is required."),
-                                        occupation: Yup.string().required("Occupation is required."),
-                                        f_phone: Yup.string().required("Contact number is required."),
-                                        line_1: Yup.string().required("Address is required."),
-                                        line_2: Yup.string().required("Address is required."),
-                                        city: Yup.string().required("city is required."),
-                                        state: Yup.string().required("state is required."),
-                                        country: Yup.string().required("country is required."),
-                                        zipcode: Yup.string().required("Zipcode is required"),
-                                        reference: Yup.string().required("reference is required"),
+                                        // l_name: Yup.string().required("Last name is required."),
+                                        // email: Yup.string().required("email is required."),
+                                        // courses: Yup.string().required("please choose your course."),
+                                        // phone: Yup.string().required("phone is required."),
+                                        // dob: Yup.string().required("Date Of Birth is required."),
+                                        // eme_phone: Yup.string().required("Emergency Contact number is required."),
+                                        // f_f_name: Yup.string().required("First name is required."),
+                                        // f_l_name: Yup.string().required("Last name is required."),
+                                        // occupation: Yup.string().required("Occupation is required."),
+                                        // f_phone: Yup.string().required("Contact number is required."),
+                                        // line_1: Yup.string().required("Address is required."),
+                                        // line_2: Yup.string().required("Address is required."),
+                                        // city: Yup.string().required("city is required."),
+                                        // state: Yup.string().required("state is required."),
+                                        // country: Yup.string().required("country is required."),
+                                        // zipcode: Yup.string().required("Zipcode is required"),
+                                        // reference: Yup.string().required("reference is required"),
 
                                     })}
                                     onSubmit={(formData, { resetForm }) => {
