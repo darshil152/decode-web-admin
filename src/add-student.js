@@ -9,6 +9,8 @@ import * as Yup from "yup";
 import { jssPreset } from "@material-ui/core";
 import { ThemeProvider } from "react-bootstrap";
 import firebaseApp from "./firebase/firebase";
+import { Button, Modal } from "react-bootstrap";
+
 
 
 
@@ -19,19 +21,46 @@ function AddStudent() {
     const [file, setFile] = useState('');
     const [ernum, setErnum] = useState(23000001)
     const [fetchdata, setFetchdata] = useState([]);
+    const [refe, setRef] = useState("");
+    const [refamount, setAmout] = useState("")
+    const [show, setShow] = useState(false);
+    const [refData, setTemp] = useState({});
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
 
 
     useEffect(() => {
         getdata();
-
     }, [])
 
     const submitStudentData = (formData, resetForm) => {
-        UploadImageTOFirebase(formData);
+        // UploadImageTOFirebase(formData);
         sendMessage(formData)
         console.log("student :: ", formData);
-
+        handlesave(formData);
     };
+
+    const handlesave = () => {
+        setShow(false)
+        setTemp({
+            refId: refe,
+            refAmount: refamount
+        })
+    }
+
+
+    const handleref = (event) => {
+        setRef(event.target.value);
+
+    }
+
+    const handlerefamount = (event) => {
+        setAmout(event.target.value);
+    }
+
+
+
 
     const errorContainer = (form, field) => {
         return form.touched[field] && form.errors[field] ? <span className="error text-danger">{form.errors[field]}</span> : null;
@@ -125,6 +154,7 @@ function AddStudent() {
         db.collection('Students').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 entry.push(doc.data())
+                // temp.push(doc.data())
             })
             console.log(entry, 'product array')
             entry.sort(compare);
@@ -172,8 +202,10 @@ function AddStudent() {
         return result;
     }
 
-    const sendMessage = (data) => {
 
+
+    const sendMessage = (data) => {
+        console.log(refData)
         let registerQuery = new Promise((resolve, reject) => {
             let db = firebaseApp.firestore();
             db.collection("Students").add({
@@ -196,11 +228,12 @@ function AddStudent() {
                 state: data.state,
                 country: data.country,
                 zipcode: data.zipcode,
-                reference: data.reference,
+                reference: refData,
                 createdAt: new Date().getTime(),
                 id: makeid(16),
                 password: makepass(8),
                 project: "Decode",
+                myref: [],
             })
                 .then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
@@ -257,6 +290,7 @@ function AddStudent() {
                                         country: '',
                                         zipcode: '',
                                         reference: "",
+                                        amount: "",
                                     }}
                                     validationSchema={Yup.object({
                                         f_name: Yup.string().required("First name is required."),
@@ -276,10 +310,13 @@ function AddStudent() {
                                         // state: Yup.string().required("state is required."),
                                         // country: Yup.string().required("country is required."),
                                         // zipcode: Yup.string().required("Zipcode is required"),
-                                        // reference: Yup.string().required("reference is required"),
+
+                                        // amount: Yup.string().required("reference is required"),
+
                                     })}
                                     onSubmit={(formData, { resetForm }) => {
                                         submitStudentData(formData, resetForm);
+
                                     }}
                                 >
                                     {(runform) => (
@@ -462,16 +499,13 @@ function AddStudent() {
                                             </div>
 
                                             <div className="col-md-6 mb-3"  {...formAttr(runform, "reference")} >
-                                                <label className="lbl-comn-info">Reference</label>
-                                                <select className="form-control input-style" name="reference" >
-                                                    <option value="⬇️ Select a fruit ⬇️" > -- Select a reference -- </option>
-                                                    {fetchdata.length && fetchdata.map((items) => (
 
-                                                        <option value={items.id}>{items.f_name} {items.l_name}</option>
 
-                                                    ))}
-                                                </select>
-                                                {errorContainer(runform, "reference")}
+                                                <input type="checkbox" onClick={handleShow} />
+                                                <label className="lbl-comn-info" style={{ display: "inline", marginLeft: 20 }}>Reference</label>
+
+
+
                                             </div>
 
                                             <div className="col-12 pt-4 text-md-end text-center">
@@ -485,6 +519,35 @@ function AddStudent() {
                                         </form>
                                     )}
                                 </Formik>
+
+                                <Modal show={show} onHide={handleClose}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>Reference</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <select className="form-control input-style" name="reference" onChange={handleref} value={refe} >
+                                            <option value="⬇️ Select a fruit ⬇️" > -- Select a reference -- </option>
+                                            {fetchdata.length && fetchdata.map((items) => (
+                                                <option value={items.id}>{items.f_name} {items.l_name}</option>
+                                            ))}
+                                        </select>
+                                        <label className="lbl-comn-info" onChange={refamount} >Number of Amount :</label>
+
+                                        <input className="form-control input-style" id="amount" name="amount" onChange={handlerefamount}
+                                        />
+
+
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="secondary" onClick={handleClose}>
+                                            Close
+                                        </Button>
+                                        <Button variant="primary" onClick={handlesave}>
+                                            Save Changes
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+
                             </div>
                         </div>
                     </div>
