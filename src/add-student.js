@@ -10,6 +10,7 @@ import { jssPreset } from "@material-ui/core";
 import { ThemeProvider } from "react-bootstrap";
 import firebaseApp from "./firebase/firebase";
 import { Button, Modal } from "react-bootstrap";
+import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 
 
 
@@ -28,6 +29,7 @@ function AddStudent() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const [currentid, setCurrentid] = useState('')
 
 
     useEffect(() => {
@@ -36,9 +38,12 @@ function AddStudent() {
 
     const submitStudentData = (formData, resetForm) => {
         // UploadImageTOFirebase(formData);
-        sendMessage(formData)
+        // sendMessage(formData)
+        abc();
+
         console.log("student :: ", formData);
-        handlesave(formData);
+        // handlesave(formData);
+        // abc();
     };
 
     const handlesave = () => {
@@ -50,17 +55,34 @@ function AddStudent() {
     }
 
 
+    const abc = () => {
+        for (let i = 0; i < fetchdata.length; i++) {
+            if (fetchdata[i].id == refData.refId) {
+                fetchdata[i].myref.push(currentid)
+                console.log(refData.refId)
+            }
+        }
+    }
+
+    // useEffect(() => {
+    //     for (let i = 0; i < fetchdata.length; i++) {
+    //         if (fetchdata[i].reference.refId == currentid) {
+    //             console.log("true")
+    //         }
+    //         // console.log(currentid)
+    //     }
+    // },)
+
+
+
+
     const handleref = (event) => {
         setRef(event.target.value);
-
     }
 
     const handlerefamount = (event) => {
         setAmout(event.target.value);
     }
-
-
-
 
     const errorContainer = (form, field) => {
         return form.touched[field] && form.errors[field] ? <span className="error text-danger">{form.errors[field]}</span> : null;
@@ -149,6 +171,7 @@ function AddStudent() {
 
 
     const getdata = async () => {
+        setCurrentid(makeid(16))
         let entry = []
         const db = firebaseApp.firestore();
         db.collection('Students').get().then((querySnapshot) => {
@@ -159,7 +182,6 @@ function AddStudent() {
             console.log(entry, 'product array')
             entry.sort(compare);
             let lastErNum = entry[entry.length - 1].er_num;
-            console.log(lastErNum)
             setErnum(ernum => 1 + lastErNum)
             setFetchdata(entry)
         }).catch(err => {
@@ -201,6 +223,7 @@ function AddStudent() {
         }
         return result;
     }
+
 
 
 
@@ -250,7 +273,6 @@ function AddStudent() {
         }).catch(error => {
             console.error(error)
         })
-
     }
 
 
