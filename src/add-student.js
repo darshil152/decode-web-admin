@@ -23,11 +23,11 @@ function AddStudent() {
 
     useEffect(() => {
         getdata();
-        incrementRollnum();
+
     }, [])
 
     const submitStudentData = (formData, resetForm) => {
-        // UploadImageTOFirebase(formData);
+        UploadImageTOFirebase(formData);
         sendMessage(formData)
         console.log("student :: ", formData);
 
@@ -118,51 +118,34 @@ function AddStudent() {
     }
 
 
-    const incrementRollnum = () => {
-        // Update state with incremented value
-
-
-    };
-
 
     const getdata = async () => {
         let entry = []
-        const citiesRef = db.collection('Students');
-        const snapshot = await citiesRef.orderBy('f_name', "desc").get();
-        if (snapshot.empty) {
-            console.log('No matching documents.');
-            return;
-        }
-
-        snapshot.forEach(doc => {
-
-            console.log(doc.id, '=>', doc.data());
-        });
-        // const citiesRef = db.collection('Students');
-        // const snapshot = await citiesRef.orderBy('f_name',).limit(13).get();
-        // if (snapshot.empty) {
-        //     console.log('No matching documents.');
-        //     return;
-        // }
-
-        // snapshot.forEach(doc => {
-
-        //     console.log(doc.id, '=>', doc.data());
-        // });
-
-
-
         const db = firebaseApp.firestore();
-        db.collection('Students').get().where("proejct" == "Decode").then((querySnapshot) => {
+        db.collection('Students').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 entry.push(doc.data())
             })
             console.log(entry, 'product array')
+            entry.sort(compare);
+            let lastErNum = entry[entry.length - 1].er_num;
+            console.log(lastErNum)
+            setErnum(ernum => 1 + lastErNum)
             setFetchdata(entry)
         }).catch(err => {
             console.error(err)
         });
+    }
 
+
+    const compare = (a, b) => {
+        if (a.er_num < b.er_num) {
+            return -1;
+        }
+        if (a.er_num > b.er_num) {
+            return 1;
+        }
+        return 0;
     }
 
     const makeid = (length) => {
@@ -294,7 +277,6 @@ function AddStudent() {
                                         // country: Yup.string().required("country is required."),
                                         // zipcode: Yup.string().required("Zipcode is required"),
                                         // reference: Yup.string().required("reference is required"),
-
                                     })}
                                     onSubmit={(formData, { resetForm }) => {
                                         submitStudentData(formData, resetForm);
