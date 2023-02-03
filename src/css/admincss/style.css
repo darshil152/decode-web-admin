@@ -90,41 +90,90 @@ input[type=submit] {
     font-size: 15px;
 }
 
-h1.profile {
-    text-align: center;
-}
 
-h5.profilename {
-    text-align: center;
-}
-
-h1.aboutheading {
-    text-align: center;
-    margin-top: 25px;
-}
-
-.mainprofile {
-    display: flex;
-    justify-content: center;
-}
 
 img.profilepicture {
     height: 150px;
     border-radius: 50px;
 }
 
-p.container {
+h3.userdetails {
+    font-weight: 500;
+}
 
-    text-align: center;
+
+.User {
+    display: inline-flex;
+    margin-left: 15px;
+}
+
+lable.lables {
     font-size: 20px;
+    font-weight: 800;
+    color: black;
+    font-family: inherit;
+}
+
+h6.username {
+    font-size: 26px;
+    margin-left: 15px;
+}
+
+.fa-envelope:before {
+    color: black;
+    content: "\f0e0";
+    font-size: 30px;
+}
+
+i.fa.fa-user {
+    color: black;
+    content: "\f0e0";
+    font-size: 30px;
+}
+
+i.fa.fa-birthday-cake {
+    color: black;
+    content: "\f0e0";
+    font-size: 30px;
+}
+
+i.fa.fa-mobile {
+    color: black;
+    content: "\f0e0";
+    font-size: 30px;
+}
+
+i.fas.fa-graduation-cap {
+    color: black;
+    content: "\f0e0";
+    font-size: 30px;
+}
+
+i.fas.fa-briefcase {
+    color: black;
+    content: "\f0e0";
+    font-size: 30px;
+}
+
+span.spans {
+    font-size: 30px;
+    font-family: 'Jost', sans-serif;
     color: black;
 }
 
-label.lables {
-    font-size: 20;
-    font-weight: 700;
+.container.mt-5.studentdetail {
+    background: #FFFFFF;
+    box-shadow: 5px 6px 25px rgb(15 15 15 / 15%);
+    border-radius: 20px;
 }
 
-h3.userdetails {
-    font-weight: 500;
+.container.mt-5.parentdetails {
+    background: #FFFFFF;
+    box-shadow: 5px 6px 25px rgb(15 15 15 / 15%);
+    border-radius: 20px;
+}
+
+img.reference {
+    width: 30px;
+    height: 30px;
 }
