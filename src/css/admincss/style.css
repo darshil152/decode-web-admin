@@ -149,6 +149,12 @@ i.fas.fa-graduation-cap {
     font-size: 30px;
 }
 
+i.fa.fa-link {
+    color: black;
+    content: "\f0e0";
+    font-size: 30px;
+}
+
 i.fas.fa-briefcase {
     color: black;
     content: "\f0e0";
@@ -173,7 +179,20 @@ span.spans {
     border-radius: 20px;
 }
 
-img.reference {
-    width: 30px;
-    height: 30px;
+.container.mt-5.residentalDetail {
+    background: #FFFFFF;
+    box-shadow: 5px 6px 25px rgb(15 15 15 / 15%);
+    border-radius: 20px;
+}
+
+i.fa-sharp.fa-solid.fa-city {
+    color: black;
+    content: "\f0e0";
+    font-size: 30px;
+}
+
+i.fa.fa-map-marker {
+    color: black;
+    content: "\f0e0";
+    font-size: 30px;
 }
