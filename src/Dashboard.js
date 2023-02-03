@@ -50,13 +50,14 @@ export default function Dashboard() {
             },
         },
         {
-            name: "l_name",
-            label: "l_name",
+            name: "status",
+            label: "status",
             options: {
                 filter: true,
                 sort: true,
             },
         },
+
         {
             name: "dob",
             label: "dob",
@@ -65,14 +66,7 @@ export default function Dashboard() {
                 sort: true,
             },
         },
-        {
-            name: "phone",
-            label: "phone",
-            options: {
-                filter: true,
-                sort: true,
-            },
-        },
+
         {
             name: "courses",
             label: "courses",
@@ -81,69 +75,7 @@ export default function Dashboard() {
                 sort: true,
             },
         },
-        {
-            name: "f_f_name",
-            label: "f_f_name",
-            options: {
-                filter: true,
-                sort: true,
-            },
-        },
-        {
-            name: "f_phone",
-            label: "f_phone",
-            options: {
-                filter: true,
-                sort: true,
-            },
-        },
-        {
-            name: "line_1",
-            label: "line_1",
-            options: {
-                filter: true,
-                sort: true,
-            },
-        },
-        {
-            name: "line_2",
-            label: "line_2",
-            options: {
-                filter: true,
-                sort: true,
-            },
-        }, {
-            name: "city",
-            label: "city",
-            options: {
-                filter: true,
-                sort: true,
-            },
-        },
-        {
-            name: "state",
-            label: "state",
-            options: {
-                filter: true,
-                sort: true,
-            },
-        },
-        {
-            name: "country",
-            label: "country",
-            options: {
-                filter: true,
-                sort: true,
-            },
-        },
-        {
-            name: "zipcode",
-            label: "zipcode",
-            options: {
-                filter: true,
-                sort: true,
-            },
-        },
+
         // {
         //     name: "createdAt",
         //     label: "Date & Time",
@@ -172,7 +104,7 @@ export default function Dashboard() {
 
     return (
         <MUIDataTable
-            title={"Student List"}
+            title={"Students List"}
             data={stdata}
             columns={columns}
             options={options}

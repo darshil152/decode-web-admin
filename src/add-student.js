@@ -252,6 +252,7 @@ function AddStudent() {
         return result;
     }
 
+
     const makepass = (length) => {
         let result = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

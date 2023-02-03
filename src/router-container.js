@@ -15,6 +15,7 @@ import "../src/css/admincss/style.css";
 import "../src/css/admincss/style.scss";
 import ProtectedRoute from './ProtectedRouter';
 import Dashboard from './Dashboard';
+import Profile from './Profile';
 
 export default class RouterContainer extends Component {
     render() {
@@ -33,6 +34,8 @@ export default class RouterContainer extends Component {
                     <Route path="/placement-partners" element={<PlacementPartners />} />
                     <Route path="*" element={<Home />} />
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/profile" element={<Profile />} />
+
 
                     <Route path="/add-student" element={
                         <ProtectedRoute>
