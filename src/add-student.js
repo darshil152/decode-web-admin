@@ -6,11 +6,12 @@ import PhoneInput from "react-phone-input-2";
 import { Formik } from "formik";
 import * as Yup from "yup";
 // import toastr from "toastr";
-import { jssPreset } from "@material-ui/core";
+import { Checkbox, jssPreset } from "@material-ui/core";
 import { ThemeProvider } from "react-bootstrap";
 import firebaseApp from "./firebase/firebase";
 import { Button, Modal } from "react-bootstrap";
 import { setSelectionRange } from "@testing-library/user-event/dist/utils";
+import { data } from "jquery";
 
 
 
@@ -25,53 +26,81 @@ function AddStudent() {
     const [refe, setRef] = useState("");
     const [refamount, setAmout] = useState("")
     const [show, setShow] = useState(false);
-    const [refData, setTemp] = useState({});
-    const handleClose = () => setShow(false);
+    const [refData, setTemp] = useState({
+        refId: 'decode',
+        refAmount: 0
+    });
     const handleShow = () => setShow(true);
-
+    const [checked, setChecked] = useState(false);
     const [currentid, setCurrentid] = useState('')
-
+    const [acticestatus, setActivestatus] = useState("")
 
     useEffect(() => {
         getdata();
     }, [])
 
+    const handleClose = () => {
+        setChecked(false);
+        setShow(false);
+    }
+
     const submitStudentData = (formData, resetForm) => {
         // UploadImageTOFirebase(formData);
-        // sendMessage(formData)
-        abc();
 
+        abc(formData);
         console.log("student :: ", formData);
         // handlesave(formData);
-        // abc();
     };
 
-    const handlesave = () => {
+    const handlesave = (event) => {
         setShow(false)
         setTemp({
             refId: refe,
             refAmount: refamount
         })
+        setChecked(false);
     }
 
 
-    const abc = () => {
+    const abc = (formData) => {
+        let idtoupdate = ''
+        let updatedData = []
         for (let i = 0; i < fetchdata.length; i++) {
             if (fetchdata[i].id == refData.refId) {
                 fetchdata[i].myref.push(currentid)
                 console.log(refData.refId)
+                updatedData = fetchdata[i].myref
+                idtoupdate = fetchdata[i].id
             }
+
         }
+        const db = firebaseApp.firestore();
+        db.collection('Students').where('id', '==', idtoupdate).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                console.log(doc.ref.id)
+
+                var updateCollection = db.collection("Students").doc(doc.ref.id);
+                return updateCollection.update({
+                    myref: updatedData
+                })
+                    .then(() => {
+                        console.log("Document successfully updated!");
+                        sendMessage(formData)
+                        // window.location.href = '/table'
+
+                    })
+                    .catch((error) => {
+                        // The document probably doesn't exist.
+                        console.error("Error updating document: ", error);
+                    });
+            })
+
+        }).catch(err => {
+            console.error(err)
+        });
+
     }
 
-    // useEffect(() => {
-    //     for (let i = 0; i < fetchdata.length; i++) {
-    //         if (fetchdata[i].reference.refId == currentid) {
-    //             console.log("true")
-    //         }
-    //         // console.log(currentid)
-    //     }
-    // },)
 
 
 
@@ -173,6 +202,7 @@ function AddStudent() {
     const getdata = async () => {
         setCurrentid(makeid(16))
         let entry = []
+        let activeStudents = []
         const db = firebaseApp.firestore();
         db.collection('Students').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
@@ -184,6 +214,16 @@ function AddStudent() {
             let lastErNum = entry[entry.length - 1].er_num;
             setErnum(ernum => 1 + lastErNum)
             setFetchdata(entry)
+
+
+            for (let i = 0; i < entry.length; i++) {
+                if (entry[i].status == 1) {
+                    console.log(entry[i].status)
+                    activeStudents.push(entry[i])
+                }
+            }
+            setActivestatus(activeStudents)
+
         }).catch(err => {
             console.error(err)
         });
@@ -256,7 +296,9 @@ function AddStudent() {
                 id: makeid(16),
                 password: makepass(8),
                 project: "Decode",
+                status: 1,
                 myref: [],
+
             })
                 .then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
@@ -523,7 +565,7 @@ function AddStudent() {
                                             <div className="col-md-6 mb-3"  {...formAttr(runform, "reference")} >
 
 
-                                                <input type="checkbox" onClick={handleShow} />
+                                                <input type="checkbox" onClick={handleShow} checked={checked} onChange={() => setChecked(!checked)} />
                                                 <label className="lbl-comn-info" style={{ display: "inline", marginLeft: 20 }}>Reference</label>
 
 
@@ -549,7 +591,7 @@ function AddStudent() {
                                     <Modal.Body>
                                         <select className="form-control input-style" name="reference" onChange={handleref} value={refe} >
                                             <option value="⬇️ Select a fruit ⬇️" > -- Select a reference -- </option>
-                                            {fetchdata.length && fetchdata.map((items) => (
+                                            {acticestatus.length && acticestatus.map((items) => (
                                                 <option value={items.id}>{items.f_name} {items.l_name}</option>
                                             ))}
                                         </select>
@@ -557,8 +599,6 @@ function AddStudent() {
 
                                         <input className="form-control input-style" id="amount" name="amount" onChange={handlerefamount}
                                         />
-
-
                                     </Modal.Body>
                                     <Modal.Footer>
                                         <Button variant="secondary" onClick={handleClose}>
