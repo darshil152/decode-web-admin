@@ -5,11 +5,15 @@ import { Formik } from 'formik';
 import * as Yup from "yup";
 import { useEffect } from 'react';
 import firebaseApp from './firebase/firebase';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
 export default function Login() {
+
+    const navigate = useNavigate();
+
+
     let data = [];
 
     useEffect(() => {
@@ -48,7 +52,8 @@ export default function Login() {
             }
         }
         if (isflag) {
-            <Link to="/">Home</Link>
+            // <Link to="/">Home</Link>
+            navigate('/profile/' + formdata.enrollmentNumber)
 
             toast('You loggin successfully', {
                 position: "top-right",
@@ -74,6 +79,7 @@ export default function Login() {
             });
         }
     }
+
 
     return (
         <section>
@@ -152,7 +158,7 @@ export default function Login() {
                                                 </div>
 
                                                 <div className="field padding-bottom--24">
-                                                    <input style={{ background: 'blue' }} href="#" type="submit" defaultValue="Login" />
+                                                    <input href="#" type="submit" defaultValue="Login" />
                                                 </div>
 
                                             </form>
