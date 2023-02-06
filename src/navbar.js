@@ -48,14 +48,14 @@ export default class NavbarComponent extends Component {
                                 </NavDropdown.Item>
                             </NavDropdown>
                             <Link to={'/contact'} className={this.state.currentPage == 'contact' ? "nav-item nav-link active" : "nav-item nav-link "}>Contact Us</Link>
+                            <Link to={'/login'} className={this.state.currentPage == 'login' ? "nav-item nav-link active" : "nav-item nav-link "}>Login</Link>
+
                         </Nav>
                         <a href="https://wa.me/918347763858" target="_blank"
                             className="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block"> <i className="fa-brands fa-whatsapp mr-2"></i> Join
                             Us</a>
                     </Navbar.Collapse>
-
                 </Navbar>
-
             </div>
         )
     }

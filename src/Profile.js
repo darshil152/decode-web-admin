@@ -81,8 +81,28 @@ export default function Profile() {
                                 <i class="fa-sharp fa-solid fa-city"></i><span className='ml-3 spans'>Surat</span>
                             </div>
                             <div className='mt-lg-4 mt-sm-4 ml-lg-4 mb-sm-4'>
-                                <i class="fa fa-mobile" aria-hidden="true"></i><span className='ml-3 spans'>Gujarat</span>
+                                <i class="fa-sharp fa-solid fa-city"></i><span className='ml-3 spans'>Gujarat</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className='container mt-5 residentalDetail '>
+                <div className='container'>
+                    <div className='row'>
+                        <div className='col-lg-6'>
+                            <div className='mt-4'>
+                                <h1>reference Details</h1>
+                            </div>
+                            <div className='mt-lg-4 mt-sm-4 ml-lg-4'>
+                                <i class="fa fa-link" aria-hidden="true"></i>
+                                <span className='ml-3 spans'>E3SfA1oy8WqHNy4S</span>
+                            </div>
+                            <div className='mt-lg-4 mt-sm-4 ml-lg-4'>
+                                <i class="fa fa-inr" aria-hidden="true"></i>
+                                <span className='ml-3 spans'>2000</span>
+                            </div>
+
                         </div>
                     </div>
                 </div>

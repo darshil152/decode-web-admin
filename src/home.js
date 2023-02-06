@@ -11,6 +11,7 @@ import Testimonial from './Testimonial';
 import Contact from './Contact';
 import Footer from './Footer';
 import Layout from './Layout';
+import Login from './Login';
 export default class Home extends Component {
 
     state = {
@@ -77,7 +78,6 @@ export default class Home extends Component {
                 {/* <!-- Contact Start --> */}
                 <Contact />
                 {/* <!-- Contact End --> */}
-
 
 
 

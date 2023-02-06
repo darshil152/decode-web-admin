@@ -120,9 +120,9 @@ h6.username {
 }
 
 .fa-envelope:before {
-    color: black;
+    /* color: black; */
     content: "\f0e0";
-    font-size: 30px;
+    /* font-size: 30px; */
 }
 
 i.fa.fa-user {
@@ -192,6 +192,12 @@ i.fa-sharp.fa-solid.fa-city {
 }
 
 i.fa.fa-map-marker {
+    color: black;
+    content: "\f0e0";
+    font-size: 30px;
+}
+
+i.fa.fa-inr {
     color: black;
     content: "\f0e0";
     font-size: 30px;
