@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import OwlCarousel from 'react-owl-carousel';
+import Heaven from './img/heaven.jpeg'
+import Vandan from './img/vandan.jpeg'
+import Dhara from './img/dhara.jpeg'
+import Darshil from './img/darshil.jpeg'
 export default class Team extends Component {
     state = {
         teamCarousel: {
@@ -24,7 +28,7 @@ export default class Team extends Component {
                     </div>
                     <OwlCarousel className='owl-carousel team-carousel position-relative' responsive={this.state.teamCarousel} smartSpeed={600} margin={30} items={3} loop={true} autoplay={true} nav={true}>
                         <div className="team-item">
-                            <img className="img-fluid w-100" src="img/heaven.jpeg" alt="" />
+                            <img className="img-fluid w-100" src={Heaven} alt="" />
                             <div className="bg-light text-center p-4">
                                 <h5 className="mb-3">Heaven Kapopara</h5>
                                 <p className="mb-2">Fullstack Developer</p>
@@ -42,7 +46,7 @@ export default class Team extends Component {
                             </div>
                         </div>
                         <div className="team-item">
-                            <img className="img-fluid w-100" src="img/vandan.jpeg" alt="" />
+                            <img className="img-fluid w-100" src={Vandan} alt="" />
                             <div className="bg-light text-center p-4">
                                 <h5 className="mb-3">Vandan</h5>
                                 <p className="mb-2">Flutter Developer</p>
@@ -57,7 +61,7 @@ export default class Team extends Component {
                             </div>
                         </div>
                         <div className="team-item">
-                            <img className="img-fluid w-100" src="img/dhara.jpeg" alt="" />
+                            <img className="img-fluid w-100" src={Dhara} alt="" />
                             <div className="bg-light text-center p-4">
                                 <h5 className="mb-3">Dhara</h5>
                                 <p className="mb-2">Web Designer</p>
@@ -71,10 +75,10 @@ export default class Team extends Component {
                                 </div>
                             </div>
                         </div>
-                        {/* <div className="team-item">
-                            <img className="img-fluid w-100" src="img/dhara.jpeg" alt="" />
+                        <div className="team-item">
+                            <img className="img-fluid w-100" src={Darshil} alt="" />
                             <div className="bg-light text-center p-4">
-                                <h5 className="mb-3">Darshil</h5>
+                                <h5 className="mb-3">Darshil Lunagariya</h5>
                                 <p className="mb-2">Frontend Developer</p>
                                 <div className="d-flex justify-content-center">
                                     <a className="mx-1 p-1" href="#"><i className="fab fa-twitter"></i></a>
@@ -85,7 +89,7 @@ export default class Team extends Component {
                                     <a className="mx-1 p-1" href="#"><i className="fab fa-youtube"></i></a>
                                 </div>
                             </div>
-                        </div> */}
+                        </div>
                     </OwlCarousel>
 
 
