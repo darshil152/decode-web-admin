@@ -8,6 +8,7 @@ import { data } from 'jquery'
 import { current } from '@reduxjs/toolkit'
 import { useState } from 'react'
 import { Navbar } from 'react-bootstrap'
+import NavbarComponent from './navbar'
 
 // let data = [];
 
@@ -64,9 +65,8 @@ export default function Profile() {
 
 
     return (
-
-        <div>
-
+        <>
+            <NavbarComponent />
             <div className='container mt-5 studentdetail' >
                 <div className='row'>
                     <div className='col-lg-12 text-center mt-4'>
@@ -177,7 +177,9 @@ export default function Profile() {
                 </div>
             </div>
 
-        </div>
+        </>
+
+
 
     )
 }

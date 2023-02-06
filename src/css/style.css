@@ -11208,10 +11208,8 @@ se {
   background-color: #ffffff;
 }
 
-a {
-  color: #5469d4;
-  text-decoration: unset;
-}
+
+
 
 .login-root {
   background: #fff;
@@ -11329,7 +11327,7 @@ a {
     rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
 }
 
-span {
+/* span {
   display: block;
   font-size: 20px;
   line-height: 28px;
@@ -11338,7 +11336,7 @@ span {
 
 label {
   margin-bottom: 10px;
-}
+} */
 
 .reset-pass a,
 label {
