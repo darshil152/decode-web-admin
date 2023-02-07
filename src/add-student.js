@@ -46,10 +46,8 @@ function AddStudent() {
 
     const submitStudentData = (formData, resetForm) => {
         // UploadImageTOFirebase(formData);
-
         abc(formData);
         console.log("student :: ", formData);
-        // handlesave(formData);
     };
 
     const handlesave = (event) => {
@@ -353,7 +351,7 @@ function AddStudent() {
                                         state: '',
                                         country: '',
                                         zipcode: '',
-                                        reference: "",
+                                        reference: {},
                                         amount: "",
                                     }}
                                     validationSchema={Yup.object({

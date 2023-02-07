@@ -3,35 +3,35 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import firebaseApp from './firebase/firebase'
 import MUIDataTable from 'mui-datatables'
-
 // import { QuerySnapshot } from '@firebase/firestore-types';
 // import Ember from 'ember';
 
 
 
-export default function Dashboard() {
+export default function Attandance() {
 
-    const [stdata, setStdata] = useState([]);
+    // const [stdata, setStdata] = useState([]);
 
-    useEffect(() => {
-        getdata()
-    }, [])
+    // useEffect(() => {
+    //     getdata()
+    // }, [])
 
 
-    const getdata = () => {
-        let entry = []
-        const db = firebaseApp.firestore();
+    // const getdata = () => {
+    //     let entry = []
+    //     const db = firebaseApp.firestore();
 
-        db.collection('Students').get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                entry.push(doc.data())
-            })
-            console.log(entry, 'product array')
-            setStdata(entry)
-        }).catch(err => {
-            console.error(err)
-        });
-    }
+    //     db.collection('Students').get().then((querySnapshot) => {
+    //         querySnapshot.forEach((doc) => {
+    //             entry.push(doc.data())
+    //         })
+    //         console.log(entry, 'product array')
+    //         setStdata(entry)
+    //     }).catch(err => {
+    //         console.error(err)
+    //     });
+    // }
+
 
     const columns = [
         {
@@ -51,14 +51,14 @@ export default function Dashboard() {
             },
         },
         {
-            name: "status",
-            label: "status",
-            options: {
-                filter: true,
-                sort: true,
+            title: 'DOB',
+            field: 'birthDate',
+            type: 'date',
+            dateSetting: {
+                format: 'dd/MM/yyyy'
             },
-        },
 
+        },
         {
             name: "dob",
             label: "dob",
@@ -77,21 +77,8 @@ export default function Dashboard() {
             },
         },
 
-        {
-            name: "createdAt",
-            label: "Date & Time",
-            options: {
-                filter: true,
-                sort: true,
-                customBodyRender: (value, tableMeta, updateValue) => {
-                    return (
-                        <div>
-                            <input type="date" />
-                        </div>
-                    );
-                },
-            },
-        },
+
+
     ];
 
 
@@ -105,7 +92,7 @@ export default function Dashboard() {
     return (
         <MUIDataTable
             title={"Students List"}
-            data={stdata}
+            // data={stdata}
             columns={columns}
             options={options}
         />

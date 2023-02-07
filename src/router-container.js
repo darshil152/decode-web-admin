@@ -17,6 +17,7 @@ import ProtectedRoute from './ProtectedRouter';
 import Dashboard from './Dashboard';
 import Profile from './Profile';
 import Login from './Login';
+import Attandance from './Attandance';
 
 export default class RouterContainer extends Component {
     render() {
@@ -34,9 +35,10 @@ export default class RouterContainer extends Component {
                     <Route path="/terms" element={<TearmsCondition />} />
                     <Route path="/placement-partners" element={<PlacementPartners />} />
                     <Route path="*" element={<Home />} />
-                    {/* <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/profile/:id" element={<Profile />} />
                     <Route path="/Login" element={<Login />} />
+                    <Route path="/attandance" element={<Attandance />} />
 
 
 
@@ -45,7 +47,7 @@ export default class RouterContainer extends Component {
                         <ProtectedRoute>
                             <AddStudent />
                         </ProtectedRoute>
-                    } /> */}
+                    } />
                 </Routes>
             </Router>
         )

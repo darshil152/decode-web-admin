@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Footer from './Footer'
 import NavbarComponent from './navbar';
 import TopBar from './topBar'
+import Navbarforprofile from './navbarforprofile';
 
 export default class Layout extends Component {
     componentDidMount() {
@@ -12,6 +13,7 @@ export default class Layout extends Component {
             <>
                 <TopBar />
                 <NavbarComponent />
+                {/* <Navbarforprofile /> */}
                 {this.props.children}
                 <Footer />
             </>

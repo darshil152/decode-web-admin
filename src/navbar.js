@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import logo from './img/logo.png'
+
 export default class NavbarComponent extends Component {
     state = {
         currentPage: ''
@@ -32,7 +33,6 @@ export default class NavbarComponent extends Component {
                             <NavDropdown
                                 id="nav-dropdown-dark-example"
                                 title="Pages"
-
                             >
                                 <NavDropdown.Item><Link to={'/details/4'}>Course Details</Link></NavDropdown.Item>
                                 <NavDropdown.Item ><Link to={'/feature'}>      Our Features</Link>

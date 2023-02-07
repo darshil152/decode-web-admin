@@ -11485,6 +11485,11 @@ i.fa.fa-map-marker-alt.mr-2.usernames {
   color: black;
 }
 
+i.fa.fa-id-card.usernames {
+  font-size: 30px;
+  color: black;
+}
+
 i.fa.fa-envelope.usernames {
   font-size: 30px;
   color: black;
@@ -11494,4 +11499,17 @@ lable.lablesdata {
   font-size: 30px;
   color: black;
   font-family: "Jost", sans-serif;
+}
+
+a#basic-nav-dropdowns {
+  font-family: "Jost", sans-serif;
+  font-weight: 800;
+  color: white;
+
+}
+
+a.dropdown-item {
+  color: #0a508c;
+  text-decoration: none;
+  background-color: transparent;
 }
