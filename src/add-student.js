@@ -46,6 +46,7 @@ function AddStudent() {
 
     const submitStudentData = (formData, resetForm) => {
         // UploadImageTOFirebase(formData);
+        sendMessage(formData);
         abc(formData);
         console.log("student :: ", formData);
     };
@@ -63,6 +64,7 @@ function AddStudent() {
     const abc = (formData) => {
         let idtoupdate = ''
         let updatedData = []
+
         for (let i = 0; i < fetchdata.length; i++) {
             if (fetchdata[i].id == refData.refId) {
                 fetchdata[i].myref.push(currentid)
@@ -296,7 +298,7 @@ function AddStudent() {
                 project: "Decode",
                 status: 1,
                 myref: [],
-
+                myAttend: []
             })
                 .then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);

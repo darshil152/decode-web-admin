@@ -11513,3 +11513,22 @@ a.dropdown-item {
   text-decoration: none;
   background-color: transparent;
 }
+
+.tss-1qtl85h-MUIDataTableBodyCell-root {
+  font-family: 'Jost', sans-serif;
+}
+
+.tss-1akey0g-MUIDataTableHeadCell-data {
+  font-family: 'Jost',
+    sans-serif;
+}
+
+
+
+input.tabledat {
+  font-size: 17px;
+}
+
+lable.tableclass {
+  font-family: 'Jost', sans-serif;
+}

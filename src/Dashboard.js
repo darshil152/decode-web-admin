@@ -77,21 +77,7 @@ export default function Dashboard() {
             },
         },
 
-        {
-            name: "createdAt",
-            label: "Date & Time",
-            options: {
-                filter: true,
-                sort: true,
-                customBodyRender: (value, tableMeta, updateValue) => {
-                    return (
-                        <div>
-                            <input type="date" />
-                        </div>
-                    );
-                },
-            },
-        },
+
     ];
 
 
