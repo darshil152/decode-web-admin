@@ -9,14 +9,18 @@ import logo from './img/logo.png'
 
 export default class avbarforprofile extends Component {
     state = {
-        currentPage: ''
+        currentPage: '',
+        id: '',
     }
     componentDidMount() {
         let url = window.location.href
+        var id = url.substring(url.lastIndexOf('/') + 1);
+        this.setState({ id })
+        console.log(id);
         url = url.split('/')
         this.setState({ currentPage: url[3] ? url[3] : '' })
-
     }
+
     render() {
         return (
             <div className="container-fluid p-0">
@@ -29,7 +33,7 @@ export default class avbarforprofile extends Component {
 
 
                             <NavDropdown.Item>
-                                <Link to={'/attandance'}>Attandance</Link>
+                                <Link to={'/attandancesheet/' + this.state.id}>Attandance</Link>
                             </NavDropdown.Item>
                             <NavDropdown.Item>
                                 <Link to={'/paymentdetail'}>Payment Details</Link>

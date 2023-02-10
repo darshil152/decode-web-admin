@@ -4,10 +4,13 @@ import { useState } from 'react';
 import firebaseApp from './firebase/firebase'
 import MUIDataTable from 'mui-datatables'
 import { number } from 'yup';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // import { QuerySnapshot } from '@firebase/firestore-types';
 // import Ember from 'ember';
 
-
+let attend = [];
 
 export default function Attandance() {
 
@@ -15,11 +18,16 @@ export default function Attandance() {
     const [stdata, setStdata] = useState([]);
     const [date, setDate] = useState('');
     const [attandance, setAttandance] = useState("");
-    let myAttend = [];
+
+
+
 
     useEffect(() => {
         getdata()
+
     }, [])
+
+
 
 
     const makeid = (length) => {
@@ -34,21 +42,73 @@ export default function Attandance() {
         return result;
     }
 
+
     const submitform = (data) => {
+        let alreadyAdded = false
 
         console.log(data);
-        console.log("first", date)
-        console.log("second", attandance)
-        console.log(makeid(6));
+        // console.log("first", date)
+        // console.log("second", attandance)
+        // console.log(makeid(6));
 
-        // myAttend.push({
-        //     data: date,
-        //     attandance: attandance,
-        //     id: makeid(8),
-        // });
+        let obj = {
+            date: date,
+            attandance: attandance,
+            id: makeid(8),
+        };
 
-        // console.log(myAttend)
+        for (let i = 0; i < stdata.length; i++) {
+            if (stdata[i].id == data) {
+                attend = stdata[i].myAttend
+            }
+        }
+
+        for (let j = 0; j < attend.length; j++) {
+            if (attend[j].date == date) {
+                alreadyAdded = true
+            }
+        }
+        if (alreadyAdded) {
+            toast.error('Attendance is already added', {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        } else {
+            attend.push(obj)
+            toast.success('Attendance added successfully!', {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        }
+
+
+
+        const db = firebaseApp.firestore();
+        db.collection('Students').where('id', '==', data).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+
+                var updateCollection = db.collection("Students").doc(doc.ref.id);
+
+                return updateCollection.update({
+                    myAttend: attend
+                })
+                    .then(() => {
+                        console.log("Document successfully updated!");
+                    })
+                    .catch((error) => {
+                        // The document probably doesn't exist.
+                        console.error("Error updating document: ", error);
+                    });
+
+            })
+
+        }).catch(err => {
+            console.error(err)
+        });
     }
+
+
+
+
+
     const onChangeValue = (event) => {
         setAttandance(event.target.value);
         console.log(event.target.value);
@@ -82,38 +142,30 @@ export default function Attandance() {
         },
         {
             name: "f_name",
-            label: "f_name",
+            label: "Student name",
             options: {
                 filter: true,
                 sort: true,
             },
         },
-        {
-            name: "status",
-            label: "status",
-            options: {
-                filter: true,
-                sort: true,
-            },
-        },
+        // {
+        //     name: "status",
+        //     label: "status",
+        //     options: {
+        //         filter: true,
+        //         sort: true,
+        //     },
+        // },
 
-        {
-            name: "dob",
-            label: "dob",
-            options: {
-                filter: true,
-                sort: true,
-            },
-        },
 
-        {
-            name: "courses",
-            label: "courses",
-            options: {
-                filter: true,
-                sort: true,
-            },
-        },
+        // {
+        //     name: "courses",
+        //     label: "courses",
+        //     options: {
+        //         filter: true,
+        //         sort: true,
+        //     },
+        // },
         {
             name: "createdAt",
             label: "Date & Time",
@@ -138,13 +190,15 @@ export default function Attandance() {
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
                         <div onChange={onChangeValue}>
-                            <label class="tableclass">Present</label>
-                            <input type="radio" name="attandance" value="Present" />
-                            <label class="tableclass" >Absent</label>
-                            <input type="radio" name="attandance" value="Absent" />
-                            <label class="tableclass" >Other</label>
-                            <input type="radio" name="attandance" value="Other" />
-
+                            <div >
+                                <span className='muiradio'>  Present:</span><input type="radio" name="attandance" value="1" /><br></br>
+                            </div>
+                            <div>
+                                <span className='muiradio'> Absent:</span><input type="radio" name="attandance" value="0" /><br></br>
+                            </div>
+                            <div>
+                                <span className='muiradio'>Other:</span><input type="radio" name="attandance" value="2" /><br></br>
+                            </div>
                         </div>
                     );
                 },
@@ -152,7 +206,7 @@ export default function Attandance() {
         },
         {
             name: "id",
-            label: "Attandance",
+            label: "Action",
             options: {
                 filter: true,
                 sort: true,
@@ -179,12 +233,19 @@ export default function Attandance() {
 
 
     return (
-        <MUIDataTable
-            title={"Students List"}
-            data={stdata}
-            columns={columns}
-            options={options}
-        />
+        <div>
+            <MUIDataTable
+                title={"Student List"}
+                data={stdata}
+                columns={columns}
+                options={options}
+
+            />
+            <ToastContainer />
+        </div>
+
     )
 }
+
+
 

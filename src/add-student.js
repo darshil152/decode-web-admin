@@ -2,16 +2,12 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import AdminLayout from "./adminlayout/adminlayout"
 import Upload from "./img/upload-icon.svg"
-import PhoneInput from "react-phone-input-2";
 import { Formik } from "formik";
 import * as Yup from "yup";
-// import toastr from "toastr";
-import { Checkbox, jssPreset } from "@material-ui/core";
-import { ThemeProvider } from "react-bootstrap";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import firebaseApp from "./firebase/firebase";
 import { Button, Modal } from "react-bootstrap";
-import { setSelectionRange } from "@testing-library/user-event/dist/utils";
-import { data } from "jquery";
 
 
 
@@ -303,10 +299,16 @@ function AddStudent() {
                 .then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
                     resolve(docRef.id);
+                    toast.success('Form submitted successfully', {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
                 })
                 .catch(function (error) {
-                    console.error("Error adding document: ", error);
+                    console.error("Please check form again ", error);
                     reject(error);
+                    toast.error('Attendance is already added', {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
                 });
         });
         registerQuery.then(result => {
@@ -615,7 +617,9 @@ function AddStudent() {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </AdminLayout>
+
     );
 }
 

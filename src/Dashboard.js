@@ -43,6 +43,14 @@ export default function Dashboard() {
             },
         },
         {
+            name: "id",
+            label: "id",
+            options: {
+                filter: true,
+                sort: true,
+            },
+        },
+        {
             name: "f_name",
             label: "f_name",
             options: {

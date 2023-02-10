@@ -11523,12 +11523,27 @@ a.dropdown-item {
     sans-serif;
 }
 
-
+img.renderimage {
+  width: 25px;
+  text-align: centera;
+}
 
 input.tabledat {
   font-size: 17px;
 }
 
-lable.tableclass {
+span.muiradio {
   font-family: 'Jost', sans-serif;
+}
+
+
+
+
+h6.MuiTypography-root.MuiTypography-h6.tss-hj53wm-MUIDataTableToolbar-titleText.css-2ulfj5-MuiTypography-root {
+  font-family: 'Jost', sans-serif;
+  font-size: 22px;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation4.tss-11quiee-MUIDataTable-paper.tss-1x5mjc5-MUIDataTable-root.css-11mde6h-MuiPaper-root {
+  box-shadow: none;
 }
