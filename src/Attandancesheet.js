@@ -7,7 +7,6 @@ import checked from "./img/checked.png"
 import cancel from "./img/cancel.png"
 import Loginheader from './Loginheader';
 import grey from "./img/grey.png";
-import finalPropsSelectorFactory from 'react-redux/es/connect/selectorFactory';
 
 
 export default class Attandancesheet extends Component {
@@ -16,10 +15,31 @@ export default class Attandancesheet extends Component {
 
         this.state = {
             id: "",
+            finalpercent: '',
             countData: [],
             currentdata: [],
-            avg: '',
+            oneandzero: [],
             presentdata: [],
+            series: [44, 55, 13, 43, 22],
+            options: {
+                chart: {
+                    width: 380,
+                    type: 'pie',
+                },
+                labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            },
+
             columns: [
                 {
                     name: "id",
@@ -69,24 +89,24 @@ export default class Attandancesheet extends Component {
         this.setState({ id }, () => {
             this.getdata();
         })
-
+        // this.finalpercentage();
     }
 
 
     getdata = () => {
+        let oneandzero = []
         const db = firebaseApp.firestore();
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 this.setState({ currentdata: doc.data().myAttend }, () => {
                     for (let i = 0; i < this.state.currentdata.length; i++) {
                         if (this.state.currentdata[i].attandance == '1' || this.state.currentdata[i].attandance == '0') {
-                            this.setState({ countData: [...this.state.countData, this.state.currentdata[i]] })
+                            oneandzero.push(this.state.currentdata[i])
                         }
-                        console.log(this.state.currentdata)
-                        // console.log(this.state.currentdata[i].attandance == "1");
-                        // presentdata({})
-
                     }
+                    this.setState({ countData: oneandzero }, () => {
+                        this.finalpercentage()
+                    })
                 })
             });
         }).catch(err => {
@@ -95,10 +115,27 @@ export default class Attandancesheet extends Component {
     }
 
 
-    // finalpercentage = () => {
-    //     var total = this.state.currentdata;
-    //     var currentpercentage = (100 *) / total
-    // }
+    finalpercentage = () => {
+
+        let total = this.state.countData.length;   //8
+        let presentStudents = []
+        let dataseries = []
+
+        for (let j = 0; j < total; j++) {
+            if (this.state.countData[j].attandance == "1") {
+                presentStudents.push(this.state.countData[j])
+            }
+        }
+
+
+        let presentNumber = presentStudents.length;
+        let absentNumber = total - presentNumber;
+        dataseries.push(presentNumber)
+        dataseries.push(absentNumber)
+        let currentpercentage = ((100 * presentNumber) / total);
+        // console.log(currentpercentage)
+        this.setState({ finalpercent: currentpercentage, series: dataseries })
+    }
 
 
 
@@ -106,8 +143,13 @@ export default class Attandancesheet extends Component {
         return (
             <>
                 <Loginheader />
+                <h5 className='percentage' style={{ textAlign: "center" }}> Your attandance is:  {this.state.finalpercent} %</h5>
+
+
+
+
                 <MUIDataTable
-                    title={"Student's attandance List"}
+                    title={"Your attandance List"}
                     data={this.state.currentdata}
                     columns={this.state.columns}
                     options={this.state.options}
