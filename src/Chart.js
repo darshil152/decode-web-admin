@@ -39,9 +39,9 @@ export default class Chart extends Component {
         return (
 
 
-            <div id="chart">
-                <ReactApexChart options={this.state.options} series={this.state.series} type="pie" width={380} />
-            </div>
+
+            <ReactApexChart options={this.state.options} series={this.state.series} type="pie" width={380} />
+
 
 
         );

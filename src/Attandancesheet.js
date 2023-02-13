@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { boolean, number } from 'yup';
 import firebaseApp from './firebase/firebase';
 import MUIDataTable from 'mui-datatables'
-import CloseIcon from '@mui/icons-material/Close';
 import checked from "./img/checked.png"
 import cancel from "./img/cancel.png"
 import Loginheader from './Loginheader';
 import grey from "./img/grey.png";
+import ReactApexChart from 'react-apexcharts';
+import ima from "./img/circleimage.png"
+
 
 
 export default class Attandancesheet extends Component {
@@ -14,31 +15,31 @@ export default class Attandancesheet extends Component {
         super(props);
 
         this.state = {
+            // series: [144, 55],
+            // options: {
+            //     chart: {
+            //         width: 380,
+            //         type: 'pie',
+            //     },
+            //     labels: ['Present', 'Absent',],
+            //     responsive: [{
+            //         breakpoint: 480,
+            //         options: {
+            //             chart: {
+            //                 width: 200
+            //             },
+            //             legend: {
+            //                 position: 'bottom'
+            //             }
+            //         }
+            //     }]
+            // },
             id: "",
             finalpercent: '',
             countData: [],
             currentdata: [],
             oneandzero: [],
             presentdata: [],
-            series: [44, 55, 13, 43, 22],
-            options: {
-                chart: {
-                    width: 380,
-                    type: 'pie',
-                },
-                labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-                responsive: [{
-                    breakpoint: 480,
-                    options: {
-                        chart: {
-                            width: 200
-                        },
-                        legend: {
-                            position: 'bottom'
-                        }
-                    }
-                }]
-            },
 
             columns: [
                 {
@@ -143,17 +144,30 @@ export default class Attandancesheet extends Component {
         return (
             <>
                 <Loginheader />
-                <h5 className='percentage' style={{ textAlign: "center" }}> Your attandance is:  {this.state.finalpercent} %</h5>
 
 
 
+                <div className='container-fluid'>
+                    <div className='row'>
+                        <div className='col-lg-7'>
+                            <MUIDataTable
+                                title={"Your attandance List"}
+                                data={this.state.currentdata}
+                                columns={this.state.columns}
+                                options={this.state.options}
+                            />
+                        </div>
+                        <div className='col-lg-5'>
+                            <h5 className=' percentage' style={{ textAlign: "center", }}> Your attandance is:</h5>
 
-                <MUIDataTable
-                    title={"Your attandance List"}
-                    data={this.state.currentdata}
-                    columns={this.state.columns}
-                    options={this.state.options}
-                />
+
+                            {/* <ReactApexChart options={this.state.options} series={this.state.series} type="pie" width={380} /> */}
+
+
+                        </div>
+                    </div>
+                </div>
+
             </>
 
         )

@@ -18,8 +18,8 @@ import Dashboard from './Dashboard';
 import Profile from './Profile';
 import Login from './Login';
 import Attandance from './Attandance';
-import Chart from './Chart';
 import Attandancesheet from './Attandancesheet';
+import Chart from './Chart';
 
 export default class RouterContainer extends Component {
     render() {
@@ -41,9 +41,8 @@ export default class RouterContainer extends Component {
                     <Route path="/profile/:id" element={<Profile />} />
                     <Route path="/Login" element={<Login />} />
                     <Route path="/attandance" element={<Attandance />} />
-                    <Route path="/chart" element={<Chart />} />
                     <Route path="/attandancesheet/:id" element={<Attandancesheet />} />
-
+                    <Route path='/chart' element={<Chart />} />
 
 
 
