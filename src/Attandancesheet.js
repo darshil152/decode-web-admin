@@ -160,7 +160,12 @@ export default class Attandancesheet extends Component {
                         <div className='col-lg-5'>
                             <h5 className=' percentage' style={{ textAlign: "center", }}> Your attandance is:</h5>
 
+                            <div class="chaarts col-lg-12 ">
+                                <div className='circleBase circle2'>
 
+                                    <h5 className='mt-5 abc'>{this.state.finalpercent} %</h5>
+                                </div>
+                            </div>
                             {/* <ReactApexChart options={this.state.options} series={this.state.series} type="pie" width={380} /> */}
 
 

@@ -65,30 +65,30 @@ export default class Profile extends Component {
                         </div>
                         <div className='row ml-4'>
                             <div className='col-lg-6'>
-                                <div className='mt-lg-5 mt-4'>
+                                <div className='mt-lg-5 mt-4 text-left text-left'>
 
                                     <i className="fa fa-id-card usernames"></i>
                                     <lable className="lablesdata ml-3">{this.state.currentdata.er_num}</lable>
 
                                 </div>
-                                <div className='mt-lg-5  mt-4 mb-sm-4'>
+                                <div className='mt-lg-5  mt-4 mb-sm-4 text-left'>
                                     <i class="fa fa-mobile usernames" aria-hidden="true"></i>
                                     <lable className="lablesdata ml-3">{this.state.currentdata.phone}</lable>
                                 </div>
-                                <div className='mt-lg-5 mb-lg-5 mt-4'>
+                                <div className='mt-lg-5 mb-lg-5 mt-4 text-left'>
                                     <i class='fas fa-graduation-cap usernames'></i>
                                     <lable className="lablesdata ml-3">{this.state.currentdata.courses}</lable>
                                 </div>
                             </div>
 
                             <div className='col-lg-6 '>
-                                <div className='mt-lg-5 mt-4'>
+                                <div className='mt-lg-5 mt-4 text-left'>
                                     <i class="fa fa-user usernames" aria-hidden="true"></i> <lable className="lablesdata ml-3">{this.state.currentdata.f_name}</lable>
                                 </div>
-                                <div className='mt-lg-5 mt-4'>
+                                <div className='mt-lg-5 mt-4 text-left'>
                                     <i class="fa fa-envelope usernames" aria-hidden="true"></i> <lable className="lablesdata ml-3">{this.state.currentdata.email}</lable>
                                 </div>
-                                <div className='mt-lg-5 mt-4 '>
+                                <div className='mt-lg-5 mt-4 text-left '>
                                     <i class="fa fa-birthday-cake usernames" aria-hidden="true"></i> <lable className="lablesdata ml-3">{this.state.currentdata.dob}</lable>
                                 </div>
                                 {/* <div className='mt-lg-5 mt-4 '>
@@ -108,13 +108,13 @@ export default class Profile extends Component {
                                     <div className='mt-4'>
                                         <h1>Parent's Detail</h1>
                                     </div>
-                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4'>
+                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4 text-left'>
                                         <i class="fa fa-user usernames" aria-hidden="true"></i><lable className="lablesdata ml-3">{this.state.currentdata.f_f_name}</lable>
                                     </div>
-                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4'>
+                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4 text-left'>
                                         <i class='fas fa-briefcase usernames'></i><lable className="lablesdata ml-3">{this.state.currentdata.occupation}</lable>
                                     </div>
-                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4 mb-sm-4'>
+                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4 mb-sm-4 text-left'>
                                         <i class="fa fa-mobile usernames" aria-hidden="true"></i><lable className="lablesdata ml-3">{this.state.currentdata.f_phone}</lable>
                                     </div>
                                 </div>
@@ -128,15 +128,15 @@ export default class Profile extends Component {
                                     <div className='mt-4'>
                                         <h1>Resident Details</h1>
                                     </div>
-                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4'>
+                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4 text-left'>
                                         <i class="fa fa-map-marker usernames " aria-hidden="true"></i>
                                         <lable className="lablesdata ml-3">{this.state.currentdata.city}</lable>
                                     </div>
-                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4'>
+                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4 text-left'>
                                         <i class="fa-sharp fa-solid fa-city usernames"></i>
                                         <lable className="lablesdata ml-3">{this.state.currentdata.state}</lable>
                                     </div>
-                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4 mb-sm-4'>
+                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4 mb-sm-4 text-left'>
                                         <i class="fa-sharp fa-solid fa-city usernames"></i>
                                         <lable className="lablesdata ml-3">{this.state.currentdata.country}</lable>
                                     </div>
@@ -151,11 +151,11 @@ export default class Profile extends Component {
                                     <div className='mt-4'>
                                         <h1>reference Details</h1>
                                     </div>
-                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4'>
+                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4 text-left'>
                                         <i class="fa fa-link usernames" aria-hidden="true"></i>
                                         <lable className="lablesdata ml-3">{this.state.referencedata.f_name}</lable>
                                     </div>
-                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4'>
+                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4 text-left'>
                                         <i class="fa fa-inr usernames" aria-hidden="true"></i>
                                         <lable className="lablesdata ml-3">2000</lable>
                                     </div>

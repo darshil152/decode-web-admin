@@ -9836,6 +9836,7 @@ button.bg-dark:focus {
   .mt-lg-5,
   .my-lg-5 {
     margin-top: 3rem !important;
+
   }
 
   .mr-lg-5,
@@ -11572,16 +11573,33 @@ h6.MuiTypography-root.MuiTypography-h6.tss-hj53wm-MUIDataTableToolbar-titleText.
   display: inline-block;
 }
 
-/* h2.percentage {
-  margin-top: 150px;
+.circleBase.circle2 {
+  width: 200px;
+  height: 200px;
+  background: #0a508c;
+  border-radius: 200px;
 }
 
-img.chartsimage {
+.chaarts.col-lg-12 {
+  display: flex;
+  justify-content: center;
+}
+
+h5.mt-5.abc {
+  position: absolute;
   margin-top: 30px;
-} */
+  margin-left: 70px;
+  top: 35px;
+  color: white;
+  left: 50;
+}
+
+h5.percentage {
+  margin-top: 180px;
+}
 
 @media only screen and (max-width: 992px) {
-  .h2.percentage {
+  h5.percentage {
     margin-top: 50px;
   }
 }
