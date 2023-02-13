@@ -7,6 +7,7 @@ import checked from "./img/checked.png"
 import cancel from "./img/cancel.png"
 import Loginheader from './Loginheader';
 import grey from "./img/grey.png";
+import finalPropsSelectorFactory from 'react-redux/es/connect/selectorFactory';
 
 
 export default class Attandancesheet extends Component {
@@ -18,6 +19,7 @@ export default class Attandancesheet extends Component {
             countData: [],
             currentdata: [],
             avg: '',
+            presentdata: [],
             columns: [
                 {
                     name: "id",
@@ -72,27 +74,31 @@ export default class Attandancesheet extends Component {
 
 
     getdata = () => {
-
         const db = firebaseApp.firestore();
-
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 this.setState({ currentdata: doc.data().myAttend }, () => {
                     for (let i = 0; i < this.state.currentdata.length; i++) {
                         if (this.state.currentdata[i].attandance == '1' || this.state.currentdata[i].attandance == '0') {
-
                             this.setState({ countData: [...this.state.countData, this.state.currentdata[i]] })
-
                         }
+                        console.log(this.state.currentdata)
+                        // console.log(this.state.currentdata[i].attandance == "1");
+                        // presentdata({})
 
                     }
-
                 })
             });
         }).catch(err => {
             console.error(err)
         });
     }
+
+
+    // finalpercentage = () => {
+    //     var total = this.state.currentdata;
+    //     var currentpercentage = (100 *) / total
+    // }
 
 
 
