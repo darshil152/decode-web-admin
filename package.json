@@ -19,6 +19,7 @@
     "ngx-toastr": "^16.0.2",
     "owl.carousel": "^2.3.4",
     "react": "^18.2.0",
+    "react-apexcharts": "^1.4.0",
     "react-bootstrap": "^2.7.0",
     "react-bootstrap-modal": "^4.2.0",
     "react-countup": "^6.4.0",
