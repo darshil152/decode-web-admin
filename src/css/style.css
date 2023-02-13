@@ -11549,57 +11549,24 @@ h6.MuiTypography-root.MuiTypography-h6.tss-hj53wm-MUIDataTableToolbar-titleText.
   box-shadow: none;
 }
 
-.container {
-  position: relative;
-  text-align: center;
-  color: white;
-}
-
-.centered {
+.apex {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #0a508c;
-  font-family: 'Jost', sans-serif;
-  font-size: 20px;
+  left: 150px;
 }
 
-.dot {
-  height: 250px;
-  width: 250px;
-  background-color: #0a508c;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.circleBase.circle2 {
-  width: 200px;
-  height: 200px;
-  background: #0a508c;
-  border-radius: 200px;
-}
-
-.chaarts.col-lg-12 {
-  display: flex;
-  justify-content: center;
-}
-
-h5.mt-5.abc {
-  position: absolute;
-  margin-top: 30px;
-  margin-left: 70px;
-  top: 35px;
-  color: white;
-  left: 50;
-}
-
-h5.percentage {
+h3.percentage {
   margin-top: 180px;
 }
 
+
+
 @media only screen and (max-width: 992px) {
-  h5.percentage {
+  h3.percentage {
     margin-top: 50px;
+  }
+
+  .apex {
+    position: absolute;
+    left: 50px;
   }
 }

@@ -43,7 +43,7 @@ function AddStudent() {
     const submitStudentData = (formData, resetForm) => {
         // UploadImageTOFirebase(formData);
         sendMessage(formData);
-        abc(formData);
+        // abc(formData);
         console.log("student :: ", formData);
     };
 

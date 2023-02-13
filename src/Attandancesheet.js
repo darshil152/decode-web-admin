@@ -15,25 +15,31 @@ export default class Attandancesheet extends Component {
         super(props);
 
         this.state = {
-            // series: [144, 55],
-            // options: {
-            //     chart: {
-            //         width: 380,
-            //         type: 'pie',
-            //     },
-            //     labels: ['Present', 'Absent',],
-            //     responsive: [{
-            //         breakpoint: 480,
-            //         options: {
-            //             chart: {
-            //                 width: 200
-            //             },
-            //             legend: {
-            //                 position: 'bottom'
-            //             }
-            //         }
-            //     }]
-            // },
+            series: [144, 55],
+            optionsa: {
+                chart: {
+                    width: 380,
+                    type: 'pie',
+                },
+                fill: {
+                    colors: ["#28a745", "#d1403f",]
+                },
+                labels: ['Present', 'Absent',],
+                colors: ["#28a745", "#d1403f",], //Add this line
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200,
+
+                        },
+                        legend: {
+                            position: 'bottom',
+                        },
+
+                    }
+                }]
+            },
             id: "",
             finalpercent: '',
             countData: [],
@@ -158,15 +164,12 @@ export default class Attandancesheet extends Component {
                             />
                         </div>
                         <div className='col-lg-5'>
-                            <h5 className=' percentage' style={{ textAlign: "center", }}> Your attandance is:</h5>
+                            <h3 className='ml-lg-5 percentage' style={{ textAlign: "center", }}> Your attandance is:</h3>
 
-                            <div class="chaarts col-lg-12 ">
-                                <div className='circleBase circle2'>
+                            <div className='apex'>
 
-                                    <h5 className='mt-5 abc'>{this.state.finalpercent} %</h5>
-                                </div>
+                                <ReactApexChart options={this.state.optionsa} series={this.state.series} type="pie" width={450} />
                             </div>
-                            {/* <ReactApexChart options={this.state.options} series={this.state.series} type="pie" width={380} /> */}
 
 
                         </div>
