@@ -22,6 +22,9 @@ import Attandancesheet from './Attandancesheet';
 import Chart from './Chart';
 import Fees from './Fees';
 import Paymentdetail from './Paymentdetail';
+import ProtectedRouteAdmin from './ProtectedRouterAdmin';
+import ProtectedRouteStudent from './ProtectedRouterStudent';
+
 
 export default class RouterContainer extends Component {
     render() {
@@ -38,23 +41,41 @@ export default class RouterContainer extends Component {
                     <Route path="/feature" element={<FeaturePage />} />
                     <Route path="/terms" element={<TearmsCondition />} />
                     <Route path="/placement-partners" element={<PlacementPartners />} />
-                    <Route path="*" element={<Home />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/profile/:id" element={<Profile />} />
                     <Route path="/Login" element={<Login />} />
-                    <Route path="/attandance" element={<Attandance />} />
                     <Route path="/attandancesheet/:id" element={<Attandancesheet />} />
-                    <Route path='/chart' element={<Chart />} />
-                    <Route path='/fees' element={<Fees />} />
+                    {/* <Route path='/chart' element={<Chart />} /> */}
+
                     <Route path='/paymentdetail/:id' element={<Paymentdetail />} />
 
-
-
                     <Route path="/add-student" element={
-                        <ProtectedRoute>
+                        <ProtectedRouteAdmin>
                             <AddStudent />
+                        </ProtectedRouteAdmin>
+                    } />
+
+                    <Route path="/fees" element={
+                        <ProtectedRouteAdmin>
+                            <Fees />
+                        </ProtectedRouteAdmin>
+                    } />
+
+                    <Route path="/fees" element={
+                        <ProtectedRouteStudent>
+                            <Fees />
+                        </ProtectedRouteStudent>
+                    } />
+
+
+                    <Route path="/attandance" element={
+                        <ProtectedRoute>
+                            <Attandance />
                         </ProtectedRoute>
                     } />
+
+
+                    <Route path="*" element={<Home />} />
                 </Routes>
             </Router>
         )

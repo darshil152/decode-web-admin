@@ -4,10 +4,12 @@ const initialState = {
 
     state: {
         isFetching: false,
+        userRole: false,
     },
     user: {
         name: "collins",
-        isAuthenticated: true
+        isAuthenticated: true,
+
     },
 }
 
@@ -19,6 +21,9 @@ const userSlice = createSlice({
         setIsFetching: (state) => {
             state.state.isFetching = true;
         },
+        setUserRole: (State) => {
+            state.state.userRole = 1
+        }
     }
 });
 
