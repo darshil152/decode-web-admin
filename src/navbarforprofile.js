@@ -36,7 +36,7 @@ export default class avbarforprofile extends Component {
                                 <Link to={'/attandancesheet/' + this.state.id}>Attandance</Link>
                             </NavDropdown.Item>
                             <NavDropdown.Item>
-                                <Link to={'/paymentdetail'}>Payment Details</Link>
+                                <Link to={'/paymentdetail/' + this.state.id}>Payment Details</Link>
                             </NavDropdown.Item>
                         </NavDropdown>
                         {/* <Link to={'/login'} className={this.state.currentPage == 'login' ? "nav-item nav-link active" : "nav-item nav-link btn btn-primary py-2 px-4 ml-auto d-none d-lg-block"}>Login</Link> */}

@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import firebaseApp from './firebase/firebase';
-import MUIDataTable from 'mui-datatables'
+import MUIDataTable from "mui-datatables";
 import checked from "./img/checked.png"
 import cancel from "./img/cancel.png"
 import Loginheader from './Loginheader';
 import grey from "./img/grey.png";
 import ReactApexChart from 'react-apexcharts';
-import ima from "./img/circleimage.png"
 
 
 
@@ -48,14 +47,7 @@ export default class Attandancesheet extends Component {
             presentdata: [],
 
             columns: [
-                {
-                    name: "id",
-                    label: "id",
-                    options: {
-                        filter: true,
-                        sort: true,
-                    },
-                },
+
                 {
                     name: "date",
                     label: "date",
@@ -154,23 +146,24 @@ export default class Attandancesheet extends Component {
 
 
                 <div className='container-fluid'>
-                    <div className='row'>
-                        <div className='col-lg-7'>
-                            <MUIDataTable
-                                title={"Your attandance List"}
-                                data={this.state.currentdata}
-                                columns={this.state.columns}
-                                options={this.state.options}
-                            />
-                        </div>
-                        <div className='col-lg-5'>
-                            <h3 className='ml-lg-5 percentage' style={{ textAlign: "center", }}> Your attandance is:</h3>
-
-                            <div className='apex'>
-
-                                <ReactApexChart options={this.state.optionsa} series={this.state.series} type="pie" width={450} />
+                    <div className='row '>
+                        <div className='col-lg-6 '>
+                            <div className='shdow tabledata'>
+                                <MUIDataTable
+                                    title={"Your attandance List"}
+                                    data={this.state.currentdata}
+                                    columns={this.state.columns}
+                                    options={this.state.options}
+                                />
                             </div>
-
+                        </div>
+                        <div className='col-lg-6 tabledata p-2'>
+                            <div className='shdowa'>
+                                <div className='apex'>
+                                    <h3 className='ml-lg-5 percentage' style={{ textAlign: "center", }}> Your attandance is:</h3>
+                                    <ReactApexChart options={this.state.optionsa} series={this.state.series} type="pie" width={450} />
+                                </div>
+                            </div>
 
                         </div>
                     </div>

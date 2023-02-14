@@ -20,6 +20,8 @@ import Login from './Login';
 import Attandance from './Attandance';
 import Attandancesheet from './Attandancesheet';
 import Chart from './Chart';
+import Fees from './Fees';
+import Paymentdetail from './Paymentdetail';
 
 export default class RouterContainer extends Component {
     render() {
@@ -43,6 +45,8 @@ export default class RouterContainer extends Component {
                     <Route path="/attandance" element={<Attandance />} />
                     <Route path="/attandancesheet/:id" element={<Attandancesheet />} />
                     <Route path='/chart' element={<Chart />} />
+                    <Route path='/fees' element={<Fees />} />
+                    <Route path='/paymentdetail/:id' element={<Paymentdetail />} />
 
 
 

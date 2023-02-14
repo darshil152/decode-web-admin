@@ -294,7 +294,8 @@ function AddStudent() {
                 project: "Decode",
                 status: 1,
                 myref: [],
-                myAttend: []
+                myAttend: [],
+                fees: [],
             })
                 .then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);

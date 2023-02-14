@@ -10,18 +10,25 @@ import 'react-toastify/dist/ReactToastify.css';
 // import { QuerySnapshot } from '@firebase/firestore-types';
 // import Ember from 'ember';
 
-let attend = [];
+let myfees = [];
 
-export default function Attandance() {
+export default function Fees() {
 
 
     const [stdata, setStdata] = useState([]);
     const [date, setDate] = useState('');
-    const [attandance, setAttandance] = useState("");
+    const [amount, setAmount] = useState()
+    const [payment, setpayment] = useState(0)
 
     useEffect(() => {
         getdata()
     }, [])
+
+
+    const handleChange = event => {
+        console.log(event.target.value);
+        setpayment(event.target.value);
+    };
 
 
     const makeid = (length) => {
@@ -37,42 +44,33 @@ export default function Attandance() {
     }
 
 
+
     const submitform = (data) => {
         let alreadyAdded = false
-
-        console.log(data);
-        // console.log("first", date)
-        // console.log("second", attandance)
-        // console.log(makeid(6));
-
         let obj = {
             date: date,
-            attandance: attandance,
+            amount: amount,
+            payment: payment,
             id: makeid(8),
         };
 
         for (let i = 0; i < stdata.length; i++) {
             if (stdata[i].id == data) {
-                attend = stdata[i].myAttend
-            }
-        }
-
-        for (let j = 0; j < attend.length; j++) {
-            if (attend[j].date == date) {
+                myfees = stdata[i].fees
                 alreadyAdded = true
             }
         }
+
         if (alreadyAdded) {
-            toast.error('Attendance is already added', {
+            myfees.push(obj);
+            toast.success('Payment done', {
                 position: toast.POSITION.TOP_RIGHT
             });
         } else {
-            attend.push(obj)
-            toast.success('Attendance added successfully!', {
+            toast.error('Payment is not done!', {
                 position: toast.POSITION.TOP_RIGHT
             });
         }
-
 
 
         const db = firebaseApp.firestore();
@@ -82,7 +80,7 @@ export default function Attandance() {
                 var updateCollection = db.collection("Students").doc(doc.ref.id);
 
                 return updateCollection.update({
-                    myAttend: attend
+                    fees: myfees
                 })
                     .then(() => {
                         console.log("Document successfully updated!");
@@ -91,21 +89,10 @@ export default function Attandance() {
                         // The document probably doesn't exist.
                         console.error("Error updating document: ", error);
                     });
-
             })
-
         }).catch(err => {
             console.error(err)
         });
-    }
-
-
-
-
-
-    const onChangeValue = (event) => {
-        setAttandance(event.target.value);
-        console.log(event.target.value);
     }
 
 
@@ -142,24 +129,7 @@ export default function Attandance() {
                 sort: true,
             },
         },
-        // {
-        //     name: "status",
-        //     label: "status",
-        //     options: {
-        //         filter: true,
-        //         sort: true,
-        //     },
-        // },
 
-
-        // {
-        //     name: "courses",
-        //     label: "courses",
-        //     options: {
-        //         filter: true,
-        //         sort: true,
-        //     },
-        // },
         {
             name: "createdAt",
             label: "Date & Time",
@@ -169,7 +139,7 @@ export default function Attandance() {
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
                         <div>
-                            <input type="date" className='tabledat' onChange={e => setDate(e.target.value)} />
+                            <input type="date" className='tabledat' onChange={e => setDate(e.target.value)} required />
                         </div>
                     );
                 },
@@ -177,22 +147,33 @@ export default function Attandance() {
         },
         {
             name: "createdAt",
-            label: "Attandance",
+            label: "Amount",
             options: {
                 filter: true,
                 sort: true,
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
-                        <div onChange={onChangeValue}>
-                            <div >
-                                <span className='muiradio'>  Present:</span><input type="radio" name="attandance" value="1" /><br></br>
-                            </div>
-                            <div>
-                                <span className='muiradio'> Absent:</span><input type="radio" name="attandance" value="0" /><br></br>
-                            </div>
-                            <div>
-                                <span className='muiradio'>Other:</span><input type="radio" name="attandance" value="2" /><br></br>
-                            </div>
+                        <div className='tabledat' onChange={e => setAmount(e.target.value)} >
+                            <input type="number" id="fname" name="fname" required />
+                        </div>
+                    );
+                },
+            },
+        },
+        {
+            name: "createdAt",
+            label: "Method",
+            options: {
+                filter: true,
+                sort: true,
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                        <div className='payment' required>
+                            <select onChange={handleChange}>
+                                <option value="0" selected>Cash</option>
+                                <option value="1">Google Pay</option>
+                                <option value="2">Banktransfer</option>
+                            </select>
                         </div>
                     );
                 },

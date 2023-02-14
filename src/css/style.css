@@ -11558,6 +11558,18 @@ h3.percentage {
   margin-top: 180px;
 }
 
+.col-lg-6.tabledata {
+  background: #FFFFFF;
+  box-shadow: 5px 6px 25px rgb(15 15 15 / 15%);
+
+}
+
+.shdow.tabledata {
+  background: #FFFFFF;
+  box-shadow: 5px 6px 25px rgb(15 15 15 / 15%);
+  height: 100vh;
+}
+
 
 
 @media only screen and (max-width: 992px) {
