@@ -14,7 +14,7 @@ export default class Attandancesheet extends Component {
         super(props);
 
         this.state = {
-            series: [144, 55],
+            series: [50, 50],
             optionsa: {
                 chart: {
                     width: 380,

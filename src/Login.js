@@ -16,12 +16,13 @@ export default function Login() {
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
-    const [userrole, setUserrole] = useState('1');
+    const [userRole, setUserRole] = useState('1');
     let data = [];
 
 
     useEffect(() => {
         getalldata();
+        console.log(localStorage.getItem('userrole'))
     }, [])
 
 
@@ -31,7 +32,6 @@ export default function Login() {
             querySnapshot.forEach((doc) => {
                 data.push(doc.data())
             });
-            console.log(data)
         }).catch(err => {
             console.error(err)
         });
@@ -52,16 +52,25 @@ export default function Login() {
         console.log(formdata)
         for (let i = 0; i < data.length; i++) {
             if (data[i].er_num == formdata.enrollmentNumber && data[i].password == formdata.password) {
-                localStorage.setItem('Login', JSON.stringify(formdata))
-                // dispatch(addToCart(currentdata));
-
+                localStorage.setItem('userrole', data[i].userRole)
                 isflag = true
             }
         }
-        if (isflag) {
-            // <Link to="/">Home</Link>
+        if (isflag && (Number(localStorage.getItem('userrole')) == 1)) {
+            toast('You loggin successfully', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             navigate('/profile/' + formdata.enrollmentNumber)
 
+        } else if (isflag && (Number(localStorage.getItem('userrole')) == 2)) {
+            navigate('/attandance')
             toast('You loggin successfully', {
                 position: "top-right",
                 autoClose: 5000,
@@ -86,6 +95,8 @@ export default function Login() {
             });
         }
     }
+
+
 
 
     return (

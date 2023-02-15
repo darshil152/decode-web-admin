@@ -7,9 +7,7 @@ const initialState = {
         userRole: false,
     },
     user: {
-        name: "collins",
         isAuthenticated: true,
-
     },
 }
 
@@ -21,14 +19,15 @@ const userSlice = createSlice({
         setIsFetching: (state) => {
             state.state.isFetching = true;
         },
-        setUserRole: (State) => {
-            state.state.userRole = 1
+        setUserRole: (state) => {
+            state.state.userRole = true;
         }
     }
 });
 
 export const {
     setIsFetching,
+    setUserRole,
 } = userSlice.actions;
 
 

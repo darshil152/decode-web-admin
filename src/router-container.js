@@ -24,6 +24,8 @@ import Fees from './Fees';
 import Paymentdetail from './Paymentdetail';
 import ProtectedRouteAdmin from './ProtectedRouterAdmin';
 import ProtectedRouteStudent from './ProtectedRouterStudent';
+import ReferenceDetails from './ReferenceDetails';
+import Navbarforprofile from './navbarforprofile';
 
 
 export default class RouterContainer extends Component {
@@ -41,13 +43,50 @@ export default class RouterContainer extends Component {
                     <Route path="/feature" element={<FeaturePage />} />
                     <Route path="/terms" element={<TearmsCondition />} />
                     <Route path="/placement-partners" element={<PlacementPartners />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/profile/:id" element={<Profile />} />
-                    <Route path="/Login" element={<Login />} />
-                    <Route path="/attandancesheet/:id" element={<Attandancesheet />} />
+                    <Route path="/test" element={<Navbarforprofile />} />
+                    {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                    {/* <Route path="/profile/:id" element={<Profile />} /> */}
+                    {/* <Route path="/Login" element={<Login />} /> */}
+                    {/* <Route path="/attandancesheet/:id" element={<Attandancesheet />} /> */}
                     {/* <Route path='/chart' element={<Chart />} /> */}
+                    {/* <Route path='/paymentdetail/:id' element={<Paymentdetail />} /> */}
 
-                    <Route path='/paymentdetail/:id' element={<Paymentdetail />} />
+
+                    <Route path="/dashboard" element={
+                        <ProtectedRouteStudent>
+                            <Dashboard />
+                        </ProtectedRouteStudent>
+                    } />
+
+
+                    <Route path="/profile/:id" element={
+                        <ProtectedRouteStudent>
+                            <Profile />
+                        </ProtectedRouteStudent>
+                    } />
+
+
+                    <Route path="/Login" element={<Login />} />
+
+                    <Route path="/attandancesheet/:id" element={
+                        <ProtectedRouteStudent>
+                            <Attandancesheet />
+                        </ProtectedRouteStudent>
+                    } />
+
+
+                    <Route path="/paymentdetail/:id" element={
+                        <ProtectedRouteStudent>
+                            <Paymentdetail />
+                        </ProtectedRouteStudent>
+                    } />
+
+                    <Route path="/referencedetail/:id" element={
+                        <ProtectedRouteStudent>
+                            <ReferenceDetails />
+                        </ProtectedRouteStudent>
+                    } />
+
 
                     <Route path="/add-student" element={
                         <ProtectedRouteAdmin>
@@ -61,11 +100,6 @@ export default class RouterContainer extends Component {
                         </ProtectedRouteAdmin>
                     } />
 
-                    <Route path="/fees" element={
-                        <ProtectedRouteStudent>
-                            <Fees />
-                        </ProtectedRouteStudent>
-                    } />
 
 
                     <Route path="/attandance" element={

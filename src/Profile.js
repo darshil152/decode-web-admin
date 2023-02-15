@@ -144,27 +144,6 @@ export default class Profile extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className='container mt-5 residentalDetail '>
-                        <div className='container'>
-                            <div className='row'>
-                                <div className='col-lg-6'>
-                                    <div className='mt-4'>
-                                        <h1>reference Details</h1>
-                                    </div>
-                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4 text-left'>
-                                        <i class="fa fa-link usernames" aria-hidden="true"></i>
-                                        <lable className="lablesdata ml-3">{this.state.referencedata.f_name}</lable>
-                                    </div>
-                                    <div className='mt-lg-4 mt-sm-4 ml-lg-4 text-left'>
-                                        <i class="fa fa-inr usernames" aria-hidden="true"></i>
-                                        <lable className="lablesdata ml-3">2000</lable>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </>}
             </>
         )

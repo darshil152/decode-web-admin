@@ -199,7 +199,7 @@ function AddStudent() {
         let entry = []
         let activeStudents = []
         const db = firebaseApp.firestore();
-        db.collection('Students').get().then((querySnapshot) => {
+        db.collection('Students').where("status", "==", 1).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 entry.push(doc.data())
                 // temp.push(doc.data())
@@ -362,24 +362,24 @@ function AddStudent() {
                                     }}
                                     validationSchema={Yup.object({
                                         f_name: Yup.string().required("First name is required."),
-                                        l_name: Yup.string().required("Last name is required."),
-                                        email: Yup.string().required("email is required."),
-                                        courses: Yup.string().required("please choose your course."),
-                                        phone: Yup.string().required("phone is required."),
-                                        dob: Yup.string().required("Date Of Birth is required."),
-                                        eme_phone: Yup.string().required("Emergency Contact number is required."),
-                                        f_f_name: Yup.string().required("First name is required."),
-                                        f_l_name: Yup.string().required("Last name is required."),
-                                        occupation: Yup.string().required("Occupation is required."),
-                                        f_phone: Yup.string().required("Contact number is required."),
-                                        line_1: Yup.string().required("Address is required."),
-                                        line_2: Yup.string().required("Address is required."),
-                                        city: Yup.string().required("city is required."),
-                                        state: Yup.string().required("state is required."),
-                                        country: Yup.string().required("country is required."),
-                                        zipcode: Yup.string().required("Zipcode is required"),
+                                        // l_name: Yup.string().required("Last name is required."),
+                                        // email: Yup.string().required("email is required."),
+                                        // courses: Yup.string().required("please choose your course."),
+                                        // phone: Yup.string().required("phone is required."),
+                                        // dob: Yup.string().required("Date Of Birth is required."),
+                                        // eme_phone: Yup.string().required("Emergency Contact number is required."),
+                                        // f_f_name: Yup.string().required("First name is required."),
+                                        // f_l_name: Yup.string().required("Last name is required."),
+                                        // occupation: Yup.string().required("Occupation is required."),
+                                        // f_phone: Yup.string().required("Contact number is required."),
+                                        // line_1: Yup.string().required("Address is required."),
+                                        // line_2: Yup.string().required("Address is required."),
+                                        // city: Yup.string().required("city is required."),
+                                        // state: Yup.string().required("state is required."),
+                                        // country: Yup.string().required("country is required."),
+                                        // zipcode: Yup.string().required("Zipcode is required"),
 
-                                        amount: Yup.string().required("reference is required"),
+                                        // amount: Yup.string().required("reference is required"),
 
                                     })}
                                     onSubmit={(formData, { resetForm }) => {
