@@ -70,7 +70,7 @@ export default function Login() {
             navigate('/profile/' + formdata.enrollmentNumber)
 
         } else if (isflag && (Number(localStorage.getItem('userrole')) == 2)) {
-            navigate('/attandance')
+            navigate('/add-student')
             toast('You loggin successfully', {
                 position: "top-right",
                 autoClose: 5000,

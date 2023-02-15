@@ -43,7 +43,6 @@ export default class RouterContainer extends Component {
                     <Route path="/feature" element={<FeaturePage />} />
                     <Route path="/terms" element={<TearmsCondition />} />
                     <Route path="/placement-partners" element={<PlacementPartners />} />
-                    <Route path="/test" element={<Navbarforprofile />} />
                     {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                     {/* <Route path="/profile/:id" element={<Profile />} /> */}
                     {/* <Route path="/Login" element={<Login />} /> */}
@@ -53,9 +52,9 @@ export default class RouterContainer extends Component {
 
 
                     <Route path="/dashboard" element={
-                        <ProtectedRouteStudent>
+                        <ProtectedRouteAdmin>
                             <Dashboard />
-                        </ProtectedRouteStudent>
+                        </ProtectedRouteAdmin>
                     } />
 
 

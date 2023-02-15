@@ -12,7 +12,7 @@ const ProtectedRouteAdmin = ({ children }) => {
 
     let location = useLocation();
 
-    if (Number(localStorage.getItem('userrole')) !== 1) {
+    if (Number(localStorage.getItem('userrole')) !== 2) {
         return <Navigate to="/" state={{ from: location }} replace />
     }
     return children

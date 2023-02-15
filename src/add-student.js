@@ -7,12 +7,15 @@ import * as Yup from "yup";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import firebaseApp from "./firebase/firebase";
+import { Navigate, useLocation } from "react-router-dom"
 import { Button, Modal } from "react-bootstrap";
 
 
 
 
 function AddStudent() {
+
+    let location = useLocation();
 
 
     const [imageAsUrl, setImageAsUrl] = useState('');
@@ -304,6 +307,7 @@ function AddStudent() {
                     toast.success('Form submitted successfully', {
                         position: toast.POSITION.TOP_RIGHT
                     });
+                    <Navigate to="/dashboard" state={{ from: location }} replace />
                 })
                 .catch(function (error) {
                     console.error("Please check form again ", error);
@@ -362,25 +366,23 @@ function AddStudent() {
                                     }}
                                     validationSchema={Yup.object({
                                         f_name: Yup.string().required("First name is required."),
-                                        // l_name: Yup.string().required("Last name is required."),
-                                        // email: Yup.string().required("email is required."),
-                                        // courses: Yup.string().required("please choose your course."),
-                                        // phone: Yup.string().required("phone is required."),
-                                        // dob: Yup.string().required("Date Of Birth is required."),
-                                        // eme_phone: Yup.string().required("Emergency Contact number is required."),
-                                        // f_f_name: Yup.string().required("First name is required."),
-                                        // f_l_name: Yup.string().required("Last name is required."),
-                                        // occupation: Yup.string().required("Occupation is required."),
-                                        // f_phone: Yup.string().required("Contact number is required."),
-                                        // line_1: Yup.string().required("Address is required."),
-                                        // line_2: Yup.string().required("Address is required."),
-                                        // city: Yup.string().required("city is required."),
-                                        // state: Yup.string().required("state is required."),
-                                        // country: Yup.string().required("country is required."),
-                                        // zipcode: Yup.string().required("Zipcode is required"),
-
+                                        l_name: Yup.string().required("Last name is required."),
+                                        email: Yup.string().required("email is required."),
+                                        courses: Yup.string().required("please choose your course."),
+                                        phone: Yup.string().required("phone is required."),
+                                        dob: Yup.string().required("Date Of Birth is required."),
+                                        eme_phone: Yup.string().required("Emergency Contact number is required."),
+                                        f_f_name: Yup.string().required("First name is required."),
+                                        f_l_name: Yup.string().required("Last name is required."),
+                                        occupation: Yup.string().required("Occupation is required."),
+                                        f_phone: Yup.string().required("Contact number is required."),
+                                        line_1: Yup.string().required("Address is required."),
+                                        line_2: Yup.string().required("Address is required."),
+                                        city: Yup.string().required("city is required."),
+                                        state: Yup.string().required("state is required."),
+                                        country: Yup.string().required("country is required."),
+                                        zipcode: Yup.string().required("Zipcode is required"),
                                         // amount: Yup.string().required("reference is required"),
-
                                     })}
                                     onSubmit={(formData, { resetForm }) => {
                                         submitStudentData(formData, resetForm);

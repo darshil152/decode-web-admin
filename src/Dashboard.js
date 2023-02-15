@@ -42,14 +42,7 @@ export default function Dashboard() {
                 sort: true,
             },
         },
-        {
-            name: "id",
-            label: "id",
-            options: {
-                filter: true,
-                sort: true,
-            },
-        },
+
         {
             name: "f_name",
             label: "f_name",
@@ -75,6 +68,22 @@ export default function Dashboard() {
                 sort: true,
             },
         },
+        {
+            name: "phone",
+            label: "phone",
+            options: {
+                filter: true,
+                sort: true,
+            },
+        },
+        {
+            name: "f_phone",
+            label: "f_phone",
+            options: {
+                filter: true,
+                sort: true,
+            },
+        },
 
         {
             name: "courses",
@@ -82,6 +91,14 @@ export default function Dashboard() {
             options: {
                 filter: true,
                 sort: true,
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                        <>
+                            {value == 1 ? <div className='rendercon'><h6 className='valtoname'>Master In Webdesign</h6></div> : value == 2 ? <div className='rendercon'><h6 className='valtoname'>Master In Frontend Development</h6></div> : value == 3 ? <div className='rendercon'><h6 className='valtoname'>Master In backend Development</h6></div> : value == 4 ? <div className='rendercon'><h6 className='valtoname'>firebase</h6></div> : value == 5 ? <div className='rendercon'><h6 className='valtoname'>Master in 360 & 3D Website</h6></div> : value == 6 ? <div className='rendercon'><h6 className='valtoname'>Master In Fullstack Development</h6></div> : <div className='rendercon'></div>}
+                        </>
+                    );
+
+                },
             },
         },
 

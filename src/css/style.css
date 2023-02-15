@@ -11000,7 +11000,7 @@ h6,
 
 .navbar-light .navbar-nav .nav-link {
   font-family: 'Jost', sans-serif;
-  padding: 30px 15px;
+  /* padding: 30px 15px; */
   font-size: 18px;
   font-weight: 500;
   color: #120F2D;
@@ -11570,6 +11570,10 @@ h3.percentage {
   height: 100vh;
 }
 
+div#basic-navbar-nav\ abcd {
+  justify-content: end;
+  margin-right: 61px;
+}
 
 
 @media only screen and (max-width: 992px) {

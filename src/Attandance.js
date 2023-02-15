@@ -135,6 +135,15 @@ export default function Attandance() {
             },
         },
         {
+            name: "password",
+            label: "password",
+            options: {
+                filter: true,
+                sort: true,
+            },
+        },
+
+        {
             name: "f_name",
             label: "Student name",
             options: {
