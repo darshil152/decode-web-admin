@@ -2,13 +2,25 @@ import React, { Component } from 'react'
 import firebaseApp from './firebase/firebase';
 import MUIDataTable from "mui-datatables";
 import Loginheader from './Loginheader';
-
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow
+} from "@mui/material";
 
 export default class paymentdetail extends Component {
+
+
+
+
     constructor(props) {
         super(props);
         this.state = {
             id: "",
+            total: '',
             retrivedata: [],
             columns: [
                 {
@@ -45,6 +57,7 @@ export default class paymentdetail extends Component {
 
                 },
             ],
+
             options: {
                 selectableRowsHideCheckboxes: true,
                 responsive: "standard",

@@ -53,6 +53,7 @@ export default function Login() {
         for (let i = 0; i < data.length; i++) {
             if (data[i].er_num == formdata.enrollmentNumber && data[i].password == formdata.password) {
                 localStorage.setItem('userrole', data[i].userRole)
+                localStorage.setItem('sc', data[i].password)
                 isflag = true
             }
         }

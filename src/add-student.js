@@ -265,7 +265,6 @@ function AddStudent() {
 
 
 
-
     const sendMessage = (data) => {
         console.log(refData)
         let registerQuery = new Promise((resolve, reject) => {

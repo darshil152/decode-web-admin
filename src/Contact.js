@@ -1,6 +1,20 @@
 import React, { Component } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import firebaseApp from './firebase/firebase';
+import { Formik } from "formik";
+import * as Yup from "yup";
+
+
+let errorContainer = (form, field) => {
+    return form.touched[field] && form.errors[field] ? <span className="error text-danger">{form.errors[field]}</span> : null;
+};
+let formAttr = (form, field) => ({
+    onBlur: form.handleBlur,
+    onChange: form.handleChange,
+    value: form.values[field],
+});
+
+// let submitdetail = ''
 
 export default class Contact extends Component {
 
@@ -12,21 +26,31 @@ export default class Contact extends Component {
         cphone: ''
     }
 
+
+
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     }
 
+    submitdetail = (formData, resetForm) => {
+        // UploadImageTOFirebase(formData);
+        this.sendMessage(formData);
+        // abc(formData);
+        console.log("student :: ", formData);
+    };
 
-    sendMessage = () => {
+
+
+    sendMessage = (formdata) => {
 
         let registerQuery = new Promise((resolve, reject) => {
             let db = firebaseApp.firestore();
             db.collection("ContactUsPortfolio").add({
-                name: this.state.cname,
-                phone: this.state.cphone,
-                subject: this.state.csubject,
-                message: this.state.cmessage,
-                email: this.state.cemail,
+                name: formdata.cname,
+                phone: formdata.cphone,
+                subject: formdata.csubject,
+                message: formdata.cmessage,
+                email: formdata.cemail,
                 createdAt: new Date().getTime(),
                 project: 'decode-contact'
             })
@@ -100,52 +124,103 @@ export default class Contact extends Component {
                                 <h6 className="d-inline-block position-relative text-secondary text-uppercase pb-2">Need Help?</h6>
                                 <h1 className="display-4">Send Us A Message</h1>
                             </div>
-                            <div className="contact-form">
-                                {/* <!-- <form> --> */}
-                                <div className="row">
-                                    <div className="col-6 form-group">
-                                        <input onChange={this.handleChange} value={this.state.cname} name='cname' type="text" id="c-name"
-                                            className="form-control border-top-0 border-right-0 border-left-0 p-0"
-                                            placeholder="Your Name" required="required" />
-                                    </div>
-                                    <div className="col-6 form-group">
-                                        <input onChange={this.handleChange} value={this.state.cemail} type="email" name='cemail' id="c-email"
-                                            className="form-control border-top-0 border-right-0 border-left-0 p-0"
-                                            placeholder="Your Email" required="required" />
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-6">
-                                        <div className="form-group">
-                                            <select onChange={this.handleChange} name='csubject' id="c-subject"
-                                                className="form-control border-top-0 border-right-0 border-left-0 p-0">
-                                                <option value="">Select a course</option>
-                                                <option value="webdesign">Master in Web Design</option>
-                                                <option value="frontend">Master in Frontend Development</option>
-                                                <option value="backend">Master in Backend Development</option>
-                                                <option value="fullstack">Master in Fullstack Development</option>
-                                                <option value="firebase">Master in Firebase</option>
-                                                <option value="360&3d">Master in 360 & 3D Website</option>
-                                                <option value="react">Master in Reactjs</option>
-                                                <option value="node">Master in Nodejs</option>
-                                            </select>
+                            <Formik
+                                enableReinitialize
+                                initialValues={{
+                                    cname: "",
+                                    cemail: '',
+                                    cphone: '',
+                                    cmessage: '',
+                                    csubject: '',
+
+                                }}
+                                validationSchema={Yup.object({
+                                    cname: Yup.string().required("Name is required."),
+                                    cphone: Yup.string().required("Phone number is required."),
+                                })}
+                                onSubmit={(formData, { resetForm }) => {
+                                    this.submitdetail(formData, resetForm);
+
+                                }}
+                            >
+                                {(runform) => (
+                                    <form className="row" onSubmit={runform.handleSubmit}>
+                                        <div className="contact-form">
+                                            {/* <!-- <form> --> */}
+
+                                            <div className="row">
+                                                <div className="col-6 form-group">
+                                                    <input  {...formAttr(runform, "cname")} name='cname' type="text" id="c-name"
+                                                        className="form-control border-top-0 border-right-0 border-left-0 p-0"
+                                                        placeholder="Your Name" />
+                                                    {errorContainer(runform, "cname")}
+
+                                                </div>
+                                                <div className="col-6 form-group">
+                                                    <input type="email" {...formAttr(runform, "cemail")} name='cemail' id="c-email"
+                                                        className="form-control border-top-0 border-right-0 border-left-0 p-0"
+                                                        placeholder="Your Email" />
+                                                    {errorContainer(runform, "cemail")}
+
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-6">
+                                                    <div className="form-group">
+                                                        <select className="selectcourse"
+                                                            name="csubject"
+
+                                                            {...formAttr(runform, "courses")}
+
+                                                        >
+                                                            <option value="" label="Select a course">
+                                                                Select a courses{" "}
+                                                            </option>
+                                                            <option value="1" label="Master In Web design ">
+                                                                {" "}
+                                                                Master In Web design
+                                                            </option>
+                                                            <option value="2" label="Master In Frontend Development">
+                                                                Master In Frontend Development
+                                                            </option>
+                                                            <option value="3" label="Master In Backend Development">
+                                                                Master In Backend Development
+                                                            </option>
+                                                            <option value="4" label="firebase">
+                                                                firebase
+                                                            </option>
+                                                            <option value="5" label="Master in 360 & 3D Website">
+                                                                Master in 360 & 3D Website
+                                                            </option>
+                                                            <option value="6" label="Master In Fullstack Development">
+                                                                Master In Fullstack Development
+                                                            </option>
+                                                        </select>
+                                                        {errorContainer(runform, "csubject")}
+                                                    </div>
+                                                </div>
+                                                <div className="form-group col-6">
+                                                    <input {...formAttr(runform, "cphone")} name='cphone' type="text" id="c-number"
+                                                        className="form-control border-top-0 border-right-0 border-left-0 p-0"
+                                                        placeholder="Enter Contact Number" />
+                                                    {errorContainer(runform, "cphone")}
+
+                                                </div>
+                                            </div>
+                                            <div className="form-group">
+                                                <textarea {...formAttr(runform, "cmessage")} name='cmessage' className="form-control border-top-0 border-right-0 border-left-0 p-0" rows="5"
+                                                    id="c-message" placeholder="Message" ></textarea>
+                                                {errorContainer(runform, "cmessage")}
+
+                                            </div>
+                                            <div>
+                                                <button type='submit' className="btn btn-primary py-3 px-5" >Send Message</button>
+                                            </div>
+                                            {/* <!-- </form> --> */}
                                         </div>
-                                    </div>
-                                    <div className="form-group col-6">
-                                        <input onChange={this.handleChange} value={this.state.cphone} name='cphone' type="text" id="c-number"
-                                            className="form-control border-top-0 border-right-0 border-left-0 p-0"
-                                            placeholder="Enter Contact Number" required="required" />
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <textarea onChange={this.handleChange} value={this.state.cmessage} name='cmessage' className="form-control border-top-0 border-right-0 border-left-0 p-0" rows="5"
-                                        id="c-message" placeholder="Message" required="required"></textarea>
-                                </div>
-                                <div>
-                                    <button onClick={this.sendMessage} className="btn btn-primary py-3 px-5" >Send Message</button>
-                                </div>
-                                {/* <!-- </form> --> */}
-                            </div>
+                                    </form>
+                                )}
+                            </Formik>
                         </div>
                     </div>
                 </div>
@@ -163,7 +238,7 @@ export default class Contact extends Component {
                 />
                 {/* Same as */}
                 <ToastContainer />
-            </div>
+            </div >
         )
     }
 }

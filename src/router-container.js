@@ -102,9 +102,9 @@ export default class RouterContainer extends Component {
 
 
                     <Route path="/attandance" element={
-                        <ProtectedRoute>
+                        <ProtectedRouteAdmin>
                             <Attandance />
-                        </ProtectedRoute>
+                        </ProtectedRouteAdmin>
                     } />
 
 

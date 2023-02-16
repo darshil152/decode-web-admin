@@ -35,7 +35,7 @@ export default class NavbarComponent extends Component {
                                 title="Pages"
                             >
                                 <NavDropdown.Item><Link to={'/details/4'}>Course Details</Link></NavDropdown.Item>
-                                <NavDropdown.Item ><Link to={'/feature'}>      Our Features</Link>
+                                <NavDropdown.Item ><Link to={'/feature'}> Our Features</Link>
 
                                 </NavDropdown.Item>
                                 <NavDropdown.Item ><Link to={'/instructors'}>Instructors</Link></NavDropdown.Item>
@@ -49,8 +49,10 @@ export default class NavbarComponent extends Component {
                             </NavDropdown>
                             <Link to={'/contact'} className={this.state.currentPage == 'contact' ? "nav-item nav-link active" : "nav-item nav-link "}>Contact Us</Link>
 
+
                         </Nav>
-                        <Link to={'/login'} className={this.state.currentPage == 'login' ? "nav-item nav-link active" : "nav-item nav-link btn btn-primary py-2 px-4 ml-auto d-none d-lg-block"}>Login</Link>
+
+                        <Link to={'/login'} className={this.state.currentPage == 'login' ? "nav-item nav-link active" : "nav-item nav-link btn btn-primary me-auto ml-lg-auto loginwidth"}>Login</Link>
 
                     </Navbar.Collapse>
                 </Navbar>

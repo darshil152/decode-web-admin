@@ -12,15 +12,18 @@ export default class Profile extends Component {
             id: "",
             currentdata: '',
             referencedata: '',
+            sc: localStorage.getItem('sc'),
         }
     }
 
     componentDidMount() {
+
         const url = window.location.href;
         var id = url.substring(url.lastIndexOf('/') + 1);
         this.setState({ id }, () => {
             this.getalldata();
         })
+        console.log('come', this.state.sc)
 
     }
 
@@ -29,6 +32,9 @@ export default class Profile extends Component {
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 this.setState({ currentdata: doc.data() }, () => {
+                    if (this.state.sc !== this.state.currentdata.password) {
+                        window.location.href = '/'
+                    }
                     this.getrefdata();
                 })
             });
@@ -77,9 +83,10 @@ export default class Profile extends Component {
                                 </div>
                                 <div className='mt-lg-5 mb-lg-5 mt-4 text-left'>
                                     <i class='fas fa-graduation-cap usernames'></i>
-                                    <lable className="lablesdata ml-3">{this.state.currentdata.courses}</lable>
-                                </div>
-                            </div>
+                                    <lable className="lablesdata ml-3">{this.state.currentdata.courses == 1 ? <lable className="lablesdata">Master In Webdesign</lable> : this.state.currentdata.courses == 2 ? <lable className="lablesdata">Master In Frontend Development</lable> : this.state.currentdata.courses == 3 ? <lable className="lablesdata">Master In backend Development </lable> : this.state.currentdata.courses == 4 ? <lable className="lablesdata">firebase </lable> : this.state.currentdata.courses == 5 ? <lable className="lablesdata">Master in 360 & 3D Website</lable> : this.state.currentdata.courses == 6 ? <lable className="lablesdata">Master In Fullstack Development</lable> : <div className='rendercon'></div>
+                                    }</lable>
+                                </div >
+                            </div >
 
                             <div className='col-lg-6 '>
                                 <div className='mt-lg-5 mt-4 text-left'>
@@ -96,10 +103,10 @@ export default class Profile extends Component {
                         </div> */}
 
                             </div>
-                        </div>
+                        </div >
                         <div>
                         </div>
-                    </div>
+                    </div >
 
                     <div className='container mt-5 parentdetails '>
                         <div className='container'>
