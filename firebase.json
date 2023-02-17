@@ -1,6 +1,6 @@
 {
     "hosting": {
-        "site": "decodesofttech",
+        "site": "decodeadmin",
         "public": "build",
         "ignore": [
             "firebase.json",
