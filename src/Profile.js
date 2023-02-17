@@ -3,6 +3,14 @@ import profilepicture from "./img/profilepicture.jpg"
 import firebaseApp from './firebase/firebase'
 import Navbarforprofile from './navbarforprofile'
 import React, { Component } from 'react'
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow
+} from "@mui/material";
 
 export default class Profile extends Component {
 

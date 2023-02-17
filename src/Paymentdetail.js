@@ -20,8 +20,10 @@ export default class paymentdetail extends Component {
         super(props);
         this.state = {
             id: "",
-            total: '',
+            totalAmount: 0,
             retrivedata: [],
+            courseprice: '',
+            sc: localStorage.getItem('sc'),
             columns: [
                 {
                     name: "date",
@@ -56,6 +58,23 @@ export default class paymentdetail extends Component {
                     },
 
                 },
+                {
+                    name: "payment",
+                    label: "payment method",
+                    options: {
+                        filter: true,
+                        sort: true,
+                        customBodyRender: (value, tableMeta, updateValue) => {
+                            return (
+                                <>
+                                    {value == 0 ? <div className='paymenttype'><h6 className='paymenttype'>Cash</h6></div> : value == 1 ? <div className='paymenttype'><h6 className='paymenttype'>Google Pay</h6></div> : <div className='paymenttype'><h6 className='paymenttype'>Bank Transfer</h6></div>}
+                                </>
+                            );
+
+                        },
+                    },
+
+                },
             ],
 
             options: {
@@ -68,26 +87,47 @@ export default class paymentdetail extends Component {
 
 
 
+
+
     componentDidMount() {
         const url = window.location.href;
         var id = url.substring(url.lastIndexOf('/') + 1);
         this.setState({ id }, () => {
             this.getdata();
         })
-
+        // this.calculateTotalSum();
     }
 
+
+
     getdata = () => {
+        let total = 0
         const db = firebaseApp.firestore();
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                console.log(doc.data().fees)
-                this.setState({ retrivedata: doc.data().fees })
+                console.log(doc.data().password)
+
+                this.setState({ courseprice: doc.data() })
+
+                this.setState({ retrivedata: doc.data().fees }, () => {
+                    for (let i = 0; i < this.state.retrivedata.length; i++) {
+                        total = Number(total) + Number(this.state.retrivedata[i].amount)
+                    }
+                    this.setState({ totalAmount: total }, () => {
+                        if (this.state.sc !== this.state.courseprice.password) {
+                            window.location.href = '/'
+                        }
+                    })
+
+                })
             })
         }).catch(err => {
             console.error(err)
         });
     }
+
+
+
 
     render() {
         return (
@@ -100,7 +140,12 @@ export default class paymentdetail extends Component {
                         data={this.state.retrivedata}
                         columns={this.state.columns}
                         options={this.state.options}
+
                     />
+
+                    <h4 className='ml-3 mt-5 totalamount' >Total amout paid is: {this.state.totalAmount} </h4>
+
+
                 </div>
             </>
         )
