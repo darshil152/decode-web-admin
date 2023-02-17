@@ -78,7 +78,8 @@ export default class ReferenceDetails extends Component {
                         </div>
                     </div>
 
-                </>}
+                </>
+                }
             </>
         )
     }

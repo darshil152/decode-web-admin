@@ -11580,6 +11580,20 @@ div#basic-navbar-nav\ abcd {
 }
 
 
+lable.lbls {
+  font-weight: 600;
+  font-size: 18px;
+  color: #000;
+  white-space: nowrap;
+  margin-right: 18px;
+}
+
+.srernum {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  /* margin-top: 2px; */
+  font-size: 19px;
+}
+
 @media only screen and (max-width: 992px) {
   h3.percentage {
     margin-top: 50px;
