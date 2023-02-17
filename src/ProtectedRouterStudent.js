@@ -14,7 +14,7 @@ const ProtectedRouteStudent = ({ children }) => {
 
     let location = useLocation();
     // console.log('first', getlocalrole)
-    if (Number(localStorage.getItem('userrole')) !== 1) {
+    if (Number(localStorage.getItem('userrole')) == 0) {
         // console.log('come')
         return <Navigate to="/" state={{ from: location }} replace />
     }

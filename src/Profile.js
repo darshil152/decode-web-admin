@@ -40,9 +40,12 @@ export default class Profile extends Component {
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 this.setState({ currentdata: doc.data() }, () => {
-                    if (this.state.sc !== this.state.currentdata.password) {
-                        window.location.href = '/'
+                    if (Number(localStorage.getItem('userrole')) !== 2) {
+                        if (this.state.sc !== this.state.currentdata.password) {
+                            window.location.href = '/'
+                        }
                     }
+
                     this.getrefdata();
                 })
             });
