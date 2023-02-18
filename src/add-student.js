@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import firebaseApp from "./firebase/firebase";
-import { Navigate, useLocation } from "react-router-dom"
+import { Navigate, useLocation, useNavigate } from "react-router-dom"
 import { Button, Modal } from "react-bootstrap";
 
 
@@ -34,6 +34,8 @@ function AddStudent() {
     const [currentid, setCurrentid] = useState('')
     const [acticestatus, setActivestatus] = useState("")
 
+
+    const navigate = useNavigate();
     useEffect(() => {
         getdata();
     }, [])
@@ -47,7 +49,7 @@ function AddStudent() {
         // UploadImageTOFirebase(formData);
         // sendMessage(formData);
         abc(formData);
-        console.log("student :: ", formData);
+
     };
 
     const handlesave = (event) => {
@@ -66,7 +68,6 @@ function AddStudent() {
         for (let i = 0; i < fetchdata.length; i++) {
             if (fetchdata[i].id == refData.refId) {
                 fetchdata[i].myref.push(currentid)
-                console.log(refData.refId)
                 if (fetchdata[i].myref.length > 0) {
                     updatedData = fetchdata[i].myref
                 }
@@ -292,7 +293,7 @@ function AddStudent() {
                 zipcode: data.zipcode,
                 reference: refData,
                 createdAt: new Date().getTime(),
-                id: makeid(16),
+                id: currentid,
                 password: makepass(8),
                 project: "Decode",
                 userRole: 1,
@@ -307,7 +308,8 @@ function AddStudent() {
                     toast.success('Form submitted successfully', {
                         position: toast.POSITION.TOP_RIGHT
                     });
-                    <Navigate to="/dashboard" state={{ from: location }} replace />
+                    navigate('/dashboard')
+
                 })
                 .catch(function (error) {
                     console.error("Please check form again ", error);

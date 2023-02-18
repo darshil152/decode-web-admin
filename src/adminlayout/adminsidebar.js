@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Logo from "../img/adminlogo.png";
+import Logo from '../img/logo.png'
 
 function AdminSidebar(props) {
     const sidebar_change = (name) => {

@@ -85,29 +85,29 @@ export default class Profile extends Component {
                                 <div className='mt-lg-5 mt-4 text-left text-left'>
 
                                     <i className="fa fa-id-card usernames"></i>
-                                    <lable className="lablesdata ml-3">{this.state.currentdata.er_num}</lable>
+                                    <label className="labelData ml-3">{this.state.currentdata.er_num}</label>
 
                                 </div>
                                 <div className='mt-lg-5  mt-4 mb-sm-4 text-left'>
                                     <i class="fa fa-mobile usernames" aria-hidden="true"></i>
-                                    <lable className="lablesdata ml-3">{this.state.currentdata.phone}</lable>
+                                    <label className="labelData ml-3">{this.state.currentdata.phone}</label>
                                 </div>
                                 <div className='mt-lg-5 mb-lg-5 mt-4 text-left'>
                                     <i class='fas fa-graduation-cap usernames'></i>
-                                    <lable className="lablesdata ml-3">{this.state.currentdata.courses == 1 ? <lable className="lablesdata">Master In Webdesign</lable> : this.state.currentdata.courses == 2 ? <lable className="lablesdata">Master In Frontend Development</lable> : this.state.currentdata.courses == 3 ? <lable className="lablesdata">Master In backend Development </lable> : this.state.currentdata.courses == 4 ? <lable className="lablesdata">firebase </lable> : this.state.currentdata.courses == 5 ? <lable className="lablesdata">Master in 360 & 3D Website</lable> : this.state.currentdata.courses == 6 ? <lable className="lablesdata">Master In Fullstack Development</lable> : <div className='rendercon'></div>
-                                    }</lable>
+                                    <label className="labelData ml-3">{this.state.currentdata.courses == 1 ? <label className="labelData">Master In Webdesign</label> : this.state.currentdata.courses == 2 ? <label className="labelData">Master In Frontend Development</label> : this.state.currentdata.courses == 3 ? <label className="labelData">Master In backend Development </label> : this.state.currentdata.courses == 4 ? <label className="labelData">firebase </label> : this.state.currentdata.courses == 5 ? <label className="labelData">Master in 360 & 3D Website</label> : this.state.currentdata.courses == 6 ? <label className="labelData">Master In Fullstack Development</label> : <div className='rendercon'></div>
+                                    }</label>
                                 </div >
                             </div >
 
                             <div className='col-lg-6 '>
                                 <div className='mt-lg-5 mt-4 text-left'>
-                                    <i class="fa fa-user usernames" aria-hidden="true"></i> <lable className="lablesdata ml-3">{this.state.currentdata.f_name}</lable>
+                                    <i class="fa fa-user usernames" aria-hidden="true"></i> <label className="labelData ml-3">{this.state.currentdata.f_name}</label>
                                 </div>
                                 <div className='mt-lg-5 mt-4 text-left'>
-                                    <i class="fa fa-envelope usernames" aria-hidden="true"></i> <lable className="lablesdata ml-3">{this.state.currentdata.email}</lable>
+                                    <i class="fa fa-envelope usernames" aria-hidden="true"></i> <label className="labelData ml-3">{this.state.currentdata.email}</label>
                                 </div>
                                 <div className='mt-lg-5 mt-4 text-left '>
-                                    <i class="fa fa-birthday-cake usernames" aria-hidden="true"></i> <lable className="lablesdata ml-3">{this.state.currentdata.dob}</lable>
+                                    <i class="fa fa-birthday-cake usernames" aria-hidden="true"></i> <label className="labelData ml-3">{this.state.currentdata.dob}</label>
                                 </div>
                                 {/* <div className='mt-lg-5 mt-4 '>
                             <i class="fa fa-link" aria-hidden="true"></i> <span className='ml-3 spans'>Tj62zYQcXC5GCjuP</span>
@@ -127,13 +127,13 @@ export default class Profile extends Component {
                                         <h1>Parent's Detail</h1>
                                     </div>
                                     <div className='mt-lg-4 mt-sm-4 ml-lg-4 text-left'>
-                                        <i class="fa fa-user usernames" aria-hidden="true"></i><lable className="lablesdata ml-3">{this.state.currentdata.f_f_name}</lable>
+                                        <i class="fa fa-user usernames" aria-hidden="true"></i><label className="labelData ml-3">{this.state.currentdata.f_f_name}</label>
                                     </div>
                                     <div className='mt-lg-4 mt-sm-4 ml-lg-4 text-left'>
-                                        <i class='fas fa-briefcase usernames'></i><lable className="lablesdata ml-3">{this.state.currentdata.occupation}</lable>
+                                        <i class='fas fa-briefcase usernames'></i><label className="labelData ml-3">{this.state.currentdata.occupation}</label>
                                     </div>
                                     <div className='mt-lg-4 mt-sm-4 ml-lg-4 mb-sm-4 text-left'>
-                                        <i class="fa fa-mobile usernames" aria-hidden="true"></i><lable className="lablesdata ml-3">{this.state.currentdata.f_phone}</lable>
+                                        <i class="fa fa-mobile usernames" aria-hidden="true"></i><label className="labelData ml-3">{this.state.currentdata.f_phone}</label>
                                     </div>
                                 </div>
                             </div>
@@ -148,15 +148,15 @@ export default class Profile extends Component {
                                     </div>
                                     <div className='mt-lg-4 mt-sm-4 ml-lg-4 text-left'>
                                         <i class="fa fa-map-marker usernames " aria-hidden="true"></i>
-                                        <lable className="lablesdata ml-3">{this.state.currentdata.city}</lable>
+                                        <label className="labelData ml-3">{this.state.currentdata.city}</label>
                                     </div>
                                     <div className='mt-lg-4 mt-sm-4 ml-lg-4 text-left'>
                                         <i class="fa-sharp fa-solid fa-city usernames"></i>
-                                        <lable className="lablesdata ml-3">{this.state.currentdata.state}</lable>
+                                        <label className="labelData ml-3">{this.state.currentdata.state}</label>
                                     </div>
                                     <div className='mt-lg-4 mt-sm-4 ml-lg-4 mb-sm-4 text-left'>
                                         <i class="fa-sharp fa-solid fa-city usernames"></i>
-                                        <lable className="lablesdata ml-3">{this.state.currentdata.country}</lable>
+                                        <label className="labelData ml-3">{this.state.currentdata.country}</label>
                                     </div>
                                 </div>
                             </div>
