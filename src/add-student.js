@@ -45,8 +45,8 @@ function AddStudent() {
 
     const submitStudentData = (formData, resetForm) => {
         // UploadImageTOFirebase(formData);
-        sendMessage(formData);
-        // abc(formData);
+        // sendMessage(formData);
+        abc(formData);
         console.log("student :: ", formData);
     };
 
@@ -56,7 +56,6 @@ function AddStudent() {
             refId: refe,
             refAmount: refamount
         })
-        setChecked(false);
     }
 
 
@@ -68,7 +67,9 @@ function AddStudent() {
             if (fetchdata[i].id == refData.refId) {
                 fetchdata[i].myref.push(currentid)
                 console.log(refData.refId)
-                updatedData = fetchdata[i].myref
+                if (fetchdata[i].myref.length > 0) {
+                    updatedData = fetchdata[i].myref
+                }
                 idtoupdate = fetchdata[i].id
             }
 
@@ -365,23 +366,22 @@ function AddStudent() {
                                     }}
                                     validationSchema={Yup.object({
                                         f_name: Yup.string().required("First name is required."),
-                                        l_name: Yup.string().required("Last name is required."),
-                                        email: Yup.string().required("email is required."),
-                                        courses: Yup.string().required("please choose your course."),
-                                        phone: Yup.string().required("phone is required."),
-                                        dob: Yup.string().required("Date Of Birth is required."),
-                                        eme_phone: Yup.string().required("Emergency Contact number is required."),
-                                        f_f_name: Yup.string().required("First name is required."),
-                                        f_l_name: Yup.string().required("Last name is required."),
-                                        occupation: Yup.string().required("Occupation is required."),
-                                        f_phone: Yup.string().required("Contact number is required."),
-                                        line_1: Yup.string().required("Address is required."),
-                                        line_2: Yup.string().required("Address is required."),
-                                        city: Yup.string().required("city is required."),
-                                        state: Yup.string().required("state is required."),
-                                        country: Yup.string().required("country is required."),
-                                        zipcode: Yup.string().required("Zipcode is required"),
-                                        // amount: Yup.string().required("reference is required"),
+                                        // l_name: Yup.string().required("Last name is required."),
+                                        // email: Yup.string().required("email is required."),
+                                        // courses: Yup.string().required("please choose your course."),
+                                        // phone: Yup.string().required("phone is required."),
+                                        // dob: Yup.string().required("Date Of Birth is required."),
+                                        // eme_phone: Yup.string().required("Emergency Contact number is required."),
+                                        // f_f_name: Yup.string().required("First name is required."),
+                                        // f_l_name: Yup.string().required("Last name is required."),
+                                        // occupation: Yup.string().required("Occupation is required."),
+                                        // f_phone: Yup.string().required("Contact number is required."),
+                                        // line_1: Yup.string().required("Address is required."),
+                                        // line_2: Yup.string().required("Address is required."),
+                                        // city: Yup.string().required("city is required."),
+                                        // state: Yup.string().required("state is required."),
+                                        // country: Yup.string().required("country is required."),
+                                        // zipcode: Yup.string().required("Zipcode is required"),
                                     })}
                                     onSubmit={(formData, { resetForm }) => {
                                         submitStudentData(formData, resetForm);
@@ -390,7 +390,7 @@ function AddStudent() {
                                 >
                                     {(runform) => (
                                         <form className="row" onSubmit={runform.handleSubmit}>
-                                            <div className="stsg-box-list d-flex align-items-center stsg-box-list-text mb-4">
+                                            <div className="col-12 stsg-box-list d-flex align-items-center stsg-box-list-text mb-4">
                                                 <span className="d-block">
                                                     <img src={imageAsUrl} alt="profile" />
                                                 </span>
@@ -514,10 +514,10 @@ function AddStudent() {
                                                 <label className="lbl-comn-info">Father's Occupation</label>
                                                 <input type="text" name="occupation" {...formAttr(runform, "occupation")} className="form-control input-style" placeholder="" />
                                             </div>
-                                            <div className="col-md-6 mb-3">
+                                            {/* <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Father's Qualification</label>
                                                 <input type="qualification" name="qualification" {...formAttr(runform, "qualification")} className="form-control input-style" placeholder="" />
-                                            </div>
+                                            </div> */}
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Father's Contact Number</label>
                                                 <div className="phone-cust-input">
@@ -589,7 +589,7 @@ function AddStudent() {
                                     )}
                                 </Formik>
 
-                                <Modal show={show} onHide={handleClose}>
+                                <Modal show={show && checked} onHide={handleClose}>
                                     <Modal.Header closeButton>
                                         <Modal.Title>Reference</Modal.Title>
                                     </Modal.Header>

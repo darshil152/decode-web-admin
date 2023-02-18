@@ -6,6 +6,7 @@ import MUIDataTable from 'mui-datatables'
 import { number } from 'yup';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AdminLayout from './adminlayout/adminlayout';
 
 // import { QuerySnapshot } from '@firebase/firestore-types';
 // import Ember from 'ember';
@@ -236,16 +237,21 @@ export default function Attandance() {
 
 
     return (
-        <div>
-            <MUIDataTable
-                title={"Student List"}
-                data={stdata}
-                columns={columns}
-                options={options}
 
-            />
+        <AdminLayout>
+            <div className="content-main-section">
+                <MUIDataTable
+                    title={"Student List"}
+                    data={stdata}
+                    columns={columns}
+                    options={options}
+
+                />
+            </div>
             <ToastContainer />
-        </div>
+        </AdminLayout>
+
+
 
     )
 }

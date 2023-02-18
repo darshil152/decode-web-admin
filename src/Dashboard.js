@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import firebaseApp from './firebase/firebase'
 import MUIDataTable from 'mui-datatables'
+import AdminLayout from './adminlayout/adminlayout';
 
 // import { QuerySnapshot } from '@firebase/firestore-types';
 // import Ember from 'ember';
@@ -114,11 +115,15 @@ export default function Dashboard() {
 
 
     return (
-        <MUIDataTable
-            title={"Students List"}
-            data={stdata}
-            columns={columns}
-            options={options}
-        />
+        <AdminLayout>
+            <div className="content-main-section">
+                <MUIDataTable
+                    title={"Students List"}
+                    data={stdata}
+                    columns={columns}
+                    options={options}
+                />
+            </div>
+        </AdminLayout>
     )
 }
