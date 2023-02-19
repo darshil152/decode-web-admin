@@ -24,13 +24,21 @@ function AddStudent() {
     const [fetchdata, setFetchdata] = useState([]);
     const [refe, setRef] = useState("");
     const [refamount, setAmout] = useState("")
+    const [otherRefName, setOtherRefName] = useState("")
+    const [otherRefAmount, setOtherRefAmount] = useState("")
     const [show, setShow] = useState(false);
     const [refData, setTemp] = useState({
         refId: 'decode',
         refAmount: 0
     });
-    const handleShow = () => setShow(true);
+    const [otherRef, setOtherRef] = useState({
+        refName: '',
+        refAmount: 0
+    })
+
     const [checked, setChecked] = useState(false);
+    const [otherRefCheck, setOtherRefCheck] = useState(false);
+    const [otherRefModalShow, setOtherRefModalShow] = useState(false);
     const [currentid, setCurrentid] = useState('')
     const [acticestatus, setActivestatus] = useState("")
 
@@ -40,10 +48,25 @@ function AddStudent() {
         getdata();
     }, [])
 
+
+
+    const handleShow = () => setShow(true);
+
     const handleClose = () => {
         setChecked(false);
         setShow(false);
     }
+
+    const handleOtherRefModalShow = () => {
+        setOtherRefModalShow(true)
+    }
+
+    const handleOtherRefModalClose = () => {
+        setOtherRefCheck(false)
+        setOtherRefModalShow(true)
+    }
+
+
 
     const submitStudentData = (formData, resetForm) => {
         // UploadImageTOFirebase(formData);
@@ -58,13 +81,31 @@ function AddStudent() {
             refId: refe,
             refAmount: refamount
         })
+        // setOtherRef({
+        //     refName: '',
+        //     refAmount: 0
+        // })
+        // setOtherRefCheck(false)
+    }
+
+    const handleOtherRefSave = () => {
+        setOtherRefModalShow(false)
+        setOtherRef({
+            refName: otherRefName,
+            refAmount: otherRefAmount
+        })
+        // setTemp({
+        //     refId: 'decode',
+        //     refAmount: 0
+        // })
+        // setChecked(false)
     }
 
 
     const abc = (formData) => {
         let idtoupdate = ''
         let updatedData = []
-
+        console.log('fetch data :: ', fetchdata)
         for (let i = 0; i < fetchdata.length; i++) {
             if (fetchdata[i].id == refData.refId) {
                 fetchdata[i].myref.push(currentid)
@@ -75,30 +116,37 @@ function AddStudent() {
             }
 
         }
-        const db = firebaseApp.firestore();
-        db.collection('Students').where('id', '==', idtoupdate).get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                console.log(doc.ref.id)
+        if (idtoupdate !== '') {
+            console.log('come')
+            const db = firebaseApp.firestore();
+            db.collection('Students').where('id', '==', idtoupdate).get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    console.log(doc.ref.id)
 
-                var updateCollection = db.collection("Students").doc(doc.ref.id);
-                return updateCollection.update({
-                    myref: updatedData
-                })
-                    .then(() => {
-                        console.log("Document successfully updated!");
-                        sendMessage(formData)
-                        // window.location.href = '/table'
-
+                    var updateCollection = db.collection("Students").doc(doc.ref.id);
+                    return updateCollection.update({
+                        myref: updatedData
                     })
-                    .catch((error) => {
-                        // The document probably doesn't exist.
-                        console.error("Error updating document: ", error);
-                    });
-            })
+                        .then(() => {
+                            console.log("Document successfully updated!");
+                            sendMessage(formData)
+                            // window.location.href = '/table'
 
-        }).catch(err => {
-            console.error(err)
-        });
+                        })
+                        .catch((error) => {
+                            // The document probably doesn't exist.
+                            console.error("Error updating document: ", error);
+                        });
+                })
+
+            }).catch(err => {
+                console.error(err)
+            });
+        } else {
+            console.log('else')
+            sendMessage(formData)
+        }
+
 
     }
 
@@ -111,6 +159,12 @@ function AddStudent() {
 
     const handlerefamount = (event) => {
         setAmout(event.target.value);
+    }
+    const handleOtherrefamount = (event) => {
+        setOtherRefAmount(event.target.value);
+    }
+    const handleOtherrefName = (event) => {
+        setOtherRefName(event.target.value);
     }
 
     const errorContainer = (form, field) => {
@@ -209,20 +263,22 @@ function AddStudent() {
                 entry.push(doc.data())
                 // temp.push(doc.data())
             })
-            console.log(entry, 'product array')
-            entry.sort(compare);
-            let lastErNum = entry[entry.length - 1].er_num;
-            setErnum(ernum => 1 + lastErNum)
-            setFetchdata(entry)
+            if (entry.length > 0) {
+                entry.sort(compare);
+                let lastErNum = entry[entry.length - 1].er_num;
+                setErnum(ernum => 1 + lastErNum)
+                setFetchdata(entry)
 
 
-            for (let i = 0; i < entry.length; i++) {
-                if (entry[i].status == 1) {
-                    console.log(entry[i].status)
-                    activeStudents.push(entry[i])
+                for (let i = 0; i < entry.length; i++) {
+                    if (entry[i].status == 1) {
+                        console.log(entry[i].status)
+                        activeStudents.push(entry[i])
+                    }
                 }
+                setActivestatus(activeStudents)
             }
-            setActivestatus(activeStudents)
+
 
         }).catch(err => {
             console.error(err)
@@ -280,6 +336,7 @@ function AddStudent() {
                 email: data.email,
                 eme_phone: data.eme_phone,
                 courses: data.courses,
+                course_fees: data.course_fees,
                 f_f_name: data.f_f_name,
                 f_l_name: data.f_l_name,
                 occupation: data.occupation,
@@ -292,6 +349,7 @@ function AddStudent() {
                 country: data.country,
                 zipcode: data.zipcode,
                 reference: refData,
+                other_ref: otherRef,
                 createdAt: new Date().getTime(),
                 id: currentid,
                 password: makepass(8),
@@ -352,6 +410,7 @@ function AddStudent() {
                                         phone: '',
                                         eme_phone: '',
                                         courses: '',
+                                        course_fees: '',
                                         f_f_name: '',
                                         f_l_name: '',
                                         occupation: '',
@@ -361,29 +420,27 @@ function AddStudent() {
                                         line_2: '',
                                         city: '',
                                         state: '',
-                                        country: '',
+                                        country: 'India',
                                         zipcode: '',
                                         reference: {},
                                         amount: "",
                                     }}
                                     validationSchema={Yup.object({
                                         f_name: Yup.string().required("First name is required."),
-                                        // l_name: Yup.string().required("Last name is required."),
-                                        // email: Yup.string().required("email is required."),
-                                        // courses: Yup.string().required("please choose your course."),
-                                        // phone: Yup.string().required("phone is required."),
-                                        // dob: Yup.string().required("Date Of Birth is required."),
-                                        // eme_phone: Yup.string().required("Emergency Contact number is required."),
-                                        // f_f_name: Yup.string().required("First name is required."),
-                                        // f_l_name: Yup.string().required("Last name is required."),
-                                        // occupation: Yup.string().required("Occupation is required."),
-                                        // f_phone: Yup.string().required("Contact number is required."),
-                                        // line_1: Yup.string().required("Address is required."),
-                                        // line_2: Yup.string().required("Address is required."),
-                                        // city: Yup.string().required("city is required."),
-                                        // state: Yup.string().required("state is required."),
-                                        // country: Yup.string().required("country is required."),
-                                        // zipcode: Yup.string().required("Zipcode is required"),
+                                        l_name: Yup.string().required("Last name is required."),
+                                        email: Yup.string().required("email is required."),
+                                        courses: Yup.string().required("please choose your course."),
+                                        course_fees: Yup.string().required("please Enter Fees of Course."),
+                                        phone: Yup.string().required("phone is required."),
+                                        dob: Yup.string().required("Date Of Birth is required."),
+                                        eme_phone: Yup.string().required("Emergency Contact number is required."),
+                                        f_f_name: Yup.string().required("First name is required."),
+                                        f_l_name: Yup.string().required("Last name is required."),
+                                        f_phone: Yup.string().required("Contact number is required."),
+                                        line_1: Yup.string().required("Address is required."),
+                                        city: Yup.string().required("city is required."),
+                                        state: Yup.string().required("state is required."),
+                                        zipcode: Yup.string().required("Zipcode is required"),
                                     })}
                                     onSubmit={(formData, { resetForm }) => {
                                         submitStudentData(formData, resetForm);
@@ -392,7 +449,7 @@ function AddStudent() {
                                 >
                                     {(runform) => (
                                         <form className="row" onSubmit={runform.handleSubmit}>
-                                            <div className="col-12 stsg-box-list d-flex align-items-center stsg-box-list-text mb-4">
+                                            {/* <div className="col-12 stsg-box-list d-flex align-items-center stsg-box-list-text mb-4">
                                                 <span className="d-block">
                                                     <img src={imageAsUrl} alt="profile" />
                                                 </span>
@@ -407,29 +464,29 @@ function AddStudent() {
                                                         <input type="file" name="myfile"  {...formAttr(runform, "file")} onChange={handleChange} />
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> */}
 
-                                            <div className="col-md-6 mb-3">
+                                            <div className="col-12 mb-3">
                                                 <label className="lbl-comn-info">Enrollment Number</label>
                                                 <input type="text" name="er_num" value={ernum} className="form-control input-style" placeholder="" />
 
                                             </div>
 
                                             <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">First Name</label>
+                                                <label className="lbl-comn-info">First Name <span className="text-danger">*</span></label>
                                                 <input type="text" name="f_name" {...formAttr(runform, "f_name")} className="form-control input-style" placeholder="" />
                                                 {errorContainer(runform, "f_name")}
                                             </div>
 
                                             <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">Last Name</label>
+                                                <label className="lbl-comn-info">Last Name <span className="text-danger">*</span></label>
                                                 <input type="text" name="l_name" {...formAttr(runform, "l_name")} className="form-control input-style" placeholder="" />
                                                 {errorContainer(runform, "l_name")}
                                             </div>
 
 
                                             <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">Select courses:</label>
+                                                <label className="lbl-comn-info">Select courses: <span className="text-danger">*</span></label>
                                                 <select className="selectcourse"
                                                     name="courses"
 
@@ -463,32 +520,32 @@ function AddStudent() {
 
                                             </div>
 
-                                            {/* <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">Standard</label>
-                                                <input type="text" name="standard" {...formAttr(runform, "standard")} className="form-control input-style" placeholder="" />
-                                                {errorContainer(runform, "standard")}
-                                            </div> */}
+                                            <div className="col-md-6 mb-3">
+                                                <label className="lbl-comn-info">Course Fees <span className="text-danger">*</span></label>
+                                                <input type="text" name="course_fees" {...formAttr(runform, "course_fees")} className="form-control input-style" placeholder="" />
+                                                {errorContainer(runform, "course_fees")}
+                                            </div>
 
 
                                             <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">Date Of Birth</label>
+                                                <label className="lbl-comn-info">Date Of Birth <span className="text-danger">*</span></label>
                                                 <input type="date" name="dob" {...formAttr(runform, "dob")} className="form-control input-style" placeholder="" />
                                                 {errorContainer(runform, "dob")}
                                             </div>
                                             <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">Email Address</label>
+                                                <label className="lbl-comn-info">Email Address <span className="text-danger">*</span></label>
                                                 <input type="email" name="email" {...formAttr(runform, "email")} className="form-control input-style" placeholder="" />
                                                 {errorContainer(runform, "email")}
                                             </div>
                                             <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">Contact Number</label>
+                                                <label className="lbl-comn-info">Contact Number <span className="text-danger">*</span></label>
                                                 <div className="phone-cust-input">
                                                     <input type="tel" name="phone" {...formAttr(runform, "phone")} className="form-control input-style" maxLength='10' placeholder="" />
                                                     {errorContainer(runform, "phone")}
                                                 </div>
                                             </div>
                                             <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">Emergency Contact Number</label>
+                                                <label className="lbl-comn-info">Emergency Contact Number <span className="text-danger">*</span></label>
                                                 <div className="phone-cust-input">
                                                     <input type="tel" name="eme_phone" {...formAttr(runform, "eme_phone")} className="form-control input-style" maxLength='10' placeholder="" />
                                                     {errorContainer(runform, "eme_phone")}
@@ -502,13 +559,13 @@ function AddStudent() {
                                             </div>
 
                                             <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">Father's First Name</label>
+                                                <label className="lbl-comn-info">Father's First Name <span className="text-danger">*</span></label>
                                                 <input type="text" name="f_f_name" {...formAttr(runform, "f_f_name")} className="form-control input-style" placeholder="" />
                                                 {errorContainer(runform, "f_f_name")}
                                             </div>
 
                                             <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">Father's Last Name</label>
+                                                <label className="lbl-comn-info">Father's Last Name <span className="text-danger">*</span></label>
                                                 <input type="text" name="f_l_name" {...formAttr(runform, "f_l_name")} className="form-control input-style" placeholder="" />
                                                 {errorContainer(runform, "f_l_name")}
                                             </div>
@@ -521,7 +578,7 @@ function AddStudent() {
                                                 <input type="qualification" name="qualification" {...formAttr(runform, "qualification")} className="form-control input-style" placeholder="" />
                                             </div> */}
                                             <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">Father's Contact Number</label>
+                                                <label className="lbl-comn-info">Father's Contact Number <span className="text-danger">*</span></label>
                                                 <div className="phone-cust-input">
                                                     <input type="tel" name="f_phone" {...formAttr(runform, "f_phone")} className="form-control input-style" maxLength='10' placeholder="" />
                                                     {errorContainer(runform, "f_phone")}
@@ -534,7 +591,7 @@ function AddStudent() {
                                                 </div>
                                             </div>
                                             <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">Line 1</label>
+                                                <label className="lbl-comn-info">Line 1 <span className="text-danger">*</span></label>
                                                 <input type="text" name="line_1" {...formAttr(runform, "line_1")} className="form-control input-style" placeholder="" />
                                                 {errorContainer(runform, "line_1")}
                                             </div>
@@ -543,41 +600,47 @@ function AddStudent() {
                                                 <input type="text" name="line_2" {...formAttr(runform, "line_2")} className="form-control input-style" placeholder="" />
                                             </div>
                                             <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">City</label>
+                                                <label className="lbl-comn-info">City <span className="text-danger">*</span></label>
                                                 <input type="text" name="city" {...formAttr(runform, "city")} className="form-control input-style" placeholder="" />
                                                 {errorContainer(runform, "city")}
                                             </div>
                                             <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">State</label>
+                                                <label className="lbl-comn-info">State <span className="text-danger">*</span></label>
                                                 <input type="text" name="state" {...formAttr(runform, "state")} className="form-control input-style" placeholder="" />
                                                 {errorContainer(runform, "state")}
                                             </div>
                                             <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">Country</label>
+                                                <label className="lbl-comn-info">Country <span className="text-danger">*</span></label>
                                                 <input type="text" name="country" {...formAttr(runform, "country")} className="form-control input-style" placeholder="" />
                                                 {errorContainer(runform, "country")}
                                             </div>
                                             <div className="col-md-6 mb-3">
-                                                <label className="lbl-comn-info">Zipcode</label>
+                                                <label className="lbl-comn-info">Zipcode <span className="text-danger">*</span></label>
                                                 <input type="tel" name="zipcode" {...formAttr(runform, "zipcode")} className="form-control input-style" placeholder="" />
                                                 {errorContainer(runform, "zipcode")}
                                             </div>
 
-                                            <div className="col-12">
+                                            <div className="col-md-6 mb-3">
                                                 <div className="comn-title-info">
-                                                    <h1>Reference By</h1>
+                                                    <h1>Reference By Old Student</h1>
+                                                </div>
+                                                <div>
+                                                    <input type="checkbox" onClick={handleShow} checked={checked} onChange={() => setChecked(!checked)} />
+                                                    <label className="lbl-comn-info" style={{ display: "inline", marginLeft: 20 }}>Reference</label>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6 mb-3">
+                                                <div className="comn-title-info">
+                                                    <h1>Reference By Other</h1>
+                                                </div>
+                                                <div>
+                                                    <input type="checkbox" onClick={handleOtherRefModalShow} checked={otherRefCheck} onChange={() => setOtherRefCheck(!otherRefCheck)} />
+                                                    <label className="lbl-comn-info" style={{ display: "inline", marginLeft: 20 }}>Reference</label>
                                                 </div>
                                             </div>
 
-                                            <div className="col-md-6 mb-3"  {...formAttr(runform, "reference")} >
 
 
-                                                <input type="checkbox" onClick={handleShow} checked={checked} onChange={() => setChecked(!checked)} />
-                                                <label className="lbl-comn-info" style={{ display: "inline", marginLeft: 20 }}>Reference</label>
-
-
-
-                                            </div>
 
                                             <div className="col-12 pt-4 text-md-end text-center">
                                                 <button type="submit" className="btn-comn-all" style={{ marginRight: 15 }}>
@@ -593,7 +656,7 @@ function AddStudent() {
 
                                 <Modal show={show && checked} onHide={handleClose}>
                                     <Modal.Header closeButton>
-                                        <Modal.Title>Reference</Modal.Title>
+                                        <Modal.Title>Reference By Old Student</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
                                         <select className="form-control input-style" name="reference" onChange={handleref} value={refe} >
@@ -612,6 +675,30 @@ function AddStudent() {
                                             Close
                                         </Button>
                                         <Button variant="primary" onClick={handlesave}>
+                                            Save Changes
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+
+
+                                <Modal show={otherRefModalShow && otherRefCheck} onHide={handleOtherRefModalClose}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>Reference By Other</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <label className="lbl-comn-info"  > Refered By:</label>
+
+                                        <input className="form-control input-style" id="referedBy" name="referedBy" onChange={handleOtherrefName} />
+                                        <label className="lbl-comn-info"  >Number of Amount :</label>
+
+                                        <input className="form-control input-style" id="otherRefAmount" name="otherRefAmount" onChange={handleOtherrefamount}
+                                        />
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="secondary" onClick={handleOtherRefModalClose}>
+                                            Close
+                                        </Button>
+                                        <Button variant="primary" onClick={handleOtherRefSave}>
                                             Save Changes
                                         </Button>
                                     </Modal.Footer>
