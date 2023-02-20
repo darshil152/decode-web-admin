@@ -515,6 +515,9 @@ function AddStudent() {
                                                     <option value="6" label="Master In Fullstack Development">
                                                         Master In Fullstack Development
                                                     </option>
+                                                    <option value="7" label="Master In MERN-stack Development">
+                                                        Master In MERN-stack Development
+                                                    </option>
                                                 </select>
                                                 {errorContainer(runform, "courses")}
 
