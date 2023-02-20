@@ -6,6 +6,7 @@ import cancel from "./img/cancel.png"
 import Loginheader from './Loginheader';
 import grey from "./img/grey.png";
 import ReactApexChart from 'react-apexcharts';
+import StudentLayout from './studentlayout/studentlayout';
 
 
 
@@ -141,34 +142,33 @@ export default class Attandancesheet extends Component {
     render() {
         return (
             <>
-                <Loginheader />
+                <StudentLayout>
+                    <div className='content-main-section left'>
+                        <div className='container-fluid'>
+                            <div className='row '>
+                                <div className='col-lg-6 '>
+                                    <div className='shdow tabledata'>
+                                        <MUIDataTable
+                                            title={"Your attandance List"}
+                                            data={this.state.currentdata}
+                                            columns={this.state.columns}
+                                            options={this.state.options}
+                                        />
+                                    </div>
+                                </div>
+                                <div className='col-lg-6 tabledata p-2'>
+                                    <div className='shdowa'>
+                                        <div className='apex'>
+                                            <h3 className='ml-lg-5 percentage' > Your attandance is:</h3>
+                                            <ReactApexChart options={this.state.optionsa} series={this.state.series} type="pie" width={450} />
+                                        </div>
+                                    </div>
 
-
-
-                <div className='container-fluid'>
-                    <div className='row '>
-                        <div className='col-lg-6 '>
-                            <div className='shdow tabledata'>
-                                <MUIDataTable
-                                    title={"Your attandance List"}
-                                    data={this.state.currentdata}
-                                    columns={this.state.columns}
-                                    options={this.state.options}
-                                />
-                            </div>
-                        </div>
-                        <div className='col-lg-6 tabledata p-2'>
-                            <div className='shdowa'>
-                                <div className='apex'>
-                                    <h3 className='ml-lg-5 percentage' style={{ textAlign: "center", }}> Your attandance is:</h3>
-                                    <ReactApexChart options={this.state.optionsa} series={this.state.series} type="pie" width={450} />
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
-
+                </StudentLayout>
             </>
 
         )

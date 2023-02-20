@@ -174,6 +174,7 @@ export default function Fees() {
                                 <option value="0" selected>Cash</option>
                                 <option value="1">Google Pay</option>
                                 <option value="2">Banktransfer</option>
+                                <option value="3">Cheque</option>
                             </select>
                         </div>
                     );
