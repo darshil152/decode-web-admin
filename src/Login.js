@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 
+let data = [];
 
 export default function Login() {
 
@@ -17,7 +18,7 @@ export default function Login() {
 
     const navigate = useNavigate();
     const [userRole, setUserRole] = useState('1');
-    let data = [];
+
 
 
     useEffect(() => {
@@ -30,6 +31,7 @@ export default function Login() {
         const db = firebaseApp.firestore();
         db.collection('Students').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
+                console.log(data)
                 data.push(doc.data())
             });
         }).catch(err => {

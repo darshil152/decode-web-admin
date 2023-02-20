@@ -385,7 +385,7 @@ export default class paymentdetail extends Component {
                                     <div className='row'>
                                         <div className='col-lg-12 d-flex'>
                                             <label className="lbls mt-3">Installment No: </label>
-                                            <div className='srernum mt-3'>1</div>
+                                            <div className='srernum mt-3'>{this.state.retrivedata.length}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -413,6 +413,15 @@ export default class paymentdetail extends Component {
                                             <div className='srernum mt-3'>{this.state.currentFeesData.amount} </div>
                                         </div>
                                     </div>
+                                    <div className='row'>
+                                        <div className='col-lg-12 d-flex'>
+                                            <label className="lbls mt-3 ">Remark</label>
+                                            <div className='srernum '>
+                                                {this.state.currentFeesData.payment == 0 ? <div className='srernum mt-3'> Cash </div> : this.state.currentFeesData.payment == 1 ? <div className='srernum mt-3'>Google Pay</div> : this.state.currentFeesData.payment == 2 ? <div className='srernum mt-3'>Bank Transfer</div> : this.state.currentFeesData.payment == 3 ? <div className='srernum mt-3'>Cheque</div> : <div className='srernum mt-3'>Cheque</div>}
+
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div className='row'>
                                         <div className='col-lg-12 d-flex'>
@@ -431,7 +440,7 @@ export default class paymentdetail extends Component {
                                 <Button variant="secondary" onClick={this.closeModal}>
                                     Close
                                 </Button>
-                                <button id='print-btn' className="btn-theme-color me-2" onClick={() => { this.downloadAsPdf('#PrintDocument') }}>Download</button>
+                                <button id='print-btn' className="btn btn-primary me-2" onClick={() => { this.downloadAsPdf('#PrintDocument') }}>Download</button>
 
                             </Modal.Footer>
                         </Modal>

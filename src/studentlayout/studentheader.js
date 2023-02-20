@@ -1,10 +1,12 @@
 import { Dropdown } from "react-bootstrap";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import Profile from "../img/profile.png";
-import { useEffect } from "react";
-import { useState } from "react";
 import firebaseApp from "../firebase/firebase";
 import HeaderLogo from "../img/logo-hdr.png"
 import Left from "../img/left-arrow-icon.svg"
+
+
+
 
 function StudentHeader(props) {
 
@@ -18,6 +20,8 @@ function StudentHeader(props) {
     const openUserinfo = () => {
         document.getElementById("user-detail").classList.toggle("active-user-info");
     };
+
+
 
     useEffect(() => {
         let url = window.location.href;
