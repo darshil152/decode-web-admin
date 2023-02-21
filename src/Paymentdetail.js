@@ -5,7 +5,7 @@ import Loginheader from './Loginheader';
 import { Modal, Button } from "react-bootstrap";
 import profilepicture from "./img/profilepicture.jpg"
 import calendar from "./img/calendar.png"
-
+import logo from "./img/logo.png"
 import converter from 'number-to-words'
 import StudentLayout from './studentlayout/studentlayout';
 import { throwIfEmpty } from 'rxjs';
@@ -20,6 +20,7 @@ export default class paymentdetail extends Component {
 
 
         this.state = {
+            installMentNo: 1,
             date: "",
             isOpen: false,
             feesId: "",
@@ -105,18 +106,22 @@ export default class paymentdetail extends Component {
             this.getalldata();
             this.getDate();
         })
+
     }
 
-    openModal = (value) => this.setState({ isOpen: true, feesId: value }, () => {
-        for (let i = 0; i < this.state.retrivedata.length; i++) {
-            if (this.state.retrivedata[i].id === value) {
-                this.setState({ currentFeesData: this.state.retrivedata[i] }, () => {
-                    this.numbertoword();
-                })
-            }
+    openModal = (value) => {
+        let index = this.state.retrivedata.findIndex(x => x.id === value);
+        this.setState({ isOpen: true, feesId: value, installMentNo: index + 1 }, () => {
+            for (let i = 0; i < this.state.retrivedata.length; i++) {
+                if (this.state.retrivedata[i].id === value) {
+                    this.setState({ currentFeesData: this.state.retrivedata[i] }, () => {
+                        this.numbertoword();
+                    })
+                }
 
-        }
-    });
+            }
+        });
+    }
     closeModal = () => this.setState({ isOpen: false });
 
 
@@ -172,8 +177,8 @@ export default class paymentdetail extends Component {
         const db = firebaseApp.firestore();
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                console.log(doc.data().other_ref);
 
+                console.log(doc.data().fees)
                 this.setState({ refsamount: doc.data().other_ref.refAmount, otherref: doc.data().other_ref }, () => {
                     // console.log(this.state.otherref);
                 })
@@ -200,8 +205,6 @@ export default class paymentdetail extends Component {
                     }
                 })
             })
-
-
         }).catch(err => {
             console.error(err)
         });
@@ -316,16 +319,11 @@ export default class paymentdetail extends Component {
                                                             )
                                                         })}
                                                     </table>
-
-
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div> : null
                             }
-
-
                         </>}
 
 
@@ -359,17 +357,31 @@ export default class paymentdetail extends Component {
                             <Modal.Header >
                                 <div className='container'>
                                     <div className='row'>
-                                        <div className='col-lg-12 text-center'>
-                                            <h1 className='feesreceipt'>FEES RECEIPT</h1>
+                                        <div className='col-lg-6 '>
+
+                                            <h2 className='decodesoft'>DECODE SOFTTECH</h2>
+                                            <h6 className='decodesoft mt-2'>304, Dhara Arcade, Mahadev chawk</h6>
+                                            <h6 className='decodesoft'>Mota varachha, surat</h6>
                                         </div>
+                                        <div className='col-lg-6  text-center text-lg-right' >
+                                            <img src={logo} style={{ width: "200px", height: "70px", }} />
+
+                                        </div>
+
                                     </div>
+
                                 </div>
                             </Modal.Header>
                             <Modal.Header>
                                 <div className='container'>
                                     <div className='row'>
+                                        <div className='col-lg-12 text-center'>
+                                            <h3>FEES RECEIPT</h3>
+                                        </div>
+                                    </div>
+                                    <div className='row'>
                                         <div className='col-lg-12 text-right'>
-                                            <h5 className='currentdate'>Date:{this.state.date}</h5>
+                                            <h5>Date :{this.state.currentFeesData.date}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -385,7 +397,7 @@ export default class paymentdetail extends Component {
                                     <div className='row'>
                                         <div className='col-lg-12 d-flex'>
                                             <label className="lbls mt-3">Installment No: </label>
-                                            <div className='srernum mt-3'>{this.state.retrivedata.length}</div>
+                                            <div className='srernum mt-3'>{this.state.installMentNo}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -403,7 +415,7 @@ export default class paymentdetail extends Component {
                                         <div className='col-lg-12 d-flex'>
                                             <label className="lbls mt-3 ">Course: </label>
                                             <div className='srernum '>
-                                                {this.state.currentdata.courses == 1 ? <div className='srernum mt-3'>Master In Webdesign</div> : this.state.currentdata.courses == 2 ? <div className='srernum mt-3'>Master In Frontend Development</div> : this.state.currentdata.courses == 3 ? <div className='srernum mt-3'>Master In backend Development</div> : this.state.currentdata.courses == 4 ? <div className='srernum mt-3'>firebase</div> : this.state.currentdata.courses == 5 ? <div className='srernum mt-3'>Master in 360 & 3D Website</div> : this.state.currentdata.courses == 6 ? <div className='srernum mt-3'>Master In Fullstack Development</div> : <div className='srernum mt-3'></div>}
+                                                {this.state.currentdata.courses == 1 ? <div className='srernum mt-3'>Master In Webdesign</div> : this.state.currentdata.courses == 2 ? <div className='srernum mt-3'>Master In Frontend Development</div> : this.state.currentdata.courses == 3 ? <div className='srernum mt-3'>Master In backend Development</div> : this.state.currentdata.courses == 4 ? <div className='srernum mt-3'>firebase</div> : this.state.currentdata.courses == 5 ? <div className='srernum mt-3'>Master in 360 & 3D Website</div> : this.state.currentdata.courses == 6 ? <div className='srernum mt-3'>Master In Fullstack Development</div> : this.state.currentdata.courses == 7 ? <div className='srernum mt-3'>Master In MERN-stack Development</div> : <div className='srernum mt-3'></div>}
                                             </div>
                                         </div>
                                     </div>
@@ -411,6 +423,12 @@ export default class paymentdetail extends Component {
                                         <div className='col-lg-12 d-flex'>
                                             <label className="lbls mt-3 ">Pay Now: </label>
                                             <div className='srernum mt-3'>{this.state.currentFeesData.amount} </div>
+                                        </div>
+                                    </div>
+                                    <div className='row'>
+                                        <div className='col-lg-12 d-flex'>
+                                            <label className="lbls mt-3 ">In words: </label>
+                                            <div className='srernum mt-3'>{this.state.numbertoalpha} Only</div>
                                         </div>
                                     </div>
                                     <div className='row'>
@@ -428,7 +446,7 @@ export default class paymentdetail extends Component {
                                             <label className="lbls mt-3 ">T & C: </label>
                                             <div className='srernum '>
                                                 <div className='srernum mt-3'>This invoice was generated for educational services payment .</div>
-                                                <div className='srernum mt-3'>Fees Will be non-refundable.</div>
+                                                <div className='srernum mt-3'>Fees* Will be non-refundable.</div>
                                             </div>
                                         </div>
                                     </div>

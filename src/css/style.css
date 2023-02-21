@@ -590,7 +590,7 @@ mark,
 }
 
 .img-fluid {
-  max-width: 100%;
+  max-width: 80%;
   height: auto;
 }
 
@@ -11611,6 +11611,11 @@ tr.tableheading {
   color: black
 }
 
+h1.feesreceipt.text-right.mt-3 {
+  text-align: center;
+}
+
+
 @media only screen and (max-width: 992px) {
   h3.percentage {
     margin-top: 50px;
@@ -11619,5 +11624,20 @@ tr.tableheading {
   .apex {
     position: absolute;
     left: 50px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+
+  h2.decodesoft {
+    text-align: center;
+  }
+
+  h6.decodesoft.mt-2 {
+    text-align: center;
+  }
+
+  h6.decodesoft {
+    text-align: center;
   }
 }
