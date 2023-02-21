@@ -6,7 +6,6 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/style.css'
 
-
 export default class App extends Component {
   render() {
     return (
