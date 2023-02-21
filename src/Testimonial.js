@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import OwlCarousel from 'react-owl-carousel';
+import dharmil from './img/dharmil.jfif'
 export default class Testimonial extends Component {
     render() {
         return (
@@ -18,7 +19,7 @@ export default class Testimonial extends Component {
                         <div className="col-lg-7">
 
                             <OwlCarousel className='owl-carousel testimonial-carousel' items={1} loop={true} smartSpeed={600} autoplay={true} dots={false} nav={true}>
-                                <div className="bg-light p-5">
+                                <div className="bg-light p-sm-5 p-3 test-height">
                                     <i className="fa fa-3x fa-quote-left text-primary mb-4"></i>
                                     <p>Decode Softtech provides great opportunities for someone who is just starting out with
                                         Coding or even has few years of
@@ -33,7 +34,7 @@ export default class Testimonial extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="bg-light p-5">
+                                <div className="bg-light p-sm-5 p-3 test-height">
                                     <i className="fa fa-3x fa-quote-left text-primary mb-4"></i>
                                     <p>I found hevan sir's teaching techniques outstanding and very unique. I've always hated
                                         learning computer languages as I
@@ -47,20 +48,20 @@ export default class Testimonial extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="bg-light p-5">
+                                <div className="bg-light p-sm-5 p-3 test-height">
                                     <i className="fa fa-3x fa-quote-left text-primary mb-4"></i>
                                     <p>I would recommend to each and every beginner to start your journey from here. Great place
                                         to learn new technologies and
                                         to build our career.</p>
                                     <div className="d-flex flex-shrink-0 align-items-center mt-4">
-                                        <img className="img-thumbnail w-25 mr-4" src="img/dharmil.jfif" alt="" />
+                                        <img className="img-thumbnail w-25 mr-4" src={dharmil} alt="" />
                                         <div>
                                             <h5>Dharmil Vekariya</h5>
                                             <span>Frontend Developer</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="bg-light p-5">
+                                <div className="bg-light p-sm-5 p-3 test-height">
                                     <i className="fa fa-3x fa-quote-left text-primary mb-4"></i>
                                     <p>I just wanted let you know that the service provided, from registration to training was a
                                         very positive experience for

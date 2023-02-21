@@ -11562,6 +11562,10 @@ h3.percentage {
   margin-top: 180px;
 }
 
+.test-height {
+  height: 500px;
+}
+
 .col-lg-6.tabledata {
   background: #FFFFFF;
   box-shadow: 5px 6px 25px rgb(15 15 15 / 15%);

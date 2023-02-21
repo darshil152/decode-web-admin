@@ -84,8 +84,8 @@ export default class Contact extends Component {
             <div className="container-fluid py-5">
                 <div className="container py-5">
                     <div className="row align-items-center">
-                        <div className="col-lg-5 mb-5 mb-lg-0">
-                            <div className="bg-light d-flex flex-column justify-content-center px-5" style={{ height: '500px' }}>
+                        <div className="col-lg-5 mb-5 mb-lg-0 p-lg-0">
+                            <div className="bg-light d-flex flex-column justify-content-center px-2 px-md-5" style={{ height: '500px' }}>
                                 <div className="d-flex align-items-center mb-5">
                                     <div className="btn-icon bg-primary mr-4">
                                         <a className="text-white" href="https://goo.gl/maps/tY68pnXuMjLQ1Jc19" target="_blank">
@@ -143,7 +143,7 @@ export default class Contact extends Component {
                                 }}
                             >
                                 {(runform) => (
-                                    <form className="row" onSubmit={runform.handleSubmit}>
+                                    <form onSubmit={runform.handleSubmit}>
                                         <div className="contact-form">
                                             {/* <!-- <form> --> */}
 
@@ -166,7 +166,7 @@ export default class Contact extends Component {
                                             <div className="row">
                                                 <div className="col-6">
                                                     <div className="form-group">
-                                                        <select className="selectcourse"
+                                                        <select className="form-control border-top-0 border-right-0 border-left-0 p-0"
                                                             name="csubject"
 
                                                             {...formAttr(runform, "courses")}
