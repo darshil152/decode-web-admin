@@ -30,15 +30,24 @@ export default class Profile extends Component {
             sc: localStorage.getItem('sc'),
             isOpen: false,
             defaultcheked: false,
-            language: true
+            language: true,
+            isOpen1: false,
+            email: "",
+            dob: "",
+            temp: [],
         }
     }
 
 
 
     openModal = () => this.setState({ isOpen: true });
-
     closeModal = () => this.setState({ isOpen: false });
+
+
+
+    openModal1 = () => this.setState({ isOpen1: true });
+    closeModal1 = () => this.setState({ isOpen1: false });
+
 
     componentDidMount() {
         const url = window.location.href;
@@ -53,7 +62,7 @@ export default class Profile extends Component {
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 console.log(doc.data())
-                this.setState({ currentdata: doc.data() }, () => {
+                this.setState({ currentdata: doc.data(), email: doc.data().email, dob: doc.data().dob }, () => {
                     if (Number(localStorage.getItem('userrole')) !== 2) {
                         if (this.state.sc !== this.state.currentdata.password) {
                             window.location.href = '/'
@@ -130,6 +139,45 @@ export default class Profile extends Component {
         this.setState({ language: !this.state.language })
     }
 
+    handleemail = (event) => {
+        this.setState({ email: event.target.value })
+    }
+    handledob = (event) => {
+        this.state({ dob: event.target.value })
+    }
+
+    editform1 = (data) => {
+        const db = firebaseApp.firestore();
+        db.collection('Students').where("er_num", "==", this.state.id).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+
+                var updateCollection = db.collection("Students").doc(doc.ref.id);
+
+
+                return updateCollection.update({
+                    email: data.email,
+                    dob: data.dob,
+                })
+                    .then(() => {
+                        console.log("Document successfully updated!");
+                        this.closeModal1();
+
+                    })
+                    .catch((error) => {
+                        // The document probably doesn't exist.
+                        console.error("Error updating document: ", error);
+                    });
+            })
+        }).catch(err => {
+            console.error(err)
+        });
+    }
+
+    handlesave = (data) => {
+        console.log(this.state.email)
+        console.log(this.state.dob)
+        this.editform1(data);
+    }
 
 
     render() {
@@ -169,14 +217,44 @@ export default class Profile extends Component {
                         </Modal.Footer>
                     </Modal>
 
+
+                    <Modal show={this.state.isOpen1} onHide={this.closeModal1}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Edit form</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+
+
+
+                            Email :  <input type="email" name="email" value={this.state.email} class="emailstyle" onChange={this.handleemail} />
+                            birthday : <input type="date" value={this.state.dob} class="emailstyle" onChange={this.handledob} />
+
+                            <Button className="btn btn-priamry mt-3gi" onClick={this.handlesave} >
+                                Save Changes
+                            </Button>
+
+
+
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.closeModal1}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
                     {this.state.currentdata !== '' && <>
                         <div className="content-main-section left">
                             <div className='container mt-5 studentdetail' >
                                 <div className="showdiv">
-                                    <button className="buttonedit">Edit</button>
+
                                     <div className='row'>
-                                        <div className='col-lg-12 text-center mt-4'>
+                                        <div className='col-lg-11 text-center mt-4'>
                                             <img src={profilepicture} className="profilepicture" />
+                                        </div>
+                                        <div className="col-lg-1 mt-5  abced">
+                                            <button className="buttonedit btn btn-primary btn-lg" onClick={this.openModal1}>
+                                                <i class="fa fa-pencil" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
 
