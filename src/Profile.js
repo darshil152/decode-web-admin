@@ -7,6 +7,12 @@ import Studentlayout from "./studentlayout/studentlayout"
 import { Modal, Button } from "react-bootstrap";
 import React, { Component } from 'react'
 import Rules from "./Rules"
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
 
 import {
     Table,
@@ -16,6 +22,7 @@ import {
     TableHead,
     TableRow
 } from "@mui/material";
+import { FastField } from "formik"
 
 
 export default class Profile extends Component {
@@ -33,9 +40,13 @@ export default class Profile extends Component {
             defaultcheked: false,
             language: true,
             isOpen1: false,
+            isOpen2: false,
             email: "",
             dob: "",
             temp: [],
+            line_1: "",
+            line_2: "",
+            city: "",
         }
     }
 
@@ -49,6 +60,10 @@ export default class Profile extends Component {
     openModal1 = () => this.setState({ isOpen1: true });
     closeModal1 = () => this.setState({ isOpen1: false });
 
+
+
+    openModal2 = () => this.setState({ isOpen2: true });
+    closeModal2 = () => this.setState({ isOpen2: false });
 
     componentDidMount() {
         const url = window.location.href;
@@ -109,7 +124,7 @@ export default class Profile extends Component {
 
     submitform = () => {
         const db = firebaseApp.firestore();
-        db.collection('Students').where("er_num", "==", this.state.id).get().then((querySnapshot) => {
+        db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
 
                 var updateCollection = db.collection("Students").doc(doc.ref.id);
@@ -119,6 +134,7 @@ export default class Profile extends Component {
                 })
                     .then(() => {
                         console.log("Document successfully updated!");
+                        this.closeModal()
 
                     })
                     .catch((error) => {
@@ -133,8 +149,8 @@ export default class Profile extends Component {
 
 
     clicks = () => {
-        // this.submitform();
-        this.closeModal();
+        this.submitform();
+        // this.closeModal();
     }
 
     chagees = () => {
@@ -146,6 +162,16 @@ export default class Profile extends Component {
     }
     handledob = (event) => {
         this.setState({ dob: event.target.value })
+    }
+    handleline1 = (event) => {
+        this.setState({ line_1: event.target.value })
+    }
+    handleline2 = (event) => {
+        this.setState({ line_2: event.target.value })
+    }
+    handlecity = (event) => {
+        this.setState({ city: event.target.value })
+
     }
 
     editform1 = () => {
@@ -178,9 +204,40 @@ export default class Profile extends Component {
         });
     }
 
-    handlesave = () => {
+    updateadd = () => {
+        console.log('coem', this.state.id)
+        const db = firebaseApp.firestore();
+        db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
 
+                var updateCollection = db.collection("Students").doc(doc.ref.id);
+
+
+                return updateCollection.update({
+                    line_1: this.state.line_1,
+                    line_2: this.state.line_2,
+                    city: this.state.city
+                })
+                    .then(() => {
+                        console.log("Document successfully updated!");
+                        this.closeModal2();
+
+                    })
+                    .catch((error) => {
+                        // The document probably doesn't exist.
+                        console.error("Error updating document: ", error);
+                    });
+            })
+        }).catch(err => {
+            console.error(err)
+        });
+    }
+
+    handlesave = () => {
         this.editform1();
+    }
+    handlesaveaddress = () => {
+        this.updateadd();
     }
 
     UploadImageTOFirebase = (file) => {
@@ -251,14 +308,23 @@ export default class Profile extends Component {
                         <div className="content-main-section left">
                             <div className='container mt-5 studentdetail' >
                                 <div className="showdiv">
+                                    <div className="row">
+                                        <div className="col-10 text-sm-center mt-3 mb-3">
+                                            <h1>Personal Detail</h1>
+                                        </div>
+                                        <div className="col-2  text-sm-center text-lg-right mt-3" >
+                                            <button className="buttonedit btn btn-primary btn-lg" onClick={this.openModal1}>
+                                                <i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                        </div>
+                                    </div>
 
                                     <div className='row'>
                                         <div className='col-11 text-center mt-4'>
                                             <img src={this.state.profile !== '' ? this.state.profile : profilepicture} className="profilepicture" />
                                         </div>
                                         <div className="col-1 mt-5  abced">
-                                            <button className="buttonedit btn btn-primary btn-lg" onClick={this.openModal1}>
-                                                <i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                            {/* <button className="buttonedit btn btn-primary btn-lg" onClick={this.openModal1}>
+                                                <i class="fa fa-pencil" aria-hidden="true"></i></button> */}
                                         </div>
                                     </div>
 
@@ -317,13 +383,22 @@ export default class Profile extends Component {
                             </div>
                             <div className='container mt-5 residentalDetail '>
                                 <div className='container'>
-                                    <div className='row'>
+                                    <div className="showdiv mt-3">
+
+                                        <div className="row">
+                                            <div className="col-10 text-sm-center mt-3 mb-3">
+                                                <h1>Personal Detail</h1>
+                                            </div>
+                                            <div className="col-2 text-sm-center text-lg-right mt-3" >
+                                                <button className="buttonedit btn btn-primary btn-lg" onClick={this.openModal2}>
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>
                                         <div className='col-lg-6'>
                                             <div className='mt-4'>
-                                                <h1>Resident Details</h1>
                                             </div>
                                             <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
-                                                <i class="fa fa-map-marker usernames " aria-hidden="true"></i>
+                                                <i class="fa fa-map-marker-alt usernames" aria-hidden="true"></i>
                                                 <label className="labelData ml-3">{this.state.currentdata.line_1}</label>
                                             </div>
                                             <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
@@ -345,13 +420,17 @@ export default class Profile extends Component {
                     <Modal size='xl' show={this.state.isOpen} >
                         <Modal.Header  >
                             <Modal.Title>
-                                <div className="lanfgauge d-flex">
-                                    <h3>
-                                        Rules & Regulations
-                                    </h3>
-                                    <button onClick={this.chagees}>{this.state.language == true ? 'English' : 'Gujarati'}</button>
-                                </div>
-
+                                <Navbar collapseOnSelect expand="lg" >
+                                    <Container>
+                                        <Navbar.Brand >Rules & Regulations</Navbar.Brand>
+                                        <Navbar aria-controls="responsive-navbar-nav" />
+                                        <Nav>
+                                            <Nav.Link eventKey={2} >
+                                                <button className="btn btn-primary" onClick={this.chagees}>{this.state.language == true ? 'English' : 'Gujarati'}</button>
+                                            </Nav.Link>
+                                        </Nav>
+                                    </Container>
+                                </Navbar>
                             </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
@@ -382,22 +461,53 @@ export default class Profile extends Component {
                         </Modal.Header>
                         <Modal.Body>
 
-
-                            Change your Profile: <input type='file' onChange={this.handleFileChange} />
+                            Change your Profile: <input type='file' className="emailstyle" onChange={this.handleFileChange} />
                             Email :  <input type="email" name="email" value={this.state.email} class="emailstyle" onChange={this.handleemail} />
                             birthday : <input type="date" value={this.state.dob} class="emailstyle" onChange={this.handledob} />
-
-                            <Button className="btn btn-priamry mt-3gi" onClick={this.handlesave} >
-                                Save Changes
-                            </Button>
-
-
 
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.closeModal1}>
                                 Close
                             </Button>
+                            <Button className="btn btn-priamry mt-3gi" onClick={this.handlesave} >
+                                Save Changes
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
+
+                    <Modal show={this.state.isOpen2} onHide={this.closeModal2}>
+                        <Modal.Header >
+                            <Modal.Title>Edit form</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+
+
+                            {/* Change your Profile: <input type='file' className="emailstyle" onChange={this.handleFileChange} /> */}
+
+
+
+                            <lable class="lbl-comn-info">Address 1:</lable>
+                            <input type="text" name="line_1" value={this.state.line_1} class="emailstyle" onChange={this.handleline1} />
+
+                            <lable class="lbl-comn-info mt-3">Address 2:</lable>
+                            <lable class="lbl-comn-info"></lable>  <input type="text" name="line_2" value={this.state.line_2} class="emailstyle" onChange={this.handleline2} />
+
+                            <lable class="lbl-comn-info mt-3">City: </lable>
+                            <lable class="lbl-comn-info"></lable><input type="text" name="city" value={this.state.city} class="emailstyle" onChange={this.handlecity} />
+
+
+
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.closeModal2}>
+                                Close
+                            </Button>
+                            <Button className="btn btn-priamry mt-3gi" onClick={this.handlesaveaddress} >
+                                Save Changes
+                            </Button>
+
                         </Modal.Footer>
                     </Modal>
                 </Studentlayout>

@@ -28,6 +28,7 @@ import ReferenceDetails from './ReferenceDetails';
 import Navbarforprofile from './navbarforprofile';
 import Rules from './Rules';
 import Erules from './Erules';
+import Langhaugeterm from './Langhaugeterm';
 
 
 export default class RouterContainer extends Component {
@@ -45,7 +46,10 @@ export default class RouterContainer extends Component {
                     <Route path="/feature" element={<FeaturePage />} />
                     <Route path="/terms" element={<TearmsCondition />} />
                     <Route path="/rules" element={<Rules />} />
-                    <Route path="/Erules" element={<Erules />} />
+                    {/* <Route path="/Erules" element={<Erules />} /> */}
+                    <Route path="/regulation" element={<Langhaugeterm />} />
+
+
 
 
                     <Route path="/placement-partners" element={<PlacementPartners />} />

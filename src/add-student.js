@@ -206,6 +206,7 @@ function AddStudent() {
         const db = firebaseApp.firestore();
         db.collection('Students').where("status", "==", 1).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
+                console.log(doc.data())
                 entry.push(doc.data())
                 // temp.push(doc.data())
             })

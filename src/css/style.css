@@ -5,6 +5,7 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -35,6 +36,9 @@
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
+
+
+/* @import url('https://fonts.googleapis.com/css2?family=Jost:wght@100&family=Noto+Sans+Gujarati:wght@200;700&display=swap'); */
 
 *,
 *::before,
@@ -11513,6 +11517,11 @@ a#basic-nav-dropdowns {
 
 }
 
+i.fa.fa-map-marker-alt.usernames {
+  font-size: 30px;
+  color: black;
+}
+
 a.dropdown-item {
   color: #0a508c;
   text-decoration: none;
@@ -11616,7 +11625,7 @@ h1.feesreceipt.text-right.mt-3 {
 }
 
 .rules {
-  list-style: disc inside;
+  list-style: disc outside;
   padding: 20px;
 }
 
@@ -11632,6 +11641,15 @@ li {
 .showdiv:hover .buttonedit {
   display: inline-block;
 }
+
+.buttonedits {
+  display: none;
+}
+
+.showdiv:hover .buttonedits {
+  display: inline-block;
+}
+
 
 input.emailstyle {
   display: block;

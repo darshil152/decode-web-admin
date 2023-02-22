@@ -56,6 +56,7 @@ export default function Login() {
             if (data[i].er_num == formdata.enrollmentNumber && data[i].password == formdata.password) {
                 localStorage.setItem('userrole', data[i].userRole)
                 localStorage.setItem('sc', data[i].password)
+                localStorage.setItem("userer_num", data[i].er_num)
                 isflag = true
             }
         }

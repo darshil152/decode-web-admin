@@ -9,7 +9,10 @@ import logo from "./img/logo.png"
 import converter from 'number-to-words'
 import StudentLayout from './studentlayout/studentlayout';
 import { throwIfEmpty } from 'rxjs';
+
+
 let referedStudent = []
+
 export default class paymentdetail extends Component {
 
 
@@ -174,23 +177,26 @@ export default class paymentdetail extends Component {
 
     getdata = () => {
         let total = 0
+        let totaloldref = 0
         const db = firebaseApp.firestore();
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
 
-                console.log(doc.data().fees)
-                this.setState({ refsamount: doc.data().other_ref.refAmount, otherref: doc.data().other_ref }, () => {
-                    // console.log(this.state.otherref);
-                })
+                console.log(doc.data())
+                this.setState({ refsamount: doc.data().other_ref.refAmount, otherref: doc.data().other_ref, feesdata: doc.data().course_fees }, () => {
 
-                this.setState({ feesdata: doc.data().course_fees }, () => {
-                    // console.log(this.state.feesdata);
+                    for (let i = 0; i < this.state.referedStudent.length; i++) {
+                        totaloldref = Number(totaloldref) + Number(this.state.referedStudent[i].amount)
+                    }
+                    console.log('ref :: ', totaloldref)
+                    // this.setState({ totaloldrefamount: totaloldref })
                 })
 
                 this.setState({ retrivedata: doc.data().fees, myRefData: doc.data().myref, currentdata: doc.data() }, () => {
                     for (let i = 0; i < this.state.retrivedata.length; i++) {
                         total = Number(total) + Number(this.state.retrivedata[i].amount)
                     }
+
                     this.setState({ totalAmount: total }, () => {
                         if (Number(localStorage.getItem('userrole')) !== 2) {
                             if (this.state.sc !== doc.data().password) {
@@ -198,7 +204,6 @@ export default class paymentdetail extends Component {
                             }
                         }
                     })
-                    console.log(doc.data().myref.length)
                     for (let j = 0; j < doc.data().myref.length; j++) {
                         this.getRefersName(doc.data().myref[j])
 
@@ -259,13 +264,13 @@ export default class paymentdetail extends Component {
                             <div className='col-sm-3'>
                                 <div className='totalfees'>
                                     <h1 className='totalfee' style={{ fontSize: "22px", textAlign: "center" }}>Total paid amount</h1>
-                                    <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>{this.state.totalAmount}</h1>
+                                    <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>{this.state.totalAmount} </h1>
                                 </div>
                             </div>
                             <div className='col-sm-3'>
                                 <div className='totalfees'>
                                     <h1 className='totalfee' style={{ fontSize: "22px", textAlign: "center" }}>Total reference amount</h1>
-                                    <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>{this.state.refsamount}</h1>
+                                    <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>{this.state.refsamount} </h1>
                                 </div>
                             </div>
 
@@ -287,42 +292,42 @@ export default class paymentdetail extends Component {
 
                         <h4 className='ml-3 mt-5 totalamount' >Total amout paid is: {this.state.totalAmount} </h4>
 
-                        {this.state.referedStudent.length == 0 && this.state.currentdata !== '' && <>
+                        {this.state.referedStudent.length > 0 && <>
                             {
-                                this.state.showdiv ?
-                                    <div className='container mt-5 residentalDetail '>
-                                        <div className='container'>
-                                            <div className='row'>
-                                                <div className='col-lg-6'>
-                                                    <div className='mt-4'>
-                                                        <h1>reference Details</h1>
-                                                    </div>
 
-                                                    <table>
-                                                        <th>Enrollment Number</th>
-                                                        <th>First Name</th>
-                                                        <th>Last Name</th>
-                                                        <th>Amount</th>
-
-                                                        {this.state.referedStudent.length > 0 && this.state.referedStudent.map((item, i) => {
-                                                            return (
-                                                                <tr key={i}>
-
-                                                                    <td className="labelData ml-3">{item.er_num}</td>
-
-                                                                    <td className="labelData ml-3  ">{item.f_name}</td>
-                                                                    <td className="labelData ml-3  ">{item.l_name}</td>
-
-                                                                    <td className="labelData ml-3  ">{item.ref_amount}</td>
-
-                                                                </tr>
-                                                            )
-                                                        })}
-                                                    </table>
+                                <div className='container mt-5 residentalDetail '>
+                                    <div className='container'>
+                                        <div className='row'>
+                                            <div className='col-lg-6'>
+                                                <div className='mt-4'>
+                                                    <h1>reference Details</h1>
                                                 </div>
+
+                                                <table>
+                                                    <th>Enrollment Number</th>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Amount</th>
+
+                                                    {this.state.referedStudent.map((item, i) => {
+                                                        return (
+                                                            <tr key={i}>
+
+                                                                <td className="labelData ml-3">{item.er_num}</td>
+
+                                                                <td className="labelData ml-3  ">{item.f_name}</td>
+                                                                <td className="labelData ml-3  ">{item.l_name}</td>
+
+                                                                <td className="labelData ml-3  ">{item.ref_amount}</td>
+
+                                                            </tr>
+                                                        )
+                                                    })}
+                                                </table>
                                             </div>
                                         </div>
-                                    </div> : null
+                                    </div>
+                                </div>
                             }
                         </>}
 
