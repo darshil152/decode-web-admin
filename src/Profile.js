@@ -24,6 +24,7 @@ export default class Profile extends Component {
     constructor() {
         super();
         this.state = {
+            profile: '',
             id: "",
             currentdata: '',
             referencedata: '',
@@ -62,7 +63,7 @@ export default class Profile extends Component {
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 console.log(doc.data())
-                this.setState({ currentdata: doc.data(), email: doc.data().email, dob: doc.data().dob }, () => {
+                this.setState({ currentdata: doc.data(), email: doc.data().email, dob: doc.data().dob, profile: doc.data().profile_img ? doc.data().profile_img : '' }, () => {
                     if (Number(localStorage.getItem('userrole')) !== 2) {
                         if (this.state.sc !== this.state.currentdata.password) {
                             window.location.href = '/'
@@ -118,6 +119,7 @@ export default class Profile extends Component {
                 })
                     .then(() => {
                         console.log("Document successfully updated!");
+
                     })
                     .catch((error) => {
                         // The document probably doesn't exist.
@@ -143,23 +145,26 @@ export default class Profile extends Component {
         this.setState({ email: event.target.value })
     }
     handledob = (event) => {
-        this.state({ dob: event.target.value })
+        this.setState({ dob: event.target.value })
     }
 
-    editform1 = (data) => {
+    editform1 = () => {
+        console.log('coem', this.state.id)
         const db = firebaseApp.firestore();
-        db.collection('Students').where("er_num", "==", this.state.id).get().then((querySnapshot) => {
+        db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
 
                 var updateCollection = db.collection("Students").doc(doc.ref.id);
 
 
                 return updateCollection.update({
-                    email: data.email,
-                    dob: data.dob,
+                    email: this.state.email,
+                    dob: this.state.dob,
+                    profile_img: this.state.profile
                 })
                     .then(() => {
                         console.log("Document successfully updated!");
+                        this.getalldata();
                         this.closeModal1();
 
                     })
@@ -173,10 +178,66 @@ export default class Profile extends Component {
         });
     }
 
-    handlesave = (data) => {
-        console.log(this.state.email)
-        console.log(this.state.dob)
-        this.editform1(data);
+    handlesave = () => {
+
+        this.editform1();
+    }
+
+    UploadImageTOFirebase = (file) => {
+        const guid = () => {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
+            return String(this.state.id + '-' + s4() + '-' + s4() + '-' + s4() + '-' +
+                s4() + '-' + s4() + s4() + s4());
+        }
+
+
+        let myPromise = new Promise((resolve, reject) => {
+
+            const myGuid = guid();
+            const storageUrl = firebaseApp.storage('gs://hey1-portfolio.appspot.com/')
+            const storageRef = storageUrl.ref();
+            console.log('ref : ', storageRef)
+            const uploadTask = storageRef.child('decode').child('profile').child(myGuid).put(file)
+            uploadTask.on('state_changed',
+                (snapShot) => {
+
+                }, (err) => {
+                    //catches the errors
+                    console.log(err)
+                    reject(err)
+                }, () => {
+
+                    firebaseApp
+                        .storage('gs://hey1-portfolio.appspot.com/')
+                        .ref()
+                        .child('decode')
+                        .child('profile')
+                        .child(myGuid)
+                        .getDownloadURL()
+                        .then(fireBaseUrl => {
+                            resolve(fireBaseUrl)
+                        }).catch(err => {
+                            console.log('error caught', err)
+                        })
+                })
+        })
+        myPromise.then(url => {
+            console.log(url)
+            this.setState({ profile: url })
+            // sendMessage(data)
+        }).catch(err => {
+            console.log('error caught', err)
+        })
+    }
+
+
+    handleFileChange = (e) => {
+        console.log('e :: ', e.target.files[0])
+        this.UploadImageTOFirebase(e.target.files[0])
     }
 
 
@@ -184,64 +245,7 @@ export default class Profile extends Component {
         return (
             <>
                 <Studentlayout>
-                    <Modal size='xl' show={this.state.isOpen} >
-                        <Modal.Header  >
-                            <Modal.Title>
-                                <div className="lanfgauge d-flex">
-                                    <h3>
-                                        Rules & Regulations
-                                    </h3>
-                                    <button onClick={this.chagees}>{this.state.language == true ? 'English' : 'Gujarati'}</button>
-                                </div>
 
-                            </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-
-                            <Rules language={this.state.language} />
-                        </Modal.Body>
-
-                        <Modal.Body >
-
-                            <div className="condition d-flex">
-                                <input
-                                    type="checkbox"
-                                    name="agreement"
-                                    onChange={this.handleChange}
-                                />
-                                <label for="js" className="ml-3 mt-2" > I agree with all the terms and condition </label>
-                            </div>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <button className="btn btn-primary" disabled={!this.state.defaultcheked} onClick={this.clicks}>Continue</button>
-                        </Modal.Footer>
-                    </Modal>
-
-
-                    <Modal show={this.state.isOpen1} onHide={this.closeModal1}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Edit form</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-
-
-
-                            Email :  <input type="email" name="email" value={this.state.email} class="emailstyle" onChange={this.handleemail} />
-                            birthday : <input type="date" value={this.state.dob} class="emailstyle" onChange={this.handledob} />
-
-                            <Button className="btn btn-priamry mt-3gi" onClick={this.handlesave} >
-                                Save Changes
-                            </Button>
-
-
-
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={this.closeModal1}>
-                                Close
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
 
                     {this.state.currentdata !== '' && <>
                         <div className="content-main-section left">
@@ -249,10 +253,10 @@ export default class Profile extends Component {
                                 <div className="showdiv">
 
                                     <div className='row'>
-                                        <div className='col-lg-11 text-center mt-4'>
-                                            <img src={profilepicture} className="profilepicture" />
+                                        <div className='col-11 text-center mt-4'>
+                                            <img src={this.state.profile !== '' ? this.state.profile : profilepicture} className="profilepicture" />
                                         </div>
-                                        <div className="col-lg-1 mt-5  abced">
+                                        <div className="col-1 mt-5  abced">
                                             <button className="buttonedit btn btn-primary btn-lg" onClick={this.openModal1}>
                                                 <i class="fa fa-pencil" aria-hidden="true"></i></button>
                                         </div>
@@ -337,6 +341,65 @@ export default class Profile extends Component {
                         </div>
                     </>
                     }
+
+                    <Modal size='xl' show={this.state.isOpen} >
+                        <Modal.Header  >
+                            <Modal.Title>
+                                <div className="lanfgauge d-flex">
+                                    <h3>
+                                        Rules & Regulations
+                                    </h3>
+                                    <button onClick={this.chagees}>{this.state.language == true ? 'English' : 'Gujarati'}</button>
+                                </div>
+
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+
+                            <Rules language={this.state.language} />
+                        </Modal.Body>
+
+                        <Modal.Body >
+
+                            <div className="condition d-flex">
+                                <input
+                                    type="checkbox"
+                                    name="agreement"
+                                    onChange={this.handleChange}
+                                />
+                                <label for="js" className="ml-3 mt-2" > I agree with all the terms and condition </label>
+                            </div>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <button className="btn btn-primary" disabled={!this.state.defaultcheked} onClick={this.clicks}>Continue</button>
+                        </Modal.Footer>
+                    </Modal>
+
+
+                    <Modal show={this.state.isOpen1} onHide={this.closeModal1}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Edit form</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+
+
+                            Change your Profile: <input type='file' onChange={this.handleFileChange} />
+                            Email :  <input type="email" name="email" value={this.state.email} class="emailstyle" onChange={this.handleemail} />
+                            birthday : <input type="date" value={this.state.dob} class="emailstyle" onChange={this.handledob} />
+
+                            <Button className="btn btn-priamry mt-3gi" onClick={this.handlesave} >
+                                Save Changes
+                            </Button>
+
+
+
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.closeModal1}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </Studentlayout>
             </>
         )

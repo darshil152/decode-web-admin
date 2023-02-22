@@ -194,62 +194,8 @@ function AddStudent() {
     //     setImageAsUrl(dataurl)
     // }
 
-    const handleChange = (e) => {
-        console.log(e.target.files);
-        setImageAsUrl(URL.createObjectURL(e.target.files[0]));
-        setFile((e.target.files[0]));
-    }
 
 
-    const UploadImageTOFirebase = (data) => {
-        const guid = () => {
-            function s4() {
-                return Math.floor((1 + Math.random()) * 0x10000)
-                    .toString(16)
-                    .substring(1);
-            }
-            return String(s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-                s4() + '-' + s4() + s4() + s4());
-        }
-
-
-        let myPromise = new Promise((resolve, reject) => {
-
-            const myGuid = guid();
-            const storageUrl = firebaseApp.storage('gs://hey1-portfolio.appspot.com/')
-            const storageRef = storageUrl.ref();
-
-            const uploadTask = storageRef.child('decode').child('profile').child(myGuid).put(file)
-            uploadTask.on('state_changed',
-                (snapShot) => {
-
-                }, (err) => {
-                    //catches the errors
-                    console.log(err)
-                    reject(err)
-                }, () => {
-
-                    firebaseApp
-                        .storage('gs://hey1-portfolio.appspot.com/')
-                        .ref()
-                        .child('decode')
-                        .child('profile')
-                        .child(myGuid)
-                        .getDownloadURL()
-                        .then(fireBaseUrl => {
-                            resolve(fireBaseUrl)
-                        }).catch(err => {
-                            console.log('error caught', err)
-                        })
-                })
-        })
-        myPromise.then(url => {
-            console.log(url)
-            sendMessage(data)
-        }).catch(err => {
-            console.log('error caught', err)
-        })
-    }
 
 
 
@@ -333,6 +279,7 @@ function AddStudent() {
                 l_name: data.l_name,
                 dob: data.dob,
                 phone: data.phone,
+                profile_img: '',
                 email: data.email,
                 eme_phone: data.eme_phone,
                 courses: data.courses,
