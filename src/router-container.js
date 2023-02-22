@@ -26,6 +26,8 @@ import ProtectedRouteAdmin from './ProtectedRouterAdmin';
 import ProtectedRouteStudent from './ProtectedRouterStudent';
 import ReferenceDetails from './ReferenceDetails';
 import Navbarforprofile from './navbarforprofile';
+import Rules from './Rules';
+import Erules from './Erules';
 
 
 export default class RouterContainer extends Component {
@@ -42,6 +44,10 @@ export default class RouterContainer extends Component {
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/feature" element={<FeaturePage />} />
                     <Route path="/terms" element={<TearmsCondition />} />
+                    <Route path="/rules" element={<Rules />} />
+                    <Route path="/Erules" element={<Erules />} />
+
+
                     <Route path="/placement-partners" element={<PlacementPartners />} />
                     {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                     {/* <Route path="/profile/:id" element={<Profile />} /> */}

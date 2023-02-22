@@ -11615,6 +11615,24 @@ h1.feesreceipt.text-right.mt-3 {
   text-align: center;
 }
 
+.rules {
+  list-style: disc inside;
+  padding: 20px;
+}
+
+
+li {
+  line-height: 35px;
+}
+
+.buttonedit {
+  display: none;
+}
+
+.showdiv:hover .buttonedit {
+  display: inline-block;
+}
+
 
 @media only screen and (max-width: 992px) {
   h3.percentage {

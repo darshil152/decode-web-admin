@@ -359,6 +359,7 @@ function AddStudent() {
                 myref: [],
                 myAttend: [],
                 fees: [],
+                terms: false,
             })
                 .then(function (docRef) {
                     console.log("Document written with ID: ", docRef.id);
