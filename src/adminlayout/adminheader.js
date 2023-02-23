@@ -1,7 +1,7 @@
 import { Dropdown } from "react-bootstrap";
 import Profile from "../img/profile.png";
 import HeaderLogo from "../img/logo-hdr.png"
-import Left from "../img/left-arrow-icon.svg"
+import menu from "../img/menu.png"
 
 function AdminHeader(props) {
     const addmainclass = () => {
@@ -15,8 +15,8 @@ function AdminHeader(props) {
     return (
         <>
             <header className="header-fix-top-section">
-                <div onClick={addmainclass} className="d-xl-none">
-                    <img src={Left} className="me-3 img-fluid" alt="arrow" />
+                <div onClick={addmainclass} className="d-xl-none abce">
+                    <img src={menu} className="me-3 mr-3 imgmenu" alt="arrow" />
                 </div>
                 {/* <div className="hdr-top-info d-flex align-items-center">
                     <span className="me-2">

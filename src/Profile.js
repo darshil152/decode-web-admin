@@ -343,13 +343,13 @@ export default class Profile extends Component {
 
                                         <div className='col-lg-6 '>
                                             <div className='mt-lg-5 d-flex mt-4 text-left'>
-                                                <i class="fa fa-user usernames" aria-hidden="true"></i> <label className="labelData ml-3">{this.state.currentdata.f_name}</label>
+                                                <i class="fa fa-user usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i> <label className="labelData ml-3">{this.state.currentdata.f_name}</label>
                                             </div>
                                             <div className='mt-lg-5 d-flex mt-4 text-left'>
-                                                <i class="fa fa-envelope usernames" aria-hidden="true"></i> <label className="labelData ml-3" style={{ wordBreak: "break-all" }}>{this.state.currentdata.email}</label>
+                                                <i class="fa fa-envelope usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i> <label className="labelData ml-3" style={{ wordBreak: "break-all" }}>{this.state.currentdata.email}</label>
                                             </div>
                                             <div className='mt-lg-5 d-flex mt-4 text-left '>
-                                                <i class="fa fa-birthday-cake usernames" aria-hidden="true"></i> <label className="labelData ml-3">{this.state.currentdata.dob}</label>
+                                                <i class="fa fa-birthday-cake usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i> <label className="labelData ml-3">{this.state.currentdata.dob}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -366,13 +366,13 @@ export default class Profile extends Component {
                                                 <h1>Parent's Detail</h1>
                                             </div>
                                             <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
-                                                <i class="fa fa-user usernames" aria-hidden="true"></i><label className="labelData ml-3">{this.state.currentdata.f_f_name}</label>
+                                                <i class="fa fa-user usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i><label className="labelData ml-3">{this.state.currentdata.f_f_name}</label>
                                             </div>
                                             <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
-                                                <i class='fas fa-briefcase usernames'></i><label className="labelData ml-3">{this.state.currentdata.occupation}</label>
+                                                <i class='fas fa-briefcase usernames' style={{ lineHeight: "inherit" }}></i><label className="labelData ml-3">{this.state.currentdata.occupation}</label>
                                             </div>
                                             <div className='mt-lg-4  d-flex mt-sm-4 ml-lg-4 mb-sm-4 text-left'>
-                                                <i class="fa fa-mobile usernames" aria-hidden="true"></i><label className="labelData ml-3">{this.state.currentdata.f_phone}</label>
+                                                <i class="fa fa-mobile usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i><label className="labelData ml-3">{this.state.currentdata.f_phone}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -395,15 +395,15 @@ export default class Profile extends Component {
                                             <div className='mt-4'>
                                             </div>
                                             <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
-                                                <i class="fa fa-map-marker-alt usernames" aria-hidden="true"></i>
+                                                <i class="fa fa-map-marker-alt usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i>
                                                 <label className="labelData ml-3">{this.state.currentdata.line_1}</label>
                                             </div>
                                             <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
-                                                <i class="fa-sharp fa-solid fa-city usernames"></i>
+                                                <i class="fa-sharp fa-solid fa-city usernames" style={{ lineHeight: "inherit" }}></i>
                                                 <label className="labelData ml-3">{this.state.currentdata.line_2}</label>
                                             </div>
                                             <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 mb-sm-4 text-left'>
-                                                <i class="fa-sharp fa-solid fa-city usernames"></i>
+                                                <i class="fa-sharp fa-solid fa-city usernames" style={{ lineHeight: "inherit" }}></i>
                                                 <label className="labelData ml-3">{this.state.currentdata.city}</label>
                                             </div>
                                         </div>
@@ -430,7 +430,7 @@ export default class Profile extends Component {
                                 </Navbar>
                             </Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>
+                        <Modal.Body >
 
                             <Rules language={this.state.language} />
                         </Modal.Body>

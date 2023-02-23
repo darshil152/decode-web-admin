@@ -76,7 +76,7 @@ export default class Courses extends Component {
                 </div>
                 <OwlCarousel className='owl-carousel courses-carousel' responsive={this.state.courseCarousel} items={4} loop={true} autoplay={true} >
                     <div className="courses-item position-relative">
-                        <img className="img-fluid" src="img/courses-1.jpg" alt="" />
+                        <img className="img-fluids" src="img/courses-1.jpg" alt="" />
                         <div className="courses-text">
                             <h4 className="text-center text-white px-3">Web design course for beginners</h4>
                             {/* <!-- <div className="border-top w-100 mt-3">
