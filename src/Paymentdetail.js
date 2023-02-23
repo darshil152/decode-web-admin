@@ -250,7 +250,6 @@ export default class paymentdetail extends Component {
 
     render() {
         return (
-
             <StudentLayout >
                 <div className='content-main-section left'>
                     <div className='container mt-5'>

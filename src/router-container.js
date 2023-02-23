@@ -19,7 +19,6 @@ import Profile from './Profile';
 import Login from './Login';
 import Attandance from './Attandance';
 import Attandancesheet from './Attandancesheet';
-import Chart from './Chart';
 import Fees from './Fees';
 import Paymentdetail from './Paymentdetail';
 import ProtectedRouteAdmin from './ProtectedRouterAdmin';
@@ -27,9 +26,9 @@ import ProtectedRouteStudent from './ProtectedRouterStudent';
 import ReferenceDetails from './ReferenceDetails';
 import Navbarforprofile from './navbarforprofile';
 import Rules from './Rules';
-import Erules from './Erules';
 import Langhaugeterm from './Langhaugeterm';
-
+import Timetable from './Timetable';
+import Newpassword from "./Newpassword";
 
 export default class RouterContainer extends Component {
     render() {
@@ -48,6 +47,11 @@ export default class RouterContainer extends Component {
                     <Route path="/rules" element={<Rules />} />
                     {/* <Route path="/Erules" element={<Erules />} /> */}
                     <Route path="/regulation" element={<Langhaugeterm />} />
+                    <Route path="/timetable" element={<Timetable />} />
+                    <Route path="/newpassword/:id" element={<Newpassword />} />
+
+
+
 
 
 
@@ -119,8 +123,8 @@ export default class RouterContainer extends Component {
 
 
                     <Route path="*" element={<Home />} />
-                </Routes>
-            </Router>
+                </Routes >
+            </Router >
         )
     }
 }

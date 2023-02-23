@@ -43,7 +43,6 @@ export default class Profile extends Component {
             isOpen2: false,
             email: "",
             dob: "",
-            temp: [],
             line_1: "",
             line_2: "",
             city: "",
@@ -78,7 +77,7 @@ export default class Profile extends Component {
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 console.log(doc.data())
-                this.setState({ currentdata: doc.data(), email: doc.data().email, dob: doc.data().dob, profile: doc.data().profile_img ? doc.data().profile_img : '' }, () => {
+                this.setState({ currentdata: doc.data(), email: doc.data().email, dob: doc.data().dob, profile: doc.data().profile_img ? doc.data().profile_img : '', line_1: doc.data().line_1, line_2: doc.data().line_2, city: doc.data().city }, () => {
                     if (Number(localStorage.getItem('userrole')) !== 2) {
                         if (this.state.sc !== this.state.currentdata.password) {
                             window.location.href = '/'
@@ -302,8 +301,6 @@ export default class Profile extends Component {
         return (
             <>
                 <Studentlayout>
-
-
                     {this.state.currentdata !== '' && <>
                         <div className="content-main-section left">
                             <div className='container mt-5 studentdetail' >
@@ -456,14 +453,62 @@ export default class Profile extends Component {
 
 
                     <Modal show={this.state.isOpen1} onHide={this.closeModal1}>
-                        <Modal.Header closeButton>
+                        <Modal.Header>
                             <Modal.Title>Edit form</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
 
-                            Change your Profile: <input type='file' className="emailstyle" onChange={this.handleFileChange} />
-                            Email :  <input type="email" name="email" value={this.state.email} class="emailstyle" onChange={this.handleemail} />
-                            birthday : <input type="date" value={this.state.dob} class="emailstyle" onChange={this.handledob} />
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col-12 rounded ">
+                                        <img src={this.state.profile !== '' ? this.state.profile : profilepicture} className="rounded mx-auto d-block" style={{ width: "100px" }} />
+                                    </div>
+
+
+
+
+                                    <div class="file-input">
+
+                                        <lable class="lbl-comn-info " > Change your Profile:</lable>
+                                        <input
+                                            type="file"
+                                            name="file-input"
+                                            id="file-input"
+                                            class="file-input__input"
+                                            onChange={this.handleFileChange}
+                                        />
+                                        <label class="file-input__label" for="file-input">
+                                            <svg
+                                                aria-hidden="true"
+                                                focusable="false"
+                                                data-prefix="fas"
+                                                data-icon="upload"
+                                                class="svg-inline--fa fa-upload fa-w-16"
+                                                role="img"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 512 512"
+                                            >
+                                                <path
+                                                    fill="currentColor"
+                                                    d="M296 384h-80c-13.3 0-24-10.7-24-24V192h-87.7c-17.8 0-26.7-21.5-14.1-34.1L242.3 5.7c7.5-7.5 19.8-7.5 27.3 0l152.2 152.2c12.6 12.6 3.7 34.1-14.1 34.1H320v168c0 13.3-10.7 24-24 24zm216-8v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h136v8c0 30.9 25.1 56 56 56h80c30.9 0 56-25.1 56-56v-8h136c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"
+                                                ></path>
+                                            </svg>
+                                            <span>Upload file</span></label>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            {/* <lable class="lbl-comn-info " > Change your Profile:</lable> */}
+
+                            {/* <input type='file' className="emailstyle" onChange={this.handleFileChange} />  */}
+
+                            <lable class="lbl-comn-info mt-2">Email</lable>
+                            <input type="email" name="email" value={this.state.email} class="emailstyle" onChange={this.handleemail} />
+
+                            <lable class="lbl-comn-info mt-2">birthdate:</lable>
+                            <input type="date" value={this.state.dob} class="emailstyle" onChange={this.handledob} />
 
                         </Modal.Body>
                         <Modal.Footer>
@@ -492,10 +537,10 @@ export default class Profile extends Component {
                             <input type="text" name="line_1" value={this.state.line_1} class="emailstyle" onChange={this.handleline1} />
 
                             <lable class="lbl-comn-info mt-3">Address 2:</lable>
-                            <lable class="lbl-comn-info"></lable>  <input type="text" name="line_2" value={this.state.line_2} class="emailstyle" onChange={this.handleline2} />
+                            <input type="text" name="line_2" value={this.state.line_2} class="emailstyle" onChange={this.handleline2} />
 
                             <lable class="lbl-comn-info mt-3">City: </lable>
-                            <lable class="lbl-comn-info"></lable><input type="text" name="city" value={this.state.city} class="emailstyle" onChange={this.handlecity} />
+                            <input type="text" name="city" value={this.state.city} class="emailstyle" onChange={this.handlecity} />
 
 
 
