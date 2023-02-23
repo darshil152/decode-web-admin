@@ -3,10 +3,12 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import firebaseApp from './firebase/firebase'
 import MUIDataTable from 'mui-datatables'
-import { number } from 'yup';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AdminLayout from './adminlayout/adminlayout';
+import checked from "./img/checked.png"
+import cancel from "./img/cancel.png"
+import grey from "./img/grey.png";
 
 // import { QuerySnapshot } from '@firebase/firestore-types';
 // import Ember from 'ember';
@@ -194,13 +196,13 @@ export default function Attandance() {
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
                         <div onChange={onChangeValue}>
-                            <div >
+                            <div className='attandancecheckl'>
                                 <span className='muiradio'>  Present:</span><input type="radio" name="attandance" value="1" /><br></br>
                             </div>
-                            <div>
+                            <div className='attandancecheckl'>
                                 <span className='muiradio'> Absent:</span><input type="radio" name="attandance" value="0" /><br></br>
                             </div>
-                            <div>
+                            <div className='attandancecheckl'>
                                 <span className='muiradio'>Other:</span><input type="radio" name="attandance" value="2" /><br></br>
                             </div>
                         </div>

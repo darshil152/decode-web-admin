@@ -51,8 +51,7 @@ export default function Rules(props) {
 
 
     return (
-        <div className='container'>
-
+        <div className='container ex1'>
             <ul className='rules'>
                 {props.language == 0 ?
                     Enrules.map((number, i) =>

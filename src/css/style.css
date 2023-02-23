@@ -11566,13 +11566,14 @@ h6.MuiTypography-root.MuiTypography-h6.tss-hj53wm-MUIDataTableToolbar-titleText.
   box-shadow: none;
 }
 
-.apex {
+/* .apex {
   position: absolute;
   left: 50px;
-}
+} */
 
-h3.percentage {
+.percentage {
   margin-top: 180px;
+  margin-left: 80px;
 }
 
 .test-height {
@@ -11772,7 +11773,7 @@ input.emailstyle {
 }
 
 input {
-  height: 40px;
+  /* height: 40px; */
   font-size: 16px;
   border-radius: 4px;
   border: none;
@@ -11815,6 +11816,105 @@ img.me-3.imgmenu {
   width: 20px;
 }
 
+/* toggle button css */
+
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin: 9px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s cubic-bezier(0, 1, 0.5, 1);
+  border-radius: 4px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s cubic-bezier(0, 1, 0.5, 1);
+  border-radius: 3px;
+}
+
+input.toggle:checked+.slider {
+  background-color: #52c944;
+}
+
+input.toggle:focus+.slider {
+  box-shadow: 0 0 4px #7efa70;
+}
+
+input.toggle:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+input.toggle:checked+.slider.red {
+  background-color: crimson;
+}
+
+input.toggle:focus+.slider.red {
+  box-shadow: 0 0 4px crimson;
+}
+
+input:checked+.slider.red {
+  background-color: crimson;
+}
+
+#round {
+  border-radius: 34px;
+}
+
+#round:before {
+  border-radius: 50%;
+}
+
+input.toggle:checked+.slider.red {
+  background-color: crimson;
+}
+
+input.toggle:focus+.slider.blue {
+  box-shadow: 0 0 4px #424bf5;
+}
+
+input.toggle:checked+.slider.blue {
+  background-color: #424bf5;
+}
+
+
 
 @keyframes spin {
   0% {
@@ -11831,10 +11931,18 @@ img.me-3.imgmenu {
     margin-top: 50px;
   }
 
-  .apex {
+  /* .apex {
     position: absolute;
     left: 50px;
+  } */
+
+
+
+  .container.ex1 {
+    height: 568px;
+    overflow-y: scroll;
   }
+
 }
 
 @media only screen and (max-width: 1200px) {

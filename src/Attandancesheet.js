@@ -15,7 +15,7 @@ export default class Attandancesheet extends Component {
         super(props);
 
         this.state = {
-            series: [50, 50],
+            series: [0, 0],
             optionsa: {
                 chart: {
                     width: 380,
@@ -27,11 +27,10 @@ export default class Attandancesheet extends Component {
                 labels: ['Present', 'Absent',],
                 colors: ["#28a745", "#d1403f",], //Add this line
                 responsive: [{
-                    breakpoint: 480,
+                    breakpoint: 500,
                     options: {
                         chart: {
-                            width: 200,
-
+                            width: 350,
                         },
                         legend: {
                             position: 'bottom',
@@ -146,7 +145,7 @@ export default class Attandancesheet extends Component {
                     <div className='content-main-section left'>
                         <div className='container-fluid'>
                             <div className='row '>
-                                <div className='col-lg-6 '>
+                                <div className='col-lg-6'>
                                     <div className='shdow tabledata'>
                                         <MUIDataTable
                                             title={"Your attandance List"}
@@ -156,14 +155,13 @@ export default class Attandancesheet extends Component {
                                         />
                                     </div>
                                 </div>
-                                <div className='col-lg-6 tabledata p-2'>
+                                <div className='col-lg-6 tabledata '>
                                     <div className='shdowa'>
                                         <div className='apex'>
-                                            <h3 className='ml-lg-5 percentage' > Your attandance is:</h3>
-                                            <ReactApexChart options={this.state.optionsa} series={this.state.series} type="pie" width={450} />
+                                            <h3 className='percentage' > Your attandance is:</h3>
+                                            <ReactApexChart options={this.state.optionsa} series={this.state.series} type="pie" width={600} />
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

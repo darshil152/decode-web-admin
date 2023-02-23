@@ -4,6 +4,8 @@ import { useState } from 'react';
 import firebaseApp from './firebase/firebase'
 import MUIDataTable from 'mui-datatables'
 import AdminLayout from './adminlayout/adminlayout';
+import userdummy from "./img/userdummy.png"
+
 
 // import { QuerySnapshot } from '@firebase/firestore-types';
 // import Ember from 'ember';
@@ -45,8 +47,27 @@ export default function Dashboard() {
         },
 
         {
+            name: "profile_img",
+            label: "profile_img",
+            options: {
+                filter: true,
+                sort: true,
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                        <>
+                            {/* <img src={value} /> */}
+                            <img src={value !== '' ? value : userdummy} style={{ width: "80px", borderRadius: "15px" }} />
+
+                        </>
+                    );
+
+                },
+            },
+        },
+
+        {
             name: "f_name",
-            label: "f_name",
+            label: "First Name",
             options: {
                 filter: true,
                 sort: true,
@@ -58,6 +79,18 @@ export default function Dashboard() {
             options: {
                 filter: true,
                 sort: true,
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                        <>
+                            <label class="switch">
+                                <input type="checkbox" class="toggle" value={value} />
+                                <span class="slider round"></span>
+                            </label>
+                        </>
+                    );
+
+                },
+
             },
         },
 
@@ -79,7 +112,7 @@ export default function Dashboard() {
         },
         {
             name: "f_phone",
-            label: "f_phone",
+            label: "Father's phone",
             options: {
                 filter: true,
                 sort: true,
@@ -112,6 +145,8 @@ export default function Dashboard() {
         responsive: "standard",
         filterType: 'dropdown',
     };
+
+
 
 
     return (
