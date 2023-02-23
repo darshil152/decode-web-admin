@@ -307,7 +307,7 @@ export default class Profile extends Component {
                                 <div className="showdiv">
                                     <div className="row">
                                         <div className="col-10 text-sm-center mt-3 mb-3">
-                                            <h1>Personal Detail</h1>
+                                            <h1 className="text-left">Personal Detail</h1>
                                         </div>
                                         <div className="col-2  text-sm-center text-lg-right mt-3" >
                                             <button className="buttonedit btn btn-primary btn-lg" onClick={this.openModal1}>
@@ -363,7 +363,7 @@ export default class Profile extends Component {
                                     <div className='row'>
                                         <div className='col-lg-6'>
                                             <div className='mt-4'>
-                                                <h1>Parent's Detail</h1>
+                                                <h1 className="text-left">Parent's Detail</h1>
                                             </div>
                                             <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
                                                 <i class="fa fa-user usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i><label className="labelData ml-3">{this.state.currentdata.f_f_name}</label>
@@ -384,7 +384,7 @@ export default class Profile extends Component {
 
                                         <div className="row">
                                             <div className="col-10 text-sm-center mt-3 mb-3">
-                                                <h1>Personal Detail</h1>
+                                                <h1 className="text-left">Personal Detail</h1>
                                             </div>
                                             <div className="col-2 text-sm-center text-lg-right mt-3" >
                                                 <button className="buttonedit btn btn-primary btn-lg" onClick={this.openModal2}>

@@ -11915,6 +11915,54 @@ input.toggle:checked+.slider.blue {
 }
 
 
+/* tyable css */
+table {
+  max-width: 960px;
+  margin: 15px auto;
+  font-family: "Jost", sans-serif;
+}
+
+caption {
+  font-size: 1.6em;
+  font-weight: 400;
+  padding: 10px 0;
+}
+
+thead th {
+  font-weight: 400;
+  background: #8a97a0;
+  color: #FFF;
+  font-family: "Jost", sans-serif;
+}
+
+tr {
+  background: #f4f7f8;
+  border-bottom: 1px solid #FFF;
+  margin-bottom: 5px;
+  font-family: "Jost", sans-serif;
+}
+
+tr:nth-child(even) {
+  background: #e8eeef;
+  font-family: "Jost", sans-serif;
+}
+
+th.headings {
+  font-weight: 800;
+  font-family: "Jost", sans-serif;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 25px;
+  font-weight: 300;
+  font-family: "Jost", sans-serif;
+}
+
+
+
+
 
 @keyframes spin {
   0% {
