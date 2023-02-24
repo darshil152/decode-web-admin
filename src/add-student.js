@@ -76,13 +76,16 @@ function AddStudent() {
     const submitStudentData = (formData, resetForm) => {
         // UploadImageTOFirebase(formData);
         // sendMessage(formData);
-
         if (localStorage.getItem('mmatchid') == Number(id)) {
-            updatedatas(formData)
+            console.log("first")
+            updatedatas(formData);
         } else {
+            console.log("new data")
             abc(formData);
         }
     };
+
+
 
     const handlesave = (event) => {
         setShow(false)
@@ -195,19 +198,27 @@ function AddStudent() {
                 entry.push(doc.data())
                 // temp.push(doc.data())
             })
+
             if (entry.length > 0) {
                 entry.sort(compare);
                 let lastErNum = entry[entry.length - 1].er_num;
-                setErnum(ernum => 1 + lastErNum)
+
+
+
+                if (localStorage.getItem('mmatchid') == Number(id)) {
+                    setErnum(id)
+                } else {
+                    setErnum(ernum => 1 + lastErNum)
+                }
+
+                // setErnum(ernum => 1 + lastErNum)
                 setFetchdata(entry)
 
                 for (let i = 0; i < fetchdata.length; i++) {
                     if (fetchdata[i].er_num == id) {
-                        cl;
+                        setGetcurrent(fetchdata[i])
                     }
-
                 }
-
 
                 for (let i = 0; i < entry.length; i++) {
                     if (entry[i].status == 1) {
@@ -259,70 +270,58 @@ function AddStudent() {
         return result;
     }
 
+
+
+
     const updatedatas = (data) => {
-        let registerQuery = new Promise((resolve, reject) => {
-            let db = firebaseApp.firestore();
-            db.collection("Students").add({
-                er_num: Number(ernum),
-                f_name: data.f_name,
-                l_name: data.l_name,
-                dob: data.dob,
-                phone: data.phone,
-                profile_img: '',
-                email: data.email,
-                eme_phone: data.eme_phone,
-                courses: data.courses,
-                course_fees: data.course_fees,
-                f_f_name: data.f_f_name,
-                f_l_name: data.f_l_name,
-                occupation: data.occupation,
-                qualification: data.qualification,
-                f_phone: data.f_phone,
-                line_1: data.line_1,
-                line_2: data.line_2,
-                city: data.city,
-                state: data.state,
-                country: data.country,
-                zipcode: data.zipcode,
-                reference: refData,
-                other_ref: otherRef,
-                createdAt: new Date().getTime(),
-                id: currentid,
-                password: makepass(8),
-                project: "Decode",
-                userRole: 1,
-                status: 1,
-                myref: [],
-                myAttend: [],
-                fees: [],
-                terms: false,
-            })
-                .then(function (docRef) {
-                    console.log("Document written with ID: ", docRef.id);
-                    resolve(docRef.id);
-                    toast.success('Form submitted successfully', {
+        const db = firebaseApp.firestore();
+        db.collection('Students').where("er_num", "==", Number(id)).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                var updateCollection = db.collection("Students").doc(doc.ref.id);
+                return updateCollection.update({
+                    f_name: data.f_name,
+                    l_name: data.l_name,
+                    dob: data.dob,
+                    phone: data.phone,
+                    profile_img: '',
+                    email: data.email,
+                    eme_phone: data.eme_phone,
+                    courses: data.courses,
+                    course_fees: data.course_fees,
+                    f_f_name: data.f_f_name,
+                    f_l_name: data.f_l_name,
+                    occupation: data.occupation,
+                    qualification: data.qualification,
+                    f_phone: data.f_phone,
+                    line_1: data.line_1,
+                    line_2: data.line_2,
+                    city: data.city,
+                    state: data.state,
+                    country: data.country,
+                    zipcode: data.zipcode,
+                    reference: refData,
+                    other_ref: otherRef,
+                    createdAt: new Date().getTime(),
+                    id: currentid,
+                    password: makepass(8),
+                    project: "Decode",
+                    userRole: 1,
+                    status: 1,
+                    myref: [],
+                    myAttend: [],
+                    fees: [],
+                    terms: false,
+                }).then(function (docRef) {
+                    toast.success('Form upadated successfully', {
                         position: toast.POSITION.TOP_RIGHT
                     });
                     navigate('/dashboard')
-
                 })
-                .catch(function (error) {
-                    console.error("Please check form again ", error);
-                    reject(error);
-                    toast.error('Attendance is already added', {
-                        position: toast.POSITION.TOP_RIGHT
-                    });
-                });
+            })
+        }).catch(err => {
+            console.error(err)
         });
-        registerQuery.then(result => {
-            console.warn('register successful')
-            // toast.success("Thank you for reaching out. We will contact you soon.")
-        }).catch(error => {
-            console.error(error)
-        })
     }
-
-
 
 
 
