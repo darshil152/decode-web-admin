@@ -15,6 +15,12 @@ export default class Attandancesheet extends Component {
         super(props);
 
         this.state = {
+            id: "",
+            finalpercent: '',
+            countData: [],
+            currentdata: [],
+            oneandzero: [],
+            presentdata: [],
             series: [0, 0],
             optionsa: {
                 chart: {
@@ -39,12 +45,7 @@ export default class Attandancesheet extends Component {
                     }
                 }]
             },
-            id: "",
-            finalpercent: '',
-            countData: [],
-            currentdata: [],
-            oneandzero: [],
-            presentdata: [],
+
 
             columns: [
 
@@ -78,17 +79,39 @@ export default class Attandancesheet extends Component {
                 selectableRowsHideCheckboxes: true,
                 responsive: "standard",
                 filterType: 'dropdown',
-            }
+            },
+
         };
     }
 
     componentDidMount() {
         const url = window.location.href;
-        var id = url.substring(url.lastIndexOf('/') + 1);
-        this.setState({ id }, () => {
+        var ids = url.substring(url.lastIndexOf('/') + 1);
+        this.setState({ id: ids }, () => {
             this.getdata();
+            this.getuserrole();
         })
         // this.finalpercentage();
+    }
+
+
+
+    getuserrole = () => {
+        const db = firebaseApp.firestore();
+        db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                console.log(doc.data())
+                this.setState({ currentdata: doc.data(), email: doc.data().email, dob: doc.data().dob, profile: doc.data().profile_img ? doc.data().profile_img : '', line_1: doc.data().line_1, line_2: doc.data().line_2, city: doc.data().city }, () => {
+                    if (Number(localStorage.getItem('userrole')) !== 2) {
+                        if (this.state.sc !== this.state.currentdata.password) {
+                            window.location.href = '/'
+                        }
+                    }
+                })
+            });
+        }).catch(err => {
+            console.error(err)
+        });
     }
 
 

@@ -2,11 +2,18 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from '../img/logo.png'
 import { useEffect } from "react";
+import { Modal } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 function Studentsidebar(props) {
 
     const [id, setId] = useState('');
+    const [lastid, setLastid] = useState("");
     const [userollno, setUserollno] = useState('')
+    const [show, setShow] = useState(false);
+
+
+
 
     const sidebar_change = (name) => {
         if (name) {
@@ -17,14 +24,33 @@ function Studentsidebar(props) {
     useEffect(() => {
         let url = window.location.href;
         var id = url.substring(url.lastIndexOf('/') + 1);
+        var ids = url.substring(url.lastIndexOf('/') + 1);
         var userollno = localStorage.getItem("userer_num")
+        if (userollno == "heaven") {
+            localStorage.setItem("userer_num", ids)
+        }
+        console.log(lastid)
         setUserollno(userollno);
         setId(id)
     }, [])
 
 
-    const clear = () => {
+    const handleClose = () => {
+        setShow(false);
         localStorage.clear();
+        <Link to="/"></Link>
+    }
+    const handleCloseNo = () => {
+        setShow(false);
+    }
+
+    const handleShow = () => {
+        setShow(true);
+    }
+
+
+    const clear = () => {
+        handleShow()
     }
 
 
@@ -84,7 +110,8 @@ function Studentsidebar(props) {
                                         </bdi>
                                     </li>
                                 </Link>
-                                <Link to="/timetable">
+
+                                <Link to={"/timetable/" + userollno}>
                                     <li>
                                         <bdi className={urlName === "fees" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,7 +121,7 @@ function Studentsidebar(props) {
                                         </bdi>
                                     </li>
                                 </Link>
-                                <Link to="/regulation">
+                                <Link to={"/regulation/" + userollno}>
                                     <li>
                                         <bdi className={urlName === "fees" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -105,7 +132,7 @@ function Studentsidebar(props) {
                                     </li>
                                 </Link>
 
-                                <Link to="/" onClick={clear}>
+                                <Link onClick={clear}>
                                     <li>
                                         <bdi className={urlName === "fees" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -116,10 +143,21 @@ function Studentsidebar(props) {
                                     </li>
                                 </Link>
                             </ul>
+
+                            <Modal centered show={show} onHide={handleClose}>
+
+                                <Modal.Body className="text-center mt-4"><h3>Are you sure you want to logout ?</h3></Modal.Body>
+
+                                <Modal.Footer style={{ textAlign: "center", }} className="mb-3">
+                                    <button className="btn btn-danger abct" style={{ width: "90px" }} onClick={handleClose}>Yes</button>
+                                    <button className="btn btn-primary danger" style={{ width: "90px" }} onClick={handleCloseNo}>No</button>
+
+                                </Modal.Footer>
+                            </Modal>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     );
 }

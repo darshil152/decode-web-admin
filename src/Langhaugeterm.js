@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import Rules from './Rules'
+import firebaseApp from './firebase/firebase';
 import Studentlayout from "./studentlayout/studentlayout"
 
 export default class Langhaugeterm extends Component {
@@ -50,10 +51,38 @@ export default class Langhaugeterm extends Component {
                 'After the selection of candidates, the company must issue the offer/joining letter of the same.',
 
                 'We expect you to provide your experiences and feedback in the medium of video review via mail to us.',
-            ]
-
-
+            ],
+            getid: "",
         }
+    }
+
+
+
+    componentDidMount() {
+        const url = window.location.href;
+        var ids = url.substring(url.lastIndexOf('/') + 1);
+        this.setState({ getid: ids }, () => {
+            this.getuserrole()
+        })
+
+    }
+
+    getuserrole = () => {
+        const db = firebaseApp.firestore();
+        db.collection('Students').where("er_num", "==", Number(this.state.getid)).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                console.log(doc.data())
+                this.setState({ currentdata: doc.data(), email: doc.data().email, dob: doc.data().dob, profile: doc.data().profile_img ? doc.data().profile_img : '', line_1: doc.data().line_1, line_2: doc.data().line_2, city: doc.data().city }, () => {
+                    if (Number(localStorage.getItem('userrole')) !== 2) {
+                        if (this.state.sc !== this.state.currentdata.password) {
+                            window.location.href = '/'
+                        }
+                    }
+                })
+            });
+        }).catch(err => {
+            console.error(err)
+        });
     }
 
     chagees = () => {

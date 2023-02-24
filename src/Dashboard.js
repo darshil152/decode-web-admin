@@ -15,6 +15,7 @@ import userdummy from "./img/userdummy.png"
 export default function Dashboard() {
 
     const [stdata, setStdata] = useState([]);
+    const [toggles, setToggles] = useState('');
 
     useEffect(() => {
         getdata()
@@ -31,6 +32,40 @@ export default function Dashboard() {
             })
             console.log(entry, 'product array')
             setStdata(entry)
+        }).catch(err => {
+            console.error(err)
+        });
+    }
+
+    const viewuser = (data) => {
+
+        window.location.href = "./profile/" + data
+    }
+
+    const changestatus = (event) => {
+        setToggles(event.target.value)
+    }
+
+    const changetogglestatus = () => {
+        const db = firebaseApp.firestore();
+        db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                var updateCollection = db.collection("Students").doc(doc.ref.id);
+
+                return updateCollection.update({
+                    status: false
+                })
+                    .then(() => {
+                        console.log("Document successfully updated!");
+                        this.getalldata();
+                        this.closeModal1();
+
+                    })
+                    .catch((error) => {
+                        // The document probably doesn't exist.
+                        console.error("Error updating document: ", error);
+                    });
+            })
         }).catch(err => {
             console.error(err)
         });
@@ -83,7 +118,7 @@ export default function Dashboard() {
                     return (
                         <>
                             <label class="switch">
-                                <input type="checkbox" class="toggle" value={value} />
+                                <input type="checkbox" class="toggle" checked={value} onChange={changestatus} />
                                 <span class="slider round"></span>
                             </label>
                         </>
@@ -135,8 +170,22 @@ export default function Dashboard() {
                 },
             },
         },
+        {
+            name: "er_num",
+            label: "view",
+            options: {
+                filter: true,
+                sort: true,
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                        <>
+                            <button className='btn btn-primary' onClick={() => viewuser(value)}>View</button>
+                        </>
+                    );
 
-
+                },
+            }
+        },
     ];
 
 

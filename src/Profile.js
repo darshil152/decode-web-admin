@@ -49,7 +49,13 @@ export default class Profile extends Component {
         }
     }
 
-
+    componentDidMount() {
+        const url = window.location.href;
+        var id = url.substring(url.lastIndexOf('/') + 1);
+        this.setState({ id }, () => {
+            this.getalldata();
+        })
+    }
 
     openModal = () => this.setState({ isOpen: true });
     closeModal = () => this.setState({ isOpen: false });
@@ -64,13 +70,7 @@ export default class Profile extends Component {
     openModal2 = () => this.setState({ isOpen2: true });
     closeModal2 = () => this.setState({ isOpen2: false });
 
-    componentDidMount() {
-        const url = window.location.href;
-        var id = url.substring(url.lastIndexOf('/') + 1);
-        this.setState({ id }, () => {
-            this.getalldata();
-        })
-    }
+
 
     getalldata = () => {
         const db = firebaseApp.firestore();
