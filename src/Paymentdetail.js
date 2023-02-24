@@ -299,7 +299,7 @@ export default class paymentdetail extends Component {
                                         <div className='row'>
                                             <div className='col-lg-6'>
                                                 <div className='mt-4'>
-                                                    <h1>reference Details</h1>
+                                                    <h1>Your References</h1>
                                                 </div>
 
                                                 <table>
