@@ -28,9 +28,13 @@ export default function Dashboard() {
 
         db.collection('Students').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                entry.push(doc.data())
+                if (doc.data().status !== 2) {
+
+                    entry.push(doc.data())
+                }
+
             })
-            console.log(entry, 'product array')
+            entry.sort((a, b) => a.er_num - b.er_num)
             setStdata(entry)
         }).catch(err => {
             console.error(err)
