@@ -28,13 +28,9 @@ export default function Dashboard() {
 
         db.collection('Students').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                if (doc.data().status !== 2) {
-
-                    entry.push(doc.data())
-                }
-
+                entry.push(doc.data())
             })
-            entry.sort((a, b) => a.er_num - b.er_num)
+            // console.log(entry, 'product array')
             setStdata(entry)
         }).catch(err => {
             console.error(err)
@@ -47,6 +43,7 @@ export default function Dashboard() {
 
     const edituser = (data) => {
         window.location.href = "./add-student/" + data
+        localStorage.setItem('mmatchid', data)
 
     }
 

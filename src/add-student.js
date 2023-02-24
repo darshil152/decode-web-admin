@@ -18,7 +18,7 @@ function AddStudent() {
     let location = useLocation();
 
     const [id, setId] = useState('');
-    const [getcurrent, setGetcurrent] = useState('');
+    const [getcurrent, setGetcurrent] = useState([]);
 
     const [imageAsUrl, setImageAsUrl] = useState('');
     const [file, setFile] = useState('');
@@ -49,10 +49,9 @@ function AddStudent() {
     useEffect(() => {
         var url = window.location.href
         var ids = url.substring(url.lastIndexOf('/') + 1);
-        setId(ids)
-        getalldata();
+        setId(ids);
         getdata();
-    }, [])
+    },)
 
 
 
@@ -77,8 +76,12 @@ function AddStudent() {
     const submitStudentData = (formData, resetForm) => {
         // UploadImageTOFirebase(formData);
         // sendMessage(formData);
-        abc(formData);
 
+        if (localStorage.getItem('mmatchid') == Number(id)) {
+            updatedatas(formData)
+        } else {
+            abc(formData);
+        }
     };
 
     const handlesave = (event) => {
@@ -157,8 +160,6 @@ function AddStudent() {
     }
 
 
-
-
     const handleref = (event) => {
         setRef(event.target.value);
     }
@@ -183,27 +184,6 @@ function AddStudent() {
         value: form.values[field],
     });
 
-    // const uploadImage = (images) => {
-    //     getBase64(images[0])
-    // }
-
-
-    // const getBase64 = (file) => {
-    //     let dataurl = ''
-    //     var reader = new FileReader();
-    //     reader.readAsDataURL(file);
-    //     reader.onload = () => {
-    //         console.log(reader.result);
-    //         dataurl = reader.result
-    //         // setImage(reader.result);
-    //     };
-    //     setImageAsUrl(dataurl)
-    // }
-
-
-
-
-
 
     const getdata = async () => {
         setCurrentid(makeid(16))
@@ -220,6 +200,13 @@ function AddStudent() {
                 let lastErNum = entry[entry.length - 1].er_num;
                 setErnum(ernum => 1 + lastErNum)
                 setFetchdata(entry)
+
+                for (let i = 0; i < fetchdata.length; i++) {
+                    if (fetchdata[i].er_num == id) {
+                        cl;
+                    }
+
+                }
 
 
                 for (let i = 0; i < entry.length; i++) {
@@ -270,6 +257,69 @@ function AddStudent() {
             counter += 1;
         }
         return result;
+    }
+
+    const updatedatas = (data) => {
+        let registerQuery = new Promise((resolve, reject) => {
+            let db = firebaseApp.firestore();
+            db.collection("Students").add({
+                er_num: Number(ernum),
+                f_name: data.f_name,
+                l_name: data.l_name,
+                dob: data.dob,
+                phone: data.phone,
+                profile_img: '',
+                email: data.email,
+                eme_phone: data.eme_phone,
+                courses: data.courses,
+                course_fees: data.course_fees,
+                f_f_name: data.f_f_name,
+                f_l_name: data.f_l_name,
+                occupation: data.occupation,
+                qualification: data.qualification,
+                f_phone: data.f_phone,
+                line_1: data.line_1,
+                line_2: data.line_2,
+                city: data.city,
+                state: data.state,
+                country: data.country,
+                zipcode: data.zipcode,
+                reference: refData,
+                other_ref: otherRef,
+                createdAt: new Date().getTime(),
+                id: currentid,
+                password: makepass(8),
+                project: "Decode",
+                userRole: 1,
+                status: 1,
+                myref: [],
+                myAttend: [],
+                fees: [],
+                terms: false,
+            })
+                .then(function (docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                    resolve(docRef.id);
+                    toast.success('Form submitted successfully', {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
+                    navigate('/dashboard')
+
+                })
+                .catch(function (error) {
+                    console.error("Please check form again ", error);
+                    reject(error);
+                    toast.error('Attendance is already added', {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
+                });
+        });
+        registerQuery.then(result => {
+            console.warn('register successful')
+            // toast.success("Thank you for reaching out. We will contact you soon.")
+        }).catch(error => {
+            console.error(error)
+        })
     }
 
 
@@ -341,17 +391,7 @@ function AddStudent() {
         })
     }
 
-    const getalldata = () => {
-        const db = firebaseApp.firestore();
-        db.collection('Students').where("er_num", "==", Number(id)).get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                setGetcurrent(doc.data())
-            });
-            console.log(getcurrent)
-        }).catch(err => {
-            console.error(err)
-        });
-    }
+
 
     return (
         <AdminLayout>
@@ -371,26 +411,26 @@ function AddStudent() {
                                         er_num: ernum,
                                         file: '',
                                         f_name: getcurrent.f_name,
-                                        l_name: '',
-                                        dob: '',
-                                        email: '',
-                                        phone: '',
-                                        eme_phone: '',
-                                        courses: '',
-                                        course_fees: '',
-                                        f_f_name: '',
-                                        f_l_name: '',
-                                        occupation: '',
-                                        qualification: '',
-                                        f_phone: '',
-                                        line_1: '',
-                                        line_2: '',
-                                        city: '',
-                                        state: '',
+                                        l_name: getcurrent.l_name,
+                                        dob: getcurrent.dob,
+                                        email: getcurrent.email,
+                                        phone: getcurrent.phone,
+                                        eme_phone: getcurrent.eme_phone,
+                                        courses: getcurrent.courses,
+                                        course_fees: getcurrent.course_fees,
+                                        f_f_name: getcurrent.f_f_name,
+                                        f_l_name: getcurrent.f_l_name,
+                                        occupation: getcurrent.occupation,
+                                        qualification: getcurrent.qualification,
+                                        f_phone: getcurrent.f_phone,
+                                        line_1: getcurrent.line_1,
+                                        line_2: getcurrent.line_2,
+                                        city: getcurrent.city,
+                                        state: getcurrent.state,
                                         country: 'India',
-                                        zipcode: '',
+                                        zipcode: getcurrent.zipcode,
                                         reference: {},
-                                        amount: "",
+                                        amount: getcurrent.amount,
                                     }}
                                     validationSchema={Yup.object({
                                         f_name: Yup.string().required("First name is required."),
@@ -411,6 +451,7 @@ function AddStudent() {
                                     })}
                                     onSubmit={(formData, { resetForm }) => {
                                         submitStudentData(formData, resetForm);
+                                        // console.log(formda)
 
                                     }}
                                 >
