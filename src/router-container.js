@@ -49,6 +49,8 @@ export default class RouterContainer extends Component {
                     <Route path="/regulation/:id" element={<Langhaugeterm />} />
                     <Route path="/timetable/:id" element={<Timetable />} />
                     <Route path="/newpassword/:id" element={<Newpassword />} />
+                    <Route path="/add-student/:id" element={<AddStudent />} />
+
 
 
 

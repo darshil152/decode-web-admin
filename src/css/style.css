@@ -11915,54 +11915,40 @@ input.toggle:checked+.slider.blue {
 }
 
 
-/* tyable css */
-/* table {
-  max-width: 960px;
-  margin: 15px auto;
-  font-family: "Jost", sans-serif;
-}
-
-caption {
-  font-size: 1.6em;
-  font-weight: 400;
-  padding: 10px 0;
-}
-
-thead th {
-  font-weight: 400;
-  background: #8a97a0;
-  color: #FFF;
-  font-family: "Jost", sans-serif;
-}
-
-tr {
-  background: #f4f7f8;
-  border-bottom: 1px solid #FFF;
-  margin-bottom: 5px;
-  font-family: "Jost", sans-serif;
-}
-
-tr:nth-child(even) {
-  background: #e8eeef;
-  font-family: "Jost", sans-serif;
-}
-
-th.headings {
-  font-weight: 800;
-  font-family: "Jost", sans-serif;
-}
-
-th,
-td {
+table.tabledesign {
+  width: 100%;
+  border-collapse: collapse;
   text-align: left;
-  padding: 25px;
-  font-weight: 300;
-  font-family: "Jost", sans-serif;
-} */
+  overflow: hidden;
+}
+
+td.detailtable,
+th.headingstable {
+  border-top: 1px solid #ECF0F1;
+  padding: 10px;
+  font-family: "Open Sans", sans-serif;
+}
 
 
+td.detailtable {
+  border-left: 1px solid #ECF0F1;
+  border-right: 1px solid #ECF0F1;
+  font-family: "Open Sans", sans-serif;
+}
 
+th.headingstable {
+  background-color: #4ECDC4;
+}
 
+tr:nth-of-type(even) td {
+  background-color: lighten(#4ECDC4, 35%);
+}
+
+td.detailtable {
+  text-align: left;
+  font-weight: 700;
+  font-family: "Open Sans", sans-serif;
+}
 
 
 

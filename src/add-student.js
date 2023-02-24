@@ -17,6 +17,8 @@ function AddStudent() {
 
     let location = useLocation();
 
+    const [id, setId] = useState('');
+    const [getcurrent, setGetcurrent] = useState('');
 
     const [imageAsUrl, setImageAsUrl] = useState('');
     const [file, setFile] = useState('');
@@ -45,6 +47,10 @@ function AddStudent() {
 
     const navigate = useNavigate();
     useEffect(() => {
+        var url = window.location.href
+        var ids = url.substring(url.lastIndexOf('/') + 1);
+        setId(ids)
+        getalldata();
         getdata();
     }, [])
 
@@ -206,7 +212,6 @@ function AddStudent() {
         const db = firebaseApp.firestore();
         db.collection('Students').where("status", "==", 1).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                console.log(doc.data())
                 entry.push(doc.data())
                 // temp.push(doc.data())
             })
@@ -219,7 +224,6 @@ function AddStudent() {
 
                 for (let i = 0; i < entry.length; i++) {
                     if (entry[i].status == 1) {
-                        console.log(entry[i].status)
                         activeStudents.push(entry[i])
                     }
                 }
@@ -267,6 +271,9 @@ function AddStudent() {
         }
         return result;
     }
+
+
+
 
 
 
@@ -334,6 +341,17 @@ function AddStudent() {
         })
     }
 
+    const getalldata = () => {
+        const db = firebaseApp.firestore();
+        db.collection('Students').where("er_num", "==", Number(id)).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                setGetcurrent(doc.data())
+            });
+            console.log(getcurrent)
+        }).catch(err => {
+            console.error(err)
+        });
+    }
 
     return (
         <AdminLayout>
@@ -352,7 +370,7 @@ function AddStudent() {
                                     initialValues={{
                                         er_num: ernum,
                                         file: '',
-                                        f_name: '',
+                                        f_name: getcurrent.f_name,
                                         l_name: '',
                                         dob: '',
                                         email: '',
@@ -376,20 +394,20 @@ function AddStudent() {
                                     }}
                                     validationSchema={Yup.object({
                                         f_name: Yup.string().required("First name is required."),
-                                        l_name: Yup.string().required("Last name is required."),
-                                        email: Yup.string().required("email is required."),
-                                        courses: Yup.string().required("please choose your course."),
-                                        course_fees: Yup.string().required("please Enter Fees of Course."),
-                                        phone: Yup.string().required("phone is required."),
-                                        dob: Yup.string().required("Date Of Birth is required."),
-                                        eme_phone: Yup.string().required("Emergency Contact number is required."),
-                                        f_f_name: Yup.string().required("First name is required."),
-                                        f_l_name: Yup.string().required("Last name is required."),
-                                        f_phone: Yup.string().required("Contact number is required."),
-                                        line_1: Yup.string().required("Address is required."),
-                                        city: Yup.string().required("city is required."),
-                                        state: Yup.string().required("state is required."),
-                                        zipcode: Yup.string().required("Zipcode is required"),
+                                        // l_name: Yup.string().required("Last name is required."),
+                                        // email: Yup.string().required("email is required."),
+                                        // courses: Yup.string().required("please choose your course."),
+                                        // course_fees: Yup.string().required("please Enter Fees of Course."),
+                                        // phone: Yup.string().required("phone is required."),
+                                        // dob: Yup.string().required("Date Of Birth is required."),
+                                        // eme_phone: Yup.string().required("Emergency Contact number is required."),
+                                        // f_f_name: Yup.string().required("First name is required."),
+                                        // f_l_name: Yup.string().required("Last name is required."),
+                                        // f_phone: Yup.string().required("Contact number is required."),
+                                        // line_1: Yup.string().required("Address is required."),
+                                        // city: Yup.string().required("city is required."),
+                                        // state: Yup.string().required("state is required."),
+                                        // zipcode: Yup.string().required("Zipcode is required"),
                                     })}
                                     onSubmit={(formData, { resetForm }) => {
                                         submitStudentData(formData, resetForm);
@@ -423,7 +441,7 @@ function AddStudent() {
 
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">First Name <span className="text-danger">*</span></label>
-                                                <input type="text" name="f_name" {...formAttr(runform, "f_name")} className="form-control input-style" placeholder="" />
+                                                <input type="text" name="f_name"  {...formAttr(runform, "f_name")} className="form-control input-style" placeholder="" />
                                                 {errorContainer(runform, "f_name")}
                                             </div>
 

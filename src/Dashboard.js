@@ -38,8 +38,12 @@ export default function Dashboard() {
     }
 
     const viewuser = (data) => {
-
         window.location.href = "./profile/" + data
+    }
+
+    const edituser = (data) => {
+        window.location.href = "./add-student/" + data
+
     }
 
     const changestatus = (event) => {
@@ -180,6 +184,22 @@ export default function Dashboard() {
                     return (
                         <>
                             <button className='btn btn-primary' onClick={() => viewuser(value)}>View</button>
+                        </>
+                    );
+
+                },
+            }
+        },
+        {
+            name: "er_num",
+            label: "Edit",
+            options: {
+                filter: true,
+                sort: true,
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                        <>
+                            <button className='btn btn-primary' onClick={() => edituser(value)}>Edit</button>
                         </>
                     );
 
