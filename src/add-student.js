@@ -19,7 +19,6 @@ function AddStudent() {
 
     const [id, setId] = useState('');
     const [getcurrent, setGetcurrent] = useState([]);
-
     const [imageAsUrl, setImageAsUrl] = useState('');
     const [file, setFile] = useState('');
     const [ernum, setErnum] = useState(23000001)
@@ -43,6 +42,33 @@ function AddStudent() {
     const [otherRefModalShow, setOtherRefModalShow] = useState(false);
     const [currentid, setCurrentid] = useState('')
     const [acticestatus, setActivestatus] = useState("")
+
+
+    const [f_name, setFname] = useState('');
+    const [l_name, setLname] = useState('');
+    const [dob, setDob] = useState('');
+    const [phone, setPhone] = useState('');
+    const [profile_img, setImg] = useState('');
+    const [email, setEmail] = useState('');
+    const [eme_phone, setEmephone] = useState('');
+    const [courses, setCourses] = useState('');
+    const [course_fees, setCoursefees] = useState('');
+    const [f_f_name, setFfname] = useState('');
+    const [f_l_name, setFlname] = useState('');
+    const [occupation, setOccupation] = useState('');
+    const [qualification, setQualification] = useState('');
+    const [f_phone, setFphone] = useState('');
+    const [line_1, setLine1] = useState('');
+    const [line_2, setLine2] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [country, setCountry] = useState('');
+    const [zipcode, setZipcode] = useState('');
+    const [myref, setMyref] = useState([]);
+    const [other_ref, setOthersRef] = useState([]);
+    const [reference, setReference] = useState([]);
+
+
 
 
     const navigate = useNavigate();
@@ -216,7 +242,30 @@ function AddStudent() {
 
                 for (let i = 0; i < fetchdata.length; i++) {
                     if (fetchdata[i].er_num == id) {
-                        setGetcurrent(fetchdata[i])
+                        setFname(fetchdata[i].f_name);
+                        setLname(fetchdata[i].l_name)
+                        setDob(fetchdata[i].dob);
+                        setPhone(fetchdata[i].phone)
+                        setImg(fetchdata[i].profile_img)
+                        setEmail(fetchdata[i].email)
+                        setEmephone(fetchdata[i].eme_phone)
+                        setCourses(fetchdata[i].courses)
+                        setCoursefees(fetchdata[i].course_fees)
+                        setFfname(fetchdata[i].f_f_name)
+                        setFlname(fetchdata[i].f_l_name)
+                        setOccupation(fetchdata[i].occupation)
+                        setQualification(fetchdata[i].qualification)
+                        setFphone(fetchdata[i].f_phone)
+                        setLine1(fetchdata[i].line_1)
+                        setLine2(fetchdata[i].line_2)
+                        setCity(fetchdata[i].city)
+                        setState(fetchdata[i].state)
+                        setCountry(fetchdata[i].country)
+                        setZipcode(fetchdata[i].zipcode)
+                        setMyref(fetchdata[i].myref)
+                        setOthersRef(fetchdata[i].other_ref)
+                        setReference(fetchdata[i].reference)
+
                     }
                 }
 
@@ -408,28 +457,28 @@ function AddStudent() {
                                     enableReinitialize
                                     initialValues={{
                                         er_num: ernum,
-                                        file: '',
-                                        f_name: getcurrent.f_name,
-                                        l_name: getcurrent.l_name,
-                                        dob: getcurrent.dob,
-                                        email: getcurrent.email,
-                                        phone: getcurrent.phone,
-                                        eme_phone: getcurrent.eme_phone,
-                                        courses: getcurrent.courses,
-                                        course_fees: getcurrent.course_fees,
-                                        f_f_name: getcurrent.f_f_name,
-                                        f_l_name: getcurrent.f_l_name,
-                                        occupation: getcurrent.occupation,
-                                        qualification: getcurrent.qualification,
-                                        f_phone: getcurrent.f_phone,
-                                        line_1: getcurrent.line_1,
-                                        line_2: getcurrent.line_2,
-                                        city: getcurrent.city,
-                                        state: getcurrent.state,
+                                        file: f_name,
+                                        f_name: f_name,
+                                        l_name: l_name,
+                                        dob: dob,
+                                        email: email,
+                                        phone: phone,
+                                        eme_phone: eme_phone,
+                                        courses: courses,
+                                        course_fees: course_fees,
+                                        f_f_name: f_f_name,
+                                        f_l_name: "",
+                                        occupation: occupation,
+                                        qualification: qualification,
+                                        f_phone: f_phone,
+                                        line_1: line_1,
+                                        line_2: line_2,
+                                        city: city,
+                                        state: state,
                                         country: 'India',
-                                        zipcode: getcurrent.zipcode,
+                                        zipcode: zipcode,
                                         reference: {},
-                                        amount: getcurrent.amount,
+                                        amount: "",
                                     }}
                                     validationSchema={Yup.object({
                                         f_name: Yup.string().required("First name is required."),
@@ -675,9 +724,9 @@ function AddStudent() {
                                                 <option value={items.id}>{items.f_name} {items.l_name}</option>
                                             ))}
                                         </select>
-                                        <label className="lbl-comn-info" onChange={refamount} >Number of Amount :</label>
+                                        <label className="lbl-comn-info"  >Number of Amount :</label>
 
-                                        <input className="form-control input-style" id="amount" name="amount" onChange={handlerefamount}
+                                        <input className="form-control input-style" id="amount" value={refamount} name="amount" onChange={handlerefamount}
                                         />
                                     </Modal.Body>
                                     <Modal.Footer>

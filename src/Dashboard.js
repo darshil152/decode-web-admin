@@ -15,7 +15,8 @@ import userdummy from "./img/userdummy.png"
 export default function Dashboard() {
 
     const [stdata, setStdata] = useState([]);
-    const [toggles, setToggles] = useState('');
+    const [toggles, setToggles] = useState(false);
+    const [getid, setGetid] = useState('')
 
     useEffect(() => {
         getdata()
@@ -28,9 +29,10 @@ export default function Dashboard() {
 
         db.collection('Students').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
+                // console.log(doc.data())
                 entry.push(doc.data())
             })
-            // console.log(entry, 'product array')
+            console.log(entry, 'product array')
             setStdata(entry)
         }).catch(err => {
             console.error(err)
@@ -47,24 +49,31 @@ export default function Dashboard() {
 
     }
 
-    const changestatus = (event) => {
-        setToggles(event.target.value)
+    const changetoggle = (event, data) => {
+
+        console.log("first", event, data)
+        changetogglestatus(event, data.rowData[0])
     }
 
-    const changetogglestatus = () => {
+
+
+
+
+    const changetogglestatus = (e, id) => {
+        console.log(e.target.checked, id)
+        let status = e.target.checked == true ? 1 : 0
         const db = firebaseApp.firestore();
-        db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
+        db.collection('Students').where("er_num", "==", Number(id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 var updateCollection = db.collection("Students").doc(doc.ref.id);
 
                 return updateCollection.update({
-                    status: false
+                    status: status
+
                 })
                     .then(() => {
                         console.log("Document successfully updated!");
-                        this.getalldata();
-                        this.closeModal1();
-
+                        getdata()
                     })
                     .catch((error) => {
                         // The document probably doesn't exist.
@@ -115,6 +124,7 @@ export default function Dashboard() {
         },
         {
             name: "status",
+            // name: "er_num",
             label: "status",
             options: {
                 filter: true,
@@ -123,14 +133,13 @@ export default function Dashboard() {
                     return (
                         <>
                             <label class="switch">
-                                <input type="checkbox" class="toggle" checked={value} onChange={changestatus} />
+                                <input type="checkbox" class="toggle" checked={value} onChange={(e) => changetoggle(e, tableMeta)} />
+                                {/* <h2>{value}</h2> */}
                                 <span class="slider round"></span>
                             </label>
                         </>
                     );
-
                 },
-
             },
         },
 
