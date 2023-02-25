@@ -82,12 +82,13 @@ export default class Profile extends Component {
                         if (this.state.sc !== this.state.currentdata.password) {
                             window.location.href = '/'
                         }
+                        if (!this.state.currentdata.terms) {
+                            this.openModal()
+                        } else {
+                            this.closeModal();
+                        }
                     }
-                    if (!this.state.currentdata.terms) {
-                        this.openModal()
-                    } else {
-                        this.closeModal();
-                    }
+
                     this.getrefdata();
                 })
 
