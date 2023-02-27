@@ -52,7 +52,10 @@ export default class Langhaugeterm extends Component {
 
                 'We expect you to provide your experiences and feedback in the medium of video review via mail to us.',
             ],
-            getid: "",
+            id: "",
+            currentuser: [],
+            sc: localStorage.getItem('sc'),
+
         }
     }
 
@@ -61,22 +64,28 @@ export default class Langhaugeterm extends Component {
     componentDidMount() {
         const url = window.location.href;
         var ids = url.substring(url.lastIndexOf('/') + 1);
-        this.setState({ getid: ids }, () => {
-            this.getuserrole()
+        this.setState({ id: ids }, () => {
+            this.getalldatas();
         })
-
     }
 
-    getuserrole = () => {
+
+
+    getalldatas = () => {
+        console.log('come', this.state.id)
         const db = firebaseApp.firestore();
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                console.log(doc.data())
-                if (Number(localStorage.getItem('userrole')) !== 2) {
-                    if (this.state.sc !== this.state.currentdata.password) {
-                        window.location.href = '/'
-                    }
-                }
+                this.setState({ currentuser: doc.data() }, () => {
+                    console.log(this.state.currentuser)
+                    this.setState({ currentdata: doc.data(), email: doc.data().email, dob: doc.data().dob, profile: doc.data().profile_img ? doc.data().profile_img : '', line_1: doc.data().line_1, line_2: doc.data().line_2, city: doc.data().city }, () => {
+                        if (Number(localStorage.getItem('userrole')) !== 2) {
+                            if (this.state.sc !== this.state.currentdata.password) {
+                                window.location.href = '/'
+                            }
+                        }
+                    })
+                })
             });
         }).catch(err => {
             console.error(err)

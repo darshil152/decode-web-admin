@@ -26,19 +26,18 @@ function Studentsidebar(props) {
         var id = url.substring(url.lastIndexOf('/') + 1);
         var ids = url.substring(url.lastIndexOf('/') + 1);
         var userollno = localStorage.getItem("userer_num")
-        if (userollno == "heaven") {
-            localStorage.setItem("userer_num", ids)
-        }
-        console.log(lastid)
-        setUserollno(userollno);
+        // if (userollno == "heaven") {
+        //     localStorage.setItem("userer_num", ids)
+        // }
+        // setUserollno(userollno);
         setId(id)
     }, [])
 
 
     const handleClose = () => {
         setShow(false);
+        window.location.href = "/"
         localStorage.clear();
-        <Link to="/"></Link>
     }
     const handleCloseNo = () => {
         setShow(false);
@@ -79,7 +78,7 @@ function Studentsidebar(props) {
                                         </bdi>
                                     </li>
                                 </Link>
-                                <Link to={"/attandancesheet/" + userollno}>
+                                <Link to={"/attandancesheet/" + id}>
                                     <li>
                                         <bdi className={urlName === "attandancesheet" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,7 +88,7 @@ function Studentsidebar(props) {
                                         </bdi>
                                     </li>
                                 </Link>
-                                <Link to={"/paymentdetail/" + userollno}>
+                                <Link to={"/paymentdetail/" + id}>
                                     <li>
                                         <bdi className={urlName === "paymentdetail" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -100,7 +99,7 @@ function Studentsidebar(props) {
                                     </li>
                                 </Link>
 
-                                <Link to={"/Newpassword/" + userollno}>
+                                <Link to={"/Newpassword/" + id}>
                                     <li>
                                         <bdi className={urlName === "fees" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -111,7 +110,7 @@ function Studentsidebar(props) {
                                     </li>
                                 </Link>
 
-                                <Link to={"/timetable/" + userollno}>
+                                <Link to={"/timetable/" + id}>
                                     <li>
                                         <bdi className={urlName === "fees" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +120,7 @@ function Studentsidebar(props) {
                                         </bdi>
                                     </li>
                                 </Link>
-                                <Link to={"/regulation/" + userollno}>
+                                <Link to={"/regulation/" + id}>
                                     <li>
                                         <bdi className={urlName === "fees" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">

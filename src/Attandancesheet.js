@@ -15,8 +15,10 @@ export default class Attandancesheet extends Component {
         super(props);
 
         this.state = {
+            sc: localStorage.getItem('sc'),
             id: "",
             finalpercent: '',
+            currentpass: "",
             countData: [],
             currentdata: [],
             oneandzero: [],
@@ -89,7 +91,6 @@ export default class Attandancesheet extends Component {
         var ids = url.substring(url.lastIndexOf('/') + 1);
         this.setState({ id: ids }, () => {
             this.getdata();
-            // this.getuserrole();
         })
         // this.finalpercentage();
     }
@@ -121,13 +122,26 @@ export default class Attandancesheet extends Component {
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 console.log('data :: ', doc.data())
-                this.setState({ currentdata: doc.data().myAttend }, () => {
+
+                this.setState({ currentdata: doc.data().myAttend, currentpass: doc.data().password }, () => {
                     console.log('data :: ', this.state.currentdata)
+
+
+
+                    if (Number(localStorage.getItem('userrole')) !== 2) {
+                        if (this.state.sc !== this.state.currentpass) {
+                            window.location.href = '/'
+                        }
+                    }
+
                     for (let i = 0; i < this.state.currentdata.length; i++) {
                         if (this.state.currentdata[i].attandance == '1' || this.state.currentdata[i].attandance == '0') {
                             oneandzero.push(this.state.currentdata[i])
                         }
                     }
+
+
+
                     this.setState({ countData: oneandzero }, () => {
                         this.finalpercentage()
                     })

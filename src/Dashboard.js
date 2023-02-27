@@ -41,8 +41,8 @@ export default function Dashboard() {
         });
     }
 
-    const viewuser = (data) => {
-        window.location.href = "./profile/" + data
+    const viewuser = (datas) => {
+        window.location.href = "./profile/" + datas;
     }
 
     const edituser = (data) => {

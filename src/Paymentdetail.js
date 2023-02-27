@@ -11,7 +11,7 @@ import StudentLayout from './studentlayout/studentlayout';
 import { throwIfEmpty } from 'rxjs';
 
 
-let referedStudent = []
+
 
 export default class paymentdetail extends Component {
 
@@ -23,6 +23,7 @@ export default class paymentdetail extends Component {
 
 
         this.state = {
+            referedamount: 0,
             installMentNo: 1,
             date: "",
             isOpen: false,
@@ -36,7 +37,7 @@ export default class paymentdetail extends Component {
             retrivedata: [],
             referedStudent: [],
             feesdata: [],
-            refsamount: [],
+            refsamount: 0,
             balance: [],
             showdiv: false,
             sc: localStorage.getItem('sc'),
@@ -189,7 +190,6 @@ export default class paymentdetail extends Component {
                         totaloldref = Number(totaloldref) + Number(this.state.referedStudent[i].amount)
                     }
                     console.log('ref :: ', totaloldref)
-                    // this.setState({ totaloldrefamount: totaloldref })
                 })
 
                 this.setState({ retrivedata: doc.data().fees, myRefData: doc.data().myref, currentdata: doc.data() }, () => {
@@ -229,6 +229,7 @@ export default class paymentdetail extends Component {
 
     getRefersName = (id) => {
         console.log('come')
+        let referedamount = 0
         for (let i = 0; i < this.state.allStudentData.length; i++) {
 
             if (this.state.allStudentData[i].id == id) {
@@ -240,10 +241,14 @@ export default class paymentdetail extends Component {
                     ref_amount: this.state.allStudentData[i].reference.refAmount,
                     id: this.makeid(8)
                 }
-                referedStudent.push(obj)
-                this.setState({ referedStudent })
-            }
+                this.setState({ referedStudent: [...this.state.referedStudent, obj] }, () => {
+                    for (let i = 0; i < this.state.referedStudent.length; i++) {
 
+                        referedamount = referedamount + this.state.referedStudent[i].ref_amount
+                    }
+                    this.setState({ referedamount })
+                })
+            }
         }
     }
 
@@ -269,14 +274,14 @@ export default class paymentdetail extends Component {
                             <div className='col-sm-3'>
                                 <div className='totalfees'>
                                     <h1 className='totalfee' style={{ fontSize: "22px", textAlign: "center" }}>Total reference amount</h1>
-                                    <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>{this.state.refsamount} </h1>
+                                    <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>{Number(this.state.refsamount) + Number(this.state.referedamount)} </h1>
                                 </div>
                             </div>
 
                             <div className='col-sm-3'>
                                 <div className='totalfees'>
                                     <h1 className='totalfee' style={{ fontSize: "22px", textAlign: "center" }}>Total pending amount</h1>
-                                    <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>{this.state.feesdata - this.state.totalAmount - this.state.refsamount}</h1>
+                                    <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>{this.state.feesdata - this.state.totalAmount - Number(this.state.refsamount) - Number(this.state.referedamount)}</h1>
                                 </div>
                             </div>
                         </div>
@@ -289,53 +294,60 @@ export default class paymentdetail extends Component {
                             options={this.state.options}
                         />
 
-                        <h4 className='ml-3 mt-5 totalamount' >Total amout paid is: {this.state.totalAmount} </h4>
 
-                        {this.state.referedStudent.length > 0 && <>
-                            {
+                        {this.state.referedStudent.length > 0 ? <div className='container mt-5 residentalDetail '>
+                            <div className='container'>
+                                <div className='row'>
+                                    <div className='col-lg-6'>
+                                        <div className='mt-4'>
+                                            <h1>Your References</h1>
+                                        </div>
 
-                                <div className='container mt-5 residentalDetail '>
-                                    <div className='container'>
-                                        <div className='row'>
-                                            <div className='col-lg-6'>
-                                                <div className='mt-4'>
-                                                    <h1>Your References</h1>
-                                                </div>
+                                        <table className='tabledesign'>
+                                            <th className='headingstable'>Enrollment Number</th>
+                                            <th className='headingstable'>First Name</th>
+                                            <th className='headingstable'>Last Name</th>
+                                            <th className='headingstable'>Amount</th>
 
-                                                <table>
-                                                    <th>Enrollment Number</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Amount</th>
+                                            {this.state.referedStudent.map((item, i) => {
+                                                return (
 
-                                                    {this.state.referedStudent.map((item, i) => {
-                                                        return (
-                                                            <tr key={i}>
+                                                    <tr key={i}>
 
-                                                                <td className="labelData ml-3">{item.er_num}</td>
+                                                        <td className='detailtable'>{item.er_num}</td>
 
-                                                                <td className="labelData ml-3  ">{item.f_name}</td>
-                                                                <td className="labelData ml-3  ">{item.l_name}</td>
+                                                        <td className='detailtable'>{item.f_name}</td>
+                                                        <td className='detailtable'>{item.l_name}</td>
 
-                                                                <td className="labelData ml-3  ">{item.ref_amount}</td>
+                                                        <td className='detailtable' >{item.ref_amount}</td>
 
-                                                            </tr>
-                                                        )
-                                                    })}
-                                                </table>
+                                                    </tr>
+                                                )
+                                            })}
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> :
+                            <div className='container mt-5 residentalDetail '>
+                                <div className='container'>
+                                    <div className='row'>
+                                        <div className='col-lg-12'>
+                                            <div className='mt-4'>
+                                                <h1>Your Reference</h1>
+                                                <h5 className='text-left  mb-3'  >Sorry you don't have any  references😔</h5>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            }
-                        </>}
+                            </div>
+                        }
 
 
-
-
-                        <div className='container mt-5 residentalDetail '>
+                        {this.state.otherref.refAmount != 0 ? <div className='container mt-5 residentalDetail '>
                             <div className='container'>
                                 <div className='row'>
+
                                     <div className='col-lg-12'>
                                         <div className='mt-4'>
                                             <h1>Other Reference</h1>
@@ -356,7 +368,39 @@ export default class paymentdetail extends Component {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> :
+                            null
+
+                        }
+                        {/* <div className='container mt-5 residentalDetail '>
+                            <div className='container'>
+                                <div className='row'>
+
+                                    <div className='col-lg-12'>
+                                        <div className='mt-4'>
+                                            <h1>Other Reference</h1>
+                                        </div>
+
+                                        <div className='row'>
+                                            <div className='col-lg-12 d-flex'>
+                                                <label className="lbls mt-3 ">Reference Name: </label>
+                                                <div className='srernum mt-3'>{this.state.otherref.refName} </div>
+                                            </div>
+                                        </div>
+                                        <div className='row'>
+                                            <div className='col-lg-12 d-flex'>
+                                                <label className="lbls mt-3 ">Reference Amount: </label>
+                                                <div className='srernum mt-3'>{this.state.otherref.refAmount} </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> */}
+
+
+
+
                         <Modal size='xl' show={this.state.isOpen} onHide={this.closeModal} className="modal-container custom-map-modal">
                             <Modal.Header >
                                 <div className='container'>

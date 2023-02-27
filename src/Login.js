@@ -3,28 +3,30 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Formik } from 'formik';
 import * as Yup from "yup";
-import { useEffect } from 'react';
+
 import firebaseApp from './firebase/firebase';
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+
+
 
 
 let data = [];
 
 export default function Login() {
 
-    const dispatch = useDispatch();
+
 
     const navigate = useNavigate();
     const [userRole, setUserRole] = useState('1');
 
+    const getcontextdat =
 
-
-    useEffect(() => {
-        getalldata();
-        console.log(localStorage.getItem('userrole'))
-    }, [])
+        useEffect(() => {
+            getalldata();
+            console.log(localStorage.getItem('userrole'))
+        }, [])
 
 
     const getalldata = () => {

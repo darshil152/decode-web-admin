@@ -15,6 +15,7 @@ export default class Newpassword extends Component {
             Newpassword: "",
             confirmpassword: "",
             id: "",
+            sc: localStorage.getItem('sc'),
             currentuser: [],
             Schema: Yup.object().shape({
                 oldpassword: Yup.string().required("This field is required"),
@@ -36,25 +37,10 @@ export default class Newpassword extends Component {
         var ids = url.substring(url.lastIndexOf('/') + 1);
         this.setState({ id: ids }, () => {
             this.getalldatas();
-            this.getuserrole();
         })
     }
 
-    getuserrole = () => {
-        const db = firebaseApp.firestore();
-        db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                console.log(doc.data())
-                if (Number(localStorage.getItem('userrole')) !== 2) {
-                    if (this.state.sc !== this.state.currentdata.password) {
-                        window.location.href = '/'
-                    }
-                }
-            });
-        }).catch(err => {
-            console.error(err)
-        });
-    }
+
 
 
 
@@ -67,7 +53,11 @@ export default class Newpassword extends Component {
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 this.setState({ currentuser: doc.data() }, () => {
-                    console.log(this.state.currentuser)
+                    if (Number(localStorage.getItem('userrole')) !== 2) {
+                        if (this.state.sc !== this.state.currentuser.password) {
+                            window.location.href = '/'
+                        }
+                    }
                 })
             });
         }).catch(err => {
