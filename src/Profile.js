@@ -8,21 +8,10 @@ import { Modal, Button } from "react-bootstrap";
 import React, { Component } from 'react'
 import Rules from "./Rules"
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow
-} from "@mui/material";
-import { FastField } from "formik"
 
 
 export default class Profile extends Component {

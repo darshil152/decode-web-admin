@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import AdminLayout from "./adminlayout/adminlayout"
-import Upload from "./img/upload-icon.svg"
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import firebaseApp from "./firebase/firebase";
-import { Navigate, useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { Button, Modal } from "react-bootstrap";
 
 
@@ -119,11 +118,7 @@ function AddStudent() {
             refId: refe,
             refAmount: refamount
         })
-        // setOtherRef({
-        //     refName: '',
-        //     refAmount: 0
-        // })
-        // setOtherRefCheck(false)
+
     }
 
     const handleOtherRefSave = () => {
@@ -332,7 +327,6 @@ function AddStudent() {
                     l_name: data.l_name,
                     dob: data.dob,
                     phone: data.phone,
-                    profile_img: '',
                     email: data.email,
                     eme_phone: data.eme_phone,
                     courses: data.courses,
@@ -350,16 +344,8 @@ function AddStudent() {
                     zipcode: data.zipcode,
                     reference: refData,
                     other_ref: otherRef,
-                    createdAt: new Date().getTime(),
-                    id: currentid,
-                    password: makepass(8),
-                    project: "Decode",
-                    userRole: 1,
-                    status: 1,
-                    myref: [],
-                    myAttend: [],
-                    fees: [],
-                    terms: false,
+                    updatedAt: new Date().getTime(),
+
                 }).then(function (docRef) {
                     toast.success('Form upadated successfully', {
                         position: toast.POSITION.TOP_RIGHT
@@ -482,20 +468,20 @@ function AddStudent() {
                                     }}
                                     validationSchema={Yup.object({
                                         f_name: Yup.string().required("First name is required."),
-                                        // l_name: Yup.string().required("Last name is required."),
-                                        // email: Yup.string().required("email is required."),
-                                        // courses: Yup.string().required("please choose your course."),
-                                        // course_fees: Yup.string().required("please Enter Fees of Course."),
-                                        // phone: Yup.string().required("phone is required."),
-                                        // dob: Yup.string().required("Date Of Birth is required."),
-                                        // eme_phone: Yup.string().required("Emergency Contact number is required."),
-                                        // f_f_name: Yup.string().required("First name is required."),
-                                        // f_l_name: Yup.string().required("Last name is required."),
-                                        // f_phone: Yup.string().required("Contact number is required."),
-                                        // line_1: Yup.string().required("Address is required."),
-                                        // city: Yup.string().required("city is required."),
-                                        // state: Yup.string().required("state is required."),
-                                        // zipcode: Yup.string().required("Zipcode is required"),
+                                        l_name: Yup.string().required("Last name is required."),
+                                        email: Yup.string().required("email is required."),
+                                        courses: Yup.string().required("please choose your course."),
+                                        course_fees: Yup.string().required("please Enter Fees of Course."),
+                                        phone: Yup.string().required("phone is required."),
+                                        dob: Yup.string().required("Date Of Birth is required."),
+                                        eme_phone: Yup.string().required("Emergency Contact number is required."),
+                                        f_f_name: Yup.string().required("First name is required."),
+                                        f_l_name: Yup.string().required("Last name is required."),
+                                        f_phone: Yup.string().required("Contact number is required."),
+                                        line_1: Yup.string().required("Address is required."),
+                                        city: Yup.string().required("city is required."),
+                                        state: Yup.string().required("state is required."),
+                                        zipcode: Yup.string().required("Zipcode is required"),
                                     })}
                                     onSubmit={(formData, { resetForm }) => {
                                         submitStudentData(formData, resetForm);
