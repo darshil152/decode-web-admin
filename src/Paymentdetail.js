@@ -23,6 +23,7 @@ export default class paymentdetail extends Component {
 
 
         this.state = {
+            lastdata: [],
             referedamount: 0,
             installMentNo: 1,
             date: "",
@@ -204,6 +205,8 @@ export default class paymentdetail extends Component {
                             }
                         }
                     })
+
+
                     for (let j = 0; j < doc.data().myref.length; j++) {
                         this.getRefersName(doc.data().myref[j])
 
@@ -228,7 +231,6 @@ export default class paymentdetail extends Component {
     }
 
     getRefersName = (id) => {
-        console.log('come')
         let referedamount = 0
         for (let i = 0; i < this.state.allStudentData.length; i++) {
 
@@ -241,15 +243,17 @@ export default class paymentdetail extends Component {
                     ref_amount: this.state.allStudentData[i].reference.refAmount,
                     id: this.makeid(8)
                 }
-                this.setState({ referedStudent: [...this.state.referedStudent, obj] }, () => {
-                    for (let i = 0; i < this.state.referedStudent.length; i++) {
-
-                        referedamount = referedamount + this.state.referedStudent[i].ref_amount
-                    }
-                    this.setState({ referedamount })
-                })
+                this.state.lastdata.push(obj)
+                console.log(this.state.lastdata)
             }
         }
+        this.setState({ referedStudent: this.state.lastdata }, () => {
+            console.log('refered :: ', this.state.referedStudent)
+            for (let i = 0; i < this.state.referedStudent.length; i++) {
+                referedamount = referedamount + this.state.referedStudent[i].ref_amount
+            }
+            this.setState({ referedamount })
+        })
     }
 
 
