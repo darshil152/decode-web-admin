@@ -4,7 +4,7 @@ import Logo from '../img/logo.png'
 function AdminSidebar(props) {
     const sidebar_change = (name) => {
         if (name) {
-            window.location.href = "/" + name;
+            // window.location.href = "/" + name;
             document.getElementById("root").classList.remove("dash-main-class-add");
         }
     };
@@ -23,7 +23,7 @@ function AdminSidebar(props) {
                     <div className="sidebar-main-inner-menu">
                         <div className="sidebar-main-inner-list">
                             <ul>
-                                <Link to="/dashboard">
+                                <Link to="/dashboard" onClick={sidebar_change}>
                                     <li>
                                         <bdi className={urlName === "dashboard" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +33,7 @@ function AdminSidebar(props) {
                                         </bdi>
                                     </li>
                                 </Link>
-                                <Link to="/add-student">
+                                <Link to="/add-student" onClick={sidebar_change}>
                                     <li>
                                         <bdi className={urlName === "add-student" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +43,7 @@ function AdminSidebar(props) {
                                         </bdi>
                                     </li>
                                 </Link>
-                                <Link to="/attandance">
+                                <Link to="/attandance" onClick={sidebar_change}>
                                     <li>
                                         <bdi className={urlName === "attandance" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,7 +53,7 @@ function AdminSidebar(props) {
                                         </bdi>
                                     </li>
                                 </Link>
-                                <Link to="/fees">
+                                <Link to="/fees" onClick={sidebar_change}>
                                     <li>
                                         <bdi className={urlName === "fees" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">

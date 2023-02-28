@@ -17,7 +17,7 @@ function Studentsidebar(props) {
 
     const sidebar_change = (name) => {
         if (name) {
-            window.location.href = "/" + name;
+            // window.location.href = "/" + name;
             document.getElementById("root").classList.remove("dash-main-class-add");
         }
     };
@@ -68,7 +68,7 @@ function Studentsidebar(props) {
                     <div className="sidebar-main-inner-menu">
                         <div className="sidebar-main-inner-list">
                             <ul>
-                                <Link to={"/profile/" + id}>
+                                <Link to={"/profile/" + id} onClick={sidebar_change}>
                                     <li>
                                         <bdi className={urlName === "profile" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,7 +78,7 @@ function Studentsidebar(props) {
                                         </bdi>
                                     </li>
                                 </Link>
-                                <Link to={"/attandancesheet/" + id}>
+                                <Link to={"/attandancesheet/" + id} onClick={sidebar_change}>
                                     <li>
                                         <bdi className={urlName === "attandancesheet" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -88,7 +88,7 @@ function Studentsidebar(props) {
                                         </bdi>
                                     </li>
                                 </Link>
-                                <Link to={"/paymentdetail/" + id}>
+                                <Link to={"/paymentdetail/" + id} onClick={sidebar_change}>
                                     <li>
                                         <bdi className={urlName === "paymentdetail" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,7 +99,7 @@ function Studentsidebar(props) {
                                     </li>
                                 </Link>
 
-                                <Link to={"/Newpassword/" + id}>
+                                <Link to={"/Newpassword/" + id} onClick={sidebar_change}>
                                     <li>
                                         <bdi className={urlName === "fees" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -110,7 +110,7 @@ function Studentsidebar(props) {
                                     </li>
                                 </Link>
 
-                                <Link to={"/timetable/" + id}>
+                                <Link to={"/timetable/" + id} onClick={sidebar_change}>
                                     <li>
                                         <bdi className={urlName === "fees" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -120,7 +120,7 @@ function Studentsidebar(props) {
                                         </bdi>
                                     </li>
                                 </Link>
-                                <Link to={"/regulation/" + id}>
+                                <Link to={"/regulation/" + id} onClick={sidebar_change}>
                                     <li>
                                         <bdi className={urlName === "fees" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -131,7 +131,7 @@ function Studentsidebar(props) {
                                     </li>
                                 </Link>
 
-                                <Link onClick={clear}>
+                                <Link onClick={clear} >
                                     <li>
                                         <bdi className={urlName === "fees" ? "active" : ""}>
                                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
