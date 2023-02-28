@@ -233,9 +233,7 @@ export default class paymentdetail extends Component {
     getRefersName = (id) => {
         let referedamount = 0
         for (let i = 0; i < this.state.allStudentData.length; i++) {
-
             if (this.state.allStudentData[i].id == id) {
-
                 let obj = {
                     f_name: this.state.allStudentData[i].f_name,
                     l_name: this.state.allStudentData[i].l_name,
@@ -244,13 +242,13 @@ export default class paymentdetail extends Component {
                     id: this.makeid(8)
                 }
                 this.state.lastdata.push(obj)
-                console.log(this.state.lastdata)
+                console.log("", this.state.lastdata)
             }
         }
         this.setState({ referedStudent: this.state.lastdata }, () => {
-            console.log('refered :: ', this.state.referedStudent)
+            // console.log('refered :: ', this.state.referedStudent)
             for (let i = 0; i < this.state.referedStudent.length; i++) {
-                referedamount = referedamount + this.state.referedStudent[i].ref_amount
+                referedamount = referedamount + Number(this.state.referedStudent[i].ref_amount)
             }
             this.setState({ referedamount })
         })
