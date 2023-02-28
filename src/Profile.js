@@ -35,16 +35,31 @@ export default class Profile extends Component {
             line_1: "",
             line_2: "",
             city: "",
+            // time: Date.now()
+
         }
     }
 
     componentDidMount() {
+        // const date = new Date();
+        // const final = date.toLocaleTimeString();
+        // console.log(final);
+        // localStorage.setItem('firsttime', final)
         const url = window.location.href;
         var id = url.substring(url.lastIndexOf('/') + 1);
         this.setState({ id }, () => {
             this.getalldata();
         })
     }
+
+
+    // componentWillUnmount() {
+    //     console.log('come')
+    //     const date = new Date();
+    //     const final = date.toLocaleTimeString();
+
+    //     localStorage.setItem('second', final)
+    // }
 
     openModal = () => this.setState({ isOpen: true });
     closeModal = () => this.setState({ isOpen: false });
@@ -65,7 +80,6 @@ export default class Profile extends Component {
         const db = firebaseApp.firestore();
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                console.log(doc.data())
                 this.setState({ currentdata: doc.data(), email: doc.data().email, dob: doc.data().dob, profile: doc.data().profile_img ? doc.data().profile_img : '', line_1: doc.data().line_1, line_2: doc.data().line_2, city: doc.data().city }, () => {
                     if (Number(localStorage.getItem('userrole')) !== 2) {
                         if (this.state.sc !== this.state.currentdata.password) {

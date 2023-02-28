@@ -7,6 +7,7 @@ import Loginheader from './Loginheader';
 import grey from "./img/grey.png";
 import ReactApexChart from 'react-apexcharts';
 import StudentLayout from './studentlayout/studentlayout';
+import { data } from 'jquery';
 
 
 
@@ -58,6 +59,35 @@ export default class Attandancesheet extends Component {
                         filter: true,
                         sort: true,
                     },
+                    sortOrder: {
+                        name: 'name',
+                        direction: 'desc'
+                    }
+
+                },
+                {
+                    name: "date",
+                    label: "Day",
+                    options: {
+                        filter: true,
+                        sort: true,
+                        customBodyRender: (value, tableMeta, updateValue) => {
+                            return (
+                                <>
+                                    {
+                                        <div className='datetoday'>{new Date(value).toLocaleDateString('en-us', { weekday: "long" })}</div>
+
+                                    }
+                                </>
+                            );
+
+                        },
+                    },
+                    sortOrder: {
+                        name: 'name',
+                        direction: 'desc'
+                    }
+
                 },
                 {
                     name: "attandance",
@@ -79,8 +109,8 @@ export default class Attandancesheet extends Component {
             ],
             options: {
                 selectableRowsHideCheckboxes: true,
-                responsive: "standard",
-                filterType: 'dropdown',
+                filterType: "dropdown",
+                responsive: "scroll"
             },
 
         };
@@ -92,28 +122,11 @@ export default class Attandancesheet extends Component {
         this.setState({ id: ids }, () => {
             this.getdata();
         })
-        // this.finalpercentage();
     }
 
 
 
-    // getuserrole = () => {
-    //     const db = firebaseApp.firestore();
-    //     db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
-    //         querySnapshot.forEach((doc) => {
-    //             console.log(doc.data())
-    //             this.setState({ currentdata: doc.data(), email: doc.data().email, dob: doc.data().dob, profile: doc.data().profile_img ? doc.data().profile_img : '', line_1: doc.data().line_1, line_2: doc.data().line_2, city: doc.data().city }, () => {
-    //                 if (Number(localStorage.getItem('userrole')) !== 2) {
-    //                     if (this.state.sc !== this.state.currentdata.password) {
-    //                         window.location.href = '/'
-    //                     }
-    //                 }
-    //             })
-    //         });
-    //     }).catch(err => {
-    //         console.error(err)
-    //     });
-    // }
+
 
 
     getdata = () => {

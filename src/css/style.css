@@ -11950,7 +11950,10 @@ td.detailtable {
   font-family: "Open Sans", sans-serif;
 }
 
-
+.datetoday {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+}
 
 @keyframes spin {
   0% {

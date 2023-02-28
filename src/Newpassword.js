@@ -43,10 +43,6 @@ export default class Newpassword extends Component {
 
 
 
-
-
-
-
     getalldatas = () => {
         console.log('come', this.state.id)
         const db = firebaseApp.firestore();
@@ -99,7 +95,12 @@ export default class Newpassword extends Component {
         if (this.state.currentuser.password == data.oldpassword) {
             console.log("1")
         } else {
-            console.log("0")
+            alert("Your old password does not match");
+            toast.error('Your old password does not match', {
+                position: toast.POSITION.TOP_RIGHT
+            });
+            window.location.reload(true);
+
         }
     }
 

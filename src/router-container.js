@@ -125,8 +125,8 @@ export default class RouterContainer extends Component {
 
 
                     <Route path="*" element={<Home />} />
-                </Routes >
-            </Router >
+                </Routes>
+            </Router>
         )
     }
 }
