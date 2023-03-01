@@ -10,6 +10,7 @@ import Rules from "./Rules"
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Context } from "./contexts/HeaderContext"
 
 
 
@@ -81,6 +82,7 @@ export default class Profile extends Component {
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 this.setState({ currentdata: doc.data(), email: doc.data().email, dob: doc.data().dob, profile: doc.data().profile_img ? doc.data().profile_img : '', line_1: doc.data().line_1, line_2: doc.data().line_2, city: doc.data().city }, () => {
+                    document.getElementById('profile-btn').click()
                     if (Number(localStorage.getItem('userrole')) !== 2) {
                         if (this.state.sc !== this.state.currentdata.password) {
                             window.location.href = '/'
@@ -303,264 +305,268 @@ export default class Profile extends Component {
 
     render() {
         return (
-            <>
-                <Studentlayout>
-                    {this.state.currentdata !== '' && <>
-                        <div className="content-main-section left">
-                            <div className='container mt-5 studentdetail' >
-                                <div className="showdiv">
-                                    <div className="row">
-                                        <div className="col-10 text-sm-center mt-3 mb-3">
-                                            <h1 className="text-left">Personal Detail</h1>
-                                        </div>
-                                        <div className="col-2  text-sm-center text-lg-right mt-3" >
-                                            <button className="buttonedit btn btn-primary btn-lg" onClick={this.openModal1}>
-                                                <i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                        </div>
-                                    </div>
+            <Context.Consumer>
+                {value => <>
 
-                                    <div className='row'>
-                                        <div className='col-11 text-center mt-4'>
-                                            <img src={this.state.profile !== '' ? this.state.profile : profilepicture} className="profilepicture" />
-                                        </div>
-                                        <div className="col-1 mt-5  abced">
-                                            {/* <button className="buttonedit btn btn-primary btn-lg" onClick={this.openModal1}>
-                                                <i class="fa fa-pencil" aria-hidden="true"></i></button> */}
-                                        </div>
-                                    </div>
-
-                                    <div className='row ml-4'>
-                                        <div className='col-lg-6'>
-                                            <div className='mt-lg-5 mt-5 d-flex text-left text-left'>
-                                                <i className="fa fa-id-card usernames"></i>
-                                                <label className="labelData ml-3 mb-2">{this.state.currentdata.er_num}</label>
-                                            </div>
-                                            <div className='mt-lg-5 d-flex mt-4 mb-sm-4 text-left'>
-                                                <i class="fa fa-mobile usernames" aria-hidden="true"></i>
-                                                <label className="labelData ml-3">{this.state.currentdata.phone}</label>
-                                            </div>
-                                            <div className='mt-lg-5 d-flex mb-lg-5 mt-4 text-left'>
-                                                <i class='fas fa-graduation-cap usernames'></i>
-                                                <label className="labelData ml-3">{this.state.currentdata.courses == 1 ? <label className="labelData">Master In Webdesign</label> : this.state.currentdata.courses == 2 ? <label className="labelData">Master In Frontend Development</label> : this.state.currentdata.courses == 3 ? <label className="labelData">Master In backend Development </label> : this.state.currentdata.courses == 4 ? <label className="labelData">firebase </label> : this.state.currentdata.courses == 5 ? <label className="labelData">Master in 360 & 3D Website</label> : this.state.currentdata.courses == 6 ? <label className="labelData">Master In Fullstack Development</label> : this.state.currentdata.courses == 7 ? <label className="labelData">Master In MERN-stack Development</label> : <div className='rendercon'></div>}</label>
-                                            </div>
-                                        </div>
-
-                                        <div className='col-lg-6 '>
-                                            <div className='mt-lg-5 d-flex mt-4 text-left'>
-                                                <i class="fa fa-user usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i> <label className="labelData ml-3">{this.state.currentdata.f_name}</label>
-                                            </div>
-                                            <div className='mt-lg-5 d-flex mt-4 text-left'>
-                                                <i class="fa fa-envelope usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i> <label className="labelData ml-3" style={{ wordBreak: "break-all" }}>{this.state.currentdata.email}</label>
-                                            </div>
-                                            <div className='mt-lg-5 d-flex mt-4 text-left '>
-                                                <i class="fa fa-birthday-cake usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i> <label className="labelData ml-3">{this.state.currentdata.dob}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className='container mt-5 parentdetails '>
-                                <div className='container'>
-                                    <div className='row'>
-                                        <div className='col-lg-6'>
-                                            <div className='mt-4'>
-                                                <h1 className="text-left">Parent's Detail</h1>
-                                            </div>
-                                            <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
-                                                <i class="fa fa-user usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i><label className="labelData ml-3">{this.state.currentdata.f_f_name}</label>
-                                            </div>
-                                            <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
-                                                <i class='fas fa-briefcase usernames' style={{ lineHeight: "inherit" }}></i><label className="labelData ml-3">{this.state.currentdata.occupation}</label>
-                                            </div>
-                                            <div className='mt-lg-4  d-flex mt-sm-4 ml-lg-4 mb-sm-4 text-left'>
-                                                <i class="fa fa-mobile usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i><label className="labelData ml-3">{this.state.currentdata.f_phone}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='container mt-5 residentalDetail '>
-                                <div className='container'>
-                                    <div className="showdiv mt-3">
-
+                    <Studentlayout>
+                        {this.state.currentdata !== '' && <>
+                            <div className="content-main-section left">
+                                <div className='container mt-5 studentdetail' >
+                                    <div className="showdiv">
                                         <div className="row">
                                             <div className="col-10 text-sm-center mt-3 mb-3">
                                                 <h1 className="text-left">Personal Detail</h1>
                                             </div>
-                                            <div className="col-2 text-sm-center text-lg-right mt-3" >
-                                                <button className="buttonedit btn btn-primary btn-lg" onClick={this.openModal2}>
+                                            <div className="col-2  text-sm-center text-lg-right mt-3" >
+                                                <button className="buttonedit btn btn-primary btn-lg" onClick={this.openModal1}>
                                                     <i class="fa fa-pencil" aria-hidden="true"></i></button>
                                             </div>
                                         </div>
-                                        <div className='col-lg-6'>
-                                            <div className='mt-4'>
+
+                                        <div className='row'>
+                                            <div className='col-11 text-center mt-4'>
+                                                <img src={this.state.profile !== '' ? this.state.profile : profilepicture} className="profilepicture" />
                                             </div>
-                                            <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
-                                                <i class="fa fa-map-marker-alt usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i>
-                                                <label className="labelData ml-3">{this.state.currentdata.line_1}</label>
+                                            <div className="col-1 mt-5  abced">
+                                                {/* <button className="buttonedit btn btn-primary btn-lg" onClick={this.openModal1}>
+                                                <i class="fa fa-pencil" aria-hidden="true"></i></button> */}
                                             </div>
-                                            <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
-                                                <i class="fa-sharp fa-solid fa-city usernames" style={{ lineHeight: "inherit" }}></i>
-                                                <label className="labelData ml-3">{this.state.currentdata.line_2}</label>
+                                        </div>
+
+                                        <div className='row ml-4'>
+                                            <div className='col-lg-6'>
+                                                <div className='mt-lg-5 mt-5 d-flex text-left text-left'>
+                                                    <i className="fa fa-id-card usernames"></i>
+                                                    <label className="labelData ml-3 mb-2">{this.state.currentdata.er_num}</label>
+                                                </div>
+                                                <div className='mt-lg-5 d-flex mt-4 mb-sm-4 text-left'>
+                                                    <i class="fa fa-mobile usernames" aria-hidden="true"></i>
+                                                    <label className="labelData ml-3">{this.state.currentdata.phone}</label>
+                                                </div>
+                                                <div className='mt-lg-5 d-flex mb-lg-5 mt-4 text-left'>
+                                                    <i class='fas fa-graduation-cap usernames'></i>
+                                                    <label className="labelData ml-3">{this.state.currentdata.courses == 1 ? <label className="labelData">Master In Webdesign</label> : this.state.currentdata.courses == 2 ? <label className="labelData">Master In Frontend Development</label> : this.state.currentdata.courses == 3 ? <label className="labelData">Master In backend Development </label> : this.state.currentdata.courses == 4 ? <label className="labelData">firebase </label> : this.state.currentdata.courses == 5 ? <label className="labelData">Master in 360 & 3D Website</label> : this.state.currentdata.courses == 6 ? <label className="labelData">Master In Fullstack Development</label> : this.state.currentdata.courses == 7 ? <label className="labelData">Master In MERN-stack Development</label> : <div className='rendercon'></div>}</label>
+                                                </div>
                                             </div>
-                                            <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 mb-sm-4 text-left'>
-                                                <i class="fa-sharp fa-solid fa-city usernames" style={{ lineHeight: "inherit" }}></i>
-                                                <label className="labelData ml-3">{this.state.currentdata.city}</label>
+
+                                            <div className='col-lg-6 '>
+                                                <div className='mt-lg-5 d-flex mt-4 text-left'>
+                                                    <i class="fa fa-user usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i> <label className="labelData ml-3">{this.state.currentdata.f_name}</label>
+                                                </div>
+                                                <div className='mt-lg-5 d-flex mt-4 text-left'>
+                                                    <i class="fa fa-envelope usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i> <label className="labelData ml-3" style={{ wordBreak: "break-all" }}>{this.state.currentdata.email}</label>
+                                                </div>
+                                                <div className='mt-lg-5 d-flex mt-4 text-left '>
+                                                    <i class="fa fa-birthday-cake usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i> <label className="labelData ml-3">{this.state.currentdata.dob}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className='container mt-5 parentdetails '>
+                                    <div className='container'>
+                                        <div className='row'>
+                                            <div className='col-lg-6'>
+                                                <div className='mt-4'>
+                                                    <h1 className="text-left">Parent's Detail</h1>
+                                                </div>
+                                                <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
+                                                    <i class="fa fa-user usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i><label className="labelData ml-3">{this.state.currentdata.f_f_name}</label>
+                                                </div>
+                                                <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
+                                                    <i class='fas fa-briefcase usernames' style={{ lineHeight: "inherit" }}></i><label className="labelData ml-3">{this.state.currentdata.occupation}</label>
+                                                </div>
+                                                <div className='mt-lg-4  d-flex mt-sm-4 ml-lg-4 mb-sm-4 text-left'>
+                                                    <i class="fa fa-mobile usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i><label className="labelData ml-3">{this.state.currentdata.f_phone}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='container mt-5 residentalDetail '>
+                                    <div className='container'>
+                                        <div className="showdiv mt-3">
+
+                                            <div className="row">
+                                                <div className="col-10 text-sm-center mt-3 mb-3">
+                                                    <h1 className="text-left">Personal Detail</h1>
+                                                </div>
+                                                <div className="col-2 text-sm-center text-lg-right mt-3" >
+                                                    <button className="buttonedit btn btn-primary btn-lg" onClick={this.openModal2}>
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                                </div>
+                                            </div>
+                                            <div className='col-lg-6'>
+                                                <div className='mt-4'>
+                                                </div>
+                                                <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
+                                                    <i class="fa fa-map-marker-alt usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i>
+                                                    <label className="labelData ml-3">{this.state.currentdata.line_1}</label>
+                                                </div>
+                                                <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
+                                                    <i class="fa-sharp fa-solid fa-city usernames" style={{ lineHeight: "inherit" }}></i>
+                                                    <label className="labelData ml-3">{this.state.currentdata.line_2}</label>
+                                                </div>
+                                                <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 mb-sm-4 text-left'>
+                                                    <i class="fa-sharp fa-solid fa-city usernames" style={{ lineHeight: "inherit" }}></i>
+                                                    <label className="labelData ml-3">{this.state.currentdata.city}</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </>
-                    }
+                        </>
+                        }
 
-                    <Modal size='xl' show={this.state.isOpen} >
-                        <Modal.Header  >
-                            <Modal.Title>
-                                <Navbar collapseOnSelect expand="lg" >
-                                    <Container>
-                                        <Navbar.Brand >Rules & Regulations</Navbar.Brand>
-                                        <Navbar aria-controls="responsive-navbar-nav" />
-                                        <Nav>
-                                            <Nav.Link eventKey={2} >
-                                                <button className="btn btn-primary" onClick={this.chagees}>{this.state.language == true ? 'English' : 'Gujarati'}</button>
-                                            </Nav.Link>
-                                        </Nav>
-                                    </Container>
-                                </Navbar>
-                            </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body >
+                        <Modal size='xl' show={this.state.isOpen} >
+                            <Modal.Header  >
+                                <Modal.Title>
+                                    <Navbar collapseOnSelect expand="lg" >
+                                        <Container>
+                                            <Navbar.Brand >Rules & Regulations</Navbar.Brand>
+                                            <Navbar aria-controls="responsive-navbar-nav" />
+                                            <Nav>
+                                                <Nav.Link eventKey={2} >
+                                                    <button className="btn btn-primary" onClick={this.chagees}>{this.state.language == true ? 'English' : 'Gujarati'}</button>
+                                                </Nav.Link>
+                                            </Nav>
+                                        </Container>
+                                    </Navbar>
+                                </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body >
 
-                            <Rules language={this.state.language} />
-                        </Modal.Body>
+                                <Rules language={this.state.language} />
+                            </Modal.Body>
 
-                        <Modal.Body >
+                            <Modal.Body >
 
-                            <div className="condition d-flex">
-                                <input
-                                    type="checkbox"
-                                    name="agreement"
-                                    onChange={this.handleChange}
-                                />
-                                <label for="js" className="ml-3 mt-2" > I agree with all the terms and condition </label>
-                            </div>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <button className="btn btn-primary" disabled={!this.state.defaultcheked} onClick={this.clicks}>Continue</button>
-                        </Modal.Footer>
-                    </Modal>
-
-
-                    <Modal show={this.state.isOpen1} onHide={this.closeModal1}>
-                        <Modal.Header>
-                            <Modal.Title>Edit form</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-12 rounded ">
-                                        <img src={this.state.profile !== '' ? this.state.profile : profilepicture} className="rounded mx-auto d-block" style={{ width: "100px" }} />
-                                    </div>
-
-
-
-
-                                    <div class="file-input">
-
-                                        <lable class="lbl-comn-info " > Change your Profile:</lable>
-                                        <input
-                                            type="file"
-                                            name="file-input"
-                                            id="file-input"
-                                            class="file-input__input"
-                                            onChange={this.handleFileChange}
-                                        />
-                                        <label class="file-input__label" for="file-input">
-                                            <svg
-                                                aria-hidden="true"
-                                                focusable="false"
-                                                data-prefix="fas"
-                                                data-icon="upload"
-                                                class="svg-inline--fa fa-upload fa-w-16"
-                                                role="img"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 512 512"
-                                            >
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M296 384h-80c-13.3 0-24-10.7-24-24V192h-87.7c-17.8 0-26.7-21.5-14.1-34.1L242.3 5.7c7.5-7.5 19.8-7.5 27.3 0l152.2 152.2c12.6 12.6 3.7 34.1-14.1 34.1H320v168c0 13.3-10.7 24-24 24zm216-8v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h136v8c0 30.9 25.1 56 56 56h80c30.9 0 56-25.1 56-56v-8h136c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"
-                                                ></path>
-                                            </svg>
-                                            <span>Upload file</span></label>
-
-                                    </div>
-
+                                <div className="condition d-flex">
+                                    <input
+                                        type="checkbox"
+                                        name="agreement"
+                                        onChange={this.handleChange}
+                                    />
+                                    <label for="js" className="ml-3 mt-2" > I agree with all the terms and condition </label>
                                 </div>
-                            </div>
-
-                            {/* <lable class="lbl-comn-info " > Change your Profile:</lable> */}
-
-                            {/* <input type='file' className="emailstyle" onChange={this.handleFileChange} />  */}
-
-                            <lable class="lbl-comn-info mt-2">Email</lable>
-                            <input type="email" name="email" value={this.state.email} class="emailstyle" onChange={this.handleemail} />
-
-                            <lable class="lbl-comn-info mt-2">birthdate:</lable>
-                            <input type="date" value={this.state.dob} class="emailstyle" onChange={this.handledob} />
-
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={this.closeModal1}>
-                                Close
-                            </Button>
-                            <Button className="btn btn-priamry mt-3gi" onClick={this.handlesave} >
-                                Save Changes
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <button className="btn btn-primary" disabled={!this.state.defaultcheked} onClick={this.clicks}>Continue</button>
+                            </Modal.Footer>
+                        </Modal>
 
 
-                    <Modal show={this.state.isOpen2} onHide={this.closeModal2}>
-                        <Modal.Header >
-                            <Modal.Title>Edit form</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
+                        <Modal show={this.state.isOpen1} onHide={this.closeModal1}>
+                            <Modal.Header>
+                                <Modal.Title>Edit form</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
 
-
-                            {/* Change your Profile: <input type='file' className="emailstyle" onChange={this.handleFileChange} /> */}
+                                <div className="container">
+                                    <div className="row">
+                                        <div className="col-12 rounded ">
+                                            <img src={this.state.profile !== '' ? this.state.profile : profilepicture} className="rounded mx-auto d-block" style={{ width: "100px" }} />
+                                        </div>
 
 
 
-                            <lable class="lbl-comn-info">Address 1:</lable>
-                            <input type="text" name="line_1" value={this.state.line_1} class="emailstyle" onChange={this.handleline1} />
 
-                            <lable class="lbl-comn-info mt-3">Address 2:</lable>
-                            <input type="text" name="line_2" value={this.state.line_2} class="emailstyle" onChange={this.handleline2} />
+                                        <div class="file-input">
 
-                            <lable class="lbl-comn-info mt-3">City: </lable>
-                            <input type="text" name="city" value={this.state.city} class="emailstyle" onChange={this.handlecity} />
+                                            <lable class="lbl-comn-info " > Change your Profile:</lable>
+                                            <input
+                                                type="file"
+                                                name="file-input"
+                                                id="file-input"
+                                                class="file-input__input"
+                                                onChange={this.handleFileChange}
+                                            />
+                                            <label class="file-input__label" for="file-input">
+                                                <svg
+                                                    aria-hidden="true"
+                                                    focusable="false"
+                                                    data-prefix="fas"
+                                                    data-icon="upload"
+                                                    class="svg-inline--fa fa-upload fa-w-16"
+                                                    role="img"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <path
+                                                        fill="currentColor"
+                                                        d="M296 384h-80c-13.3 0-24-10.7-24-24V192h-87.7c-17.8 0-26.7-21.5-14.1-34.1L242.3 5.7c7.5-7.5 19.8-7.5 27.3 0l152.2 152.2c12.6 12.6 3.7 34.1-14.1 34.1H320v168c0 13.3-10.7 24-24 24zm216-8v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h136v8c0 30.9 25.1 56 56 56h80c30.9 0 56-25.1 56-56v-8h136c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"
+                                                    ></path>
+                                                </svg>
+                                                <span>Upload file</span></label>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                {/* <lable class="lbl-comn-info " > Change your Profile:</lable> */}
+
+                                {/* <input type='file' className="emailstyle" onChange={this.handleFileChange} />  */}
+
+                                <lable class="lbl-comn-info mt-2">Email</lable>
+                                <input type="email" name="email" value={this.state.email} class="emailstyle" onChange={this.handleemail} />
+
+                                <lable class="lbl-comn-info mt-2">birthdate:</lable>
+                                <input type="date" value={this.state.dob} class="emailstyle" onChange={this.handledob} />
+
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={this.closeModal1}>
+                                    Close
+                                </Button>
+                                <Button className="btn btn-priamry mt-3gi" onClick={this.handlesave} >
+                                    Save Changes
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+
+
+                        <Modal show={this.state.isOpen2} onHide={this.closeModal2}>
+                            <Modal.Header >
+                                <Modal.Title>Edit form</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+
+
+                                {/* Change your Profile: <input type='file' className="emailstyle" onChange={this.handleFileChange} /> */}
 
 
 
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={this.closeModal2}>
-                                Close
-                            </Button>
-                            <Button className="btn btn-priamry mt-3gi" onClick={this.handlesaveaddress} >
-                                Save Changes
-                            </Button>
+                                <lable class="lbl-comn-info">Address 1:</lable>
+                                <input type="text" name="line_1" value={this.state.line_1} class="emailstyle" onChange={this.handleline1} />
 
-                        </Modal.Footer>
-                    </Modal>
-                </Studentlayout>
-            </>
+                                <lable class="lbl-comn-info mt-3">Address 2:</lable>
+                                <input type="text" name="line_2" value={this.state.line_2} class="emailstyle" onChange={this.handleline2} />
+
+                                <lable class="lbl-comn-info mt-3">City: </lable>
+                                <input type="text" name="city" value={this.state.city} class="emailstyle" onChange={this.handlecity} />
+
+
+
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={this.closeModal2}>
+                                    Close
+                                </Button>
+                                <Button className="btn btn-priamry mt-3gi" onClick={this.handlesaveaddress} >
+                                    Save Changes
+                                </Button>
+
+                            </Modal.Footer>
+                        </Modal>
+                    </Studentlayout>
+                    <button className='d-none' id="profile-btn" onClick={() => { value.setCurrentData(this.state.currentdata); }}>click me</button>
+                </>}
+            </Context.Consumer>
         )
     }
 }

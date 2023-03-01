@@ -31,10 +31,10 @@ function AdminHeader(props) {
                             <Dropdown >
                                 <Dropdown.Toggle id="dropdown" >
                                     <img src={Profile} alt="profile" />
-                                    <div className="ps-3 text-start">
-                                        <span className="d-block">John Deo</span>
-                                        <bdi className="d-block">john@loremipsum.com</bdi>
-                                        <bdi className="d-block">#221061682933</bdi>
+                                    <div className="pl-3 text-start">
+                                        <span className="d-block">Heaven Kapopara</span>
+                                        <bdi className="d-block">heaven@decodesofttech.com</bdi>
+                                        {/* <bdi className="d-block">#221061682933</bdi> */}
                                     </div>
                                 </Dropdown.Toggle>
 
