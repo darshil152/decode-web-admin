@@ -36,7 +36,7 @@ function StudentHeader(props) {
     return (
         <Context.Consumer>
             {value => <>
-                {console.log(value.state.currentStudentData.f_name, '-------')}
+                {/* {console.log(value.state.currentStudentData.f_name, '-------')} */}
                 <header className="header-fix-top-section">
                     <div onClick={addmainclass} className="d-xl-none abce">
                         <img src={menu} className="me-3 mr-3 imgmenu" alt="arrow" />

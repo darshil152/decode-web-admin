@@ -14,13 +14,7 @@ import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 
 
-
-
-
-
 export default class paymentdetail extends Component {
-
-
 
 
     constructor(props) {
@@ -28,6 +22,7 @@ export default class paymentdetail extends Component {
 
 
         this.state = {
+            refealldata: [],
             lastdata: [],
             referedamount: 0,
             installMentNo: 1,
@@ -115,6 +110,7 @@ export default class paymentdetail extends Component {
         this.setState({ id }, () => {
             this.getalldata();
             this.getDate();
+            // this.getreferencepayment();
         })
 
     }
@@ -176,6 +172,7 @@ export default class paymentdetail extends Component {
                 entry.push(doc.data())
             })
             this.setState({ allStudentData: entry }, () => {
+                // console.log(this.state.allStudentData)
                 this.getdata();
             })
         }).catch(err => {
@@ -201,7 +198,7 @@ export default class paymentdetail extends Component {
                     for (let i = 0; i < this.state.referedStudent.length; i++) {
                         totaloldref = Number(totaloldref) + Number(this.state.referedStudent[i].amount)
                     }
-                    console.log('ref :: ', totaloldref)
+                    // console.log('ref :: ', totaloldref)
                 })
 
                 this.setState({ retrivedata: doc.data().fees, myRefData: doc.data().myref, currentdata: doc.data() }, () => {
@@ -253,7 +250,15 @@ export default class paymentdetail extends Component {
                     id: this.makeid(8)
                 }
                 this.state.lastdata.push(obj)
-                console.log("", this.state.lastdata)
+            }
+
+            if (this.state.allStudentData[i].id == id) {
+                let obj = {
+                    f_name: this.state.allStudentData[i].f_name,
+                    fees: this.state.allStudentData[i].fees,
+
+                }
+                this.state.refealldata.push(obj)
             }
         }
         this.setState({ referedStudent: this.state.lastdata }, () => {
@@ -262,8 +267,16 @@ export default class paymentdetail extends Component {
                 referedamount = referedamount + Number(this.state.referedStudent[i].ref_amount)
             }
             this.setState({ referedamount })
+            console.log(this.state.refealldata)
         })
+
+        // for (let i = 0; i < this.state.refealldata.length; i++) {
+        //     console.log(this.state.refealldata[i].fees)
+        // }
     }
+
+
+
 
 
     render() {
@@ -324,19 +337,17 @@ export default class paymentdetail extends Component {
                                             <th className='headingstable'>First Name</th>
                                             <th className='headingstable'>Last Name</th>
                                             <th className='headingstable'>Amount</th>
+                                            <th className='headingstable'>Statu</th>
+
 
                                             {this.state.referedStudent.map((item, i) => {
                                                 return (
-
                                                     <tr key={i}>
-
                                                         <td className='detailtable'>{item.er_num}</td>
-
                                                         <td className='detailtable'>{item.f_name}</td>
                                                         <td className='detailtable'>{item.l_name}</td>
-
                                                         <td className='detailtable' >{item.ref_amount}</td>
-
+                                                        <td className='detailtable' >Inactive</td>
                                                     </tr>
                                                 )
                                             })}
