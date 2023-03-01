@@ -15,17 +15,17 @@ const ProtectedRouteAdmin = ({ children }) => {
 
 
 
-    if (Number(localStorage.getItem('userrole')) !== 2) {
+    // if (Number(localStorage.getItem('userrole')) !== 2) {
 
 
-        return (
-            <Context.Consumer>
-                {value => <>
+    return (
+        <Context.Consumer>
+            {value => <>
+                {console.log(value.state.userRole)}
+                {value.state.userRole !== 2 ? <Navigate to="/" state={{ from: location }} replace /> : children}</>}
+        </Context.Consumer>)
+    // }
 
-                    {value.state.userRole !== 2 && <Navigate to="/" state={{ from: location }} replace />}</>}
-            </Context.Consumer>)
-    }
-    return children
 };
 
 export default ProtectedRouteAdmin;

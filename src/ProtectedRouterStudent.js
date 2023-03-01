@@ -15,16 +15,16 @@ const ProtectedRouteStudent = ({ children }) => {
 
     let location = useLocation();
     // console.log('first', getlocalrole)
-    if (Number(localStorage.getItem('userrole')) == 0) {
-        // console.log('come')
-        return (
-            <Context.Consumer>
-                {value => <>
+    // if (Number(localStorage.getItem('userrole')) == 0) {
+    // console.log('come')
+    return (
+        <Context.Consumer>
+            {value => <>
 
-                    {value.state.userRole == 0 && <Navigate to="/" state={{ from: location }} replace />}</>}
-            </Context.Consumer>)
-    }
-    return children
+                {value.state.userRole == 0 ? <Navigate to="/" state={{ from: location }} replace /> : children}</>}
+        </Context.Consumer>)
+    // }
+    // return children
 
 };
 

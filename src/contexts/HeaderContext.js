@@ -13,12 +13,12 @@ export default class HeaderContext extends Component {
 
     setData = (data) => {
         this.setState({ data: data }, () => {
-            console.log('data :: ', this.state.data)
+            // console.log('data :: ', this.state.data)
         })
     }
     setCurrentData = (data) => {
         this.setState({ currentStudentData: data }, () => {
-            console.log('currenat : ', this.state.currentStudentData)
+            // console.log('currenat : ', this.state.currentStudentData)
         })
     }
 

@@ -139,9 +139,14 @@ export default class Attandancesheet extends Component {
         const db = firebaseApp.firestore();
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                console.log('data :: ', doc.data())
+                console.log('data :: ', doc.data().myAttend)
+                let entry = doc.data().myAttend
 
-                this.setState({ currentdata: doc.data().myAttend, currentpass: doc.data().password }, () => {
+                entry.sort().reverse();
+                // entry.sort((a, b) => a.date - b.date)`
+                console.log('after :: ', entry)
+
+                this.setState({ currentdata: entry, currentpass: doc.data().password }, () => {
                     console.log('data :: ', this.state.currentdata)
 
 

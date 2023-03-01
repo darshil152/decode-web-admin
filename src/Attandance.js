@@ -26,17 +26,17 @@ export default function Attandance() {
     const [stdata, setStdata] = useState([]);
     const [date, setDate] = useState('');
     const [attandance, setAttandance] = useState("");
-    const [currentDates, setCurrentdates] = useState("")
+    const [currentDates, setCurrentdates] = useState(new Date().toJSON().slice(0, 10))
 
     useEffect(() => {
         getdata();
-        gettodate();
+
     }, [])
 
-    const gettodate = () => {
-        let currentDate = new Date().toJSON().slice(0, 10);
-        setCurrentdates(currentDate);
-        // console.log(currentDates)
+    const gettodate = (date) => {
+
+        setCurrentdates(date);
+
     }
 
     const makeid = (length) => {
@@ -176,7 +176,7 @@ export default function Attandance() {
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
                         <div>
-                            <input type="date" className='tabledat' value={currentDates} onChange={e => setDate(e.target.value)} />
+                            <input type="date" className='tabledat' value={currentDates} onChange={e => gettodate(e.target.value)} />
                         </div>
                     );
                 },

@@ -11956,7 +11956,17 @@ td.detailtable {
   font-weight: 700;
 }
 
+p#\:r1r\: {
+  display: none;
+}
 
+p#\:rj\: {
+  display: none;
+}
+
+p#\:r19\: {
+  display: none;
+}
 
 @keyframes spin {
   0% {
