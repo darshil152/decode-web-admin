@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -11954,6 +11955,8 @@ td.detailtable {
   font-family: "Open Sans", sans-serif;
   font-weight: 700;
 }
+
+
 
 @keyframes spin {
   0% {

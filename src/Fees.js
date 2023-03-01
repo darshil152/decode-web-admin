@@ -7,13 +7,20 @@ import { number } from 'yup';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AdminLayout from './adminlayout/adminlayout';
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
 
-// import { QuerySnapshot } from '@firebase/firestore-types';
-// import Ember from 'ember';
+
 
 let myfees = [];
 
 export default function Fees() {
+
+    const muiCache = createCache({
+        key: 'mui-datatables',
+        prepend: true
+    })
 
 
     const [stdata, setStdata] = useState([]);
@@ -197,29 +204,33 @@ export default function Fees() {
             },
         },
 
-
-
     ];
 
 
-    const options = {
-        selectableRowsHideCheckboxes: true,
-        responsive: "standard",
-        filterType: 'dropdown',
-    };
 
+
+    const options = {
+        // selectableRows: "multiple",
+        selectableRowsHideCheckboxes: true,
+        // selectableRowsOnClick: true,
+    };
 
     return (
         <AdminLayout>
 
             <div className="content-main-section">
-                <MUIDataTable
-                    title={"Student List"}
-                    data={stdata}
-                    columns={columns}
-                    options={options}
+                <CacheProvider value={muiCache}>
+                    <ThemeProvider theme={createTheme()}>
+                        <MUIDataTable
+                            title={"Student List"}
+                            data={stdata}
+                            columns={columns}
+                            options={options}
 
-                />
+                        />
+
+                    </ThemeProvider>
+                </CacheProvider>
                 <ToastContainer />
             </div>
         </AdminLayout>

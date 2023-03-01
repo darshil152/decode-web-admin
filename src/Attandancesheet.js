@@ -8,6 +8,10 @@ import grey from "./img/grey.png";
 import ReactApexChart from 'react-apexcharts';
 import StudentLayout from './studentlayout/studentlayout';
 import { data } from 'jquery';
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
+
 
 
 
@@ -27,7 +31,7 @@ export default class Attandancesheet extends Component {
             series: [0, 0],
             optionsa: {
                 chart: {
-                    width: 380,
+                    width: 300,
                     type: 'pie',
                 },
                 fill: {
@@ -39,7 +43,7 @@ export default class Attandancesheet extends Component {
                     breakpoint: 500,
                     options: {
                         chart: {
-                            width: 350,
+                            width: 300,
                         },
                         legend: {
                             position: 'bottom',
@@ -59,10 +63,6 @@ export default class Attandancesheet extends Component {
                         filter: true,
                         sort: true,
                     },
-                    sortOrder: {
-                        name: 'name',
-                        direction: 'desc'
-                    }
 
                 },
                 {
@@ -110,7 +110,8 @@ export default class Attandancesheet extends Component {
             options: {
                 selectableRowsHideCheckboxes: true,
                 filterType: "dropdown",
-                responsive: "scroll"
+                responsive: "scroll",
+                direction: 'desc'
             },
 
         };
@@ -125,6 +126,10 @@ export default class Attandancesheet extends Component {
     }
 
 
+    muiCache = createCache({
+        key: 'mui-datatables',
+        prepend: true
+    })
 
 
 
@@ -197,24 +202,29 @@ export default class Attandancesheet extends Component {
                     <div className='content-main-section left'>
                         <div className='container-fluid'>
                             <div className='row '>
-                                <div className='col-lg-6'>
-                                    <div className='shdow tabledata'>
-                                        <MUIDataTable
-                                            title={"Your attandance List"}
-                                            data={this.state.currentdata}
-                                            columns={this.state.columns}
-                                            options={this.state.options}
-                                        />
-                                    </div>
-                                </div>
                                 <div className='col-lg-6 tabledata '>
                                     <div className='shdowa'>
                                         <div className='apex'>
                                             <h3 className='percentage' > Your attandance is:</h3>
-                                            <ReactApexChart options={this.state.optionsa} series={this.state.series} type="pie" width={600} />
+                                            <ReactApexChart options={this.state.optionsa} series={this.state.series} type="pie" width={500} />
                                         </div>
                                     </div>
                                 </div>
+                                <div className='col-lg-6'>
+                                    <div className='shdow tabledata'>
+                                        <CacheProvider value={this.muiCache}>
+                                            <ThemeProvider theme={createTheme()}>
+                                                <MUIDataTable
+                                                    title={"Your attandance List"}
+                                                    data={this.state.currentdata}
+                                                    columns={this.state.columns}
+                                                    options={this.state.options}
+                                                />
+                                            </ThemeProvider>
+                                        </CacheProvider>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

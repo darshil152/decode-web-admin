@@ -6,26 +6,38 @@ import MUIDataTable from 'mui-datatables'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AdminLayout from './adminlayout/adminlayout';
-import checked from "./img/checked.png"
-import cancel from "./img/cancel.png"
-import grey from "./img/grey.png";
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
 
-// import { QuerySnapshot } from '@firebase/firestore-types';
-// import Ember from 'ember';
 
 let attend = [];
 
 export default function Attandance() {
 
 
+    const muiCache = createCache({
+        key: 'mui-datatables',
+        prepend: true
+    })
+
+
+
     const [stdata, setStdata] = useState([]);
     const [date, setDate] = useState('');
     const [attandance, setAttandance] = useState("");
+    const [currentDates, setCurrentdates] = useState("")
 
     useEffect(() => {
-        getdata()
+        getdata();
+        gettodate();
     }, [])
 
+    const gettodate = () => {
+        let currentDate = new Date().toJSON().slice(0, 10);
+        setCurrentdates(currentDate);
+        // console.log(currentDates)
+    }
 
     const makeid = (length) => {
         let result = '';
@@ -154,24 +166,7 @@ export default function Attandance() {
                 sort: true,
             },
         },
-        // {
-        //     name: "status",
-        //     label: "status",
-        //     options: {
-        //         filter: true,
-        //         sort: true,
-        //     },
-        // },
 
-
-        // {
-        //     name: "courses",
-        //     label: "courses",
-        //     options: {
-        //         filter: true,
-        //         sort: true,
-        //     },
-        // },
         {
             name: "createdAt",
             label: "Date & Time",
@@ -181,7 +176,7 @@ export default function Attandance() {
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
                         <div>
-                            <input type="date" className='tabledat' onChange={e => setDate(e.target.value)} />
+                            <input type="date" className='tabledat' value={currentDates} onChange={e => setDate(e.target.value)} />
                         </div>
                     );
                 },
@@ -206,6 +201,8 @@ export default function Attandance() {
                                 <span className='muiradio'>Other:</span><input type="radio" name="attandance" value="2" /><br></br>
                             </div>
                         </div>
+
+
                     );
                 },
             },
@@ -231,24 +228,31 @@ export default function Attandance() {
     ];
 
 
+
     const options = {
+        // selectableRows: "multiple",
         selectableRowsHideCheckboxes: true,
-        responsive: "standard",
-        filterType: 'dropdown',
+        // selectableRowsOnClick: true,
+
     };
+
 
 
     return (
 
         <AdminLayout>
             <div className="content-main-section">
-                <MUIDataTable
-                    title={"Student List"}
-                    data={stdata}
-                    columns={columns}
-                    options={options}
+                <CacheProvider value={muiCache}>
+                    <ThemeProvider theme={createTheme()}>
+                        <MUIDataTable
+                            title={"Student List"}
+                            data={stdata}
+                            columns={columns}
+                            options={options}
 
-                />
+                        />
+                    </ThemeProvider>
+                </CacheProvider>
             </div>
             <ToastContainer />
         </AdminLayout>

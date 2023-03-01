@@ -5,6 +5,9 @@ import firebaseApp from './firebase/firebase'
 import MUIDataTable from 'mui-datatables'
 import AdminLayout from './adminlayout/adminlayout';
 import userdummy from "./img/userdummy.png"
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
 
 
 // import { QuerySnapshot } from '@firebase/firestore-types';
@@ -13,6 +16,12 @@ import userdummy from "./img/userdummy.png"
 
 
 export default function Dashboard() {
+
+    const muiCache = createCache({
+        key: 'mui-datatables',
+        prepend: true
+    })
+
 
     const [stdata, setStdata] = useState([]);
     const [toggles, setToggles] = useState(false);
@@ -221,10 +230,11 @@ export default function Dashboard() {
     ];
 
 
+
     const options = {
+        // selectableRows: "multiple",
         selectableRowsHideCheckboxes: true,
-        responsive: "standard",
-        filterType: 'dropdown',
+        // selectableRowsOnClick: true,
     };
 
 
@@ -233,12 +243,16 @@ export default function Dashboard() {
     return (
         <AdminLayout>
             <div className="content-main-section">
-                <MUIDataTable
-                    title={"Students List"}
-                    data={stdata}
-                    columns={columns}
-                    options={options}
-                />
+                <CacheProvider value={muiCache}>
+                    <ThemeProvider theme={createTheme()}>
+                        <MUIDataTable
+                            title={"Students List"}
+                            data={stdata}
+                            columns={columns}
+                            options={options}
+                        />
+                    </ThemeProvider>
+                </CacheProvider>
             </div>
         </AdminLayout>
     )

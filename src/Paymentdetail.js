@@ -9,6 +9,11 @@ import logo from "./img/logo.png"
 import converter from 'number-to-words'
 import StudentLayout from './studentlayout/studentlayout';
 import { throwIfEmpty } from 'rxjs';
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
+
+
 
 
 
@@ -97,9 +102,9 @@ export default class paymentdetail extends Component {
             ],
 
             options: {
+                // selectableRows: "multiple",
                 selectableRowsHideCheckboxes: true,
-                responsive: "standard",
-                filterType: 'dropdown',
+                // selectableRowsOnClick: true,
             }
         }
     }
@@ -113,6 +118,12 @@ export default class paymentdetail extends Component {
         })
 
     }
+
+    muiCache = createCache({
+        key: 'mui-datatables',
+        prepend: true
+    })
+
 
     openModal = (value) => {
         let index = this.state.retrivedata.findIndex(x => x.id === value);
@@ -289,20 +300,23 @@ export default class paymentdetail extends Component {
                         </div>
                     </div>
                     <div className='paymentlist'>
-                        <MUIDataTable
-                            title={"Payment List"}
-                            data={this.state.retrivedata}
-                            columns={this.state.columns}
-                            options={this.state.options}
-                        />
-
+                        <CacheProvider value={this.muiCache}>
+                            <ThemeProvider theme={createTheme()}>
+                                <MUIDataTable
+                                    title={"Payment List"}
+                                    data={this.state.retrivedata}
+                                    columns={this.state.columns}
+                                    options={this.state.options}
+                                />
+                            </ThemeProvider>
+                        </CacheProvider>
 
                         {this.state.referedStudent.length > 0 ? <div className='container mt-5 residentalDetail '>
                             <div className='container'>
                                 <div className='row'>
-                                    <div className='col-lg-6'>
+                                    <div className='col-lg-12'>
                                         <div className='mt-4'>
-                                            <h1>Your References</h1>
+                                            <h1 className='ter'>Your References</h1>
                                         </div>
 
                                         <table className='tabledesign'>
