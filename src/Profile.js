@@ -37,7 +37,9 @@ export default class Profile extends Component {
             line_1: "",
             line_2: "",
             city: "",
-            birthdaydata: "",
+            birthdaydata: [],
+            dummyarray: [],
+
             todaydate: new Date().toJSON().slice(0, 10),
             // time: Date.now()
 
@@ -135,17 +137,27 @@ export default class Profile extends Component {
     }
 
     getAllData = (data) => {
-        console.log(data)
-        this.setState({ birthdaydata: data.state.data })
+        let check = false;
+        console.log(data.state.data)
+        this.setState({ birthdaydata: data.state.data }, () => {
+            // console.log(this.state.birthdaydata)
+            for (let i = 0; i < this.state.birthdaydata.length; i++) {
+                if (this.state.birthdaydata[i].dob == this.state.todaydate) {
+                    // console.log(this.state.birthdaydata[i].dob, "===", this.state.todaydate)
+                    this.setState({ dummyarray: this.state.birthdaydata[i] }, () => {
+                        // console.log(this.state.dummyarray.f_name + this.state.dummyarray.l_name)
+                        toast("Today is " + this.state.dummyarray.f_name + this.state.dummyarray.l_name + "'s Birthday", {
+                            position: toast.POSITION.TOP_RIGHT
+                        });
+                    })
+                }
+            }
 
-        // for (let i = 0; i < this.state.birthdaydata.length; i++) {
-        //     if (this.state.birthdaydata[i].dob == this.state.todaydate) {
-        //         console.log("true")
-        //     } else {
-        //         console.log("first")
-        //     }
+        })
 
-        // }
+
+
+
     }
 
     submitform = () => {
@@ -556,7 +568,6 @@ export default class Profile extends Component {
                                     Save Changes
                                 </Button>
                             </Modal.Footer>
-                            <ToastContainer />
 
                         </Modal>
 
@@ -597,6 +608,7 @@ export default class Profile extends Component {
                     </Studentlayout>
                     <button className='d-none' id="profile-btn" onClick={() => { value.setCurrentData(this.state.currentdata); }}>click me</button>
                     <button className='d-none' id="get-all-data" onClick={() => { this.getAllData(value) }}>click me</button>
+                    <ToastContainer />
                 </>}
 
             </Context.Consumer>
