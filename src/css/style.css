@@ -12031,21 +12031,11 @@ button.btn-btn-primary.eyepass {
 
 }
 
-/* 
-@media only screen and (max-width: 1400px) {
-  .shows {
-    display: none;
-  }
-
-} */
-
 @media only screen and (max-width: 1200px) {
   .d-xl-none.abce {
     position: absolute;
     left: 35px;
   }
-
-
 }
 
 @media only screen and (max-width: 576px) {

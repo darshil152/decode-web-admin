@@ -53,10 +53,12 @@ export default function Attandance() {
     }
 
 
-    const submitform = (data) => {
+    const submitform = (data, tabledata2) => {
         let alreadyAdded = false
-
+        let check = false;
         console.log(data);
+        console.log(tabledata2);
+
         // console.log("first", date)
         // console.log("second", attandance)
         // console.log(makeid(6));
@@ -77,16 +79,29 @@ export default function Attandance() {
             if (attend[j].date == date) {
                 alreadyAdded = true
             }
+
         }
         if (alreadyAdded) {
-            toast.error('Attendance is already added', {
+            toast.error(tabledata2.rowData[1] + '  Attendance is already added', {
                 position: toast.POSITION.TOP_RIGHT
             });
+
         } else {
+
+
+            if (attandance == 1) {
+                check = true;
+            }
+            if (check) {
+                toast.success(tabledata2.rowData[1] + ' You select present', {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+            } else {
+                toast.warn(tabledata2.rowData[1] + ' You select absent', {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+            }
             attend.push(obj)
-            toast.success('Attendance added successfully!', {
-                position: toast.POSITION.TOP_RIGHT
-            });
         }
 
 
@@ -225,7 +240,7 @@ export default function Attandance() {
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
                         <div >
-                            <button className='btn btn-primary ' onClick={() => submitform(value)}>Submit</button>
+                            <button className='btn btn-primary ' onClick={() => submitform(value, tableMeta)}>Submit</button>
                         </div>
                     );
                 },

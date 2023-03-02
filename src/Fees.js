@@ -53,7 +53,7 @@ export default function Fees() {
 
 
 
-    const submitform = (data) => {
+    const submitform = (data, data2) => {
         let alreadyAdded = false
         let obj = {
             date: date,
@@ -69,13 +69,10 @@ export default function Fees() {
             }
         }
 
+
         if (alreadyAdded) {
             myfees.push(obj);
-            toast.success('Payment done', {
-                position: toast.POSITION.TOP_RIGHT
-            });
-        } else {
-            toast.error('Payment is not done!', {
+            toast.success(data2.rowData[1] + ' Payment done', {
                 position: toast.POSITION.TOP_RIGHT
             });
         }
@@ -205,7 +202,7 @@ export default function Fees() {
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
                         <div >
-                            <button className='btn btn-primary ' onClick={() => submitform(value)}>Submit</button>
+                            <button className='btn btn-primary ' onClick={() => submitform(value, tableMeta)}>Submit</button>
                         </div>
                     );
                 },
