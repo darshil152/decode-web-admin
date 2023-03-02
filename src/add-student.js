@@ -398,6 +398,7 @@ function AddStudent() {
                 myref: [],
                 myAttend: [],
                 fees: [],
+                feesPr: 0,
                 terms: false,
             })
                 .then(function (docRef) {

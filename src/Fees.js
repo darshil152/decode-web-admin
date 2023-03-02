@@ -137,6 +137,14 @@ export default function Fees() {
                 sort: true,
             },
         },
+        {
+            name: "l_name",
+            label: "Last Name",
+            options: {
+                filter: true,
+                sort: true,
+            },
+        },
 
         {
             name: "createdAt",

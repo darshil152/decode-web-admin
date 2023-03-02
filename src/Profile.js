@@ -11,7 +11,8 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Context } from "./contexts/HeaderContext"
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -36,12 +37,15 @@ export default class Profile extends Component {
             line_1: "",
             line_2: "",
             city: "",
+            birthdaydata: "",
+            todaydate: new Date().toJSON().slice(0, 10),
             // time: Date.now()
 
         }
     }
 
     componentDidMount() {
+        document.getElementById('get-all-data').click()
         // const date = new Date();
         // const final = date.toLocaleTimeString();
         // console.log(final);
@@ -78,6 +82,8 @@ export default class Profile extends Component {
 
 
     getalldata = () => {
+        let isbday = false;
+        let currentDate = new Date().toJSON().slice(0, 10);
         const db = firebaseApp.firestore();
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
@@ -95,6 +101,7 @@ export default class Profile extends Component {
                     }
 
                     this.getrefdata();
+
                 })
 
             });
@@ -125,6 +132,20 @@ export default class Profile extends Component {
         else {
             this.setState({ defaultcheked: false })
         }
+    }
+
+    getAllData = (data) => {
+        console.log(data)
+        this.setState({ birthdaydata: data.state.data })
+
+        // for (let i = 0; i < this.state.birthdaydata.length; i++) {
+        //     if (this.state.birthdaydata[i].dob == this.state.todaydate) {
+        //         console.log("true")
+        //     } else {
+        //         console.log("first")
+        //     }
+
+        // }
     }
 
     submitform = () => {
@@ -180,7 +201,6 @@ export default class Profile extends Component {
     }
 
     editform1 = () => {
-        console.log('coem', this.state.id)
         const db = firebaseApp.firestore();
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
@@ -225,6 +245,7 @@ export default class Profile extends Component {
                 })
                     .then(() => {
                         console.log("Document successfully updated!");
+                        this.getalldata();
                         this.closeModal2();
 
                     })
@@ -299,7 +320,14 @@ export default class Profile extends Component {
 
     handleFileChange = (e) => {
         console.log('e :: ', e.target.files[0])
-        this.UploadImageTOFirebase(e.target.files[0])
+
+        if (e.target.files[0].size > 10e6) {
+            toast.error('Please select image 1mb or below 1mb!', {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        } else {
+            this.UploadImageTOFirebase(e.target.files[0])
+        }
     }
 
 
@@ -371,7 +399,7 @@ export default class Profile extends Component {
                                         <div className='row'>
                                             <div className='col-lg-6'>
                                                 <div className='mt-4'>
-                                                    <h1 className="text-left">Parent's Detail</h1>
+                                                    <h1 className="text-left mb-5">Parent's Detail</h1>
                                                 </div>
                                                 <div className='mt-lg-4 d-flex mt-sm-4 ml-lg-4 text-left'>
                                                     <i class="fa fa-user usernames" style={{ lineHeight: "inherit" }} aria-hidden="true"></i><label className="labelData ml-3">{this.state.currentdata.f_f_name}</label>
@@ -392,7 +420,7 @@ export default class Profile extends Component {
 
                                             <div className="row">
                                                 <div className="col-10 text-sm-center mt-3 mb-3">
-                                                    <h1 className="text-left">Personal Detail</h1>
+                                                    <h1 className="text-left">Residental Detail</h1>
                                                 </div>
                                                 <div className="col-2 text-sm-center text-lg-right mt-3" >
                                                     <button className="buttonedit btn btn-primary btn-lg" onClick={this.openModal2}>
@@ -419,6 +447,7 @@ export default class Profile extends Component {
                                     </div>
                                 </div>
                             </div>
+                            <ToastContainer />
                         </>
                         }
 
@@ -460,7 +489,7 @@ export default class Profile extends Component {
                         </Modal>
 
 
-                        <Modal show={this.state.isOpen1} onHide={this.closeModal1}>
+                        <Modal show={this.state.isOpen1} onHide={this.closeModal1} >
                             <Modal.Header>
                                 <Modal.Title>Edit form</Modal.Title>
                             </Modal.Header>
@@ -527,10 +556,12 @@ export default class Profile extends Component {
                                     Save Changes
                                 </Button>
                             </Modal.Footer>
+                            <ToastContainer />
+
                         </Modal>
 
 
-                        <Modal show={this.state.isOpen2} onHide={this.closeModal2}>
+                        <Modal show={this.state.isOpen2} onHide={this.closeModal2} style={{ marginTop: "150px" }}>
                             <Modal.Header >
                                 <Modal.Title>Edit form</Modal.Title>
                             </Modal.Header>
@@ -565,8 +596,11 @@ export default class Profile extends Component {
                         </Modal>
                     </Studentlayout>
                     <button className='d-none' id="profile-btn" onClick={() => { value.setCurrentData(this.state.currentdata); }}>click me</button>
+                    <button className='d-none' id="get-all-data" onClick={() => { this.getAllData(value) }}>click me</button>
                 </>}
+
             </Context.Consumer>
+
         )
     }
 }

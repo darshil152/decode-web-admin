@@ -23,7 +23,8 @@ export default function Login() {
     const navigate = useNavigate();
     const [userData, setuserData] = useState([])
     const [userRole, setuserRole] = useState(1)
-
+    const [passwordInput, setPasswordInput] = useState("");
+    const [passwordType, setPasswordType] = useState("password");
 
 
     useEffect(() => {
@@ -31,6 +32,14 @@ export default function Login() {
 
     }, [])
 
+
+    const togglePassword = () => {
+        if (passwordType === "password") {
+            setPasswordType("text")
+            return;
+        }
+        setPasswordType("password")
+    }
 
     const getalldata = () => {
         const db = firebaseApp.firestore();
@@ -129,7 +138,6 @@ export default function Login() {
                 navigate('/dashboard')
             }
         }, 100);
-
     }
 
 
@@ -207,10 +215,16 @@ export default function Login() {
                                                         <div className="field padding-bottom--24">
                                                             <label htmlFor="email">Password</label>
 
-                                                            <input type="password" name="password" {...formAttr(runform, "password")} placeholder="" />
+                                                            <input type={passwordType} name="password" {...formAttr(runform, "password")} placeholder="" />
+                                                            <button className="btn-btn-primary eyepass" type='button' onClick={togglePassword}>
+                                                                {passwordType === "password" ? <i class="fa fa-eye" aria-hidden="true"></i> : <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                                                }
+                                                            </button>
                                                             {errorContainer(runform, "password")}
 
+
                                                         </div>
+
 
                                                         <div className="field padding-bottom--24">
                                                             <input href="#" type="submit" defaultValue="Login" />

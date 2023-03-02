@@ -15,6 +15,7 @@ import createCache from '@emotion/cache';
 
 
 
+
 export default class Attandancesheet extends Component {
     constructor(props) {
         super(props);
@@ -40,10 +41,10 @@ export default class Attandancesheet extends Component {
                 labels: ['Present', 'Absent',],
                 colors: ["#28a745", "#d1403f",], //Add this line
                 responsive: [{
-                    breakpoint: 500,
+                    breakpoint: 498,
                     options: {
                         chart: {
-                            width: 300,
+                            width: 400,
                         },
                         legend: {
                             position: 'bottom',
@@ -125,6 +126,9 @@ export default class Attandancesheet extends Component {
         })
     }
 
+    theme = createTheme({
+        shadows: "none"
+    });
 
     muiCache = createCache({
         key: 'mui-datatables',
@@ -206,7 +210,7 @@ export default class Attandancesheet extends Component {
                 <StudentLayout>
                     <div className='content-main-section left'>
                         <div className='container-fluid'>
-                            <div className='row '>
+                            <div className='row mt-3'>
                                 <div className='col-lg-6 tabledata '>
                                     <div className='shdowa'>
                                         <div className='apex'>

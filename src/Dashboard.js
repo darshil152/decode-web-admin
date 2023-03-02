@@ -134,6 +134,14 @@ export default function Dashboard() {
             },
         },
         {
+            name: "l_name",
+            label: "Last Name",
+            options: {
+                filter: true,
+                sort: true,
+            },
+        },
+        {
             name: "status",
             // name: "er_num",
             label: "status",

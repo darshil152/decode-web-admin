@@ -22,42 +22,34 @@ function StudentHeader(props) {
 
     const openUserinfo = () => {
         document.getElementById("user-detail").classList.toggle("active-user-info");
+
     };
-
-
-
-
-
-
-
-
 
 
     return (
         <Context.Consumer>
             {value => <>
-                {/* {console.log(value.state.currentStudentData.f_name, '-------')} */}
                 <header className="header-fix-top-section">
                     <div onClick={addmainclass} className="d-xl-none abce">
                         <img src={menu} className="me-3 mr-3 imgmenu" alt="arrow" />
                     </div>
-                    {/* <div className="hdr-top-info d-flex align-items-center">
-                    <span className="me-2">
-                        <img src={HeaderLogo} className="w-100 h-100" alt="logo" />
-                    </span>
-                    lorem ipsum llc
-                </div> */}
                     <div className="ms-auto mobile-responsive-info" id="user-detail">
                         <div className="d-flex align-items-center mobile-responsive-info-inr">
 
                             <div className="dropdown-header p-0 ms-3">
                                 <Dropdown >
                                     <Dropdown.Toggle id="dropdown" >
-                                        <img src={value.state.currentStudentData.profile_img !== '' ? value.state.currentStudentData.profile_img : Profile} alt="profile" />
-                                        <div className="pl-3 text-start">
+                                        <div className="asdasd">
+
+                                            <img src={value.state.currentStudentData.profile_img !== '' ? value.state.currentStudentData.profile_img : Profile} alt="profile" />
+                                            <h2 className="d-md-none ">{value.state.currentStudentData.f_name + ' ' + value.state.currentStudentData.l_name}</h2>
+                                            <h6 className="d-md-none">{value.state.currentStudentData.er_num}</h6>
+                                        </div>
+
+
+                                        <div className=" pl-3 text-start">
                                             <span className="d-block">{value.state.currentStudentData.f_name + ' ' + value.state.currentStudentData.l_name}</span>
                                             <bdi className="d-block">{value.state.currentStudentData.er_num}</bdi>
-                                            {/* <bdi className="d-block">{value.state.currentStudentData.phone}</bdi> */}
                                         </div>
                                     </Dropdown.Toggle>
 

@@ -143,7 +143,7 @@ function Studentsidebar(props) {
                                 </Link>
                             </ul>
 
-                            <Modal centered show={show} onHide={handleClose}>
+                            <Modal centered show={show} >
 
                                 <Modal.Body className="text-center mt-4"><h3>Are you sure you want to logout ?</h3></Modal.Body>
 

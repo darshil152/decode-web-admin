@@ -31,6 +31,7 @@ function AdminHeader(props) {
                             <Dropdown >
                                 <Dropdown.Toggle id="dropdown" >
                                     <img src={Profile} alt="profile" />
+
                                     <div className="pl-3 text-start">
                                         <span className="d-block">Heaven Kapopara</span>
                                         <bdi className="d-block">heaven@decodesofttech.com</bdi>

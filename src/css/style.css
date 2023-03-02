@@ -11583,15 +11583,15 @@ h6.MuiTypography-root.MuiTypography-h6.tss-hj53wm-MUIDataTableToolbar-titleText.
 
 .col-lg-6.tabledata {
   background: #FFFFFF;
-  box-shadow: 5px 6px 25px rgb(15 15 15 / 15%);
+  /* box-shadow: 5px 6px 25px rgb(15 15 15 / 15%); */
 
 }
 
-.shdow.tabledata {
+/* .shdow.tabledata {
   background: #FFFFFF;
   box-shadow: 5px 6px 25px rgb(15 15 15 / 15%);
   height: 100vh;
-}
+} */
 
 div#basic-navbar-nav\ abcd {
   justify-content: end;
@@ -11968,6 +11968,41 @@ p#\:r19\: {
   display: none;
 }
 
+p#\:rl\: {
+  display: none;
+}
+
+button.btn-btn-primary.eyepass {
+  text-decoration: none;
+  border: 0;
+  background: none;
+}
+
+i.fa.fa-eye {
+  text-decoration: none;
+  border: 0;
+  background: none;
+}
+
+i.fa.fa-eye-slash {
+  text-decoration: none;
+  border: 0;
+  background: none;
+}
+
+button.btn-btn-primary.eyepass {
+  float: right;
+  margin-bottom: 15p;
+  position: absolute;
+  margin-top: 10px;
+  border: none !important;
+  outline: none;
+  margin-left: -28px;
+}
+
+
+
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -11978,16 +12013,15 @@ p#\:r19\: {
   }
 }
 
+
+@media only screen and (max-width: 500) {
+  margin-left: 37px;
+}
+
 @media only screen and (max-width: 992px) {
   h3.percentage {
     margin-top: 50px;
   }
-
-  /* .apex {
-    position: absolute;
-    left: 50px;
-  } */
-
 
 
   .container.ex1 {
@@ -11997,11 +12031,21 @@ p#\:r19\: {
 
 }
 
+/* 
+@media only screen and (max-width: 1400px) {
+  .shows {
+    display: none;
+  }
+
+} */
+
 @media only screen and (max-width: 1200px) {
   .d-xl-none.abce {
     position: absolute;
     left: 35px;
   }
+
+
 }
 
 @media only screen and (max-width: 576px) {

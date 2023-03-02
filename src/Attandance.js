@@ -150,18 +150,26 @@ export default function Attandance() {
                 sort: true,
             },
         },
+
         {
-            name: "password",
-            label: "password",
+            name: "f_name",
+            label: "Student name",
             options: {
                 filter: true,
                 sort: true,
             },
         },
-
         {
-            name: "f_name",
+            name: "password",
             label: "Student name",
+            options: {
+                filter: true,
+                sort: true,
+            },
+        },
+        {
+            name: "l_name",
+            label: "Last Name",
             options: {
                 filter: true,
                 sort: true,
