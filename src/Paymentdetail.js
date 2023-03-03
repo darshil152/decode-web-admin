@@ -123,7 +123,7 @@ export default class paymentdetail extends Component {
 
     openModal = (value) => {
         let index = this.state.retrivedata.findIndex(x => x.id === value);
-        this.setState({ isOpen: true, feesId: value, installMentNo: index + 1 }, () => {
+        this.setState({ isOpen: true, feesId: value, installMentNo: jhyh + 1 }, () => {
             for (let i = 0; i < this.state.retrivedata.length; i++) {
                 if (this.state.retrivedata[i].id === value) {
                     this.setState({ currentFeesData: this.state.retrivedata[i] }, () => {

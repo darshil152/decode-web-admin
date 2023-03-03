@@ -154,11 +154,8 @@ export default class Profile extends Component {
             }
 
         })
-
-
-
-
     }
+
 
     submitform = () => {
         const db = firebaseApp.firestore();

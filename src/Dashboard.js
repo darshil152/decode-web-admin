@@ -8,10 +8,11 @@ import userdummy from "./img/userdummy.png"
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
-// import { QuerySnapshot } from '@firebase/firestore-types';
-// import Ember from 'ember';
+
 
 
 
@@ -25,17 +26,22 @@ export default function Dashboard() {
 
     const [stdata, setStdata] = useState([]);
     const [toggles, setToggles] = useState(false);
-    const [getid, setGetid] = useState('')
+    const [getid, setGetid] = useState('');
+    const [todaydate, setTodaydate] = useState(new Date().toJSON().slice(0, 10));
+
 
     useEffect(() => {
         getdata()
+        // adminbday()
     }, [])
 
 
     const getdata = () => {
+        let ischeck = false;
+        console.log("first")
         let entry = []
+        let dummyarray = []
         const db = firebaseApp.firestore();
-
         db.collection('Students').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 if (doc.data().userRole != 2) {
@@ -43,12 +49,27 @@ export default function Dashboard() {
                 }
             })
             entry.sort((a, b) => a.er_num - b.er_num)
+            setStdata(entry);
 
-            setStdata(entry)
+            for (let i = 0; i < entry.length; i++) {
+                console.log("first1")
+                if (entry[i].dob == todaydate) {
+                    dummyarray.push(entry[i])
+                    ischeck = true;
+                    console.log(dummyarray)
+                }
+
+            } if (ischeck) {
+                toast("Today is " + dummyarray[0].f_name + dummyarray[0].l_name + "'s Birthday", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+            }
         }).catch(err => {
             console.error(err)
         });
     }
+
+
 
     const viewuser = (datas) => {
         window.location.href = "./profile/" + datas;
@@ -262,6 +283,7 @@ export default function Dashboard() {
                     </ThemeProvider>
                 </CacheProvider>
             </div>
+            <ToastContainer />
         </AdminLayout>
     )
 }
