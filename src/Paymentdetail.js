@@ -28,6 +28,8 @@ export default class paymentdetail extends Component {
             refealldata: [],
             lastdata: [],
             referedamount: 0,
+            activereferedamount: 0,
+            inactivereferedamount: 0,
             installMentNo: 1,
             date: "",
             isOpen: false,
@@ -44,6 +46,7 @@ export default class paymentdetail extends Component {
             refsamount: 0,
             balance: [],
             showdiv: false,
+            statusdata: [],
             perticuale: [],
             maths: '',
             sc: localStorage.getItem('sc'),
@@ -293,7 +296,7 @@ export default class paymentdetail extends Component {
                     er_num: this.state.allStudentData[i].er_num,
                     ref_amount: this.state.allStudentData[i].reference.refAmount,
                     feesPr: this.state.allStudentData[i].feesPr,
-                    feesStatus: this.state.allStudentData[i].feesPr > 70 ? 1 : 0,
+                    feesStatus: this.state.allStudentData[i].feesPr > 70 ? this.state.activereferedamount : this.state.inactivereferedamount,
                     id: this.makeid(8)
                 }
                 this.state.lastdata.push(obj)
@@ -314,6 +317,8 @@ export default class paymentdetail extends Component {
                 referedamount = referedamount + Number(this.state.referedStudent[i].ref_amount)
             }
             this.setState({ referedamount })
+
+
         })
     }
 
@@ -343,7 +348,13 @@ export default class paymentdetail extends Component {
                                 <div className='totalfees'>
                                     <h1 className='totalfee' style={{ fontSize: "22px", textAlign: "center" }}>Total reference amount</h1>
                                     <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>
-                                        {this.state.referedStudent.feesStatus == Number(1) ? (Number(this.state.refsamount) + Number(this.state.referedamount)) : ""}
+                                        {/* {this.state.referedStudent.feesStatus == Number(1) ? (Number(this.state.refsamount) + Number(this.state.referedamount)) : ""} */}
+                                        <div className='backgreen'>
+
+                                            <h3 style={{ color: "green" }}>{Number(this.state.refsamount)}</h3>
+                                            <h3 style={{ color: "black" }}>{Number(this.state.referedamount)}</h3>
+                                        </div>
+
                                     </h1>
                                 </div>
                             </div>
