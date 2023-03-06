@@ -12,6 +12,9 @@ import { throwIfEmpty } from 'rxjs';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+
 
 
 export default class paymentdetail extends Component {
@@ -41,6 +44,8 @@ export default class paymentdetail extends Component {
             refsamount: 0,
             balance: [],
             showdiv: false,
+            perticuale: [],
+            maths: '',
             sc: localStorage.getItem('sc'),
             columns: [
                 {
@@ -123,7 +128,7 @@ export default class paymentdetail extends Component {
 
     openModal = (value) => {
         let index = this.state.retrivedata.findIndex(x => x.id === value);
-        this.setState({ isOpen: true, feesId: value, installMentNo: jhyh + 1 }, () => {
+        this.setState({ isOpen: true, feesId: value, installMentNo: index + 1 }, () => {
             for (let i = 0; i < this.state.retrivedata.length; i++) {
                 if (this.state.retrivedata[i].id === value) {
                     this.setState({ currentFeesData: this.state.retrivedata[i] }, () => {
@@ -192,8 +197,7 @@ export default class paymentdetail extends Component {
         db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
 
-                console.log(doc.data())
-                this.setState({ refsamount: doc.data().other_ref.refAmount, otherref: doc.data().other_ref, feesdata: doc.data().course_fees }, () => {
+                this.setState({ perticuale: doc.data(), refsamount: doc.data().other_ref.refAmount, otherref: doc.data().other_ref, feesdata: doc.data().course_fees }, () => {
 
                     for (let i = 0; i < this.state.referedStudent.length; i++) {
                         totaloldref = Number(totaloldref) + Number(this.state.referedStudent[i].amount)
@@ -207,6 +211,17 @@ export default class paymentdetail extends Component {
                     }
 
                     this.setState({ totalAmount: total }, () => {
+
+
+                        let abce = Number(this.state.totalAmount) * 100 / Number(this.state.feesdata)
+                        this.setState({ maths: abce }, () => {
+                            console.log(this.state.maths)
+                            this.submitperce(doc.data().myref);
+
+                        })
+
+
+
                         if (Number(localStorage.getItem('userrole')) !== 2) {
                             if (this.state.sc !== doc.data().password) {
                                 window.location.href = '/'
@@ -214,17 +229,47 @@ export default class paymentdetail extends Component {
                         }
                     })
 
-
-                    for (let j = 0; j < doc.data().myref.length; j++) {
-                        this.getRefersName(doc.data().myref[j])
-
-                    }
+                }, () => {
+                    console.log(Number(this.state.totalAmount))
                 })
             })
         }).catch(err => {
             console.error(err)
         });
     }
+
+
+
+
+    submitperce = (data) => {
+        let push = this.state.maths;
+        const db = firebaseApp.firestore();
+        db.collection('Students').where("er_num", "==", Number(this.state.id)).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+
+                var updateCollection = db.collection("Students").doc(doc.ref.id);
+
+                return updateCollection.update({
+                    feesPr: Number(push)
+                })
+                    .then(() => {
+                        console.log("Document successfully updated!");
+                        for (let j = 0; j < data.length; j++) {
+                            this.getRefersName(data[j])
+
+                        }
+                    })
+                    .catch((error) => {
+                        // The document probably doesn't exist.
+                        console.error("Error updating document: ", error);
+                    });
+            })
+        }).catch(err => {
+            console.error(err)
+        });
+    }
+
+
 
     makeid = (length) => {
         let result = '';
@@ -247,6 +292,8 @@ export default class paymentdetail extends Component {
                     l_name: this.state.allStudentData[i].l_name,
                     er_num: this.state.allStudentData[i].er_num,
                     ref_amount: this.state.allStudentData[i].reference.refAmount,
+                    feesPr: this.state.allStudentData[i].feesPr,
+                    feesStatus: this.state.allStudentData[i].feesPr > 70 ? 1 : 0,
                     id: this.makeid(8)
                 }
                 this.state.lastdata.push(obj)
@@ -262,17 +309,12 @@ export default class paymentdetail extends Component {
             }
         }
         this.setState({ referedStudent: this.state.lastdata }, () => {
-            // console.log('refered :: ', this.state.referedStudent)
+            console.log('refered :: ', this.state.referedStudent)
             for (let i = 0; i < this.state.referedStudent.length; i++) {
                 referedamount = referedamount + Number(this.state.referedStudent[i].ref_amount)
             }
             this.setState({ referedamount })
-            console.log(this.state.refealldata)
         })
-
-        // for (let i = 0; i < this.state.refealldata.length; i++) {
-        //     console.log(this.state.refealldata[i].fees)
-        // }
     }
 
 
@@ -300,7 +342,9 @@ export default class paymentdetail extends Component {
                             <div className='col-sm-3'>
                                 <div className='totalfees'>
                                     <h1 className='totalfee' style={{ fontSize: "22px", textAlign: "center" }}>Total reference amount</h1>
-                                    <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>{Number(this.state.refsamount) + Number(this.state.referedamount)} </h1>
+                                    <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>
+                                        {this.state.referedStudent.feesStatus == Number(1) ? (Number(this.state.refsamount) + Number(this.state.referedamount)) : ""}
+                                    </h1>
                                 </div>
                             </div>
 
@@ -332,26 +376,33 @@ export default class paymentdetail extends Component {
                                             <h1 className='ter'>Your References</h1>
                                         </div>
 
-                                        <table className='tabledesign'>
-                                            <th className='headingstable'>Enrollment Number</th>
-                                            <th className='headingstable'>First Name</th>
-                                            <th className='headingstable'>Last Name</th>
-                                            <th className='headingstable'>Amount</th>
-                                            <th className='headingstable'>Statu</th>
 
-
+                                        <Table>
+                                            <Thead>
+                                                <Tr>
+                                                    <Th className='headingstable'>Enrollment Number</Th>
+                                                    <Th className='headingstable'>First Name</Th>
+                                                    <Th className='headingstable'>Last Name</Th>
+                                                    <Th className='headingstable'>Amount</Th>
+                                                    <Th className='headingstable'>Status</Th>
+                                                </Tr>
+                                            </Thead>
                                             {this.state.referedStudent.map((item, i) => {
                                                 return (
-                                                    <tr key={i}>
-                                                        <td className='detailtable'>{item.er_num}</td>
-                                                        <td className='detailtable'>{item.f_name}</td>
-                                                        <td className='detailtable'>{item.l_name}</td>
-                                                        <td className='detailtable' >{item.ref_amount}</td>
-                                                        <td className='detailtable' >Inactive</td>
-                                                    </tr>
+                                                    <Tbody>
+                                                        <Tr key={i}>
+                                                            <Td className='detailtable'>{item.er_num}</Td>
+                                                            <Td className='detailtable'>{item.f_name}</Td>
+                                                            <Td className='detailtable'>{item.l_name}</Td>
+                                                            <Td className='detailtable' >{item.ref_amount}</Td>
+                                                            <Td className='detailtable' >{item.feesStatus}</Td>
+                                                            {/* <Td className='detailtable'>{Number(item.feesPr)}</Td> */}
+                                                        </Tr>
+
+                                                    </Tbody>
                                                 )
                                             })}
-                                        </table>
+                                        </Table>
                                     </div>
                                 </div>
                             </div>

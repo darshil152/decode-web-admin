@@ -38,7 +38,6 @@ export default function Dashboard() {
 
     const getdata = () => {
         let ischeck = false;
-        console.log("first")
         let entry = []
         let dummyarray = []
         const db = firebaseApp.firestore();
@@ -52,7 +51,6 @@ export default function Dashboard() {
             setStdata(entry);
 
             for (let i = 0; i < entry.length; i++) {
-                console.log("first1")
                 if (entry[i].dob == todaydate) {
                     dummyarray.push(entry[i])
                     ischeck = true;
@@ -86,9 +84,6 @@ export default function Dashboard() {
         console.log("first", event, data)
         changetogglestatus(event, data.rowData[0])
     }
-
-
-
 
 
     const changetogglestatus = (e, id) => {
