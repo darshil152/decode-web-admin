@@ -287,7 +287,8 @@ export default class paymentdetail extends Component {
     }
 
     getRefersName = (id) => {
-        let referedamount = 0
+        let activereferedamount = 0
+        let inactivereferedamount = 0
         for (let i = 0; i < this.state.allStudentData.length; i++) {
             if (this.state.allStudentData[i].id == id) {
                 let obj = {
@@ -296,7 +297,7 @@ export default class paymentdetail extends Component {
                     er_num: this.state.allStudentData[i].er_num,
                     ref_amount: this.state.allStudentData[i].reference.refAmount,
                     feesPr: this.state.allStudentData[i].feesPr,
-                    feesStatus: this.state.allStudentData[i].feesPr > 70 ? this.state.activereferedamount : this.state.inactivereferedamount,
+                    feesStatus: this.state.allStudentData[i].feesPr > 70 ? 1 : 0,
                     id: this.makeid(8)
                 }
                 this.state.lastdata.push(obj)
@@ -314,9 +315,14 @@ export default class paymentdetail extends Component {
         this.setState({ referedStudent: this.state.lastdata }, () => {
             console.log('refered :: ', this.state.referedStudent)
             for (let i = 0; i < this.state.referedStudent.length; i++) {
-                referedamount = referedamount + Number(this.state.referedStudent[i].ref_amount)
+                if (this.state.referedStudent[i].feesStatus == 1) {
+
+                    activereferedamount = activereferedamount + Number(this.state.referedStudent[i].ref_amount)
+                } else {
+                    inactivereferedamount = inactivereferedamount + Number(this.state.referedStudent[i].ref_amount)
+                }
             }
-            this.setState({ referedamount })
+            this.setState({ activereferedamount: activereferedamount, inactivereferedamount: inactivereferedamount })
 
 
         })
@@ -351,8 +357,8 @@ export default class paymentdetail extends Component {
                                         {/* {this.state.referedStudent.feesStatus == Number(1) ? (Number(this.state.refsamount) + Number(this.state.referedamount)) : ""} */}
                                         <div className='backgreen'>
 
-                                            <h3 style={{ color: "green" }}>{Number(this.state.refsamount)}</h3>
-                                            <h3 style={{ color: "black" }}>{Number(this.state.referedamount)}</h3>
+                                            <h3 style={{ color: "green" }}>{Number(this.state.refsamount) + Number(this.state.activereferedamount)}</h3>
+                                            <h3 style={{ color: "black" }}>{Number(this.state.inactivereferedamount)}</h3>
                                         </div>
 
                                     </h1>
@@ -362,7 +368,7 @@ export default class paymentdetail extends Component {
                             <div className='col-sm-3'>
                                 <div className='totalfees'>
                                     <h1 className='totalfee' style={{ fontSize: "22px", textAlign: "center" }}>Total pending amount</h1>
-                                    <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>{this.state.feesdata - this.state.totalAmount - Number(this.state.refsamount) - Number(this.state.referedamount)}</h1>
+                                    <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>{this.state.feesdata - this.state.totalAmount - Number(this.state.refsamount) - Number(this.state.activereferedamount)}</h1>
                                 </div>
                             </div>
                         </div>
@@ -406,7 +412,7 @@ export default class paymentdetail extends Component {
                                                             <Td className='detailtable'>{item.f_name}</Td>
                                                             <Td className='detailtable'>{item.l_name}</Td>
                                                             <Td className='detailtable' >{item.ref_amount}</Td>
-                                                            <Td className='detailtable' >{item.feesStatus}</Td>
+                                                            <Td className='detailtable' >{item.feesStatus ? 'Active' : 'Inactive'}</Td>
                                                             {/* <Td className='detailtable'>{Number(item.feesPr)}</Td> */}
                                                         </Tr>
 
