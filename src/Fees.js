@@ -24,14 +24,19 @@ export default function Fees() {
 
 
     const [stdata, setStdata] = useState([]);
-    const [date, setDate] = useState('');
     const [amount, setAmount] = useState()
     const [payment, setpayment] = useState(0)
+    const [date, setDate] = useState(new Date().toJSON().slice(0, 10));
+
 
     useEffect(() => {
         getdata()
     }, [])
 
+    const gettodate = (date) => {
+        console.log(date)
+        setDate(date);
+    }
 
     const handleChange = event => {
         console.log(event.target.value);
@@ -152,7 +157,7 @@ export default function Fees() {
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
                         <div>
-                            <input type="date" className='tabledat' onChange={e => setDate(e.target.value)} required />
+                            <input type="date" className='tabledat' value={date} onChange={e => gettodate(e.target.value)} />
                         </div>
                     );
                 },
