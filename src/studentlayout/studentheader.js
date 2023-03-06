@@ -33,7 +33,7 @@ function StudentHeader(props) {
                     <div onClick={addmainclass} className="d-xl-none abce">
                         <img src={menu} className="me-3 mr-3 imgmenu" alt="arrow" />
                     </div>
-                    <div className="ms-auto mobile-responsive-info" id="user-detail">
+                    <div className="ms-auto mobile-responsive-info d-none" id="user-detail">
                         <div className="d-flex align-items-center mobile-responsive-info-inr">
 
                             <div className="dropdown-header p-0 ms-3">
@@ -42,8 +42,8 @@ function StudentHeader(props) {
                                         <div className="asdasd">
 
                                             <img src={value.state.currentStudentData.profile_img !== '' ? value.state.currentStudentData.profile_img : Profile} alt="profile" />
-                                            <h2 className="d-md-none ">{value.state.currentStudentData.f_name + ' ' + value.state.currentStudentData.l_name}</h2>
-                                            <h6 className="d-md-none">{value.state.currentStudentData.er_num}</h6>
+                                            <h2 className="d-md-none d-sm-none ">{value.state.currentStudentData.f_name + ' ' + value.state.currentStudentData.l_name}</h2>
+                                            <h6 className="d-md-none d-sm-none">{value.state.currentStudentData.er_num}</h6>
                                         </div>
 
 

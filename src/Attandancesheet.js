@@ -215,7 +215,7 @@ export default class Attandancesheet extends Component {
                                     <div className='shdowa'>
                                         <div className='apex'>
                                             <h3 className='percentage' > Your attandance is:</h3>
-                                            <ReactApexChart options={this.state.optionsa} series={this.state.series} type="pie" width={500} />
+                                            <ReactApexChart options={this.state.optionsa} series={this.state.series} type="pie" width={480} />
                                         </div>
                                     </div>
                                 </div>

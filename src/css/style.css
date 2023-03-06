@@ -11972,6 +11972,34 @@ p#\:rl\: {
   display: none;
 }
 
+p#\:r1t\:P {
+  display: none;
+}
+
+p#\:r13\: {
+  display: none;
+}
+
+p#\:r1t\: {
+  display: none;
+}
+
+p#\:r1v\: {
+  display: none;
+}
+
+p#\:r31\: {
+  display: none;
+}
+
+/* .MuiFormControl-root.MuiFormControl-fullWidth.mui-datatables-q8hpuo-MuiFormControl-root{
+  display: none;
+} */
+
+img.img-fluidsss {
+  width: 150px;
+}
+
 button.btn-btn-primary.eyepass {
   text-decoration: none;
   border: 0;
@@ -12017,8 +12045,6 @@ button.btn-btn-primary.eyepass {
   position: relative;
   padding: 25px 30px;
   color: #0a508c;
-  /* border: 1px solid; */
-  height: 160px;
 }
 
 .containerss::after {
@@ -12033,8 +12059,6 @@ button.btn-btn-primary.eyepass {
   z-index: 0;
   clip-path: circle(10% at 0% 0%);
   transition: all .3s ease-in;
-  /* border: 1px solid; */
-  height: 160px;
 }
 
 .contentss {
@@ -12066,6 +12090,8 @@ button.btn-btn-primary.eyepass {
 @media only screen and (max-width: 500) {
   margin-left: 37px;
 }
+
+
 
 @media only screen and (max-width: 992px) {
   h3.percentage {
@@ -12099,15 +12125,13 @@ button.btn-btn-primary.eyepass {
     margin-right: 0px;
   }
 
-  .containerss {
+  .formbg {
+    margin: 0px auto;
+    width: 80%;
+    max-width: 448px;
     background: white;
-    cursor: pointer;
-    border-radius: 15px;
-    position: relative;
-    padding: 25px 30px;
-    color: #0a508c;
-    margin-bottom: 15px;
-    height: 160px;
+    border-radius: 4px;
+    box-shadow: rgb(60 66 87 / 12%) 0px 7px 14px 0px, rgb(0 0 0 / 12%) 0px 3px 6px 0px;
   }
 
 
@@ -12135,16 +12159,5 @@ button.btn-btn-primary.eyepass {
 
   h6.decodesoft {
     text-align: center;
-  }
-
-  .containerss {
-    background: white;
-    cursor: pointer;
-    border-radius: 15px;
-    position: relative;
-    padding: 25px 30px;
-    color: #0a508c;
-    margin-bottom: 15px;
-    height: 160px;
   }
 }

@@ -338,7 +338,7 @@ export default class paymentdetail extends Component {
                 <div className='content-main-section left'>
                     <div className='container mt-5 mb-4'>
                         <div className='row'>
-                            <div className='col-sm-6 col-md-6 col-lg-3 text-center' >
+                            <div className='col-sm-6 col-md-6 col-lg-3' >
                                 <div class="shadow-sm bg-white rounded">
 
                                     <div class="containerss">
@@ -351,7 +351,7 @@ export default class paymentdetail extends Component {
 
 
                             </div>
-                            <div className='col-sm-6 col-md-6 col-lg-3 text-center'>
+                            <div className='col-sm-6 col-md-6 col-lg-3'>
                                 <div class="shadow-sm bg-white rounded">
                                     <div class="containerss">
                                         <div class="contentss">
@@ -361,7 +361,7 @@ export default class paymentdetail extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className='col-sm-6 col-md-6 col-lg-3 text-center'>
+                            <div className='col-sm-6 col-md-6 col-lg-3'>
                                 <div class="shadow-sm bg-white rounded">
                                     <div class="containerss">
 
@@ -371,13 +371,19 @@ export default class paymentdetail extends Component {
 
                                                 <h3 style={{ color: "black" }} className="asdff" data-toggle="tooltip" data-placement="top" title="active reference amount">{Number(this.state.refsamount) + Number(this.state.activereferedamount)}</h3>
                                                 <h3 style={{ color: "grey" }} className="asdff" data-toggle="tooltip" data-placement="top" title="inactive reference amount">{Number(this.state.inactivereferedamount)}</h3>
+
                                             </div>
+                                            <div className='backgreen'>
+                                                <h6>Active</h6>
+                                                <h6>Inactive</h6>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className='col-sm-6 col-md-6 col-lg-3 text-center'>
+                            <div className='col-sm-6 col-md-6 col-lg-3'>
                                 <div class="shadow-sm bg-white rounded">
                                     <div class="containerss">
 
