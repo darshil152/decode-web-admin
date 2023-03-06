@@ -517,13 +517,13 @@ function AddStudent() {
 
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">First Name <span className="text-danger">*</span></label>
-                                                <input type="text" name="f_name"  {...formAttr(runform, "f_name")} className="form-control input-style" placeholder="" />
+                                                <input type="text" name="f_name"  {...formAttr(runform, "f_name")} className="form-control input-style" placeholder="Enter your first name" />
                                                 {errorContainer(runform, "f_name")}
                                             </div>
 
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Last Name <span className="text-danger">*</span></label>
-                                                <input type="text" name="l_name" {...formAttr(runform, "l_name")} className="form-control input-style" placeholder="" />
+                                                <input type="text" name="l_name" {...formAttr(runform, "l_name")} className="form-control input-style" placeholder="Enter your last name" />
                                                 {errorContainer(runform, "l_name")}
                                             </div>
 
@@ -568,32 +568,32 @@ function AddStudent() {
 
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Course Fees <span className="text-danger">*</span></label>
-                                                <input type="text" name="course_fees" {...formAttr(runform, "course_fees")} className="form-control input-style" placeholder="" />
+                                                <input type="text" name="course_fees" {...formAttr(runform, "course_fees")} className="form-control input-style" placeholder="Enter your course fees" />
                                                 {errorContainer(runform, "course_fees")}
                                             </div>
 
 
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Date Of Birth <span className="text-danger">*</span></label>
-                                                <input type="date" name="dob" {...formAttr(runform, "dob")} className="form-control input-style" placeholder="" />
+                                                <input type="date" name="dob" {...formAttr(runform, "dob")} className="form-control input-style" placeholder="Enter your birthdate" />
                                                 {errorContainer(runform, "dob")}
                                             </div>
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Email Address <span className="text-danger">*</span></label>
-                                                <input type="email" name="email" {...formAttr(runform, "email")} className="form-control input-style" placeholder="" />
+                                                <input type="email" name="email" {...formAttr(runform, "email")} className="form-control input-style" placeholder="Enter your email " />
                                                 {errorContainer(runform, "email")}
                                             </div>
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Contact Number <span className="text-danger">*</span></label>
                                                 <div className="phone-cust-input">
-                                                    <input type="tel" name="phone" {...formAttr(runform, "phone")} className="form-control input-style" maxLength='10' placeholder="" />
+                                                    <input type="tel" name="phone" {...formAttr(runform, "phone")} className="form-control input-style" maxLength='10' placeholder="Enter your number" />
                                                     {errorContainer(runform, "phone")}
                                                 </div>
                                             </div>
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Emergency Contact Number <span className="text-danger">*</span></label>
                                                 <div className="phone-cust-input">
-                                                    <input type="tel" name="eme_phone" {...formAttr(runform, "eme_phone")} className="form-control input-style" maxLength='10' placeholder="" />
+                                                    <input type="tel" name="eme_phone" {...formAttr(runform, "eme_phone")} className="form-control input-style" maxLength='10' placeholder="Enter your emergency number" />
                                                     {errorContainer(runform, "eme_phone")}
                                                 </div>
                                             </div>
@@ -606,18 +606,18 @@ function AddStudent() {
 
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Father's First Name <span className="text-danger">*</span></label>
-                                                <input type="text" name="f_f_name" {...formAttr(runform, "f_f_name")} className="form-control input-style" placeholder="" />
+                                                <input type="text" name="f_f_name" {...formAttr(runform, "f_f_name")} className="form-control input-style" placeholder="Enter your father's first name" />
                                                 {errorContainer(runform, "f_f_name")}
                                             </div>
 
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Father's Last Name <span className="text-danger">*</span></label>
-                                                <input type="text" name="f_l_name" {...formAttr(runform, "f_l_name")} className="form-control input-style" placeholder="" />
+                                                <input type="text" name="f_l_name" {...formAttr(runform, "f_l_name")} className="form-control input-style" placeholder="Enter your father's last name" />
                                                 {errorContainer(runform, "f_l_name")}
                                             </div>
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Father's Occupation</label>
-                                                <input type="text" name="occupation" {...formAttr(runform, "occupation")} className="form-control input-style" placeholder="" />
+                                                <input type="text" name="occupation" {...formAttr(runform, "occupation")} className="form-control input-style" placeholder="Enter your father's Occupation" />
                                             </div>
                                             {/* <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Father's Qualification</label>
@@ -626,7 +626,7 @@ function AddStudent() {
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Father's Contact Number <span className="text-danger">*</span></label>
                                                 <div className="phone-cust-input">
-                                                    <input type="tel" name="f_phone" {...formAttr(runform, "f_phone")} className="form-control input-style" maxLength='10' placeholder="" />
+                                                    <input type="tel" name="f_phone" {...formAttr(runform, "f_phone")} className="form-control input-style" maxLength='10' placeholder="Enter your father's contact number" />
                                                     {errorContainer(runform, "f_phone")}
                                                 </div>
                                             </div>
@@ -638,31 +638,31 @@ function AddStudent() {
                                             </div>
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Line 1 <span className="text-danger">*</span></label>
-                                                <input type="text" name="line_1" {...formAttr(runform, "line_1")} className="form-control input-style" placeholder="" />
+                                                <input type="text" name="line_1" {...formAttr(runform, "line_1")} className="form-control input-style" placeholder="Enter your address 1" />
                                                 {errorContainer(runform, "line_1")}
                                             </div>
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Line 2</label>
-                                                <input type="text" name="line_2" {...formAttr(runform, "line_2")} className="form-control input-style" placeholder="" />
+                                                <input type="text" name="line_2" {...formAttr(runform, "line_2")} className="form-control input-style" placeholder="Enter your address 2" />
                                             </div>
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">City <span className="text-danger">*</span></label>
-                                                <input type="text" name="city" {...formAttr(runform, "city")} className="form-control input-style" placeholder="" />
+                                                <input type="text" name="city" {...formAttr(runform, "city")} className="form-control input-style" placeholder="Enter your city" />
                                                 {errorContainer(runform, "city")}
                                             </div>
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">State <span className="text-danger">*</span></label>
-                                                <input type="text" name="state" {...formAttr(runform, "state")} className="form-control input-style" placeholder="" />
+                                                <input type="text" name="state" {...formAttr(runform, "state")} className="form-control input-style" placeholder="Enter your state" />
                                                 {errorContainer(runform, "state")}
                                             </div>
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Country <span className="text-danger">*</span></label>
-                                                <input type="text" name="country" {...formAttr(runform, "country")} className="form-control input-style" placeholder="" />
+                                                <input type="text" name="country" {...formAttr(runform, "country")} className="form-control input-style" placeholder="Enter your countyr" />
                                                 {errorContainer(runform, "country")}
                                             </div>
                                             <div className="col-md-6 mb-3">
                                                 <label className="lbl-comn-info">Zipcode <span className="text-danger">*</span></label>
-                                                <input type="tel" name="zipcode" {...formAttr(runform, "zipcode")} className="form-control input-style" placeholder="" />
+                                                <input type="tel" name="zipcode" {...formAttr(runform, "zipcode")} className="form-control input-style" placeholder="Enter your zipcode" />
                                                 {errorContainer(runform, "zipcode")}
                                             </div>
 

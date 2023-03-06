@@ -217,7 +217,7 @@ export default function Login() {
 
                                                             <input type={passwordType} name="password" {...formAttr(runform, "password")} placeholder="" />
                                                             <button className="btn-btn-primary eyepass" type='button' onClick={togglePassword}>
-                                                                {passwordType === "password" ? <i class="fa fa-eye" aria-hidden="true"></i> : <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                                                {passwordType === "password" ? <i class="fa fa-eye-slash" aria-hidden="true"></i> : <i class="fa fa-eye" aria-hidden="true"></i>
                                                                 }
                                                             </button>
                                                             {errorContainer(runform, "password")}

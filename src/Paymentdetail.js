@@ -336,40 +336,61 @@ export default class paymentdetail extends Component {
         return (
             <StudentLayout >
                 <div className='content-main-section left'>
-                    <div className='container mt-5'>
+                    <div className='container mt-5 mb-4'>
                         <div className='row'>
-                            <div className='col-sm-3'>
-                                <div className='totalfees'>
-                                    <h1 className='totalfee' style={{ fontSize: "22px", textAlign: "center" }}>Total fees amount</h1>
-                                    <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>{this.state.feesdata}</h1>
-                                </div>
-                            </div>
-                            <div className='col-sm-3'>
-                                <div className='totalfees'>
-                                    <h1 className='totalfee' style={{ fontSize: "22px", textAlign: "center" }}>Total paid amount</h1>
-                                    <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>{this.state.totalAmount} </h1>
-                                </div>
-                            </div>
-                            <div className='col-sm-3'>
-                                <div className='totalfees'>
-                                    <h1 className='totalfee' style={{ fontSize: "22px", textAlign: "center" }}>Total reference amount</h1>
-                                    <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>
-                                        {/* {this.state.referedStudent.feesStatus == Number(1) ? (Number(this.state.refsamount) + Number(this.state.referedamount)) : ""} */}
-                                        <div className='backgreen'>
+                            <div className='col-sm-6 col-md-6 col-lg-3 text-center' >
+                                <div class="shadow-sm bg-white rounded">
 
-                                            <h3 style={{ color: "green" }}>{Number(this.state.refsamount) + Number(this.state.activereferedamount)}</h3>
-                                            <h3 style={{ color: "black" }}>{Number(this.state.inactivereferedamount)}</h3>
+                                    <div class="containerss">
+                                        <div class="contentss">
+
+                                            <h4 class="asdff">Total fees amount</h4>
+                                            <h4 class="asdff">{this.state.feesdata}</h4>
                                         </div>
+                                    </div></div>
 
-                                    </h1>
+
+                            </div>
+                            <div className='col-sm-6 col-md-6 col-lg-3 text-center'>
+                                <div class="shadow-sm bg-white rounded">
+                                    <div class="containerss">
+                                        <div class="contentss">
+                                            <h4 class="asdff">Total paid amount</h4>
+                                            <h4 class="asdff">{this.state.totalAmount}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='col-sm-6 col-md-6 col-lg-3 text-center'>
+                                <div class="shadow-sm bg-white rounded">
+                                    <div class="containerss">
+
+                                        <div class="contentss">
+                                            <h4 class="asdff">Total reference amount</h4>
+                                            <div className='backgreen'>
+
+                                                <h3 style={{ color: "black" }} className="asdff" data-toggle="tooltip" data-placement="top" title="active reference amount">{Number(this.state.refsamount) + Number(this.state.activereferedamount)}</h3>
+                                                <h3 style={{ color: "grey" }} className="asdff" data-toggle="tooltip" data-placement="top" title="inactive reference amount">{Number(this.state.inactivereferedamount)}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className='col-sm-3'>
-                                <div className='totalfees'>
+                            <div className='col-sm-6 col-md-6 col-lg-3 text-center'>
+                                <div class="shadow-sm bg-white rounded">
+                                    <div class="containerss">
+
+                                        <div class="contentss">
+                                            <h4 class="asdff">Total pending amount</h4>
+                                            <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>{this.state.feesdata - this.state.totalAmount - Number(this.state.refsamount) - Number(this.state.activereferedamount)}</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* <div className='totalfees'>
                                     <h1 className='totalfee' style={{ fontSize: "22px", textAlign: "center" }}>Total pending amount</h1>
                                     <h1 className='totaldatas' style={{ fontSize: "25px", textAlign: "center" }}>{this.state.feesdata - this.state.totalAmount - Number(this.state.refsamount) - Number(this.state.activereferedamount)}</h1>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

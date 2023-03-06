@@ -12008,6 +12008,50 @@ button.btn-btn-primary.eyepass {
 
 
 
+/* Banneer animated */
+
+.containerss {
+  background: white;
+  cursor: pointer;
+  border-radius: 15px;
+  position: relative;
+  padding: 25px 30px;
+  color: #0a508c;
+  /* border: 1px solid; */
+  height: 160px;
+}
+
+.containerss::after {
+  content: '';
+  background: #97c0e7;
+  border-radius: 15px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  clip-path: circle(10% at 0% 0%);
+  transition: all .3s ease-in;
+  /* border: 1px solid; */
+  height: 160px;
+}
+
+.contentss {
+  position: relative;
+  z-index: 1;
+  transition: all .3s ease-in;
+}
+
+.containerss:hover::after {
+  clip-path: circle(100%);
+}
+
+.containerss:hover .contentss {
+  color: white;
+}
+
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -12054,6 +12098,19 @@ button.btn-btn-primary.eyepass {
     box-shadow: 0px 0 5px 0 rgba(0, 0, 0, 0.25);
     margin-right: 0px;
   }
+
+  .containerss {
+    background: white;
+    cursor: pointer;
+    border-radius: 15px;
+    position: relative;
+    padding: 25px 30px;
+    color: #0a508c;
+    margin-bottom: 15px;
+    height: 160px;
+  }
+
+
 }
 
 
@@ -12078,5 +12135,16 @@ button.btn-btn-primary.eyepass {
 
   h6.decodesoft {
     text-align: center;
+  }
+
+  .containerss {
+    background: white;
+    cursor: pointer;
+    border-radius: 15px;
+    position: relative;
+    padding: 25px 30px;
+    color: #0a508c;
+    margin-bottom: 15px;
+    height: 160px;
   }
 }
